@@ -158,7 +158,7 @@ public class IntBoardTests {
 	//tests what is 4 away from cell 3,0
 	@Test
 	public void testTargets3_0() {
-		BoardCell cell = board.getCell(3, 0);
+		BoardCell cell = board.getCell(0, 0);
 
 		board.calcTargets(cell, 3);
 
