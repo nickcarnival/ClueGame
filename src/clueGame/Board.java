@@ -1,12 +1,9 @@
 package clueGame;
 
-<<<<<<< HEAD
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-=======
 import java.util.HashMap;
->>>>>>> 34912c3163250fc3edb9fe1111393eda93e8b09c
 import java.util.Map;
 
 public class Board {
