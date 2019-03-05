@@ -33,7 +33,7 @@ public class FileInitTests {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
-		board.setConfigFiles("../../data/map.csv", "../../data/rooms.txt");		
+		board.setConfigFiles("/map.csv", "/rooms.txt");		
 		// Initialize will load BOTH config files 
 		board.initialize();
 	}
@@ -64,23 +64,23 @@ public class FileInitTests {
 	// These cells are white on the planning spreadsheet
 	@Test
 	public void FourDoorDirections() {
-		BoardCell room = board.getCellAt(4, 3);
+		BoardCell room = board.getCellAt(18, 3);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.RIGHT, room.getDoorDirection());
-		room = board.getCellAt(4, 8);
+		room = board.getCellAt(5, 12);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.DOWN, room.getDoorDirection());
-		room = board.getCellAt(15, 18);
+		room = board.getCellAt(17, 13);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.LEFT, room.getDoorDirection());
-		room = board.getCellAt(14, 11);
+		room = board.getCellAt(15, 7);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.UP, room.getDoorDirection());
 		// Test that room pieces that aren't doors know it
 		room = board.getCellAt(14, 14);
 		assertFalse(room.isDoorway());	
 		// Test that walkways are not doors
-		BoardCell cell = board.getCellAt(0, 6);
+		BoardCell cell = board.getCellAt(10, 5);
 		assertFalse(cell.isDoorway());		
 
 	}
@@ -96,23 +96,23 @@ public class FileInitTests {
 				if (cell.isDoorway())
 					numDoors++;
 			}
-		Assert.assertEquals(16, numDoors);
+		Assert.assertEquals(11, numDoors);
 	}
 
 	// Test a few room cells to ensure the room initial is correct.
 	@Test
 	public void testRoomInitials() {
 		// Test first cell in room
-		assertEquals('C', board.getCellAt(0, 0).getInitial());
-		assertEquals('R', board.getCellAt(4, 8).getInitial());
-		assertEquals('B', board.getCellAt(9, 0).getInitial());
+		assertEquals('K', board.getCellAt(0, 0).getInitial());
+		assertEquals('L', board.getCellAt(0, 9).getInitial());
+		assertEquals('H', board.getCellAt(9, 13).getInitial());
 		// Test last cell in room
-		assertEquals('O', board.getCellAt(21, 22).getInitial());
-		assertEquals('K', board.getCellAt(21, 0).getInitial());
+		assertEquals('F', board.getCellAt(20, 21).getInitial());
+		assertEquals('L', board.getCellAt(5, 15).getInitial());
 		// Test a walkway
-		assertEquals('W', board.getCellAt(0, 5).getInitial());
+		assertEquals('W', board.getCellAt(15, 11).getInitial());
 		// Test the closet
-		assertEquals('X', board.getCellAt(9,13).getInitial());
+		assertEquals('X', board.getCellAt(11,7).getInitial());
 	}
 	
 

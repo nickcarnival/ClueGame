@@ -1,8 +1,12 @@
 package clueGame;
 
+<<<<<<< HEAD
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+=======
+import java.util.HashMap;
+>>>>>>> 34912c3163250fc3edb9fe1111393eda93e8b09c
 import java.util.Map;
 
 public class Board {
@@ -34,7 +38,7 @@ public class Board {
 
 	public Map<Character, String> getLegend() {
 		// TODO Auto-generated method stub
-		return null;
+		return new HashMap<Character, String>();
 	}
 
 	public int getNumRows() {
@@ -49,7 +53,7 @@ public class Board {
 
 	public BoardCell getCellAt(int i, int j) {
 		// TODO Auto-generated method stub
-		return null;
+		return new BoardCell(i, j);
 	}
 
 }
