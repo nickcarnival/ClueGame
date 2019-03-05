@@ -1,5 +1,8 @@
 package clueGame;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Map;
 
 public class Board {
@@ -8,12 +11,15 @@ public class Board {
 	private String LayoutFile;
 	private String LegendFile;
 
-	public void setConfigFiles(String string, String string2) {
+	private Board() {
+		
+	}
+	
+	public void setConfigFiles(String layout, String legend) {
 		// TODO Auto-generated method stub
 		//test if the layout file is the correct length
-		this.LayoutFile = string;
-		this.LegendFile = string2;
-		
+		this.LayoutFile = layout;
+		this.LegendFile = legend;
 	}
 
 	public void initialize() {
@@ -23,7 +29,7 @@ public class Board {
 
 	public static Board getInstance() {
 		// TODO Auto-generated method stub
-		return null;
+		return new Board();
 	}
 
 	public Map<Character, String> getLegend() {
