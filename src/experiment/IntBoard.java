@@ -80,6 +80,9 @@ public class IntBoard {
 		visited.clear();
 		visited.add(startCell);
 		findAllTargets(startCell, pathLength);
+		System.out.println("sc " + startCell + "\tpl " + pathLength);
+		System.out.println("size " + targets.size());
+		System.out.println();
 	}
 
 	//
