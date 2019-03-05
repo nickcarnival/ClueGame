@@ -1,0 +1,11 @@
+C, Children's Room, Card
+K, Kitchen, Card
+B, Bedroom, Card
+H, Helipad, Card
+L, Library, Card
+S, Study, Card
+D, Dining Room, Card
+F, Family Room, Card
+M, Mudroom, Card
+X, Closet, Other
+W, Walkway, Other
