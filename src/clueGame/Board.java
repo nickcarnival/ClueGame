@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Board {
@@ -23,12 +24,12 @@ public class Board {
 
 	public static Board getInstance() {
 		// TODO Auto-generated method stub
-		return null;
+		return new Board();
 	}
 
 	public Map<Character, String> getLegend() {
 		// TODO Auto-generated method stub
-		return null;
+		return new HashMap<Character, String>();
 	}
 
 	public int getNumRows() {
@@ -43,7 +44,7 @@ public class Board {
 
 	public BoardCell getCellAt(int i, int j) {
 		// TODO Auto-generated method stub
-		return null;
+		return new BoardCell(i, j);
 	}
 
 }
