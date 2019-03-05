@@ -9,4 +9,19 @@ public class BoardCell {
 		this.column = column;
 	}
 
+	public int getRow() {
+		return row;
+	}
+
+	public int getColumn() {
+		return column;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return (((BoardCell) obj).getRow()==this.row&&((BoardCell) obj).getColumn()==this.column);
+	}
+
+	
+
 }
