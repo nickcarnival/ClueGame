@@ -23,8 +23,8 @@ import clueGame.DoorDirection;
 public class FileInitTests {
 	// Constants that I will use to test whether the file was loaded correctly
 	public static final int LEGEND_SIZE = 11;
-	public static final int NUM_ROWS = 20;
-	public static final int NUM_COLUMNS = 21;
+	public static final int NUM_ROWS = 21;
+	public static final int NUM_COLUMNS = 20;
 
 	// NOTE: I made Board static because I only want to set it up one 
 	// time (using @BeforeClass), no need to do setup before each test.

@@ -64,7 +64,6 @@ public class Board {
         char legendLetter ;
         String legendRoom = "";
         String legendCardStuff = "";
-
         String temp2 = "";
         //this is size three because of how the legend must be formatted
         String[] splitArray = new String[3];
@@ -109,10 +108,30 @@ public class Board {
 		return legendMap;
 	}
 
+
+	//should return 21
 	public int getNumRows() {
+
+		Scanner scanner = null;
+		try {
+			scanner = new Scanner(new File(LayoutFile));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+		}
+
+		int count = 0;
+		while(scanner.hasNext()) {
+			scanner.useDelimiter(",");
+			count++;
+			scanner.nextLine();
+				
+		}
+		NumRows = count;
+		//System.out.println("Num Rows: " + NumRows);
 		return NumRows;
 	}
 
+	//shoudl return 20
 	public int getNumColumns() {
 		System.out.println(NumColumns);
 
@@ -121,14 +140,13 @@ public class Board {
 		Path path = Paths.get(LayoutFile);
 		try {
 			long lineCount = Files.lines(path).count();
-			NumColumns = toIntExact(lineCount);
-			System.out.println("File length: " + NumColumns);
+			NumColumns = toIntExact(lineCount) - 1;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}		
 		//end of file length counter
 
+		//System.out.println("num columns: " + NumColumns);
 		return NumColumns;
 	}
 
@@ -146,6 +164,7 @@ public class Board {
 		board.getLegend();
 		board.getNumColumns();
 		board.getNumRows();
+	
 	}
 	
 
