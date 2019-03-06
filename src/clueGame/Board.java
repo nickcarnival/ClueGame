@@ -140,7 +140,7 @@ public class Board {
 		Path path = Paths.get(LayoutFile);
 		try {
 			long lineCount = Files.lines(path).count();
-			NumColumns = toIntExact(lineCount) - 1;
+			NumColumns = toIntExact(lineCount) + 1;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 		}		
