@@ -40,7 +40,7 @@ public class Board {
 	//2D array for storing boardcells
 	private char[][] gridArray; 
 
-	public void initialize() {
+	public void initialize() throws BadConfigFormatException {
 		gridArray = new char[getNumRows()][getNumColumns()];
 
 		try {
@@ -49,6 +49,7 @@ public class Board {
 		} catch (BadConfigFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw e;
 			//add that to the log file
 		}
 
@@ -127,10 +128,13 @@ public class Board {
 
 			try {
 				scanner = new Scanner(new File(LayoutFile));
+
 				//gridLine should store every line in the csv file
 				String[] gridLine = new String[getNumColumns()];
+				
 				//stores the same thing without commas
 				String[] cleanedGridLine = new String[getNumRows()];
+				
 				for(int row = 0; row < getNumRows(); row++) {
 					gridLine[row] = scanner.nextLine();
 					cleanedGridLine = gridLine[row].split(COMMA);
@@ -139,6 +143,7 @@ public class Board {
 						//create a new board cell at a certain location with its char
 						//tests if it is a door
 						boardCellArray[row][column] = new BoardCell(row,column);
+
 						if(cleanedGridLine[column].length() == 1 || cleanedGridLine[column].charAt(1) == 'N'){
 							boardCellArray[row][column].initial = cleanedGridLine[column].charAt(0);
 						} else {
