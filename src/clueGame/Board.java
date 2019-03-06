@@ -21,8 +21,13 @@ public class Board {
 	private String LegendFile;
 	private String COMMA = ",";
 
-	private Board() {
-		
+	// variable used for singleton pattern
+	private static Board theInstance = new Board();
+	// constructor is private to ensure only one can be created
+	private Board() {}
+	// this method returns the only Board
+	public static Board getInstance() {
+		return theInstance;
 	}
 	
 	public void setConfigFiles(String layout, String legend) {
@@ -32,15 +37,38 @@ public class Board {
 		this.LegendFile = legend;
 	}
 
+	//2D array for storing boardcells
+	private char[][] gridArray; 
+
+	public void initialize() {
+		gridArray = new char[getNumRows()][getNumColumns()];
+
+		try {
+			initializeLegend();
+			initializeLayout();
+		} catch (BadConfigFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			//add that to the log file
+		}
+
+	}
+	
 	//this method will parse both config files 
 	//and get the row and column lengths
 	private int NumRows = 0;
 	private int NumColumns = 0;
 
 	private HashMap<Character, String> legendMap = new HashMap<Character, String>();
-	//this needs to create the legend
-	public void initialize() throws BadConfigFormatException {
+	
+	//THE ALMIGHTY 2D ARRAY OF BOARD CELLS!!!!!!!!!!!!!!!!!!!
+	private BoardCell[][] boardCellArray;
+	//THE END OF THE ALMIGHTY 2D ARRAY OF BOARD CELLS :(
 
+	//this needs to create the legend
+	public void initializeLegend() throws BadConfigFormatException{
+		boardCellArray = new BoardCell[getNumRows()][getNumColumns()];
+		
 		//Get scanner instance
         Scanner scanner = null;
 		try {
@@ -87,19 +115,45 @@ public class Board {
 
         	legendMap.put(legendLetter, legendRoom);
         	
-        	System.out.println(legendLetter);
-        	System.out.println(legendRoom);
-        	System.out.println(legendCardStuff);
         }
          
         //Do not forget to close the scanner 
         scanner.close();	
-
 	}
 
-	public static Board getInstance() {
-		// TODO Auto-generated method stub
-		return new Board();
+	//has to initialize the map layout stufffff
+	public void initializeLayout() {
+		Scanner scanner = null;
+
+			try {
+				scanner = new Scanner(new File(LayoutFile));
+				//gridLine should store every line in the csv file
+				String[] gridLine = new String[getNumColumns()];
+				//stores the same thing without commas
+				String[] cleanedGridLine = new String[getNumRows()];
+				for(int row = 0; row < getNumRows(); row++) {
+					gridLine[row] = scanner.nextLine();
+					cleanedGridLine = gridLine[row].split(COMMA);
+
+					for(int column = 0; column < getNumColumns(); column++) {
+						//create a new board cell at a certain location with its char
+						//tests if it is a door
+						boardCellArray[row][column] = new BoardCell(row,column);
+						if(cleanedGridLine[column].length() > 1) {
+							//boardCell.isDoorway is true
+							boardCellArray[row][column].isDoorway = true;
+							
+						}
+					}
+					
+				}
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				//log file not found
+				e.printStackTrace();
+			}
+		
+		
 	}
 
 	public Map<Character, String> getLegend() {
@@ -113,6 +167,7 @@ public class Board {
 	public int getNumRows() {
 
 		Scanner scanner = null;
+		System.out.println("Layout File: " + LayoutFile);
 		try {
 			scanner = new Scanner(new File(LayoutFile));
 		} catch (FileNotFoundException e1) {
@@ -131,11 +186,9 @@ public class Board {
 		return NumRows;
 	}
 
-	//shoudl return 20
+	//should return 20
 	public int getNumColumns() {
-		System.out.println(NumColumns);
-
-        //counts file lenghts
+        //counts file length s
 		//counts the number of lines in the text file
 		Path path = Paths.get(LayoutFile);
 		try {
@@ -150,9 +203,9 @@ public class Board {
 		return NumColumns;
 	}
 
-	public BoardCell getCellAt(int i, int j) {
+	public BoardCell getCellAt(int row, int column) {
 		// TODO Auto-generated method stub
-		return new BoardCell(i, j);
+		return boardCellArray[row][column];
 	}
 
 	public static void main(String[] args) throws BadConfigFormatException {
@@ -162,8 +215,19 @@ public class Board {
 		board.setConfigFiles("data/map.csv",  "data/rooms.txt");
 		board.initialize();
 		board.getLegend();
-		board.getNumColumns();
-		board.getNumRows();
+		board.getCellAt(0, 0).getInitial();
+		
+		int numDoor = 0;
+		for(int i = 0; i < board.getNumRows(); i++) {
+			for(int j = 0; j < board.getNumColumns(); j++) {
+				BoardCell cell = board.getCellAt(i, j);
+				if(cell.isDoorway()) {
+					numDoor++;
+				}
+				
+			}
+			System.out.println(numDoor);
+		}
 	
 	}
 	

@@ -1,9 +1,14 @@
+//use this board cell because the other one is the wrong one...
 package clueGame;
 
 public class BoardCell {
 	private int row;
 	private int column;
-
+	private DoorDirection doorDirection;
+	private boolean isRoom;
+	public boolean isDoorway = false;
+	private char initial;
+	
 	public BoardCell(int row, int column) {
 		this.row = row;
 		this.column = column;
@@ -50,7 +55,7 @@ public class BoardCell {
 
 	public boolean isDoorway() {
 		// TODO Auto-generated method stub
-		return false;
+		return isDoorway;
 	}
 
 	public DoorDirection getDoorDirection() {
@@ -58,11 +63,10 @@ public class BoardCell {
 		return DoorDirection.NONE;
 	}
 
-	public Object getInitial() {
+	public char getInitial() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.initial;
 	}
 
-	
 
 }
