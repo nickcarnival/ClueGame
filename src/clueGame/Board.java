@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import static java.lang.Math.toIntExact;
 
 public class Board {
 
@@ -36,11 +37,12 @@ public class Board {
 	private int NumRows = 0;
 	private int NumColumns = 0;
 
-	//we only want to parse the file once and should do that here:
+	private HashMap<Character, String> legendMap = new HashMap<Character, String>();
+	//this needs to create the legend
 	public void initialize() throws BadConfigFormatException {
 
 		//Get scanner instance
-        Scanner scanner;
+        Scanner scanner = null;
 		try {
 			scanner = new Scanner(new File(LegendFile));
 		} catch (FileNotFoundException e1) {
@@ -59,7 +61,7 @@ public class Board {
         }
 
         String[] valueArray = new String[count];
-        String legendLetter = "";
+        char legendLetter ;
         String legendRoom = "";
         String legendCardStuff = "";
 
@@ -67,14 +69,24 @@ public class Board {
         //this is size three because of how the legend must be formatted
         String[] splitArray = new String[3];
 
-        scanner = new Scanner(new File(LegendFile));
+        try {
+			scanner = new Scanner(new File(LegendFile));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
         for(int i = 0; i < count; i ++) {
         	valueArray[i] = scanner.nextLine();
         	splitArray = valueArray[i].split(COMMA);
 
-        	legendLetter = splitArray[0];
+        	legendLetter = splitArray[0].charAt(0);
         	legendRoom = splitArray[1];
         	legendCardStuff = splitArray[2];
+        	
+        	legendRoom = legendRoom.trim();
+        	legendCardStuff = legendCardStuff.trim();
+
+        	legendMap.put(legendLetter, legendRoom);
         	
         	System.out.println(legendLetter);
         	System.out.println(legendRoom);
@@ -83,18 +95,6 @@ public class Board {
          
         //Do not forget to close the scanner 
         scanner.close();	
-
-        //counts file lenghts
-		//counts the number of lines in the text file
-		Path path = Paths.get(LegendFile);
-		try {
-			long lineCount = Files.lines(path).count();
-			System.out.println("File length: " + lineCount);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
-		//end of file length counter
 
 	}
 
@@ -105,7 +105,8 @@ public class Board {
 
 	public Map<Character, String> getLegend() {
 		// TODO Auto-generated method stub
-		return new HashMap<Character, String>();
+		System.out.println("Children's Room: " + legendMap.get('C'));
+		return legendMap;
 	}
 
 	public int getNumRows() {
@@ -113,6 +114,21 @@ public class Board {
 	}
 
 	public int getNumColumns() {
+		System.out.println(NumColumns);
+
+        //counts file lenghts
+		//counts the number of lines in the text file
+		Path path = Paths.get(LayoutFile);
+		try {
+			long lineCount = Files.lines(path).count();
+			NumColumns = toIntExact(lineCount);
+			System.out.println("File length: " + NumColumns);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		//end of file length counter
+
 		return NumColumns;
 	}
 
@@ -120,18 +136,16 @@ public class Board {
 		// TODO Auto-generated method stub
 		return new BoardCell(i, j);
 	}
-	
-	public static void main(String[] args) {
+
+	public static void main(String[] args) throws BadConfigFormatException {
 		
 		Board board = new Board();
 		board.getInstance();
 		board.setConfigFiles("data/map.csv",  "data/rooms.txt");
-		try {
-			board.initialize();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		board.initialize();
+		board.getLegend();
+		board.getNumColumns();
+		board.getNumRows();
 	}
 	
 

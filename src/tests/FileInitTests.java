@@ -35,11 +35,12 @@ public class FileInitTests {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
-		board.setConfigFiles("/map.csv", "/rooms.txt");		
+		board.setConfigFiles("data/map.csv", "data/rooms.txt");		
 		try {
 			board.initialize();
 		} catch (BadConfigFormatException e) {
 			// TODO Auto-generated catch block
+			System.out.println("Bad Config Format Exception: Line 43 FileInitTests");
 			e.printStackTrace();
 		}
 	}
