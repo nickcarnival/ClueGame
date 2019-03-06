@@ -4,7 +4,7 @@ package clueGame;
 public class BoardCell {
 	private int row;
 	private int column;
-	private DoorDirection doorDirection;
+	DoorDirection doorDirection;
 	private boolean isRoom;
 	public boolean isDoorway = false;
 	public char initial;
@@ -60,13 +60,12 @@ public class BoardCell {
 
 	public DoorDirection getDoorDirection() {
 		// TODO Auto-generated method stub
-		return DoorDirection.NONE;
+		return this.doorDirection;
 	}
 
 	public char getInitial() {
 		// TODO Auto-generated method stub
 		return this.initial;
 	}
-
 
 }

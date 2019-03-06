@@ -141,8 +141,25 @@ public class Board {
 						boardCellArray[row][column] = new BoardCell(row,column);
 						if(cleanedGridLine[column].length() == 1) {
 							boardCellArray[row][column].initial = cleanedGridLine[column].charAt(0);
-						} else
+						} else {
+							char doorDirectionLetter = cleanedGridLine[column].charAt(1);
 							boardCellArray[row][column].isDoorway = true;
+							if(doorDirectionLetter == 'L') {
+								boardCellArray[row][column].doorDirection = DoorDirection.LEFT;
+							}
+
+							if(doorDirectionLetter == 'R') {
+								boardCellArray[row][column].doorDirection = DoorDirection.RIGHT;
+							}
+
+							if(doorDirectionLetter == 'U') {
+								boardCellArray[row][column].doorDirection = DoorDirection.UP;
+							}
+
+							if(doorDirectionLetter == 'D') {
+								boardCellArray[row][column].doorDirection = DoorDirection.DOWN;
+							}
+						}
 					}
 					
 				}
@@ -229,6 +246,5 @@ public class Board {
 		System.out.println("K: " + board.getCellAt(0, 0).getInitial());
 	
 	}
-	
 
 }
