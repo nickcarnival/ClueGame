@@ -139,11 +139,10 @@ public class Board {
 						//create a new board cell at a certain location with its char
 						//tests if it is a door
 						boardCellArray[row][column] = new BoardCell(row,column);
-						if(cleanedGridLine[column].length() > 1) {
-							//boardCell.isDoorway is true
+						if(cleanedGridLine[column].length() == 1) {
+							boardCellArray[row][column].initial = cleanedGridLine[column].charAt(0);
+						} else
 							boardCellArray[row][column].isDoorway = true;
-							
-						}
 					}
 					
 				}
@@ -167,7 +166,6 @@ public class Board {
 	public int getNumRows() {
 
 		Scanner scanner = null;
-		System.out.println("Layout File: " + LayoutFile);
 		try {
 			scanner = new Scanner(new File(LayoutFile));
 		} catch (FileNotFoundException e1) {
@@ -228,6 +226,7 @@ public class Board {
 			}
 			System.out.println(numDoor);
 		}
+		System.out.println("K: " + board.getCellAt(0, 0).getInitial());
 	
 	}
 	

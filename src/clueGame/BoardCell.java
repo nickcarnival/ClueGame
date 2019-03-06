@@ -7,7 +7,7 @@ public class BoardCell {
 	private DoorDirection doorDirection;
 	private boolean isRoom;
 	public boolean isDoorway = false;
-	private char initial;
+	public char initial;
 	
 	public BoardCell(int row, int column) {
 		this.row = row;
