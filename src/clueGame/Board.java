@@ -18,7 +18,7 @@ public class Board {
 	private int MAX_BOARD_SIZE = 50;
 	private String LayoutFile;
 	private String LegendFile;
-	private String COMMA = "'";
+	private String COMMA = ",";
 
 	private Board() {
 		
@@ -37,10 +37,16 @@ public class Board {
 	private int NumColumns = 0;
 
 	//we only want to parse the file once and should do that here:
-	public void initialize() throws FileNotFoundException {
+	public void initialize() throws BadConfigFormatException {
 
 		//Get scanner instance
-        Scanner scanner = new Scanner(new File(LegendFile));
+        Scanner scanner;
+		try {
+			scanner = new Scanner(new File(LegendFile));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
          
         //Set the delimiter used in file
         scanner.useDelimiter(",");
@@ -53,16 +59,32 @@ public class Board {
         }
 
         String[] valueArray = new String[count];
+        String legendLetter = "";
+        String legendRoom = "";
+        String legendCardStuff = "";
+
+        String temp2 = "";
+        //this is size three because of how the legend must be formatted
+        String[] splitArray = new String[3];
+
         scanner = new Scanner(new File(LegendFile));
         for(int i = 0; i < count; i ++) {
         	valueArray[i] = scanner.nextLine();
-        	System.out.println(valueArray[i]);
-        	System.out.println(i);
+        	splitArray = valueArray[i].split(COMMA);
+
+        	legendLetter = splitArray[0];
+        	legendRoom = splitArray[1];
+        	legendCardStuff = splitArray[2];
+        	
+        	System.out.println(legendLetter);
+        	System.out.println(legendRoom);
+        	System.out.println(legendCardStuff);
         }
          
         //Do not forget to close the scanner 
         scanner.close();	
 
+        //counts file lenghts
 		//counts the number of lines in the text file
 		Path path = Paths.get(LegendFile);
 		try {
@@ -72,6 +94,7 @@ public class Board {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
+		//end of file length counter
 
 	}
 
