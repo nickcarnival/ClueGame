@@ -217,7 +217,6 @@ public class Board {
 		}		
 		//end of file length counter
 
-		//System.out.println("num columns: " + NumColumns);
 		return NumColumns;
 	}
 
