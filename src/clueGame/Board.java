@@ -44,8 +44,8 @@ public class Board {
 		gridArray = new char[getNumRows()][getNumColumns()];
 
 		try {
-			initializeLegend();
-			initializeLayout();
+			loadRoomConfig();
+			loadBoardConfig();
 		} catch (BadConfigFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,7 +66,7 @@ public class Board {
 	//THE END OF THE ALMIGHTY 2D ARRAY OF BOARD CELLS :(
 
 	//this needs to create the legend
-	public void initializeLegend() throws BadConfigFormatException{
+	public void loadRoomConfig() throws BadConfigFormatException{
 		boardCellArray = new BoardCell[getNumRows()][getNumColumns()];
 		
 		//Get scanner instance
@@ -122,7 +122,7 @@ public class Board {
 	}
 
 	//has to initialize the map layout stufffff
-	public void initializeLayout() {
+	public void loadBoardConfig() {
 		Scanner scanner = null;
 
 			try {
@@ -139,9 +139,9 @@ public class Board {
 						//create a new board cell at a certain location with its char
 						//tests if it is a door
 						boardCellArray[row][column] = new BoardCell(row,column);
-						if(cleanedGridLine[column].length() == 1) {
+						if(cleanedGridLine[column].length() == 1 ){
 							boardCellArray[row][column].initial = cleanedGridLine[column].charAt(0);
-						} else {
+						} else if(cleanedGridLine[column].charAt(1) != 'N'){
 							char doorDirectionLetter = cleanedGridLine[column].charAt(1);
 							boardCellArray[row][column].isDoorway = true;
 							if(doorDirectionLetter == 'L') {
@@ -183,18 +183,18 @@ public class Board {
 	public int getNumRows() {
 
 		Scanner scanner = null;
+		int count = 0;
 		try {
 			scanner = new Scanner(new File(LayoutFile));
+
+			while(scanner.hasNext()) {
+				scanner.useDelimiter(",");
+				count++;
+				scanner.nextLine();
+					
+			}
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
-		}
-
-		int count = 0;
-		while(scanner.hasNext()) {
-			scanner.useDelimiter(",");
-			count++;
-			scanner.nextLine();
-				
 		}
 		NumRows = count;
 		//System.out.println("Num Rows: " + NumRows);
@@ -225,25 +225,25 @@ public class Board {
 
 	public static void main(String[] args) throws BadConfigFormatException {
 		
-		Board board = new Board();
-		board.getInstance();
-		board.setConfigFiles("data/map.csv",  "data/rooms.txt");
-		board.initialize();
-		board.getLegend();
-		board.getCellAt(0, 0).getInitial();
-		
-		int numDoor = 0;
-		for(int i = 0; i < board.getNumRows(); i++) {
-			for(int j = 0; j < board.getNumColumns(); j++) {
-				BoardCell cell = board.getCellAt(i, j);
-				if(cell.isDoorway()) {
-					numDoor++;
-				}
-				
-			}
-			System.out.println(numDoor);
-		}
-		System.out.println("K: " + board.getCellAt(0, 0).getInitial());
+//		Board board = new Board();
+//		board.getInstance();
+//		board.setConfigFiles("data/map.csv",  "data/rooms.txt");
+//		board.initialize();
+//		board.getLegend();
+//		board.getCellAt(0, 0).getInitial();
+//		
+//		int numDoor = 0;
+//		for(int i = 0; i < board.getNumRows(); i++) {
+//			for(int j = 0; j < board.getNumColumns(); j++) {
+//				BoardCell cell = board.getCellAt(i, j);
+//				if(cell.isDoorway()) {
+//					numDoor++;
+//				}
+//				
+//			}
+//			System.out.println(numDoor);
+//		}
+//		System.out.println("K: " + board.getCellAt(0, 0).getInitial());
 	
 	}
 
