@@ -139,25 +139,31 @@ public class Board {
 						//create a new board cell at a certain location with its char
 						//tests if it is a door
 						boardCellArray[row][column] = new BoardCell(row,column);
-						if(cleanedGridLine[column].length() == 1 ){
+						if(cleanedGridLine[column].length() == 1 || cleanedGridLine[column].charAt(1) == 'N'){
 							boardCellArray[row][column].initial = cleanedGridLine[column].charAt(0);
-						} else if(cleanedGridLine[column].charAt(1) != 'N'){
+						} else {
+
 							char doorDirectionLetter = cleanedGridLine[column].charAt(1);
 							boardCellArray[row][column].isDoorway = true;
+
 							if(doorDirectionLetter == 'L') {
 								boardCellArray[row][column].doorDirection = DoorDirection.LEFT;
+								boardCellArray[row][column].initial = cleanedGridLine[column].charAt(0);
 							}
 
 							if(doorDirectionLetter == 'R') {
 								boardCellArray[row][column].doorDirection = DoorDirection.RIGHT;
+								boardCellArray[row][column].initial = cleanedGridLine[column].charAt(0);
 							}
 
 							if(doorDirectionLetter == 'U') {
 								boardCellArray[row][column].doorDirection = DoorDirection.UP;
+								boardCellArray[row][column].initial = cleanedGridLine[column].charAt(0);
 							}
 
 							if(doorDirectionLetter == 'D') {
 								boardCellArray[row][column].doorDirection = DoorDirection.DOWN;
+								boardCellArray[row][column].initial = cleanedGridLine[column].charAt(0);
 							}
 						}
 					}
@@ -174,7 +180,6 @@ public class Board {
 
 	public Map<Character, String> getLegend() {
 		// TODO Auto-generated method stub
-		System.out.println("Children's Room: " + legendMap.get('C'));
 		return legendMap;
 	}
 
@@ -225,25 +230,25 @@ public class Board {
 
 	public static void main(String[] args) throws BadConfigFormatException {
 		
-//		Board board = new Board();
-//		board.getInstance();
-//		board.setConfigFiles("data/map.csv",  "data/rooms.txt");
-//		board.initialize();
-//		board.getLegend();
-//		board.getCellAt(0, 0).getInitial();
-//		
-//		int numDoor = 0;
-//		for(int i = 0; i < board.getNumRows(); i++) {
-//			for(int j = 0; j < board.getNumColumns(); j++) {
-//				BoardCell cell = board.getCellAt(i, j);
-//				if(cell.isDoorway()) {
-//					numDoor++;
-//				}
-//				
-//			}
-//			System.out.println(numDoor);
-//		}
-//		System.out.println("K: " + board.getCellAt(0, 0).getInitial());
+		Board board = new Board();
+		board.getInstance();
+		board.setConfigFiles("data/CTest_ClueLayout.csv",  "data/CTest_ClueLegend.txt");
+		board.initialize();
+		board.getLegend();
+		board.getCellAt(0, 0).getInitial();
+		
+		int numDoor = 0;
+		for(int i = 0; i < board.getNumRows(); i++) {
+			for(int j = 0; j < board.getNumColumns(); j++) {
+				BoardCell cell = board.getCellAt(i, j);
+				if(cell.isDoorway()) {
+					numDoor++;
+				}
+				
+			}
+			System.out.println(numDoor);
+		}
+		System.out.println("R: " + board.getCellAt(4, 8).getInitial());
 	
 	}
 
