@@ -36,7 +36,12 @@ public class FileInitTests {
 		board = Board.getInstance();
 		// set the file names to use my config files
 		board.setConfigFiles("data/map.csv", "data/rooms.txt");		
-		board.initialize();
+		try {
+			board.initialize();
+		} catch (BadConfigFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	@Test
 	public void testRooms() {

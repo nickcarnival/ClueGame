@@ -40,18 +40,11 @@ public class Board {
 	//2D array for storing boardcells
 	private char[][] gridArray; 
 
-	public void initialize() throws BadConfigFormatException {
+	public void initialize() throws BadConfigFormatException   {
 		gridArray = new char[getNumRows()][getNumColumns()];
 
-		try {
-			loadRoomConfig();
-			loadBoardConfig();
-		} catch (BadConfigFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw e;
-			//add that to the log file
-		}
+		loadRoomConfig();
+		loadBoardConfig();
 
 	}
 	
