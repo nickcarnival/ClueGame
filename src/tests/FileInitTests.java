@@ -1,4 +1,3 @@
-//commit change comment
 package tests;
 
 /*
@@ -37,12 +36,7 @@ public class FileInitTests {
 		board = Board.getInstance();
 		// set the file names to use my config files
 		board.setConfigFiles("data/map.csv", "data/rooms.txt");		
-		try {
-			board.initialize();
-		} catch (BadConfigFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		board.initialize();
 	}
 	@Test
 	public void testRooms() {

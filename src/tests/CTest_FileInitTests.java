@@ -29,19 +29,14 @@ public class CTest_FileInitTests {
 	// time (using @BeforeClass), no need to do setup before each test.
 	private static Board board;
 	
+	
 	@BeforeClass
 	public static void setUp() {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
 		board.setConfigFiles("data/CTest_ClueLayout.csv", "data/CTest_ClueLegend.txt");		
-		// Initialize will load BOTH config files 
-		try {
-			board.initialize();
-		} catch (BadConfigFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		board.initialize();
 	}
 	@Test
 	public void testRooms() {

@@ -8,7 +8,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import static java.lang.Math.toIntExact;
@@ -40,11 +43,15 @@ public class Board {
 	//2D array for storing boardcells
 	private char[][] gridArray; 
 
-	public void initialize() throws BadConfigFormatException   {
+	public void initialize() {
 		gridArray = new char[getNumRows()][getNumColumns()];
 
-		loadRoomConfig();
-		loadBoardConfig();
+		try {
+			loadRoomConfig();
+			loadBoardConfig();
+		} catch (BadConfigFormatException e) {
+			
+		}
 
 	}
 	
@@ -61,7 +68,13 @@ public class Board {
 
 	//this needs to create the legend
 	public void loadRoomConfig() throws BadConfigFormatException{
-		boardCellArray = new BoardCell[getNumRows()][getNumColumns()];
+		getNumRows();
+		getNumColumns();
+		if(NumColumns == -1) {
+			System.out.println("The Bad Format Has Been Thrown");
+			throw new BadConfigFormatException("Bad Columns");
+		}
+		boardCellArray = new BoardCell[NumRows][NumColumns];
 		
 		//Get scanner instance
         Scanner scanner = null;
@@ -116,62 +129,75 @@ public class Board {
 	}
 
 	//has to initialize the map layout stufffff
-	public void loadBoardConfig() {
+	public void loadBoardConfig() throws BadConfigFormatException{
 		Scanner scanner = null;
+		getNumColumns();
+		getNumRows();
 
-			try {
-				scanner = new Scanner(new File(LayoutFile));
+		System.out.println(NumColumns);
+		if(NumColumns != -1) {
+
+		
+				try {
+					scanner = new Scanner(new File(LayoutFile));
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				//gridLine should store every line in the csv file
-				String[] gridLine = new String[getNumColumns()];
+				//22 rows
+				String[] gridLine = new String[NumRows];
 				
+				//23 columns
 				//stores the same thing without commas
-				String[] cleanedGridLine = new String[getNumRows()];
+				String[] cleanedGridLine = new String[NumColumns];
 				
-				for(int row = 0; row < getNumRows(); row++) {
-					gridLine[row] = scanner.nextLine();
-					cleanedGridLine = gridLine[row].split(COMMA);
+				for(int column = 0; column < NumColumns -1 ; column++) {
+					gridLine[column] = scanner.nextLine();
+					cleanedGridLine = gridLine[column].split(COMMA);
 
-					for(int column = 0; column < getNumColumns(); column++) {
+
+					for(int row = 0; row < NumRows - 1; row++) {
 						//create a new board cell at a certain location with its char
 						//tests if it is a door
-						boardCellArray[row][column] = new BoardCell(row,column);
+						boardCellArray[column][row] = new BoardCell(column,row);
 
-						if(cleanedGridLine[column].length() == 1 || cleanedGridLine[column].charAt(1) == 'N'){
-							boardCellArray[row][column].initial = cleanedGridLine[column].charAt(0);
+						if(cleanedGridLine[row].length() == 1 || cleanedGridLine[row].charAt(1) == 'N'){
+							boardCellArray[column][row].initial = cleanedGridLine[row].charAt(0);
 						} else {
 
-							char doorDirectionLetter = cleanedGridLine[column].charAt(1);
-							boardCellArray[row][column].isDoorway = true;
+							char doorDirectionLetter = cleanedGridLine[row].charAt(1);
+							boardCellArray[column][row].isDoorway = true;
 
 							if(doorDirectionLetter == 'L') {
-								boardCellArray[row][column].doorDirection = DoorDirection.LEFT;
-								boardCellArray[row][column].initial = cleanedGridLine[column].charAt(0);
+								boardCellArray[column][row].doorDirection = DoorDirection.LEFT;
+								boardCellArray[column][row].initial = cleanedGridLine[row].charAt(0);
 							}
 
 							if(doorDirectionLetter == 'R') {
-								boardCellArray[row][column].doorDirection = DoorDirection.RIGHT;
-								boardCellArray[row][column].initial = cleanedGridLine[column].charAt(0);
+								boardCellArray[column][row].doorDirection = DoorDirection.RIGHT;
+								boardCellArray[column][row].initial = cleanedGridLine[row].charAt(0);
 							}
 
 							if(doorDirectionLetter == 'U') {
-								boardCellArray[row][column].doorDirection = DoorDirection.UP;
-								boardCellArray[row][column].initial = cleanedGridLine[column].charAt(0);
+								boardCellArray[column][row].doorDirection = DoorDirection.UP;
+								boardCellArray[column][row].initial = cleanedGridLine[row].charAt(0);
 							}
 
 							if(doorDirectionLetter == 'D') {
-								boardCellArray[row][column].doorDirection = DoorDirection.DOWN;
-								boardCellArray[row][column].initial = cleanedGridLine[column].charAt(0);
+								boardCellArray[column][row].doorDirection = DoorDirection.DOWN;
+								boardCellArray[column][row].initial = cleanedGridLine[row].charAt(0);
 							}
 						}
 					}
 					
-				}
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				//log file not found
-				e.printStackTrace();
-			}
+				}		
+			
+			
+		} else {
+			throw new BadConfigFormatException();
+		}
 		
 		
 	}
@@ -183,41 +209,55 @@ public class Board {
 
 
 	//should return 21
-	public int getNumRows() {
+	public int getNumColumns() {
 
 		Scanner scanner = null;
 		int count = 0;
 		try {
 			scanner = new Scanner(new File(LayoutFile));
 
-			while(scanner.hasNext()) {
-				scanner.useDelimiter(",");
-				count++;
-				scanner.nextLine();
-					
+			ArrayList<Integer> countArray = new ArrayList<Integer>();
+			int index = 0;
+			while(scanner.hasNextLine()) {
+				
+				String nextLine = scanner.nextLine();
+				
+				List<String> csvList = Arrays.asList(nextLine.split(COMMA));
+				
+				countArray.add(csvList.size());
+				System.out.println("count array: " + countArray.get(index));
+				index++;
+			}
+			for(int i = 1; i < countArray.size(); i++) {
+
+				if(countArray.get(i) != countArray.get(i-1)) {
+					NumColumns = -1;
+				}
 			}
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 		}
-		NumRows = count;
+		NumColumns = count + 1;
 		//System.out.println("Num Rows: " + NumRows);
-		return NumRows;
+		return NumColumns;
 	}
 
 	//should return 20
-	public int getNumColumns() {
+	public int getNumRows() {
         //counts file length s
 		//counts the number of lines in the text file
+
+		long longArray = new Long(1);
 		Path path = Paths.get(LayoutFile);
 		try {
-			long lineCount = Files.lines(path).count();
-			NumColumns = toIntExact(lineCount) + 1;
+			longArray = Files.lines(path).count();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 		}		
+		NumRows = toIntExact(longArray);
 		//end of file length counter
 
-		return NumColumns;
+		return NumRows;
 	}
 
 	public BoardCell getCellAt(int row, int column) {
@@ -229,23 +269,11 @@ public class Board {
 		
 		Board board = new Board();
 		board.getInstance();
-		board.setConfigFiles("data/CTest_ClueLayout.csv",  "data/CTest_ClueLegend.txt");
+		board.setConfigFiles("data/CTest_ClueLayoutBadColumns.csv",  "data/CTest_ClueLegend.txt");
 		board.initialize();
 		board.getLegend();
-		board.getCellAt(0, 0).getInitial();
-		
-		int numDoor = 0;
-		for(int i = 0; i < board.getNumRows(); i++) {
-			for(int j = 0; j < board.getNumColumns(); j++) {
-				BoardCell cell = board.getCellAt(i, j);
-				if(cell.isDoorway()) {
-					numDoor++;
-				}
-				
-			}
-			System.out.println(numDoor);
-		}
-		System.out.println("R: " + board.getCellAt(4, 8).getInitial());
+		board.loadBoardConfig();
+		board.loadRoomConfig();
 	
 	}
 
