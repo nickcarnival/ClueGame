@@ -119,6 +119,12 @@ public class Board {
         	
         	legendRoom = legendRoom.trim();
         	legendCardStuff = legendCardStuff.trim();
+        	
+        	System.out.println("legend car: " + legendCardStuff);
+        	if(legendCardStuff != "Card" || legendCardStuff != "Other" ) {
+        		System.out.println("bad cards :(");
+        		throw new BadConfigFormatException("The Cards are Not in your favor");
+        	}
 
         	legendMap.put(legendLetter, legendRoom);
         	
@@ -278,10 +284,9 @@ public class Board {
 		
 		Board board = new Board();
 		board.getInstance();
-		board.setConfigFiles("data/CTest_ClueLayoutBadColumns.csv",  "data/CTest_ClueLegend.txt");
+		board.setConfigFiles("data/CTest_ClueLayout.csv",  "data/CTest_ClueLegendBadFormat.txt");
 		board.initialize();
 		board.getLegend();
-		board.loadBoardConfig();
 		board.loadRoomConfig();
 	}
 

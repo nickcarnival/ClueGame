@@ -21,6 +21,7 @@ public class CTest_ExceptionTests {
 	public void testBadColumns() throws BadConfigFormatException, FileNotFoundException {
 		// Note that we are using a LOCAL Board variable, because each 
 		// test will load different files
+
 		Board board = Board.getInstance();
 		board.setConfigFiles("data/CTest_ClueLayoutBadColumns.csv", "data/CTest_ClueLegend.txt");
 		// Instead of initialize, we call the two load functions directly.
