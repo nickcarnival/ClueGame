@@ -213,6 +213,7 @@ public class Board {
 
 		Scanner scanner = null;
 		int count = 0;
+		List<String> csvList = Arrays.asList();
 		try {
 			scanner = new Scanner(new File(LayoutFile));
 
@@ -222,22 +223,24 @@ public class Board {
 				
 				String nextLine = scanner.nextLine();
 				
-				List<String> csvList = Arrays.asList(nextLine.split(COMMA));
+				csvList = Arrays.asList(nextLine.split(COMMA));
 				
 				countArray.add(csvList.size());
-				System.out.println("count array: " + countArray.get(index));
 				index++;
 			}
 			for(int i = 1; i < countArray.size(); i++) {
 
+				System.out.println("how many times? ..." + i);
 				if(countArray.get(i) != countArray.get(i-1)) {
+					System.out.println("count arry or sometingsa dsfljas ");
 					NumColumns = -1;
+					return NumColumns;
 				}
 			}
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 		}
-		NumColumns = count + 1;
+		NumColumns = csvList.size();
 		//System.out.println("Num Rows: " + NumRows);
 		return NumColumns;
 	}
