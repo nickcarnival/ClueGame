@@ -162,6 +162,12 @@ public class Board {
 						//create a new board cell at a certain location with its char
 						//tests if it is a door
 						boardCellArray[column][row] = new BoardCell(column,row);
+						//check if the map has the key
+						if(!legendMap.containsKey(boardCellArray[column][row].getInitial())) {
+							throw new BadConfigFormatException("Error: This Character is not in the Legend: " 
+						+ boardCellArray[column][row].getInitial());
+									
+						}
 
 						if(cleanedGridLine[row].length() == 1 || cleanedGridLine[row].charAt(1) == 'N'){
 							boardCellArray[column][row].initial = cleanedGridLine[row].charAt(0);
@@ -277,7 +283,6 @@ public class Board {
 		board.getLegend();
 		board.loadBoardConfig();
 		board.loadRoomConfig();
-	
 	}
 
 }
