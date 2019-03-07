@@ -23,9 +23,12 @@ public class BoardCell {
 	}
 
 
+
+
 	@Override
 	public String toString() {
-		return "BoardCell [row=" + row + ", column=" + column + "]";
+		return "BoardCell [row=" + row + ", column=" + column + ", doorDirection=" + doorDirection + ", isRoom="
+				+ isRoom + ", isDoorway=" + isDoorway + ", initial=" + initial + "]";
 	}
 
 	@Override

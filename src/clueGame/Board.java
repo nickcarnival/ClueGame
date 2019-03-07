@@ -14,6 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+
+import org.junit.Assert;
+
 import static java.lang.Math.toIntExact;
 
 public class Board {
@@ -62,7 +65,7 @@ public class Board {
 
 	private HashMap<Character, String> legendMap = new HashMap<Character, String>();
 	
-	//THE ALMIGHTY 2D ARRAY OF BOARD CELLS!!!!!!!!!!!!!!!!!!!
+	//THE ALMIGHTY 2D ARRAY OF BOARD CELLS!!!!!!!!!!!!!
 	private BoardCell[][] boardCellArray;
 	//THE END OF THE ALMIGHTY 2D ARRAY OF BOARD CELLS :(
 
@@ -120,10 +123,7 @@ public class Board {
         	legendRoom = legendRoom.trim();
         	legendCardStuff = legendCardStuff.trim();
         	
-        	System.out.println("true or false: " + legendCardStuff.contentEquals("Card"));
-        	System.out.println("legend card name: " + legendCardStuff);
         	if(!legendCardStuff.contentEquals("Card") && !legendCardStuff.contentEquals("Other")) {
-        		System.out.println("bad cards :(");
         		throw new BadConfigFormatException("The Cards are Not in your favor");
         	}
 
@@ -141,7 +141,6 @@ public class Board {
 		getNumColumns();
 		getNumRows();
 
-		System.out.println(NumColumns);
 		if(NumColumns != -1) {
 
 		
@@ -170,14 +169,13 @@ public class Board {
 						//tests if it is a door
 						boardCellArray[column][row] = new BoardCell(column,row);
 						//check if the map has the key
-						if(!legendMap.containsKey(boardCellArray[column][row].getInitial())) {
-							throw new BadConfigFormatException("Error: This Character is not in the Legend: " 
-						+ boardCellArray[column][row].getInitial());
-									
-						}
 
 						if(cleanedGridLine[row].length() == 1 || cleanedGridLine[row].charAt(1) == 'N'){
 							boardCellArray[column][row].initial = cleanedGridLine[row].charAt(0);
+							if(!legendMap.containsKey(boardCellArray[column][row].getInitial())) {
+								throw new BadConfigFormatException("Error: This Character is not in the Legend: " 
+										+ boardCellArray[column][row].getInitial());
+							}
 						} else {
 
 							char doorDirectionLetter = cleanedGridLine[row].charAt(1);
@@ -209,7 +207,8 @@ public class Board {
 			
 			
 		} else {
-			throw new BadConfigFormatException();
+			System.out.println("threw bad column format");
+			throw new BadConfigFormatException("Bad column format");
 		}
 		
 		
@@ -287,8 +286,16 @@ public class Board {
 		board.setConfigFiles("data/CTest_ClueLayout.csv",  "data/CTest_ClueLegend.txt");
 		board.initialize();
 		legend = board.getLegend();
-		System.out.println("legend size: " + legend.size());
 		board.loadRoomConfig();
+		int numDoors = 0;
+		for (int row=0; row<board.getNumRows(); row++)
+			for (int col=0; col<board.getNumColumns(); col++) {
+				System.out.println("col " + col + " row " + row);
+				BoardCell cell = board.getCellAt(row, col);
+				System.out.println("bourd cell " + board.getCellAt(row, col));
+				if (cell.isDoorway())
+					numDoors++;
+			}
 	}
 
 }
