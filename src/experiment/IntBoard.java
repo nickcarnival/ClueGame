@@ -63,19 +63,6 @@ public class IntBoard {
 
 	// calculates what cells are what distance away
 	private void findAllTargets(BoardCell thisCell, int numSteps) {
-//		for (BoardCell adjCell : getAdjList(thisCell)) {
-//			if (visited.contains(adjCell)) {
-//				break;
-//			} else {
-//				visited.add(adjCell);
-//				if (numSteps == 1) {
-//					targets.add(adjCell);
-//				} else {
-//					findAllTargets(adjCell, numSteps - 1);
-//				}
-//				visited.remove(adjCell);
-//			}
-//		}
 		Set<BoardCell> adjList = adjMtx.get(thisCell);
 		for (BoardCell adjCell : adjList) {
 			if (visited.contains(adjCell)) {
