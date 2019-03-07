@@ -1,5 +1,8 @@
 package clueGame;
-
+/*
+ * Jordan Newport
+ * Nicholas Carnival
+ */
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -159,12 +162,12 @@ public class Board {
 				//stores the same thing without commas
 				String[] cleanedGridLine = new String[NumColumns];
 				
-				for(int column = 0; column < NumColumns -1 ; column++) {
+				for(int column = 0; column < NumRows; column++) {
 					gridLine[column] = scanner.nextLine();
 					cleanedGridLine = gridLine[column].split(COMMA);
 
 
-					for(int row = 0; row < NumRows - 1; row++) {
+					for(int row = 0; row < NumColumns; row++) {
 						//create a new board cell at a certain location with its char
 						//tests if it is a door
 						boardCellArray[column][row] = new BoardCell(column,row);
@@ -179,7 +182,7 @@ public class Board {
 						} else {
 
 							char doorDirectionLetter = cleanedGridLine[row].charAt(1);
-							boardCellArray[column][row].isDoorway = true;
+							boardCellArray[column][row].setDoorway(true);
 
 							if(doorDirectionLetter == 'L') {
 								boardCellArray[column][row].doorDirection = DoorDirection.LEFT;
@@ -288,14 +291,6 @@ public class Board {
 		legend = board.getLegend();
 		board.loadRoomConfig();
 		int numDoors = 0;
-		for (int row=0; row<board.getNumRows(); row++)
-			for (int col=0; col<board.getNumColumns(); col++) {
-				System.out.println("col " + col + " row " + row);
-				BoardCell cell = board.getCellAt(row, col);
-				System.out.println("bourd cell " + board.getCellAt(row, col));
-				if (cell.isDoorway())
-					numDoors++;
-			}
 	}
 
 }

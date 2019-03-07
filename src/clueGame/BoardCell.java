@@ -1,4 +1,8 @@
 //use this board cell because the other one is the wrong one...
+/*
+ * Jordan Newport
+ * Nicholas Carnival
+ */
 package clueGame;
 
 public class BoardCell {
@@ -6,7 +10,7 @@ public class BoardCell {
 	private int column;
 	DoorDirection doorDirection;
 	private boolean isRoom;
-	public boolean isDoorway = false;
+	private boolean isDoorway = false;
 	public char initial;
 	
 	public BoardCell(int row, int column) {
@@ -54,6 +58,10 @@ public class BoardCell {
 		if (row != other.row)
 			return false;
 		return true;
+	}
+
+	public void setDoorway(boolean isDoorway) {
+		this.isDoorway = isDoorway;
 	}
 
 	public boolean isDoorway() {

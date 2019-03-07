@@ -1,6 +1,8 @@
 package tests;
 
 /*
+ * Jordan Newport
+ * Nicholas Carnival
  * This program tests that config files are loaded properly.
  */
 

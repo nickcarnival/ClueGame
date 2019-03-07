@@ -1,5 +1,8 @@
 package experiment;
-
+/*
+ * Jordan Newport
+ * Nicholas Carnival
+ */
 public class BoardCell {
 	private int row;
 	private int column;
