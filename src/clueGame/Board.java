@@ -50,7 +50,7 @@ public class Board {
 			loadRoomConfig();
 			loadBoardConfig();
 		} catch (BadConfigFormatException e) {
-			
+			System.out.println("Unable to initialize the board");
 		}
 
 	}
@@ -120,8 +120,9 @@ public class Board {
         	legendRoom = legendRoom.trim();
         	legendCardStuff = legendCardStuff.trim();
         	
-        	System.out.println("legend car: " + legendCardStuff);
-        	if(legendCardStuff != "Card" || legendCardStuff != "Other" ) {
+        	System.out.println("true or false: " + legendCardStuff.contentEquals("Card"));
+        	System.out.println("legend card name: " + legendCardStuff);
+        	if(!legendCardStuff.contentEquals("Card") && !legendCardStuff.contentEquals("Other")) {
         		System.out.println("bad cards :(");
         		throw new BadConfigFormatException("The Cards are Not in your favor");
         	}
@@ -242,9 +243,7 @@ public class Board {
 			}
 			for(int i = 1; i < countArray.size(); i++) {
 
-				System.out.println("how many times? ..." + i);
 				if(countArray.get(i) != countArray.get(i-1)) {
-					System.out.println("count arry or sometingsa dsfljas ");
 					NumColumns = -1;
 					return NumColumns;
 				}
@@ -282,11 +281,13 @@ public class Board {
 
 	public static void main(String[] args) throws BadConfigFormatException {
 		
+		Map<Character, String> legend;
 		Board board = new Board();
 		board.getInstance();
-		board.setConfigFiles("data/CTest_ClueLayout.csv",  "data/CTest_ClueLegendBadFormat.txt");
+		board.setConfigFiles("data/CTest_ClueLayout.csv",  "data/CTest_ClueLegend.txt");
 		board.initialize();
-		board.getLegend();
+		legend = board.getLegend();
+		System.out.println("legend size: " + legend.size());
 		board.loadRoomConfig();
 	}
 
