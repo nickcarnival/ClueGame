@@ -3,10 +3,8 @@ package clueGame;
  * Jordan Newport
  * Nicholas Carnival
  */
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,10 +17,15 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-import org.junit.Assert;
 
 import static java.lang.Math.toIntExact;
 
+
+// This is an example of a small board
+//	|0,0|0,1|0,2|0,3|
+//	|1,0|1,1|1,2|1,3|
+//	|2,0|2,1|2,2|2,3|
+//	|3,0|3,1|3,2|3,3|
 public class Board {
 
 
@@ -30,6 +33,9 @@ public class Board {
 	private String LayoutFile;
 	private String LegendFile;
 	private String COMMA = ",";
+
+	private int NumRows = 0;
+	private int NumColumns = 0;
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -40,18 +46,17 @@ public class Board {
 		return theInstance;
 	}
 	
+	//sets the config file variables
 	public void setConfigFiles(String layout, String legend) {
-		// TODO Auto-generated method stub
 		//test if the layout file is the correct length
 		this.LayoutFile = layout;
 		this.LegendFile = legend;
 	}
 
-	//2D array for storing boardcells
-	private char[][] gridArray; 
 
+	//calls two other methods that throw exceptions for JUnit
+	//these methods load the config files into local variables
 	public void initialize() {
-		gridArray = new char[getNumRows()][getNumColumns()];
 
 		try {
 			loadRoomConfig();
@@ -62,10 +67,6 @@ public class Board {
 
 	}
 	
-	//this method will parse both config files 
-	//and get the row and column lengths
-	private int NumRows = 0;
-	private int NumColumns = 0;
 
 	private HashMap<Character, String> legendMap = new HashMap<Character, String>();
 	
@@ -73,7 +74,7 @@ public class Board {
 	private BoardCell[][] boardCellArray;
 	//THE END OF THE ALMIGHTY 2D ARRAY OF BOARD CELLS :(
 
-	//this needs to create the legend
+	//loads in the legend file data
 	public void loadRoomConfig() throws BadConfigFormatException{
 		getNumRows();
 		getNumColumns();
@@ -88,7 +89,6 @@ public class Board {
 		try {
 			scanner = new Scanner(new File(LegendFile));
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
          
@@ -107,15 +107,17 @@ public class Board {
         String legendRoom = "";
         String legendCardStuff = "";
         String temp2 = "";
+
         //this is size three because of how the legend must be formatted
         String[] splitArray = new String[3];
 
+        //opens the legend file
         try {
 			scanner = new Scanner(new File(LegendFile));
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+        //iterates through each line of the legend file
         for(int i = 0; i < count; i ++) {
         	valueArray[i] = scanner.nextLine();
         	splitArray = valueArray[i].split(COMMA);
@@ -131,55 +133,62 @@ public class Board {
         		throw new BadConfigFormatException("The Cards are Not in your favor");
         	}
 
+        	//places the legend values into a hash map
         	legendMap.put(legendLetter, legendRoom);
         	
         }
          
-        //Do not forget to close the scanner 
         scanner.close();	
 	}
 
-	//has to initialize the map layout stufffff
+	//loads the map csv file and throws if badly formatted
 	public void loadBoardConfig() throws BadConfigFormatException{
 		Scanner scanner = null;
 		getNumColumns();
 		getNumRows();
 
-		if(NumColumns != -1) {
+		//numColumns will be -1 if the columns are formatted improperly
+		if(NumColumns == -1) {
 
+			System.out.println("threw bad column format");
+			throw new BadConfigFormatException("Bad column format");
 		
+		//laods the csv if the columns are proper
+		} else {
+
 				try {
 					scanner = new Scanner(new File(LayoutFile));
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
 				//gridLine should store every line in the csv file
-				//22 rows
 				String[] gridLine = new String[NumRows];
 				
-				//23 columns
 				//stores the same thing without commas
 				String[] cleanedGridLine = new String[NumColumns];
 				
+				//goes through every column in the csv file and scans the entire line
 				for(int column = 0; column < NumRows; column++) {
 					gridLine[column] = scanner.nextLine();
 					cleanedGridLine = gridLine[column].split(COMMA);
 
-
+					//scans each string and removes the commas
 					for(int row = 0; row < NumColumns; row++) {
 						//create a new board cell at a certain location with its char
 						//tests if it is a door
 						boardCellArray[column][row] = new BoardCell(column,row);
-						//check if the map has the key
 
+						//checks that the initial stringis not a door
 						if(cleanedGridLine[row].length() == 1 || cleanedGridLine[row].charAt(1) == 'N'){
 							boardCellArray[column][row].initial = cleanedGridLine[row].charAt(0);
+
+							//checks that the character is actually in the map
 							if(!legendMap.containsKey(boardCellArray[column][row].getInitial())) {
 								throw new BadConfigFormatException("Error: This Character is not in the Legend: " 
 										+ boardCellArray[column][row].getInitial());
 							}
+						//this runs if the initial string is a door, determined if there is more than one char
 						} else {
 
 							char doorDirectionLetter = cleanedGridLine[row].charAt(1);
@@ -208,23 +217,17 @@ public class Board {
 					}
 					
 				}		
-			
-			
-		} else {
-			System.out.println("threw bad column format");
-			throw new BadConfigFormatException("Bad column format");
 		}
-		
 		
 	}
 
+	//this contains the legend i.e. 'K, Kitchen'
 	public Map<Character, String> getLegend() {
-		// TODO Auto-generated method stub
 		return legendMap;
 	}
 
 
-	//should return 21
+	//gets the number of columns in the specified csv file
 	public int getNumColumns() {
 
 		Scanner scanner = null;
@@ -252,10 +255,8 @@ public class Board {
 				}
 			}
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
 		}
 		NumColumns = csvList.size();
-		//System.out.println("Num Rows: " + NumRows);
 		return NumColumns;
 	}
 
@@ -269,7 +270,6 @@ public class Board {
 		try {
 			longArray = Files.lines(path).count();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 		}		
 		NumRows = toIntExact(longArray);
 		//end of file length counter
@@ -277,33 +277,24 @@ public class Board {
 		return NumRows;
 	}
 
+	//returns a board cell at (row, column)
 	public BoardCell getCellAt(int row, int column) {
-		// TODO Auto-generated method stub
 		return boardCellArray[row][column];
 	}
 
-	public static void main(String[] args) throws BadConfigFormatException {
-		
-		Map<Character, String> legend;
-		Board board = new Board();
-		board.getInstance();
-		board.setConfigFiles("data/CTest_ClueLayout.csv",  "data/CTest_ClueLegend.txt");
-		board.initialize();
-		legend = board.getLegend();
-		board.loadRoomConfig();
-		int numDoors = 0;
-	}
-	public Set<BoardCell> getAdjList(int i, int j) {
-		// TODO Auto-generated method stub
+	//this finds what cells are directly next to a specific cell
+	public Set<BoardCell> getAdjList(int x, int y) {
 		return null;
 	}
+
+	//calculate the targets within a specified distance
+	public void calcTargets(int x, int y, int distanceAway) {
+		
+	}
+
+	//returns a set of BoardCells which contains the calcTargets
 	public Set<BoardCell> getTargets() {
-		// TODO Auto-generated method stub
 		return null;
-	}
-	public void calcTargets(int i, int j, int k) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
