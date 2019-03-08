@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 import org.junit.Assert;
 
@@ -291,6 +292,18 @@ public class Board {
 		legend = board.getLegend();
 		board.loadRoomConfig();
 		int numDoors = 0;
+	}
+	public Set<BoardCell> getAdjList(int i, int j) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public Set<BoardCell> getTargets() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public void calcTargets(int i, int j, int k) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
