@@ -279,6 +279,10 @@ public class Board {
 
 	//this finds what cells are directly next to a specific cell
 	public Set<BoardCell> getAdjList(int x, int y) {
+		//if it is a door or a walkway
+		if(boardCellArray[x][y].getInitial() == ('W') || boardCellArray[x][y].isDoorway()) {
+			System.out.println("Door or walkway");
+		}
 		return null;
 	}
 
@@ -290,6 +294,17 @@ public class Board {
 	//returns a set of BoardCells which contains the calcTargets
 	public Set<BoardCell> getTargets() {
 		return null;
+	}
+	
+	public static void main(String[] args) {
+		Board board ;
+		board = Board.getInstance();
+		board.setConfigFiles("data/CTest_ClueLayout.csv", "data/CTest_ClueLegend.txt");
+		board.initialize();
+		
+		Set<BoardCell> testList = board.getAdjList(0, 0);
+		System.out.println("Test List: " + testList);
+		System.out.println("testList size (0,0): " + testList.size());
 	}
 
 }
