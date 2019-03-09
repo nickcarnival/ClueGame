@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import experiment.BoardCell;
 
 import static java.lang.Math.toIntExact;
 
@@ -27,10 +28,18 @@ public class Board {
 	private int MAX_BOARD_SIZE = 50;
 	private String LayoutFile;
 	private String LegendFile;
-	private String COMMA = ",";
+	private static final String COMMA = ",";
 
 	private int NumRows = 0;
 	private int NumColumns = 0;
+	
+	private Map<BoardCell, Set<BoardCell>> adjMtx;
+	private Set<BoardCell> visited;
+	private Set<BoardCell> targets;
+	
+	//THE ALMIGHTY 2D ARRAY OF BOARD CELLS!!!!!!!!!!!!!
+	private BoardCell[][] boardCellArray;
+	//THE END OF THE ALMIGHTY 2D ARRAY OF BOARD CELLS :(
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -64,10 +73,6 @@ public class Board {
 	
 
 	private HashMap<Character, String> legendMap = new HashMap<Character, String>();
-	
-	//THE ALMIGHTY 2D ARRAY OF BOARD CELLS!!!!!!!!!!!!!
-	private BoardCell[][] boardCellArray;
-	//THE END OF THE ALMIGHTY 2D ARRAY OF BOARD CELLS :(
 
 	//loads in the legend file data
 	public void loadRoomConfig() throws BadConfigFormatException{
@@ -135,6 +140,62 @@ public class Board {
          
         scanner.close();	
 	}
+	
+	public void calcAdjacencies() {
+
+		for (int i = 0; i < NumRows; i++) {
+			for (int j = 0; j < NumColumns; j++) {
+				if (i > 0) {
+					adjMtx.get(boardCellArray[i][j]).add(boardCellArray[i-1][j]);
+				}
+				if (j > 0) {
+					adjMtx.get(boardCellArray[i][j]).add(boardCellArray[i][j-1]);
+				}
+				if (i < NumRows - 1) {
+					adjMtx.get(boardCellArray[i][j]).add(boardCellArray[i+1][j]);
+				}
+				if (j < NumRows - 1) {
+					adjMtx.get(boardCellArray[i][j]).add(boardCellArray[i][j+1]);
+				}
+			}
+		}
+
+		// calculates what cells are what distance away
+		private void findAllTargets(BoardCell thisCell, int numSteps) {
+			Set<BoardCell> adjList = adjMtx.get(thisCell);
+			for (BoardCell adjCell : adjList) {
+				if (visited.contains(adjCell)) {
+					;
+				} else {
+					visited.add(adjCell);
+					if (numSteps == 1) {
+						targets.add(adjCell);
+					} else {
+						findAllTargets(adjCell, numSteps - 1);
+					}
+					visited.remove(adjCell);
+				}
+			}
+		}
+
+		public void calcTargets(BoardCell startCell, int pathLength) {
+			targets.clear();
+			visited.clear();
+			visited.add(startCell);
+			findAllTargets(startCell, pathLength);
+			System.out.println("sc " + startCell + "\tpl " + pathLength);
+			System.out.println("size " + targets.size());
+			for (BoardCell b : targets) {
+				System.out.println(b);
+			}
+			System.out.println();
+		}
+
+		//
+		public Set<BoardCell> getTargets() {
+			return targets;
+		}
+
 
 	//loads the map csv file and throws if badly formatted
 	public void loadBoardConfig() throws BadConfigFormatException{
@@ -148,7 +209,7 @@ public class Board {
 			System.out.println("threw bad column format");
 			throw new BadConfigFormatException("Bad column format");
 		
-		//laods the csv if the columns are proper
+		//loads the csv if the columns are proper
 		} else {
 
 				try {
@@ -176,12 +237,16 @@ public class Board {
 
 						//checks that the initial stringis not a door
 						if(cleanedGridLine[row].length() == 1 || cleanedGridLine[row].charAt(1) == 'N'){
-							boardCellArray[column][row].initial = cleanedGridLine[row].charAt(0);
+							boardCellArray[column][row].setInitial(cleanedGridLine[row].charAt(0));
 
 							//checks that the character is actually in the map
 							if(!legendMap.containsKey(boardCellArray[column][row].getInitial())) {
 								throw new BadConfigFormatException("Error: This Character is not in the Legend: " 
 										+ boardCellArray[column][row].getInitial());
+							}
+							boardCellArray[column][row].setDoorway(false);
+							if(cleanedGridLine[row] != "X" && cleanedGridLine[row] != "W") {
+								boardCellArray[column][row].setRoom(true);
 							}
 						//this runs if the initial string is a door, determined if there is more than one char
 						} else {
@@ -190,30 +255,29 @@ public class Board {
 							boardCellArray[column][row].setDoorway(true);
 
 							if(doorDirectionLetter == 'L') {
-								boardCellArray[column][row].doorDirection = DoorDirection.LEFT;
-								boardCellArray[column][row].initial = cleanedGridLine[row].charAt(0);
+								boardCellArray[column][row].setDoorDirection(DoorDirection.LEFT);
+								boardCellArray[column][row].setInitial(cleanedGridLine[row].charAt(0));
 							}
 
 							if(doorDirectionLetter == 'R') {
-								boardCellArray[column][row].doorDirection = DoorDirection.RIGHT;
-								boardCellArray[column][row].initial = cleanedGridLine[row].charAt(0);
+								boardCellArray[column][row].setDoorDirection(DoorDirection.RIGHT);
+								boardCellArray[column][row].setInitial(cleanedGridLine[row].charAt(0));
 							}
 
 							if(doorDirectionLetter == 'U') {
-								boardCellArray[column][row].doorDirection = DoorDirection.UP;
-								boardCellArray[column][row].initial = cleanedGridLine[row].charAt(0);
+								boardCellArray[column][row].setDoorDirection(DoorDirection.UP);
+								boardCellArray[column][row].setInitial(cleanedGridLine[row].charAt(0));
 							}
 
 							if(doorDirectionLetter == 'D') {
-								boardCellArray[column][row].doorDirection = DoorDirection.DOWN;
-								boardCellArray[column][row].initial = cleanedGridLine[row].charAt(0);
+								boardCellArray[column][row].setDoorDirection(DoorDirection.DOWN);
+								boardCellArray[column][row].setInitial(cleanedGridLine[row].charAt(0));
 							}
 						}
 					}
-					
 				}		
+				calcAdjacencies();
 		}
-		
 	}
 
 	//this contains the legend i.e. 'K, Kitchen'
@@ -291,11 +355,6 @@ public class Board {
 		
 	}
 
-	//returns a set of BoardCells which contains the calcTargets
-	public Set<BoardCell> getTargets() {
-		return null;
-	}
-	
 	public static void main(String[] args) {
 		Board board ;
 		board = Board.getInstance();

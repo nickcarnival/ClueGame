@@ -1,18 +1,20 @@
-//use this board cell because the other one is the wrong one...
+package clueGame;
 /*
+ * use this board cell because the other one is the wrong one...
  * Jordan Newport
  * Nicholas Carnival
  */
-package clueGame;
 
 public class BoardCell {
 	private int row;
 	private int column;
-	DoorDirection doorDirection;
+	private DoorDirection doorDirection;
 	private boolean isRoom;
 	private boolean isDoorway = false;
-	public char initial;
+	private char initial;
 	
+
+
 	public BoardCell(int row, int column) {
 		this.row = row;
 		this.column = column;
@@ -78,5 +80,19 @@ public class BoardCell {
 		// TODO Auto-generated method stub
 		return this.initial;
 	}
+	public void setDoorDirection(DoorDirection doorDirection) {
+		this.doorDirection = doorDirection;
+	}
 
+	public void setInitial(char initial) {
+		this.initial = initial;
+	}
+
+	public boolean isRoom() {
+		return isRoom;
+	}
+
+	public void setRoom(boolean isRoom) {
+		this.isRoom = isRoom;
+	}
 }
