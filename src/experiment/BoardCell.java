@@ -51,6 +51,4 @@ public class BoardCell {
 		return true;
 	}
 
-	
-
 }

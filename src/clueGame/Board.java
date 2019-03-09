@@ -17,8 +17,6 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-import experiment.BoardCell;
-
 import static java.lang.Math.toIntExact;
 
 
@@ -159,42 +157,42 @@ public class Board {
 				}
 			}
 		}
+	}
 
-		// calculates what cells are what distance away
-		private void findAllTargets(BoardCell thisCell, int numSteps) {
-			Set<BoardCell> adjList = adjMtx.get(thisCell);
-			for (BoardCell adjCell : adjList) {
-				if (visited.contains(adjCell)) {
-					;
+	// calculates what cells are what distance away
+	private void findAllTargets(BoardCell thisCell, int numSteps) {
+		Set<BoardCell> adjList = adjMtx.get(thisCell);
+		for (BoardCell adjCell : adjList) {
+			if (visited.contains(adjCell)) {
+				;
+			} else {
+				visited.add(adjCell);
+				if (numSteps == 1) {
+					targets.add(adjCell);
 				} else {
-					visited.add(adjCell);
-					if (numSteps == 1) {
-						targets.add(adjCell);
-					} else {
-						findAllTargets(adjCell, numSteps - 1);
-					}
-					visited.remove(adjCell);
+					findAllTargets(adjCell, numSteps - 1);
 				}
+				visited.remove(adjCell);
 			}
 		}
+	}
 
-		public void calcTargets(BoardCell startCell, int pathLength) {
-			targets.clear();
-			visited.clear();
-			visited.add(startCell);
-			findAllTargets(startCell, pathLength);
-			System.out.println("sc " + startCell + "\tpl " + pathLength);
-			System.out.println("size " + targets.size());
-			for (BoardCell b : targets) {
-				System.out.println(b);
-			}
-			System.out.println();
+	public void calcTargets(BoardCell startCell, int pathLength) {
+		targets.clear();
+		visited.clear();
+		visited.add(startCell);
+		findAllTargets(startCell, pathLength);
+		System.out.println("sc " + startCell + "\tpl " + pathLength);
+		System.out.println("size " + targets.size());
+		for (BoardCell b : targets) {
+			System.out.println(b);
 		}
+		System.out.println();
+	}
 
-		//
-		public Set<BoardCell> getTargets() {
-			return targets;
-		}
+	public Set<BoardCell> getTargets() {
+		return targets;
+	}
 
 
 	//loads the map csv file and throws if badly formatted
@@ -276,7 +274,7 @@ public class Board {
 						}
 					}
 				}		
-				calcAdjacencies();
+				// calcAdjacencies();
 		}
 	}
 
