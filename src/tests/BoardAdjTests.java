@@ -44,16 +44,16 @@ public class BoardAdjTests {
 		testList = board.getAdjList(4, 0);
 		assertEquals(0, testList.size());
 		// Test one that has walkway above
-		testList = board.getAdjList(16, 8);
+		testList = board.getAdjList(15, 8);
 		assertEquals(0, testList.size());
 		// Test one that is in middle of room
-		testList = board.getAdjList(15, 19);
+		testList = board.getAdjList(14, 19);
 		assertEquals(0, testList.size());
 		// Test one beside a door
-		testList = board.getAdjList(2, 18);
+		testList = board.getAdjList(1, 18);
 		assertEquals(0, testList.size());
 		// Test one in a corner of room
-		testList = board.getAdjList(10, 13);
+		testList = board.getAdjList(9, 13);
 		assertEquals(0, testList.size());
 	}
 
@@ -65,25 +65,25 @@ public class BoardAdjTests {
 	public void testAdjacencyRoomExit()
 	{
 		// TEST DOORWAY RIGHT 
-		Set<BoardCell> testList = board.getAdjList(11, 6);
+		Set<BoardCell> testList = board.getAdjList(11, 3);
 		assertEquals(1, testList.size());
-		assertTrue(testList.contains(board.getCellAt(11, 7)));
+		assertTrue(testList.contains(board.getCellAt(11, 4)));
 		// TEST DOORWAY LEFT 
-		testList = board.getAdjList(10, 17);
+		testList = board.getAdjList(18, 5);
 		assertEquals(1, testList.size());
-		assertTrue(testList.contains(board.getCellAt(10, 16)));
+		assertTrue(testList.contains(board.getCellAt(18, 4)));
 		//TEST DOORWAY DOWN
-		testList = board.getAdjList(5, 15);
+		testList = board.getAdjList(5, 10);
 		assertEquals(1, testList.size());
-		assertTrue(testList.contains(board.getCellAt(6, 15)));
+		assertTrue(testList.contains(board.getCellAt(6, 10)));
 		//TEST DOORWAY UP
-		testList = board.getAdjList(7, 20);
+		testList = board.getAdjList(7, 19);
 		assertEquals(1, testList.size());
-		assertTrue(testList.contains(board.getCellAt(6, 20)));
+		assertTrue(testList.contains(board.getCellAt(6, 19)));
 		//TEST DOORWAY RIGHT, WHERE THERE'S A WALKWAY BELOW
-		testList = board.getAdjList(4, 3);
+		testList = board.getAdjList(3, 4);
 		assertEquals(1, testList.size());
-		assertTrue(testList.contains(board.getCellAt(4, 4)));
+		assertTrue(testList.contains(board.getCellAt(4, 5)));
 		
 	}
 	
