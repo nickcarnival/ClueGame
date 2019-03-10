@@ -33,6 +33,7 @@ public class BoardAdjTests {
 
 	// Ensure that player does not move around within room
 	// These cells are ORANGE on the planning spreadsheet
+	//8 of these tests
 	@Test
 	public void testAdjacenciesInsideRooms()
 	{
@@ -43,16 +44,16 @@ public class BoardAdjTests {
 		testList = board.getAdjList(4, 0);
 		assertEquals(0, testList.size());
 		// Test one that has walkway above
-		testList = board.getAdjList(15, 20);
+		testList = board.getAdjList(16, 8);
 		assertEquals(0, testList.size());
 		// Test one that is in middle of room
-		testList = board.getAdjList(18, 11);
+		testList = board.getAdjList(15, 19);
 		assertEquals(0, testList.size());
 		// Test one beside a door
-		testList = board.getAdjList(14, 12);
+		testList = board.getAdjList(2, 18);
 		assertEquals(0, testList.size());
 		// Test one in a corner of room
-		testList = board.getAdjList(5, 20);
+		testList = board.getAdjList(10, 13);
 		assertEquals(0, testList.size());
 	}
 
