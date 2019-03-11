@@ -234,6 +234,7 @@ public class Board {
 						boardCellArray[column][row] = new BoardCell(column,row);
 
 						//checks that the initial stringis not a door
+						System.out.println(cleanedGridLine[row]);
 						if(cleanedGridLine[row].length() == 1 || cleanedGridLine[row].charAt(1) == 'N'){
 							boardCellArray[column][row].setInitial(cleanedGridLine[row].charAt(0));
 
@@ -356,7 +357,7 @@ public class Board {
 	public static void main(String[] args) {
 		Board board ;
 		board = Board.getInstance();
-		board.setConfigFiles("data/CTest_ClueLayout.csv", "data/CTest_ClueLegend.txt");
+		board.setConfigFiles("data/testsMap.csv", "data/rooms.txt");
 		board.initialize();
 		
 		Set<BoardCell> testList = board.getAdjList(0, 0);
