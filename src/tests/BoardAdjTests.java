@@ -1,4 +1,6 @@
 package tests;
+//Nicholas Carnival
+//Jordan Newport
 
 /*
  * This program tests that adjacencies and targets are calculated correctly.
