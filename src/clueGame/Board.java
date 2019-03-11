@@ -12,10 +12,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeSet;
 
 import static java.lang.Math.toIntExact;
 
@@ -139,61 +141,6 @@ public class Board {
         scanner.close();	
 	}
 	
-	public void calcAdjacencies() {
-
-		for (int i = 0; i < NumRows; i++) {
-			for (int j = 0; j < NumColumns; j++) {
-				if (i > 0) {
-					adjMtx.get(boardCellArray[i][j]).add(boardCellArray[i-1][j]);
-				}
-				if (j > 0) {
-					adjMtx.get(boardCellArray[i][j]).add(boardCellArray[i][j-1]);
-				}
-				if (i < NumRows - 1) {
-					adjMtx.get(boardCellArray[i][j]).add(boardCellArray[i+1][j]);
-				}
-				if (j < NumRows - 1) {
-					adjMtx.get(boardCellArray[i][j]).add(boardCellArray[i][j+1]);
-				}
-			}
-		}
-	}
-
-	// calculates what cells are what distance away
-	private void findAllTargets(BoardCell thisCell, int numSteps) {
-		Set<BoardCell> adjList = adjMtx.get(thisCell);
-		for (BoardCell adjCell : adjList) {
-			if (visited.contains(adjCell)) {
-				;
-			} else {
-				visited.add(adjCell);
-				if (numSteps == 1) {
-					targets.add(adjCell);
-				} else {
-					findAllTargets(adjCell, numSteps - 1);
-				}
-				visited.remove(adjCell);
-			}
-		}
-	}
-
-	public void calcTargets(BoardCell startCell, int pathLength) {
-		targets.clear();
-		visited.clear();
-		visited.add(startCell);
-		findAllTargets(startCell, pathLength);
-		System.out.println("sc " + startCell + "\tpl " + pathLength);
-		System.out.println("size " + targets.size());
-		for (BoardCell b : targets) {
-			System.out.println(b);
-		}
-		System.out.println();
-	}
-
-	public Set<BoardCell> getTargets() {
-		return targets;
-	}
-
 
 	//loads the map csv file and throws if badly formatted
 	public void loadBoardConfig() throws BadConfigFormatException{
@@ -343,15 +290,75 @@ public class Board {
 	//this finds what cells are directly next to a specific cell
 	public Set<BoardCell> getAdjList(int x, int y) {
 		//if it is a door or a walkway
-		if(boardCellArray[x][y].getInitial() == ('W') || boardCellArray[x][y].isDoorway()) {
-			System.out.println("Door or walkway");
-		}
-		return null;
+
+//		if(boardCellArray[x][y].getInitial() == ('W') || boardCellArray[x][y].isDoorway()) {
+//			System.out.println("Door or walkway");
+//		}
+		BoardCell tempCell = new BoardCell(0, 0);
+		Set<BoardCell> adjList = new HashSet<BoardCell>();
+		adjList.add(tempCell);
+		return adjList;
 	}
 
 	//calculate the targets within a specified distance
 	public void calcTargets(int x, int y, int distanceAway) {
 		
+	}
+
+	public void calcAdjacencies() {
+
+//		for (int i = 0; i < NumRows; i++) {
+//			for (int j = 0; j < NumColumns; j++) {
+//				if (i > 0) {
+//					adjMtx.get(boardCellArray[i][j]).add(boardCellArray[i-1][j]);
+//				}
+//				if (j > 0) {
+//					adjMtx.get(boardCellArray[i][j]).add(boardCellArray[i][j-1]);
+//				}
+//				if (i < NumRows - 1) {
+//					adjMtx.get(boardCellArray[i][j]).add(boardCellArray[i+1][j]);
+//				}
+//				if (j < NumRows - 1) {
+//					adjMtx.get(boardCellArray[i][j]).add(boardCellArray[i][j+1]);
+//				}
+//			}
+//		}
+	}
+
+	// calculates what cells are what distance away
+	private void findAllTargets(BoardCell thisCell, int numSteps) {
+		Set<BoardCell> adjList = adjMtx.get(thisCell);
+		for (BoardCell adjCell : adjList) {
+			if (visited.contains(adjCell)) {
+				;
+			} else {
+				visited.add(adjCell);
+				if (numSteps == 1) {
+					targets.add(adjCell);
+				} else {
+					findAllTargets(adjCell, numSteps - 1);
+				}
+				visited.remove(adjCell);
+			}
+		}
+	}
+
+	public void calcTargets(BoardCell startCell, int pathLength) {
+		targets.clear();
+		visited.clear();
+		visited.add(startCell);
+		findAllTargets(startCell, pathLength);
+		System.out.println("sc " + startCell + "\tpl " + pathLength);
+		System.out.println("size " + targets.size());
+		for (BoardCell b : targets) {
+			System.out.println(b);
+		}
+		System.out.println();
+	}
+
+	public Set<BoardCell> getTargets() {
+		Set<BoardCell> targetsSet = new HashSet<BoardCell>();
+		return targetsSet;
 	}
 
 	public static void main(String[] args) {
