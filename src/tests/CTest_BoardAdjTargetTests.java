@@ -35,6 +35,7 @@ public class CTest_BoardAdjTargetTests {
 	public void testAdjacenciesInsideRooms()
 	{
 		// Test a corner
+
 		Set<BoardCell> testList = board.getAdjList(0, 0);
 		assertEquals(0, testList.size());
 		// Test one that has walkway underneath

@@ -21,7 +21,6 @@ import java.util.TreeSet;
 
 import static java.lang.Math.toIntExact;
 
-
 public class Board {
 
 
@@ -158,6 +157,7 @@ public class Board {
 		} else {
 
 			try {
+
 				scanner = new Scanner(new File(LayoutFile));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -289,14 +289,10 @@ public class Board {
 
 	//this finds what cells are directly next to a specific cell
 	public Set<BoardCell> getAdjList(int x, int y) {
-		//if it is a door or a walkway
 
-//		if(boardCellArray[x][y].getInitial() == ('W') || boardCellArray[x][y].isDoorway()) {
-//			System.out.println("Door or walkway");
-//		}
-		BoardCell tempCell = new BoardCell(0, 0);
-		Set<BoardCell> adjList = new HashSet<BoardCell>();
-		adjList.add(tempCell);
+		BoardCell currentCell = new BoardCell(x, y);
+		Set<BoardCell> adjList ;
+		adjList = adjacencyMatrix.get(currentCell);
 		return adjList;
 	}
 
