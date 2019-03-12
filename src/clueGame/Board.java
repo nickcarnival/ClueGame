@@ -33,7 +33,7 @@ public class Board {
 	private int NumRows = 0;
 	private int NumColumns = 0;
 	
-	private Map<BoardCell, Set<BoardCell>> adjMtx;
+	private Map<BoardCell, Set<BoardCell>> adjacencyMatrix;
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
 	
@@ -312,44 +312,44 @@ public class Board {
 				if (boardCellArray[i][j].getInitial() == 'W') {
 					if (i > 0) {
 						if (boardCellArray[i-1][j].getInitial() == 'W' || boardCellArray[i-1][j].getDoorDirection() == DoorDirection.LEFT) {
-							adjMtx.get(boardCellArray[i][j]).add(boardCellArray[i-1][j]);
+							adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i-1][j]);
 						}
 					}
 					if (j > 0) {
 						if (boardCellArray[i][j-1].getInitial() == 'W' || boardCellArray[i][j-1].getDoorDirection() == DoorDirection.UP) {
-							adjMtx.get(boardCellArray[i][j]).add(boardCellArray[i][j-1]);
+							adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i][j-1]);
 						}
 					}
 					if (i < NumRows - 1) {
 						if (boardCellArray[i+1][j].getInitial() == 'W' || boardCellArray[i+1][j].getDoorDirection() == DoorDirection.RIGHT) {
-							adjMtx.get(boardCellArray[i][j]).add(boardCellArray[i+1][j]);
+							adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i+1][j]);
 						}
 					}
 					if (j < NumRows - 1) {
 						if (boardCellArray[i][j+1].getInitial() == 'W' || boardCellArray[i][j+1].getDoorDirection() == DoorDirection.DOWN) {
-							adjMtx.get(boardCellArray[i][j]).add(boardCellArray[i][j+1]);
+							adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i][j+1]);
 						}
 					}
 				} else if (boardCellArray[i][j].isDoorway()) {
 					switch (boardCellArray[i][j].getDoorDirection()) {
 					case LEFT:
 						if(boardCellArray[i-1][j].getInitial() == 'W') {
-							adjMtx.get(boardCellArray[i][j]).add(boardCellArray[i-1][j]);
+							adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i-1][j]);
 						}
 						break;
 					case UP:
 						if(boardCellArray[i][j-1].getInitial() == 'W') {
-							adjMtx.get(boardCellArray[i][j]).add(boardCellArray[i][j-1]);
+							adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i][j-1]);
 						}
 						break;
 					case RIGHT:
 						if(boardCellArray[i+1][j].getInitial() == 'W') {
-							adjMtx.get(boardCellArray[i][j]).add(boardCellArray[i+1][j]);
+							adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i+1][j]);
 						}
 						break;
 					case DOWN:
 						if(boardCellArray[i][j+1].getInitial() == 'W') {
-							adjMtx.get(boardCellArray[i][j]).add(boardCellArray[i][j+1]);
+							adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i][j+1]);
 						}
 						break;
 					default:
@@ -359,7 +359,7 @@ public class Board {
 					continue;
 				}
 				System.out.println("cell at i, j: " + i + " " + j + " has adjacencies:");
-				for (BoardCell b : adjMtx.get(boardCellArray[i][j])) {
+				for (BoardCell b : adjacencyMatrix.get(boardCellArray[i][j])) {
 					System.out.println(b);
 				}
 			}
@@ -368,7 +368,7 @@ public class Board {
 
 	// calculates what cells are what distance away
 	private void findAllTargets(BoardCell thisCell, int numSteps) {
-		Set<BoardCell> adjList = adjMtx.get(thisCell);
+		Set<BoardCell> adjList = adjacencyMatrix.get(thisCell);
 		for (BoardCell adjCell : adjList) {
 			if (visited.contains(adjCell)) {
 				;
