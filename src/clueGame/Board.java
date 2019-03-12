@@ -157,72 +157,72 @@ public class Board {
 		//loads the csv if the columns are proper
 		} else {
 
-				try {
-					scanner = new Scanner(new File(LayoutFile));
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
+			try {
+				scanner = new Scanner(new File(LayoutFile));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 
-				//gridLine should store every line in the csv file
-				String[] gridLine = new String[NumRows];
-				
-				//stores the same thing without commas
-				String[] cleanedGridLine = new String[NumColumns];
-				
-				//goes through every column in the csv file and scans the entire line
-				for(int column = 0; column < NumRows; column++) {
-					gridLine[column] = scanner.nextLine();
-					cleanedGridLine = gridLine[column].split(COMMA);
+			//gridLine should store every line in the csv file
+			String[] gridLine = new String[NumRows];
 
-					//scans each string and removes the commas
-					for(int row = 0; row < NumColumns; row++) {
-						//create a new board cell at a certain location with its char
-						//tests if it is a door
-						boardCellArray[column][row] = new BoardCell(column,row);
+			//stores the same thing without commas
+			String[] cleanedGridLine = new String[NumColumns];
 
-						//checks that the initial stringis not a door
-						//System.out.println(cleanedGridLine[row]);
-						if(cleanedGridLine[row].length() == 1 || cleanedGridLine[row].charAt(1) == 'N'){
-							boardCellArray[column][row].setInitial(cleanedGridLine[row].charAt(0));
+			//goes through every column in the csv file and scans the entire line
+			for(int column = 0; column < NumRows; column++) {
+				gridLine[column] = scanner.nextLine();
+				cleanedGridLine = gridLine[column].split(COMMA);
 
-							//checks that the character is actually in the map
-							if(!legendMap.containsKey(boardCellArray[column][row].getInitial())) {
-								throw new BadConfigFormatException("Error: This Character is not in the Legend: " 
-										+ boardCellArray[column][row].getInitial());
-							}
-							boardCellArray[column][row].setDoorway(false);
-							if(cleanedGridLine[row] != "X" && cleanedGridLine[row] != "W") {
-								boardCellArray[column][row].setRoom(true);
-							}
+				//scans each string and removes the commas
+				for(int row = 0; row < NumColumns; row++) {
+					//create a new board cell at a certain location with its char
+					//tests if it is a door
+					boardCellArray[column][row] = new BoardCell(column,row);
+
+					//checks that the initial stringis not a door
+					//System.out.println(cleanedGridLine[row]);
+					if(cleanedGridLine[row].length() == 1 || cleanedGridLine[row].charAt(1) == 'N'){
+						boardCellArray[column][row].setInitial(cleanedGridLine[row].charAt(0));
+
+						//checks that the character is actually in the map
+						if(!legendMap.containsKey(boardCellArray[column][row].getInitial())) {
+							throw new BadConfigFormatException("Error: This Character is not in the Legend: " 
+									+ boardCellArray[column][row].getInitial());
+						}
+						boardCellArray[column][row].setDoorway(false);
+						if(cleanedGridLine[row] != "X" && cleanedGridLine[row] != "W") {
+							boardCellArray[column][row].setRoom(true);
+						}
 						//this runs if the initial string is a door, determined if there is more than one char
-						} else {
+					} else {
 
-							char doorDirectionLetter = cleanedGridLine[row].charAt(1);
-							boardCellArray[column][row].setDoorway(true);
+						char doorDirectionLetter = cleanedGridLine[row].charAt(1);
+						boardCellArray[column][row].setDoorway(true);
 
-							if(doorDirectionLetter == 'L') {
-								boardCellArray[column][row].setDoorDirection(DoorDirection.LEFT);
-								boardCellArray[column][row].setInitial(cleanedGridLine[row].charAt(0));
-							}
+						if(doorDirectionLetter == 'L') {
+							boardCellArray[column][row].setDoorDirection(DoorDirection.LEFT);
+							boardCellArray[column][row].setInitial(cleanedGridLine[row].charAt(0));
+						}
 
-							if(doorDirectionLetter == 'R') {
-								boardCellArray[column][row].setDoorDirection(DoorDirection.RIGHT);
-								boardCellArray[column][row].setInitial(cleanedGridLine[row].charAt(0));
-							}
+						if(doorDirectionLetter == 'R') {
+							boardCellArray[column][row].setDoorDirection(DoorDirection.RIGHT);
+							boardCellArray[column][row].setInitial(cleanedGridLine[row].charAt(0));
+						}
 
-							if(doorDirectionLetter == 'U') {
-								boardCellArray[column][row].setDoorDirection(DoorDirection.UP);
-								boardCellArray[column][row].setInitial(cleanedGridLine[row].charAt(0));
-							}
+						if(doorDirectionLetter == 'U') {
+							boardCellArray[column][row].setDoorDirection(DoorDirection.UP);
+							boardCellArray[column][row].setInitial(cleanedGridLine[row].charAt(0));
+						}
 
-							if(doorDirectionLetter == 'D') {
-								boardCellArray[column][row].setDoorDirection(DoorDirection.DOWN);
-								boardCellArray[column][row].setInitial(cleanedGridLine[row].charAt(0));
-							}
+						if(doorDirectionLetter == 'D') {
+							boardCellArray[column][row].setDoorDirection(DoorDirection.DOWN);
+							boardCellArray[column][row].setInitial(cleanedGridLine[row].charAt(0));
 						}
 					}
-				}		
-				calcAdjacencies();
+				}
+			}		
+			calcAdjacencies();
 		}
 	}
 
@@ -309,6 +309,7 @@ public class Board {
 		adjacencyMatrix = new HashMap<BoardCell, Set<BoardCell>>();
 		for (int i = 0; i < NumRows; i++) {
 			for (int j = 0; j < NumColumns; j++) {
+				adjacencyMatrix.put(boardCellArray[i][j], new HashSet<BoardCell>());
 				if (boardCellArray[i][j].getInitial() == 'W') {
 					if (i > 0) {
 						if (boardCellArray[i-1][j].getInitial() == 'W' || boardCellArray[i-1][j].getDoorDirection() == DoorDirection.LEFT) {
@@ -333,23 +334,32 @@ public class Board {
 				} else if (boardCellArray[i][j].isDoorway()) {
 					switch (boardCellArray[i][j].getDoorDirection()) {
 					case LEFT:
-						if(boardCellArray[i-1][j].getInitial() == 'W') {
-							adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i-1][j]);
+						if (j > 0) {
+							if(boardCellArray[i][j-1].getInitial() == 'W') {
+								System.out.println("asdf");
+								adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i][j-1]);
+							}
 						}
 						break;
 					case UP:
-						if(boardCellArray[i][j-1].getInitial() == 'W') {
-							adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i][j-1]);
+						if (i > 0) {
+							if(boardCellArray[i-1][j].getInitial() == 'W') {
+								adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i-1][j]);
+							}
 						}
 						break;
 					case RIGHT:
-						if(boardCellArray[i+1][j].getInitial() == 'W') {
-							adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i+1][j]);
+						if (j < NumColumns - 1) {
+							if(boardCellArray[i][j+1].getInitial() == 'W') {
+								adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i][j+1]);
+							}
 						}
 						break;
 					case DOWN:
-						if(boardCellArray[i][j+1].getInitial() == 'W') {
-							adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i][j+1]);
+						if (i < NumRows - 1) {
+							if(boardCellArray[i+1][j].getInitial() == 'W') {
+								adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i+1][j]);
+							}
 						}
 						break;
 					default:
@@ -358,9 +368,18 @@ public class Board {
 				} else if (boardCellArray[i][j].isRoom()) {
 					continue;
 				}
-				System.out.println("cell at i, j: " + i + " " + j + " has adjacencies:");
+//				System.out.println("cell at i, j: " + i + " " + j + " has adjacencies:");
+				if (boardCellArray[i][j].isDoorway()) {
+					System.out.println("IM a DOOR");
+					for (BoardCell b : adjacencyMatrix.get(boardCellArray[i][j])) {
+						System.out.println(b);
+					}
+				}
 				for (BoardCell b : adjacencyMatrix.get(boardCellArray[i][j])) {
-					System.out.println(b);
+//					System.out.println(b);
+					if (b.isDoorway()) {
+						System.out.println("HEY LOOK AT ME");
+					}
 				}
 			}
 		}
