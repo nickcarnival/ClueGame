@@ -372,12 +372,36 @@ public class Board {
 		Set<BoardCell> adjList = adjacencyMatrix.get(thisCell);
 		for (BoardCell adjCell : adjList) {
 			if (visited.contains(adjCell)) {
-				;
+				continue;
 			} else {
 				visited.add(adjCell);
-				if (numSteps == 1 || adjCell.isDoorway()) {
-					targets.add(adjCell);
-				} else {
+				//adjacencies can only be walkways or doors
+				if(numSteps == 1) {
+					if(adjCell.getInitial() == ('W')) {
+						targets.add(adjCell);
+					}
+					if(adjCell.isDoorway()) {
+						switch(adjCell.getDoorDirection()) {
+						
+						case LEFT:
+							//if this cell is to the LEFT of the other cell
+							break;
+						case RIGHT:
+							//if this cell is to the RIGHT of the other cell
+							break;
+						case UP:
+							//if this cell is to the UP of the other cell
+							break;
+						case DOWN:
+							//if this cell is to the DOWN of the other cell
+							break;
+						default:
+							break;
+						
+						}
+					}
+				}
+				else {
 					findAllTargets(adjCell, numSteps - 1);
 				}
 				visited.remove(adjCell);
@@ -413,6 +437,7 @@ public class Board {
 		board.setConfigFiles("data/testsMap.csv", "data/rooms.txt");
 		board.initialize();
 		
+		board.calcTargets(13, 17, 6);
 		Set<BoardCell> testList = board.getAdjList(0, 0);
 		System.out.println("Test List: " + testList);
 		System.out.println("testList size (0,0): " + testList.size());
