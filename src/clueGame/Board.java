@@ -308,22 +308,22 @@ public class Board {
 				adjacencyMatrix.put(boardCellArray[i][j], new HashSet<BoardCell>());
 				if (boardCellArray[i][j].getInitial() == 'W') {
 					if (i > 0) {
-						if (boardCellArray[i-1][j].getInitial() == 'W' || boardCellArray[i-1][j].getDoorDirection() == DoorDirection.LEFT) {
+						if (boardCellArray[i-1][j].getInitial() == 'W' || boardCellArray[i-1][j].getDoorDirection() == DoorDirection.DOWN) {
 							adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i-1][j]);
 						}
 					}
 					if (j > 0) {
-						if (boardCellArray[i][j-1].getInitial() == 'W' || boardCellArray[i][j-1].getDoorDirection() == DoorDirection.UP) {
+						if (boardCellArray[i][j-1].getInitial() == 'W' || boardCellArray[i][j-1].getDoorDirection() == DoorDirection.RIGHT) {
 							adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i][j-1]);
 						}
 					}
 					if (i < NumRows - 1) {
-						if (boardCellArray[i+1][j].getInitial() == 'W' || boardCellArray[i+1][j].getDoorDirection() == DoorDirection.RIGHT) {
+						if (boardCellArray[i+1][j].getInitial() == 'W' || boardCellArray[i+1][j].getDoorDirection() == DoorDirection.UP) {
 							adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i+1][j]);
 						}
 					}
 					if (j < NumColumns - 1) {
-						if (boardCellArray[i][j+1].getInitial() == 'W' || boardCellArray[i][j+1].getDoorDirection() == DoorDirection.DOWN) {
+						if (boardCellArray[i][j+1].getInitial() == 'W' || boardCellArray[i][j+1].getDoorDirection() == DoorDirection.LEFT) {
 							adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i][j+1]);
 						}
 					}
@@ -363,6 +363,11 @@ public class Board {
 				} else if (boardCellArray[i][j].isRoom()) {
 					continue;
 				}
+//				if(i==6&&j==15) {
+//					for (BoardCell b : adjacencyMatrix.get(boardCellArray[i][j])) {
+//						System.out.println(b);
+//					}
+//				}
 			}
 		}
 	}
