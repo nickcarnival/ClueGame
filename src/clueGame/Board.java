@@ -395,7 +395,6 @@ public class Board {
 		targets = new HashSet<BoardCell>();
 		visited = new HashSet<BoardCell>();
 		BoardCell startCell = boardCellArray[x][y];
-		System.out.println("in calcTargets");
 		visited.add(startCell);
 		findAllTargets(startCell, pathLength);
 
@@ -416,20 +415,43 @@ public class Board {
 		System.out.println("Test List: " + testList);
 		System.out.println("testList size (0,0): " + testList.size());
 		
-		// Take one step, essentially just the adj list
-		board.calcTargets(0, 18, 1);
-		Set<BoardCell> targets= board.getTargets();
-		System.out.println(board.getAdjList(0, 18));
-		// Ensure doesn't exit through the wall
-		assertEquals(1, targets.size());
-		assertTrue(targets.contains(board.getCellAt(0, 17)));
-		// Take two steps
-		board.calcTargets(0, 18, 2);
-		targets= board.getTargets();
-		assertEquals(2, targets.size());
-		assertTrue(targets.contains(board.getCellAt(2, 17)));
-		
-		assertTrue(targets.contains(board.getCellAt(1, 16)));
+
+		Board board2;
+		board2 = Board.getInstance();
+		board2.setConfigFiles("data/CTest_ClueLayout.csv", "data/CTest_ClueLegend.txt");
+		board2.initialize();
+		board2.calcTargets(12, 7, 3);
+		Set<BoardCell> targets = board2.getTargets();
+		int count = 0;
+		for(BoardCell targs : targets) {
+			count ++;
+			System.out.println("target: " + count + " " + targs);
+		}
+		assertEquals(12, targets.size());
+
+		board.calcTargets(12, 7, 3);
+		assertEquals(12, targets.size());
+
+		// directly up and down
+		System.out.println("contains 15, 7: " + targets.contains(board2.getCellAt(15, 7)));
+		System.out.println("contains 9, 7: " + targets.contains(board2.getCellAt(9, 7)));
+		// directly right (can't go left)
+		System.out.println("contains 12, 10: " + targets.contains(board2.getCellAt(12, 10)));
+		// right then down
+		System.out.println("contains 13, 9: " + targets.contains(board2.getCellAt(13, 9)));
+		System.out.println("contains 13, 7: " + targets.contains(board2.getCellAt(13, 7)));
+		// down then left/right
+		System.out.println("contains 14, 6: " + targets.contains(board2.getCellAt(14, 6)));
+		System.out.println("contains 14, 8: " + targets.contains(board2.getCellAt(14, 8)));
+		// right then up
+		System.out.println("contains 10, 8: " + targets.contains(board2.getCellAt(10, 8)));
+		// into the rooms
+		System.out.println("contains 11, 6: " + targets.contains(board2.getCellAt(11, 6)));
+		System.out.println("contains 10, 6: " + targets.contains(board2.getCellAt(10, 6)));
+		// 
+		System.out.println("contains 11, 7: " + targets.contains(board2.getCellAt(11, 7)));
+		System.out.println("contains 12, 8: " + targets.contains(board2.getCellAt(12, 8)));
+
 	}
 
 }
