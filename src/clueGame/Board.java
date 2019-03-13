@@ -363,11 +363,11 @@ public class Board {
 				} else if (boardCellArray[i][j].isRoom()) {
 					continue;
 				}
-//				if(i==6&&j==15) {
-//					for (BoardCell b : adjacencyMatrix.get(boardCellArray[i][j])) {
-//						System.out.println(b);
-//					}
-//				}
+				if(i==3&&j==4) {
+					for (BoardCell b : adjacencyMatrix.get(boardCellArray[i][j])) {
+						System.out.println(b);
+					}
+				}
 			}
 		}
 	}

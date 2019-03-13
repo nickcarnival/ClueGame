@@ -44,7 +44,7 @@ public class BoardAdjTests {
 		Set<BoardCell> testList = board.getAdjList(0, 0);
 		assertEquals(0, testList.size());
 		// Test one that has walkway underneath
-		testList = board.getAdjList(4, 0);
+		testList = board.getAdjList(3, 0);
 		assertEquals(0, testList.size());
 		// Test one that has walkway above
 		testList = board.getAdjList(15, 8);
@@ -84,9 +84,9 @@ public class BoardAdjTests {
 		assertEquals(1, testList.size());
 		assertTrue(testList.contains(board.getCellAt(6, 19)));
 		//TEST DOORWAY RIGHT, WHERE THERE'S A WALKWAY BELOW
-		testList = board.getAdjList(3, 4);
+		testList = board.getAdjList(5, 7);
 		assertEquals(1, testList.size());
-		assertTrue(testList.contains(board.getCellAt(4, 5)));
+		assertTrue(testList.contains(board.getCellAt(5, 8)));
 		
 	}
 	
