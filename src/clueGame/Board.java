@@ -193,6 +193,7 @@ public class Board {
 									+ boardCellArray[column][row].getInitial());
 						}
 						boardCellArray[column][row].setDoorway(false);
+						//everythin other than a walkway or closet is a room
 						if(cleanedGridLine[row] != "X" && cleanedGridLine[row] != "W") {
 							boardCellArray[column][row].setRoom(true);
 						}
@@ -298,73 +299,74 @@ public class Board {
 		return adjList;
 	}
 
+	//calculates the boards cell adjacencies
 	public void calcAdjacencies() {
+		//creates a hash map to store each cells set of adjacencies
 		adjacencyMatrix = new HashMap<BoardCell, Set<BoardCell>>();
-		for (int i = 0; i < NumRows; i++) {
-			for (int j = 0; j < NumColumns; j++) {
-				adjacencyMatrix.put(boardCellArray[i][j], new HashSet<BoardCell>());
-				if (boardCellArray[i][j].getInitial() == 'W') {
-					if (i > 0) {
-						if (boardCellArray[i-1][j].getInitial() == 'W' || boardCellArray[i-1][j].getDoorDirection() == DoorDirection.DOWN) {
-							adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i-1][j]);
+		//for every row
+		for (int row = 0; row < NumRows; row++) {
+			//for every column
+			for (int column = 0; column < NumColumns; column++) {
+				//put the current cell into the key of the hash map
+				adjacencyMatrix.put(boardCellArray[row][column], new HashSet<BoardCell>());
+				//if this cell is a walkway we will check its adjacencies
+				if (boardCellArray[row][column].getInitial() == 'W') {
+					if (row > 0) {
+						if (boardCellArray[row-1][column].getInitial() == 'W' || boardCellArray[row-1][column].getDoorDirection() == DoorDirection.DOWN) {
+							adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row-1][column]);
 						}
 					}
-					if (j > 0) {
-						if (boardCellArray[i][j-1].getInitial() == 'W' || boardCellArray[i][j-1].getDoorDirection() == DoorDirection.RIGHT) {
-							adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i][j-1]);
+					if (column > 0) {
+						if (boardCellArray[row][column-1].getInitial() == 'W' || boardCellArray[row][column-1].getDoorDirection() == DoorDirection.RIGHT) {
+							adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row][column-1]);
 						}
 					}
-					if (i < NumRows - 1) {
-						if (boardCellArray[i+1][j].getInitial() == 'W' || boardCellArray[i+1][j].getDoorDirection() == DoorDirection.UP) {
-							adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i+1][j]);
+					if (row < NumRows - 1) {
+						if (boardCellArray[row+1][column].getInitial() == 'W' || boardCellArray[row+1][column].getDoorDirection() == DoorDirection.UP) {
+							adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row+1][column]);
 						}
 					}
-					if (j < NumColumns - 1) {
-						if (boardCellArray[i][j+1].getInitial() == 'W' || boardCellArray[i][j+1].getDoorDirection() == DoorDirection.LEFT) {
-							adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i][j+1]);
+					if (column < NumColumns - 1) {
+						if (boardCellArray[row][column+1].getInitial() == 'W' || boardCellArray[row][column+1].getDoorDirection() == DoorDirection.LEFT) {
+							adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row][column+1]);
 						}
 					}
-				} else if (boardCellArray[i][j].isDoorway()) {
-					switch (boardCellArray[i][j].getDoorDirection()) {
+				} else if (boardCellArray[row][column].isDoorway()) {
+					switch (boardCellArray[row][column].getDoorDirection()) {
 					case LEFT:
-						if (j > 0) {
-							if(boardCellArray[i][j-1].getInitial() == 'W') {
-								adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i][j-1]);
+						if (column > 0) {
+							if(boardCellArray[row][column-1].getInitial() == 'W') {
+								adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row][column-1]);
 							}
 						}
 						break;
 					case UP:
-						if (i > 0) {
-							if(boardCellArray[i-1][j].getInitial() == 'W') {
-								adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i-1][j]);
+						if (row > 0) {
+							if(boardCellArray[row-1][column].getInitial() == 'W') {
+								adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row-1][column]);
 							}
 						}
 						break;
 					case RIGHT:
-						if (j < NumColumns - 1) {
-							if(boardCellArray[i][j+1].getInitial() == 'W') {
-								adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i][j+1]);
+						if (column < NumColumns - 1) {
+							if(boardCellArray[row][column+1].getInitial() == 'W') {
+								adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row][column+1]);
 							}
 						}
 						break;
 					case DOWN:
-						if (i < NumRows - 1) {
-							if(boardCellArray[i+1][j].getInitial() == 'W') {
-								adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i+1][j]);
+						if (row < NumRows - 1) {
+							if(boardCellArray[row+1][column].getInitial() == 'W') {
+								adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row+1][column]);
 							}
 						}
 						break;
 					default:
 						break;
 					}
-				} else if (boardCellArray[i][j].isRoom()) {
+				} else if (boardCellArray[row][column].isRoom()) {
 					continue;
 				}
-//				if(i==3&&j==4) {
-//					for (BoardCell b : adjacencyMatrix.get(boardCellArray[i][j])) {
-//						System.out.println(b);
-//					}
-//				}
 			}
 		}
 	}
@@ -373,6 +375,7 @@ public class Board {
 	private void findAllTargets(BoardCell thisCell, int numSteps) {
 		Set<BoardCell> adjList = adjacencyMatrix.get(thisCell);
 		for (BoardCell adjCell : adjList) {
+			//if has already visited this cell
 			if (visited.contains(adjCell)) {
 				continue;
 			} else {
