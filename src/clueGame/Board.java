@@ -322,7 +322,7 @@ public class Board {
 							adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i+1][j]);
 						}
 					}
-					if (j < NumRows - 1) {
+					if (j < NumColumns - 1) {
 						if (boardCellArray[i][j+1].getInitial() == 'W' || boardCellArray[i][j+1].getDoorDirection() == DoorDirection.DOWN) {
 							adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i][j+1]);
 						}
@@ -332,7 +332,6 @@ public class Board {
 					case LEFT:
 						if (j > 0) {
 							if(boardCellArray[i][j-1].getInitial() == 'W') {
-								System.out.println("asdf");
 								adjacencyMatrix.get(boardCellArray[i][j]).add(boardCellArray[i][j-1]);
 							}
 						}
@@ -363,19 +362,6 @@ public class Board {
 					}
 				} else if (boardCellArray[i][j].isRoom()) {
 					continue;
-				}
-//				System.out.println("cell at i, j: " + i + " " + j + " has adjacencies:");
-				if (boardCellArray[i][j].isDoorway()) {
-					System.out.println("IM a DOOR");
-					for (BoardCell b : adjacencyMatrix.get(boardCellArray[i][j])) {
-						System.out.println(b);
-					}
-				}
-				for (BoardCell b : adjacencyMatrix.get(boardCellArray[i][j])) {
-//					System.out.println(b);
-					if (b.isDoorway()) {
-						System.out.println("HEY LOOK AT ME");
-					}
 				}
 			}
 		}
