@@ -296,11 +296,6 @@ public class Board {
 		return adjList;
 	}
 
-	//calculate the targets within a specified distance
-	public void calcTargets(int x, int y, int distanceAway) {
-		
-	}
-
 	public void calcAdjacencies() {
 		adjacencyMatrix = new HashMap<BoardCell, Set<BoardCell>>();
 		for (int i = 0; i < NumRows; i++) {
@@ -363,11 +358,11 @@ public class Board {
 				} else if (boardCellArray[i][j].isRoom()) {
 					continue;
 				}
-				if(i==3&&j==4) {
-					for (BoardCell b : adjacencyMatrix.get(boardCellArray[i][j])) {
-						System.out.println(b);
-					}
-				}
+//				if(i==3&&j==4) {
+//					for (BoardCell b : adjacencyMatrix.get(boardCellArray[i][j])) {
+//						System.out.println(b);
+//					}
+//				}
 			}
 		}
 	}
@@ -380,7 +375,7 @@ public class Board {
 				;
 			} else {
 				visited.add(adjCell);
-				if (numSteps == 1) {
+				if (numSteps == 1 || adjCell.isDoorway()) {
 					targets.add(adjCell);
 				} else {
 					findAllTargets(adjCell, numSteps - 1);
@@ -390,17 +385,21 @@ public class Board {
 		}
 	}
 
-	public void calcTargets(BoardCell startCell, int pathLength) {
+	public void calcTargets(int x, int y, int pathLength) {
+		BoardCell startCell = boardCellArray[x][y];
+		System.out.println("in calcTargets");
 		targets.clear();
 		visited.clear();
 		visited.add(startCell);
 		findAllTargets(startCell, pathLength);
-		System.out.println("sc " + startCell + "\tpl " + pathLength);
-		System.out.println("size " + targets.size());
-		for (BoardCell b : targets) {
-			System.out.println(b);
-		}
-		System.out.println();
+	}
+
+	public void calcTargets(BoardCell startCell, int pathLength) {
+		System.out.println("in calcTargets");
+		targets.clear();
+		visited.clear();
+		visited.add(startCell);
+		findAllTargets(startCell, pathLength);
 	}
 
 	public Set<BoardCell> getTargets() {
