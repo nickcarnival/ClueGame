@@ -20,6 +20,8 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import static java.lang.Math.toIntExact;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class Board {
 
@@ -377,28 +379,8 @@ public class Board {
 				visited.add(adjCell);
 				//adjacencies can only be walkways or doors
 				if(numSteps == 1) {
-					if(adjCell.getInitial() == ('W')) {
+					if(adjCell.getInitial() == ('W') || adjCell.isDoorway()) {
 						targets.add(adjCell);
-					}
-					if(adjCell.isDoorway()) {
-						switch(adjCell.getDoorDirection()) {
-						
-						case LEFT:
-							//if this cell is to the LEFT of the other cell
-							break;
-						case RIGHT:
-							//if this cell is to the RIGHT of the other cell
-							break;
-						case UP:
-							//if this cell is to the UP of the other cell
-							break;
-						case DOWN:
-							//if this cell is to the DOWN of the other cell
-							break;
-						default:
-							break;
-						
-						}
 					}
 				}
 				else {
@@ -410,25 +392,17 @@ public class Board {
 	}
 
 	public void calcTargets(int x, int y, int pathLength) {
+		targets = new HashSet<BoardCell>();
+		visited = new HashSet<BoardCell>();
 		BoardCell startCell = boardCellArray[x][y];
 		System.out.println("in calcTargets");
-		targets.clear();
-		visited.clear();
 		visited.add(startCell);
 		findAllTargets(startCell, pathLength);
-	}
 
-	public void calcTargets(BoardCell startCell, int pathLength) {
-		System.out.println("in calcTargets");
-		targets.clear();
-		visited.clear();
-		visited.add(startCell);
-		findAllTargets(startCell, pathLength);
 	}
 
 	public Set<BoardCell> getTargets() {
-		Set<BoardCell> targetsSet = new HashSet<BoardCell>();
-		return targetsSet;
+		return targets;
 	}
 
 	public static void main(String[] args) {
@@ -441,6 +415,21 @@ public class Board {
 		Set<BoardCell> testList = board.getAdjList(0, 0);
 		System.out.println("Test List: " + testList);
 		System.out.println("testList size (0,0): " + testList.size());
+		
+		// Take one step, essentially just the adj list
+		board.calcTargets(0, 18, 1);
+		Set<BoardCell> targets= board.getTargets();
+		System.out.println(board.getAdjList(0, 18));
+		// Ensure doesn't exit through the wall
+		assertEquals(1, targets.size());
+		assertTrue(targets.contains(board.getCellAt(0, 17)));
+		// Take two steps
+		board.calcTargets(0, 18, 2);
+		targets= board.getTargets();
+		assertEquals(2, targets.size());
+		assertTrue(targets.contains(board.getCellAt(2, 17)));
+		
+		assertTrue(targets.contains(board.getCellAt(1, 16)));
 	}
 
 }
