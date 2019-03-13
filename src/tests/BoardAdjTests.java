@@ -44,7 +44,7 @@ public class BoardAdjTests {
 		Set<BoardCell> testList = board.getAdjList(0, 0);
 		assertEquals(0, testList.size());
 		// Test one that has walkway underneath
-		testList = board.getAdjList(4, 0);
+		testList = board.getAdjList(3, 0);
 		assertEquals(0, testList.size());
 		// Test one that has walkway above
 		testList = board.getAdjList(15, 8);
