@@ -1,8 +1,9 @@
 package clueGame;
 /*
- * use this board cell because the other one is the wrong one...
  * Jordan Newport
  * Nicholas Carnival
+ * All of the code in this class is just
+ * automatically generated functions. Super simple.
  */
 
 public class BoardCell {
@@ -13,8 +14,6 @@ public class BoardCell {
 	private boolean isDoorway = false;
 	private char initial;
 	
-
-
 	public BoardCell(int row, int column) {
 		this.row = row;
 		this.column = column;
@@ -27,9 +26,6 @@ public class BoardCell {
 	public int getColumn() {
 		return column;
 	}
-
-
-
 
 	@Override
 	public String toString() {
@@ -67,19 +63,17 @@ public class BoardCell {
 	}
 
 	public boolean isDoorway() {
-		// TODO Auto-generated method stub
 		return isDoorway;
 	}
 
 	public DoorDirection getDoorDirection() {
-		// TODO Auto-generated method stub
 		return this.doorDirection;
 	}
 
 	public char getInitial() {
-		// TODO Auto-generated method stub
 		return this.initial;
 	}
+
 	public void setDoorDirection(DoorDirection doorDirection) {
 		this.doorDirection = doorDirection;
 	}
