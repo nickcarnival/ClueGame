@@ -331,6 +331,7 @@ public class Board {
 							adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row][column+1]);
 						}
 					}
+					//if this cell is a doorway
 				} else if (boardCellArray[row][column].isDoorway()) {
 					switch (boardCellArray[row][column].getDoorDirection()) {
 					case LEFT:
@@ -350,6 +351,7 @@ public class Board {
 					case RIGHT:
 						if (column < NumColumns - 1) {
 							if(boardCellArray[row][column+1].getInitial() == 'W') {
+								System.out.println("is this cell here: " + boardCellArray[row][column]);
 								adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row][column+1]);
 							}
 						}
@@ -365,6 +367,7 @@ public class Board {
 						break;
 					}
 				} else if (boardCellArray[row][column].isRoom()) {
+					//rooms have empty adjacencies
 					continue;
 				}
 			}
@@ -381,10 +384,8 @@ public class Board {
 			} else {
 				visited.add(adjCell);
 				//adjacencies can only be walkways or doors
-				if(numSteps == 1) {
-					if(adjCell.getInitial() == ('W') || adjCell.isDoorway()) {
-						targets.add(adjCell);
-					}
+				if(numSteps == 1 || adjCell.isDoorway() ) {
+					targets.add(adjCell);
 				}
 				else {
 					findAllTargets(adjCell, numSteps - 1);
