@@ -408,53 +408,12 @@ public class Board {
 		return targets;
 	}
 
+	//main for testing stuff
 	public static void main(String[] args) {
 		Board board ;
 		board = Board.getInstance();
 		board.setConfigFiles("data/testsMap.csv", "data/rooms.txt");
 		board.initialize();
-		
-		board.calcTargets(13, 17, 6);
-		Set<BoardCell> testList = board.getAdjList(0, 0);
-		System.out.println("Test List: " + testList);
-		System.out.println("testList size (0,0): " + testList.size());
-		
-
-		Board board2;
-		board2 = Board.getInstance();
-		board2.setConfigFiles("data/CTest_ClueLayout.csv", "data/CTest_ClueLegend.txt");
-		board2.initialize();
-		board2.calcTargets(12, 7, 3);
-		Set<BoardCell> targets = board2.getTargets();
-		int count = 0;
-		for(BoardCell targs : targets) {
-			count ++;
-			System.out.println("target: " + count + " " + targs);
-		}
-		assertEquals(12, targets.size());
-
-		board.calcTargets(12, 7, 3);
-		assertEquals(12, targets.size());
-
-		// directly up and down
-		System.out.println("contains 15, 7: " + targets.contains(board2.getCellAt(15, 7)));
-		System.out.println("contains 9, 7: " + targets.contains(board2.getCellAt(9, 7)));
-		// directly right (can't go left)
-		System.out.println("contains 12, 10: " + targets.contains(board2.getCellAt(12, 10)));
-		// right then down
-		System.out.println("contains 13, 9: " + targets.contains(board2.getCellAt(13, 9)));
-		System.out.println("contains 13, 7: " + targets.contains(board2.getCellAt(13, 7)));
-		// down then left/right
-		System.out.println("contains 14, 6: " + targets.contains(board2.getCellAt(14, 6)));
-		System.out.println("contains 14, 8: " + targets.contains(board2.getCellAt(14, 8)));
-		// right then up
-		System.out.println("contains 10, 8: " + targets.contains(board2.getCellAt(10, 8)));
-		// into the rooms
-		System.out.println("contains 11, 6: " + targets.contains(board2.getCellAt(11, 6)));
-		System.out.println("contains 10, 6: " + targets.contains(board2.getCellAt(10, 6)));
-		// 
-		System.out.println("contains 11, 7: " + targets.contains(board2.getCellAt(11, 7)));
-		System.out.println("contains 12, 8: " + targets.contains(board2.getCellAt(12, 8)));
 
 	}
 

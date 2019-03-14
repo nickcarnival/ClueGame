@@ -237,7 +237,8 @@ public class BoardAdjTests {
 		assertTrue(targets.contains(board.getCellAt(5, 4)));
 		assertTrue(targets.contains(board.getCellAt(5, 2)));
 		assertTrue(targets.contains(board.getCellAt(4, 3)));
-		assertTrue(targets.contains(board.getCellAt(5, 4)));
+		assertTrue(targets.contains(board.getCellAt(4, 5)));
+		assertTrue(targets.contains(board.getCellAt(5, 0)));	
 	}	
 	
 	// Tests of just walkways plus one door, 6 steps
