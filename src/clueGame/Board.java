@@ -26,7 +26,7 @@ import static org.junit.Assert.assertTrue;
 public class Board {
 
 
-	private int MAX_BOARD_SIZE = 50;
+	public static final int MAX_BOARD_SIZE = 50;
 	private String LayoutFile;
 	private String LegendFile;
 	private static final String COMMA = ",";
@@ -37,6 +37,8 @@ public class Board {
 	private Map<BoardCell, Set<BoardCell>> adjacencyMatrix;
 	private Set<BoardCell> visited;
 	private Set<BoardCell> targets;
+
+	private HashMap<Character, String> legendMap = new HashMap<Character, String>();
 	
 	//THE ALMIGHTY 2D ARRAY OF BOARD CELLS!!!!!!!!!!!!!
 	private BoardCell[][] boardCellArray;
@@ -73,12 +75,12 @@ public class Board {
 	}
 	
 
-	private HashMap<Character, String> legendMap = new HashMap<Character, String>();
-
 	//loads in the legend file data
 	public void loadRoomConfig() throws BadConfigFormatException{
+		//these two functions write to NumRows and NumColumns variables
 		getNumRows();
 		getNumColumns();
+		//-1 is an error state for NumColumns
 		if(NumColumns == -1) {
 			System.out.println("The Bad Format Has Been Thrown");
 			throw new BadConfigFormatException("Bad Columns");
@@ -94,7 +96,7 @@ public class Board {
 		}
          
         //Set the delimiter used in file
-        scanner.useDelimiter(",");
+        scanner.useDelimiter(COMMA);
 
         //finds the length of the file
         int count = 0;
@@ -107,7 +109,6 @@ public class Board {
         char legendLetter ;
         String legendRoom = "";
         String legendCardStuff = "";
-        String temp2 = "";
 
         //this is size three because of how the legend must be formatted
         String[] splitArray = new String[3];
@@ -118,7 +119,7 @@ public class Board {
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
-        //iterates through each line of the legend file
+        //iterates through each line of the legend file and adds it to the legendMap
         for(int i = 0; i < count; i ++) {
         	valueArray[i] = scanner.nextLine();
         	splitArray = valueArray[i].split(COMMA);
@@ -130,6 +131,7 @@ public class Board {
         	legendRoom = legendRoom.trim();
         	legendCardStuff = legendCardStuff.trim();
         	
+        	//if the legend has something that is neither a regular room nor a walkway/closet
         	if(!legendCardStuff.contentEquals("Card") && !legendCardStuff.contentEquals("Other")) {
         		throw new BadConfigFormatException("The Cards are Not in your favor");
         	}
@@ -148,18 +150,19 @@ public class Board {
 		Scanner scanner = null;
 		getNumColumns();
 		getNumRows();
+		if(NumColumns > MAX_BOARD_SIZE || NumRows > MAX_BOARD_SIZE) {
+			throw new BadConfigFormatException("Board size exceeds max board size of "
+				+ MAX_BOARD_SIZE + " in at least one dimension");
+		}
 
 		//numColumns will be -1 if the columns are formatted improperly
 		if(NumColumns == -1) {
-
 			System.out.println("threw bad column format");
 			throw new BadConfigFormatException("Bad column format");
-		
+
 		//loads the csv if the columns are proper
 		} else {
-
 			try {
-
 				scanner = new Scanner(new File(LayoutFile));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -168,68 +171,70 @@ public class Board {
 			//gridLine should store every line in the csv file
 			String[] gridLine = new String[NumRows];
 
-			//stores the same thing without commas
+			//stores a line of the file without commas
 			String[] cleanedGridLine = new String[NumColumns];
 
 			//goes through every column in the csv file and scans the entire line
-			for(int column = 0; column < NumRows; column++) {
-				gridLine[column] = scanner.nextLine();
-				cleanedGridLine = gridLine[column].split(COMMA);
+			for(int row = 0; row < NumRows; row++) {
+				gridLine[row] = scanner.nextLine();
+				cleanedGridLine = gridLine[row].split(COMMA);
 
 				//scans each string and removes the commas
-				for(int row = 0; row < NumColumns; row++) {
+				for(int column = 0; column < NumColumns; column++) {
 					//create a new board cell at a certain location with its char
-					//tests if it is a door
-					boardCellArray[column][row] = new BoardCell(column,row);
+					boardCellArray[row][column] = new BoardCell(row,column);
 
-					//checks that the initial stringis not a door
-					//System.out.println(cleanedGridLine[row]);
-					if(cleanedGridLine[row].length() == 1 || cleanedGridLine[row].charAt(1) == 'N'){
-						boardCellArray[column][row].setInitial(cleanedGridLine[row].charAt(0));
+					//checks that the initial string is not a door
+					//i.e. if there is not more than one char or the second char is N
+					if(cleanedGridLine[column].length() == 1 || cleanedGridLine[column].charAt(1) == 'N'){
+						//load in initial character for board cell
+						boardCellArray[row][column].setInitial(cleanedGridLine[column].charAt(0));
 
 						//checks that the character is actually in the map
-						if(!legendMap.containsKey(boardCellArray[column][row].getInitial())) {
-							throw new BadConfigFormatException("Error: This Character is not in the Legend: " 
-									+ boardCellArray[column][row].getInitial());
+						if(!legendMap.containsKey(boardCellArray[row][column].getInitial())) {
+							throw new BadConfigFormatException("Error: This Character is not in the Legend: "
+									+ boardCellArray[row][column].getInitial());
 						}
-						boardCellArray[column][row].setDoorway(false);
-						//everythin other than a walkway or closet is a room
-						if(cleanedGridLine[row] != "X" && cleanedGridLine[row] != "W") {
-							boardCellArray[column][row].setRoom(true);
+						boardCellArray[row][column].setDoorway(false);
+						//everything other than a walkway or closet is a room
+						if(cleanedGridLine[column] != "X" && cleanedGridLine[column] != "W") {
+							boardCellArray[row][column].setRoom(true);
 						}
-						//this runs if the initial string is a door, determined if there is more than one char
+					//this runs if the initial string is a door
 					} else {
+						//load in initial character for board cell
+						boardCellArray[row][column].setInitial(cleanedGridLine[column].charAt(0));
 
-						char doorDirectionLetter = cleanedGridLine[row].charAt(1);
-						boardCellArray[column][row].setDoorway(true);
+						//set up which direction the door is facing
+						char doorDirectionLetter = cleanedGridLine[column].charAt(1);
+						boardCellArray[row][column].setDoorway(true);
 
-						if(doorDirectionLetter == 'L') {
-							boardCellArray[column][row].setDoorDirection(DoorDirection.LEFT);
-							boardCellArray[column][row].setInitial(cleanedGridLine[row].charAt(0));
-						}
-
-						if(doorDirectionLetter == 'R') {
-							boardCellArray[column][row].setDoorDirection(DoorDirection.RIGHT);
-							boardCellArray[column][row].setInitial(cleanedGridLine[row].charAt(0));
-						}
-
-						if(doorDirectionLetter == 'U') {
-							boardCellArray[column][row].setDoorDirection(DoorDirection.UP);
-							boardCellArray[column][row].setInitial(cleanedGridLine[row].charAt(0));
-						}
-
-						if(doorDirectionLetter == 'D') {
-							boardCellArray[column][row].setDoorDirection(DoorDirection.DOWN);
-							boardCellArray[column][row].setInitial(cleanedGridLine[row].charAt(0));
+						switch(doorDirectionLetter) {
+						case 'L':
+							boardCellArray[row][column].setDoorDirection(DoorDirection.LEFT);
+							break;
+						case 'R':
+							boardCellArray[row][column].setDoorDirection(DoorDirection.RIGHT);
+							break;
+						case 'U':
+							boardCellArray[row][column].setDoorDirection(DoorDirection.UP);
+							break;
+						case 'D':
+							boardCellArray[row][column].setDoorDirection(DoorDirection.DOWN);
+							break;
+						default:
+							throw new BadConfigFormatException("There is a cell whose second letter is "
+									+ doorDirectionLetter);
 						}
 					}
 				}
 			}		
+			//now that we have all our board cells, we can calculate each of their AdjacencyLists
 			calcAdjacencies();
 		}
 	}
 
-	//this contains the legend i.e. 'K, Kitchen'
+	//this contains the legend e.g. 'K, Kitchen'
 	public Map<Character, String> getLegend() {
 		return legendMap;
 	}
@@ -239,40 +244,47 @@ public class Board {
 	public int getNumColumns() {
 
 		Scanner scanner = null;
-		int count = 0;
 		List<String> csvList = Arrays.asList();
 		try {
 			scanner = new Scanner(new File(LayoutFile));
 
 			ArrayList<Integer> countArray = new ArrayList<Integer>();
-			int index = 0;
+			//go through the layout file, taking note of how long each line is
 			while(scanner.hasNextLine()) {
 				
 				String nextLine = scanner.nextLine();
-				
 				csvList = Arrays.asList(nextLine.split(COMMA));
-				
+				//each line, keep track of how many columns are in it
 				countArray.add(csvList.size());
-				index++;
 			}
-			for(int i = 1; i < countArray.size(); i++) {
+			/*
+			if there is ever a different number of columns in two lines,
+			then we should know and give back -1 as a failure state
 
+			this is not handled as an exception because
+			this method is called in places where it may not throw
+			*/
+			for(int i = 1; i < countArray.size(); i++) {
 				if(countArray.get(i) != countArray.get(i-1)) {
 					NumColumns = -1;
 					return NumColumns;
 				}
 			}
-		} catch (FileNotFoundException e1) {
+		} catch (FileNotFoundException e) {
+			//not really anything better to do with this
+			e.printStackTrace();
+		} finally {
+			scanner.close();
 		}
 		NumColumns = csvList.size();
 		return NumColumns;
 	}
 
-	//should return 20
+	//counts the number of lines in the text file
 	public int getNumRows() {
-        //counts file length s
-		//counts the number of lines in the text file
 
+		//to be honest we're not sure what we did here and we need to refactor
+		//probably it counts the lines, but it seems like there should be a simpler way than this one
 		long longArray = new Long(1);
 		Path path = Paths.get(LayoutFile);
 		try {
@@ -280,17 +292,15 @@ public class Board {
 		} catch (IOException e) {
 		}		
 		NumRows = toIntExact(longArray);
-		//end of file length counter
-
 		return NumRows;
 	}
 
-	//returns a board cell at (row, column)
+	//returns the board cell at (row, column)
 	public BoardCell getCellAt(int row, int column) {
 		return boardCellArray[row][column];
 	}
 
-	//this finds what cells are directly next to a specific cell
+	//this returns the set of cells which are directly next to a specific cell as referenced by its coordinates
 	public Set<BoardCell> getAdjList(int x, int y) {
 
 		BoardCell currentCell = new BoardCell(x, y);
@@ -309,29 +319,35 @@ public class Board {
 			for (int column = 0; column < NumColumns; column++) {
 				//put the current cell into the key of the hash map
 				adjacencyMatrix.put(boardCellArray[row][column], new HashSet<BoardCell>());
-				//if this cell is a walkway we will check its adjacencies
+				//if this cell is a walkway we will check its adjacencies this way:
+				//all adjacent walkways, or any doors that are facing the correct direction
+				//it does check if a cell is in bounds first--to avoid null pointer
 				if (boardCellArray[row][column].getInitial() == 'W') {
 					if (row > 0) {
-						if (boardCellArray[row-1][column].getInitial() == 'W' || boardCellArray[row-1][column].getDoorDirection() == DoorDirection.DOWN) {
+						if (boardCellArray[row-1][column].getInitial() == 'W' ||
+								boardCellArray[row-1][column].getDoorDirection() == DoorDirection.DOWN) {
 							adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row-1][column]);
 						}
 					}
 					if (column > 0) {
-						if (boardCellArray[row][column-1].getInitial() == 'W' || boardCellArray[row][column-1].getDoorDirection() == DoorDirection.RIGHT) {
+						if (boardCellArray[row][column-1].getInitial() == 'W' ||
+								boardCellArray[row][column-1].getDoorDirection() == DoorDirection.RIGHT) {
 							adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row][column-1]);
 						}
 					}
 					if (row < NumRows - 1) {
-						if (boardCellArray[row+1][column].getInitial() == 'W' || boardCellArray[row+1][column].getDoorDirection() == DoorDirection.UP) {
+						if (boardCellArray[row+1][column].getInitial() == 'W' ||
+								boardCellArray[row+1][column].getDoorDirection() == DoorDirection.UP) {
 							adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row+1][column]);
 						}
 					}
 					if (column < NumColumns - 1) {
-						if (boardCellArray[row][column+1].getInitial() == 'W' || boardCellArray[row][column+1].getDoorDirection() == DoorDirection.LEFT) {
+						if (boardCellArray[row][column+1].getInitial() == 'W' ||
+								boardCellArray[row][column+1].getDoorDirection() == DoorDirection.LEFT) {
 							adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row][column+1]);
 						}
 					}
-					//if this cell is a doorway
+				//otherwise if this cell is a doorway, then the only adjacency will be the walkway right outside
 				} else if (boardCellArray[row][column].isDoorway()) {
 					switch (boardCellArray[row][column].getDoorDirection()) {
 					case LEFT:
@@ -351,7 +367,6 @@ public class Board {
 					case RIGHT:
 						if (column < NumColumns - 1) {
 							if(boardCellArray[row][column+1].getInitial() == 'W') {
-								System.out.println("is this cell here: " + boardCellArray[row][column]);
 								adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row][column+1]);
 							}
 						}
@@ -375,6 +390,7 @@ public class Board {
 	}
 
 	// calculates what cells are what distance away
+	//this is based directly on the pseudocode in the presentation
 	private void findAllTargets(BoardCell thisCell, int numSteps) {
 		Set<BoardCell> adjList = adjacencyMatrix.get(thisCell);
 		for (BoardCell adjCell : adjList) {
@@ -395,67 +411,27 @@ public class Board {
 		}
 	}
 
+	//sets up call to recursive findAllTargets function
 	public void calcTargets(int x, int y, int pathLength) {
+		//set up data structures needed by findAllTargets
 		targets = new HashSet<BoardCell>();
 		visited = new HashSet<BoardCell>();
 		BoardCell startCell = boardCellArray[x][y];
 		visited.add(startCell);
 		findAllTargets(startCell, pathLength);
-
 	}
 
+	//getter for targets list. MUST BE CALLED AFTER calcTargets, otherwise will be a null pointer
 	public Set<BoardCell> getTargets() {
 		return targets;
 	}
 
+	//contains test setup code so we can copy from tests if we want to have output inside a test
 	public static void main(String[] args) {
 		Board board ;
 		board = Board.getInstance();
 		board.setConfigFiles("data/testsMap.csv", "data/rooms.txt");
 		board.initialize();
-		
-		board.calcTargets(13, 17, 6);
-		Set<BoardCell> testList = board.getAdjList(0, 0);
-		System.out.println("Test List: " + testList);
-		System.out.println("testList size (0,0): " + testList.size());
-		
-
-		Board board2;
-		board2 = Board.getInstance();
-		board2.setConfigFiles("data/CTest_ClueLayout.csv", "data/CTest_ClueLegend.txt");
-		board2.initialize();
-		board2.calcTargets(12, 7, 3);
-		Set<BoardCell> targets = board2.getTargets();
-		int count = 0;
-		for(BoardCell targs : targets) {
-			count ++;
-			System.out.println("target: " + count + " " + targs);
-		}
-		assertEquals(12, targets.size());
-
-		board.calcTargets(12, 7, 3);
-		assertEquals(12, targets.size());
-
-		// directly up and down
-		System.out.println("contains 15, 7: " + targets.contains(board2.getCellAt(15, 7)));
-		System.out.println("contains 9, 7: " + targets.contains(board2.getCellAt(9, 7)));
-		// directly right (can't go left)
-		System.out.println("contains 12, 10: " + targets.contains(board2.getCellAt(12, 10)));
-		// right then down
-		System.out.println("contains 13, 9: " + targets.contains(board2.getCellAt(13, 9)));
-		System.out.println("contains 13, 7: " + targets.contains(board2.getCellAt(13, 7)));
-		// down then left/right
-		System.out.println("contains 14, 6: " + targets.contains(board2.getCellAt(14, 6)));
-		System.out.println("contains 14, 8: " + targets.contains(board2.getCellAt(14, 8)));
-		// right then up
-		System.out.println("contains 10, 8: " + targets.contains(board2.getCellAt(10, 8)));
-		// into the rooms
-		System.out.println("contains 11, 6: " + targets.contains(board2.getCellAt(11, 6)));
-		System.out.println("contains 10, 6: " + targets.contains(board2.getCellAt(10, 6)));
-		// 
-		System.out.println("contains 11, 7: " + targets.contains(board2.getCellAt(11, 7)));
-		System.out.println("contains 12, 8: " + targets.contains(board2.getCellAt(12, 8)));
-
 	}
 
 }
