@@ -66,6 +66,9 @@ public class Board {
 	public void initialize() {
 
 		try {
+			getNumRows();
+			getNumColumns();
+
 			loadRoomConfig();
 			loadBoardConfig();
 		} catch (BadConfigFormatException e) {
@@ -78,8 +81,6 @@ public class Board {
 	//loads in the legend file data
 	public void loadRoomConfig() throws BadConfigFormatException{
 		//these two functions write to NumRows and NumColumns variables
-		getNumRows();
-		getNumColumns();
 		//-1 is an error state for NumColumns
 		if(NumColumns == -1) {
 			System.out.println("The Bad Format Has Been Thrown");
@@ -148,8 +149,6 @@ public class Board {
 	//loads the map csv file and throws if badly formatted
 	public void loadBoardConfig() throws BadConfigFormatException{
 		Scanner scanner = null;
-		getNumColumns();
-		getNumRows();
 		if(NumColumns > MAX_BOARD_SIZE || NumRows > MAX_BOARD_SIZE) {
 			throw new BadConfigFormatException("Board size exceeds max board size of "
 				+ MAX_BOARD_SIZE + " in at least one dimension");
