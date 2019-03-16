@@ -192,6 +192,9 @@ public class Board {
 					//i.e. if there is not more than one char or the second char is N
 					if(cleanedGridLine[column].length() == 1 || cleanedGridLine[column].charAt(1) == 'N'){
 						//load in initial character for board cell
+						if(cleanedGridLine[column].charAt(0) == 'W') {
+							boardCellArray[row][column].setWalkway(true);
+						}
 						boardCellArray[row][column].setInitial(cleanedGridLine[column].charAt(0));
 
 						//checks that the character is actually in the map
@@ -342,26 +345,27 @@ public class Board {
 				//all adjacent walkways, or any doors that are facing the correct direction
 				//it does check if a cell is in bounds first--to avoid null pointer
 				if (boardCellArray[row][column].getInitial() == 'W') {
+					//if the board cell is a walkway, setWalkway to true
 					if (row > 0) {
-						if (boardCellArray[row-1][column].getInitial() == 'W' ||
+						if (boardCellArray[row-1][column].isWalkway() ||
 								boardCellArray[row-1][column].getDoorDirection() == DoorDirection.DOWN) {
 							adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row-1][column]);
 						}
 					}
 					if (column > 0) {
-						if (boardCellArray[row][column-1].getInitial() == 'W' ||
+						if (boardCellArray[row][column-1].isWalkway() ||
 								boardCellArray[row][column-1].getDoorDirection() == DoorDirection.RIGHT) {
 							adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row][column-1]);
 						}
 					}
 					if (row < NumRows - 1) {
-						if (boardCellArray[row+1][column].getInitial() == 'W' ||
+						if (boardCellArray[row+1][column].isWalkway() ||
 								boardCellArray[row+1][column].getDoorDirection() == DoorDirection.UP) {
 							adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row+1][column]);
 						}
 					}
 					if (column < NumColumns - 1) {
-						if (boardCellArray[row][column+1].getInitial() == 'W' ||
+						if (boardCellArray[row][column+1].isWalkway() ||
 								boardCellArray[row][column+1].getDoorDirection() == DoorDirection.LEFT) {
 							adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row][column+1]);
 						}
@@ -371,28 +375,28 @@ public class Board {
 					switch (boardCellArray[row][column].getDoorDirection()) {
 					case LEFT:
 						if (column > 0) {
-							if(boardCellArray[row][column-1].getInitial() == 'W') {
+							if(boardCellArray[row][column-1].isWalkway()) {
 								adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row][column-1]);
 							}
 						}
 						break;
 					case UP:
 						if (row > 0) {
-							if(boardCellArray[row-1][column].getInitial() == 'W') {
+							if(boardCellArray[row-1][column].isWalkway()) {
 								adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row-1][column]);
 							}
 						}
 						break;
 					case RIGHT:
 						if (column < NumColumns - 1) {
-							if(boardCellArray[row][column+1].getInitial() == 'W') {
+							if(boardCellArray[row][column+1].isWalkway()) {
 								adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row][column+1]);
 							}
 						}
 						break;
 					case DOWN:
 						if (row < NumRows - 1) {
-							if(boardCellArray[row+1][column].getInitial() == 'W') {
+							if(boardCellArray[row+1][column].isWalkway()) {
 								adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row+1][column]);
 							}
 						}

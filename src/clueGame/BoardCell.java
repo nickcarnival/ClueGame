@@ -11,7 +11,8 @@ public class BoardCell {
 	private int column;
 	private DoorDirection doorDirection;
 	private boolean isRoom;
-	private boolean isDoorway = false;
+	private boolean isDoorway;
+	private boolean isWalkway;
 	private char initial;
 	
 	public BoardCell(int row, int column) {
@@ -66,6 +67,12 @@ public class BoardCell {
 		return isDoorway;
 	}
 
+	public void setWalkway(boolean isWalkway) {
+		this.isWalkway = isWalkway;
+	}
+	public boolean isWalkway() {
+		return isWalkway;
+	}
 	public DoorDirection getDoorDirection() {
 		return this.doorDirection;
 	}
