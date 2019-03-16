@@ -78,8 +78,8 @@ public class Board {
 	//loads in the legend file data
 	public void loadRoomConfig() throws BadConfigFormatException{
 		//these two functions write to NumRows and NumColumns variables
-		getNumRows();
-		getNumColumns();
+		setNumRows();
+		setNumColumns();
 		//-1 is an error state for NumColumns
 		if(NumColumns == -1) {
 			System.out.println("The Bad Format Has Been Thrown");
@@ -108,7 +108,7 @@ public class Board {
         String[] valueArray = new String[count];
         char legendLetter ;
         String legendRoom = "";
-        String legendCardStuff = "";
+        String legendCardType = "";
 
         //this is size three because of how the legend must be formatted
         String[] splitArray = new String[3];
@@ -126,13 +126,13 @@ public class Board {
 
         	legendLetter = splitArray[0].charAt(0);
         	legendRoom = splitArray[1];
-        	legendCardStuff = splitArray[2];
+        	legendCardType = splitArray[2];
         	
         	legendRoom = legendRoom.trim();
-        	legendCardStuff = legendCardStuff.trim();
+        	legendCardType = legendCardType.trim();
         	
         	//if the legend has something that is neither a regular room nor a walkway/closet
-        	if(!legendCardStuff.contentEquals("Card") && !legendCardStuff.contentEquals("Other")) {
+        	if(!legendCardType.contentEquals("Card") && !legendCardType.contentEquals("Other")) {
         		throw new BadConfigFormatException("The Cards are Not in your favor");
         	}
 
@@ -148,8 +148,8 @@ public class Board {
 	//loads the map csv file and throws if badly formatted
 	public void loadBoardConfig() throws BadConfigFormatException{
 		Scanner scanner = null;
-		getNumColumns();
-		getNumRows();
+		setNumColumns();
+		setNumRows();
 		if(NumColumns > MAX_BOARD_SIZE || NumRows > MAX_BOARD_SIZE) {
 			throw new BadConfigFormatException("Board size exceeds max board size of "
 				+ MAX_BOARD_SIZE + " in at least one dimension");
@@ -241,7 +241,7 @@ public class Board {
 
 
 	//gets the number of columns in the specified csv file
-	public int getNumColumns() {
+	private int setNumColumns() {
 
 		Scanner scanner = null;
 		List<String> csvList = Arrays.asList();
@@ -281,7 +281,7 @@ public class Board {
 	}
 
 	//counts the number of lines in the text file
-	public int getNumRows() {
+	private int setNumRows() {
 
 		//to be honest we're not sure what we did here and we need to refactor
 		//probably it counts the lines, but it seems like there should be a simpler way than this one
@@ -295,6 +295,7 @@ public class Board {
 		return NumRows;
 	}
 
+	
 	//returns the board cell at (row, column)
 	public BoardCell getCellAt(int row, int column) {
 		return boardCellArray[row][column];
