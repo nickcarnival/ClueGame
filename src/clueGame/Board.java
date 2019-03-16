@@ -17,11 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.TreeSet;
-
 import static java.lang.Math.toIntExact;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class Board {
 
@@ -40,9 +36,7 @@ public class Board {
 
 	private HashMap<Character, String> legendMap = new HashMap<Character, String>();
 	
-	//THE ALMIGHTY 2D ARRAY OF BOARD CELLS!!!!!!!!!!!!!
 	private BoardCell[][] boardCellArray;
-	//THE END OF THE ALMIGHTY 2D ARRAY OF BOARD CELLS :(
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -63,6 +57,10 @@ public class Board {
 
 	//calls two other methods that throw exceptions for JUnit
 	//these methods load the config files into local variables
+
+	/*///////////////////////////////////////////////////////////////////////////////////////////////////
+	/* Room Config Methods 
+	/*///////////////////////////////////////////////////////////////////////////////////////////////////
 	public void initialize() {
 
 		try {
@@ -71,6 +69,9 @@ public class Board {
 
 			loadRoomConfig();
 			loadBoardConfig();
+
+			//now that we have all our board cells, we can calculate each of their AdjacencyLists
+			calcAdjacencies();
 		} catch (BadConfigFormatException e) {
 			System.out.println("Unable to initialize the board");
 		}
@@ -78,7 +79,6 @@ public class Board {
 	}
 	
 
-	//loads in the legend file data
 	public void loadRoomConfig() throws BadConfigFormatException{
 		//these two functions write to NumRows and NumColumns variables
 		setNumRows();
@@ -233,8 +233,6 @@ public class Board {
 					}
 				}
 			}		
-			//now that we have all our board cells, we can calculate each of their AdjacencyLists
-			calcAdjacencies();
 		}
 	}
 
@@ -243,6 +241,10 @@ public class Board {
 		return legendMap;
 	}
 
+
+	/*///////////////////////////////////////////////////////////////////////////////////////////////////
+	/* Set Board Dimensions Methods 
+	/*///////////////////////////////////////////////////////////////////////////////////////////////////
 
 	//gets the number of columns in the specified csv file
 	private int setNumColumns() {
@@ -283,6 +285,10 @@ public class Board {
 		NumColumns = csvList.size();
 		return NumColumns;
 	}
+	
+	public int getNumColumns() {
+		return setNumColumns();
+	}
 
 	//counts the number of lines in the text file
 	private int setNumRows() {
@@ -299,7 +305,15 @@ public class Board {
 		return NumRows;
 	}
 
+	public int getNumRows() {
+		return setNumRows();
+	}
 	
+
+	/*///////////////////////////////////////////////////////////////////////////////////////////////////
+	/* Board Adjacency Methods 
+	/*///////////////////////////////////////////////////////////////////////////////////////////////////
+
 	//returns the board cell at (row, column)
 	public BoardCell getCellAt(int row, int column) {
 		return boardCellArray[row][column];
@@ -429,14 +443,6 @@ public class Board {
 	//getter for targets list. MUST BE CALLED AFTER calcTargets, otherwise will be a null pointer
 	public Set<BoardCell> getTargets() {
 		return targets;
-	}
-
-	//contains test setup code so we can copy from tests if we want to have output inside a test
-	public static void main(String[] args) {
-		Board board ;
-		board = Board.getInstance();
-		board.setConfigFiles("data/testsMap.csv", "data/rooms.txt");
-		board.initialize();
 	}
 
 }
