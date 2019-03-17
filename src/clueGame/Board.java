@@ -74,12 +74,14 @@ public class Board {
 			calcAdjacencies();
 		} catch (BadConfigFormatException e) {
 			System.out.println("Unable to initialize the board");
+		} catch (FileNotFoundException e) {
+			System.out.println("A specified file was not found");
 		}
 
 	}
 	
 
-	public void loadRoomConfig() throws BadConfigFormatException{
+	public void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException {
 		//these two functions write to NumRows and NumColumns variables
 		setNumRows();
 		setNumColumns();
@@ -91,12 +93,7 @@ public class Board {
 		boardCellArray = new BoardCell[numRows][numColumns];
 		
 		//Get scanner instance
-        Scanner scanner = null;
-		try {
-			scanner = new Scanner(new File(legendFile));
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		}
+		Scanner scanner = new Scanner(new File(legendFile));
          
         //Set the delimiter used in file
         scanner.useDelimiter(COMMA);
@@ -117,11 +114,7 @@ public class Board {
         String[] splitArray = new String[3];
 
         //opens the legend file
-        try {
-			scanner = new Scanner(new File(legendFile));
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		}
+		scanner = new Scanner(new File(legendFile));
         //iterates through each line of the legend file and adds it to the legendMap
         for(int i = 0; i < count; i ++) {
         	valueArray[i] = scanner.nextLine();
@@ -136,6 +129,7 @@ public class Board {
         	
         	//if the legend has something that is neither a regular room nor a walkway/closet
         	if(!legendCardType.contentEquals("Card") && !legendCardType.contentEquals("Other")) {
+        		scanner.close();
         		throw new BadConfigFormatException("The Cards are Not in your favor");
         	}
 
