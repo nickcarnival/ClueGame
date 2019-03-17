@@ -295,16 +295,20 @@ public class Board {
 
 	//counts the number of lines in the text file
 	private int setNumRows() {
-
-		//to be honest we're not sure what we did here and we need to refactor
-		//probably it counts the lines, but it seems like there should be a simpler way than this one
-		long longArray = new Long(1);
-		Path path = Paths.get(LayoutFile);
+		Scanner scanner = null;
 		try {
-			longArray = Files.lines(path).count();
-		} catch (IOException e) {
-		}		
-		numRows = toIntExact(longArray);
+			scanner = new Scanner(new File(LayoutFile));
+			numRows = 0;
+			String line = null;
+			while(scanner.hasNextLine()) {
+				line = scanner.nextLine();
+				numRows++;
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			scanner.close();
+		}
 		return numRows;
 	}
 
@@ -312,7 +316,6 @@ public class Board {
 		return numRows;
 	}
 	
-
 	/*///////////////////////////////////////////////////////////////////////////////////////////////////
 	/* Board Adjacency Methods 
 	/*///////////////////////////////////////////////////////////////////////////////////////////////////
