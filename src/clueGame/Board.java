@@ -23,8 +23,8 @@ public class Board {
 
 
 	public static final int MAX_BOARD_SIZE = 50;
-	private String LayoutFile;
-	private String LegendFile;
+	private String layoutFile;
+	private String legendFile;
 	private static final String COMMA = ",";
 
 	private int numRows = 0;
@@ -50,8 +50,8 @@ public class Board {
 	//sets the config file variables
 	public void setConfigFiles(String layout, String legend) {
 		//test if the layout file is the correct length
-		this.LayoutFile = layout;
-		this.LegendFile = legend;
+		this.layoutFile = layout;
+		this.legendFile = legend;
 	}
 
 
@@ -93,7 +93,7 @@ public class Board {
 		//Get scanner instance
         Scanner scanner = null;
 		try {
-			scanner = new Scanner(new File(LegendFile));
+			scanner = new Scanner(new File(legendFile));
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
@@ -118,7 +118,7 @@ public class Board {
 
         //opens the legend file
         try {
-			scanner = new Scanner(new File(LegendFile));
+			scanner = new Scanner(new File(legendFile));
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
@@ -167,7 +167,7 @@ public class Board {
 		//loads the csv if the columns are proper
 		} else {
 			try {
-				scanner = new Scanner(new File(LayoutFile));
+				scanner = new Scanner(new File(layoutFile));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -255,7 +255,7 @@ public class Board {
 		Scanner scanner = null;
 		List<String> csvList = Arrays.asList();
 		try {
-			scanner = new Scanner(new File(LayoutFile));
+			scanner = new Scanner(new File(layoutFile));
 
 			ArrayList<Integer> countArray = new ArrayList<Integer>();
 			//go through the layout file, taking note of how long each line is
@@ -297,7 +297,7 @@ public class Board {
 	private int setNumRows() {
 		Scanner scanner = null;
 		try {
-			scanner = new Scanner(new File(LayoutFile));
+			scanner = new Scanner(new File(layoutFile));
 			numRows = 0;
 			String line = null;
 			while(scanner.hasNextLine()) {
