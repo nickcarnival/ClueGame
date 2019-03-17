@@ -290,7 +290,7 @@ public class Board {
 	}
 	
 	public int getNumColumns() {
-		return setNumColumns();
+		return numColumns;
 	}
 
 	//counts the number of lines in the text file
@@ -309,7 +309,7 @@ public class Board {
 	}
 
 	public int getNumRows() {
-		return setNumRows();
+		return numRows;
 	}
 	
 
@@ -436,12 +436,15 @@ public class Board {
 
 	//sets up call to recursive findAllTargets function
 	public void calcTargets(int x, int y, int pathLength) {
-		//set up data structures needed by findAllTargets
+		BoardCell startCell = boardCellArray[x][y];
+		calcTargets(startCell, pathLength);
+	}
+	
+	public void calcTargets(BoardCell b, int pathLength) {
 		targets = new HashSet<BoardCell>();
 		visited = new HashSet<BoardCell>();
-		BoardCell startCell = boardCellArray[x][y];
-		visited.add(startCell);
-		findAllTargets(startCell, pathLength);
+		visited.add(b);
+		findAllTargets(b, pathLength);
 	}
 
 	//getter for targets list. MUST BE CALLED AFTER calcTargets, otherwise will be a null pointer
