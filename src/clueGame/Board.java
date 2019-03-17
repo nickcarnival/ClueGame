@@ -27,8 +27,8 @@ public class Board {
 	private String LegendFile;
 	private static final String COMMA = ",";
 
-	private int NumRows = 0;
-	private int NumColumns = 0;
+	private int numRows = 0;
+	private int numColumns = 0;
 	
 	private Map<BoardCell, Set<BoardCell>> adjacencyMatrix;
 	private Set<BoardCell> visited;
@@ -84,11 +84,11 @@ public class Board {
 		setNumRows();
 		setNumColumns();
 		//-1 is an error state for NumColumns
-		if(NumColumns == -1) {
+		if(numColumns == -1) {
 			System.out.println("The Bad Format Has Been Thrown");
 			throw new BadConfigFormatException("Bad Columns");
 		}
-		boardCellArray = new BoardCell[NumRows][NumColumns];
+		boardCellArray = new BoardCell[numRows][numColumns];
 		
 		//Get scanner instance
         Scanner scanner = null;
@@ -154,13 +154,13 @@ public class Board {
 		setNumColumns();
 		setNumRows();
 
-		if(NumColumns > MAX_BOARD_SIZE || NumRows > MAX_BOARD_SIZE) {
+		if(numColumns > MAX_BOARD_SIZE || numRows > MAX_BOARD_SIZE) {
 			throw new BadConfigFormatException("Board size exceeds max board size of "
 				+ MAX_BOARD_SIZE + " in at least one dimension");
 		}
 
 		//numColumns will be -1 if the columns are formatted improperly
-		if(NumColumns == -1) {
+		if(numColumns == -1) {
 			System.out.println("threw bad column format");
 			throw new BadConfigFormatException("Bad column format");
 
@@ -173,18 +173,18 @@ public class Board {
 			}
 
 			//gridLine should store every line in the csv file
-			String[] gridLine = new String[NumRows];
+			String[] gridLine = new String[numRows];
 
 			//stores a line of the file without commas
-			String[] cleanedGridLine = new String[NumColumns];
+			String[] cleanedGridLine = new String[numColumns];
 
 			//goes through every column in the csv file and scans the entire line
-			for(int row = 0; row < NumRows; row++) {
+			for(int row = 0; row < numRows; row++) {
 				gridLine[row] = scanner.nextLine();
 				cleanedGridLine = gridLine[row].split(COMMA);
 
 				//scans each string and removes the commas
-				for(int column = 0; column < NumColumns; column++) {
+				for(int column = 0; column < numColumns; column++) {
 					//create a new board cell at a certain location with its char
 					boardCellArray[row][column] = new BoardCell(row,column);
 
@@ -275,8 +275,8 @@ public class Board {
 			*/
 			for(int i = 1; i < countArray.size(); i++) {
 				if(countArray.get(i) != countArray.get(i-1)) {
-					NumColumns = -1;
-					return NumColumns;
+					numColumns = -1;
+					return numColumns;
 				}
 			}
 		} catch (FileNotFoundException e) {
@@ -285,8 +285,8 @@ public class Board {
 		} finally {
 			scanner.close();
 		}
-		NumColumns = csvList.size();
-		return NumColumns;
+		numColumns = csvList.size();
+		return numColumns;
 	}
 	
 	public int getNumColumns() {
@@ -304,8 +304,8 @@ public class Board {
 			longArray = Files.lines(path).count();
 		} catch (IOException e) {
 		}		
-		NumRows = toIntExact(longArray);
-		return NumRows;
+		numRows = toIntExact(longArray);
+		return numRows;
 	}
 
 	public int getNumRows() {
@@ -336,9 +336,9 @@ public class Board {
 		//creates a hash map to store each cells set of adjacencies
 		adjacencyMatrix = new HashMap<BoardCell, Set<BoardCell>>();
 		//for every row
-		for (int row = 0; row < NumRows; row++) {
+		for (int row = 0; row < numRows; row++) {
 			//for every column
-			for (int column = 0; column < NumColumns; column++) {
+			for (int column = 0; column < numColumns; column++) {
 				//put the current cell into the key of the hash map
 				adjacencyMatrix.put(boardCellArray[row][column], new HashSet<BoardCell>());
 				//if this cell is a walkway we will check its adjacencies this way:
@@ -358,13 +358,13 @@ public class Board {
 							adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row][column-1]);
 						}
 					}
-					if (row < NumRows - 1) {
+					if (row < numRows - 1) {
 						if (boardCellArray[row+1][column].isWalkway() ||
 								boardCellArray[row+1][column].getDoorDirection() == DoorDirection.UP) {
 							adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row+1][column]);
 						}
 					}
-					if (column < NumColumns - 1) {
+					if (column < numColumns - 1) {
 						if (boardCellArray[row][column+1].isWalkway() ||
 								boardCellArray[row][column+1].getDoorDirection() == DoorDirection.LEFT) {
 							adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row][column+1]);
@@ -388,14 +388,14 @@ public class Board {
 						}
 						break;
 					case RIGHT:
-						if (column < NumColumns - 1) {
+						if (column < numColumns - 1) {
 							if(boardCellArray[row][column+1].isWalkway()) {
 								adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row][column+1]);
 							}
 						}
 						break;
 					case DOWN:
-						if (row < NumRows - 1) {
+						if (row < numRows - 1) {
 							if(boardCellArray[row+1][column].isWalkway()) {
 								adjacencyMatrix.get(boardCellArray[row][column]).add(boardCellArray[row+1][column]);
 							}
