@@ -9,6 +9,7 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -20,7 +21,7 @@ public class gameSetupTests {
 	private static Board board;
 	// This runs before every test 
 	
-	@BeforeClass
+	@Before
 	public static void setUp() {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
@@ -69,6 +70,8 @@ public class gameSetupTests {
 	/*************************************************************
 	 * Testing on the Deck of Cards 
 	 *************************************************************/
+	
+	
     Load/create the deck of cards
     Dealing the cards
 	
