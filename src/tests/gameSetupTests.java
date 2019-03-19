@@ -30,11 +30,45 @@ public class gameSetupTests {
 		
 	}
 	
-	//Tests that the people exist
+	/*************************************************************
+	 *  Testing the Player's Existence
+	 *************************************************************/
+
+	//Tests that the player has the correct name
 	@Test
-	public void testPeopleExistence() {
+	public void playerName() {
 		
 	}
+	
+	//Tests that the player is in the correct location
+	@Test
+	public void humanExistence() {
+		
+	}
+	
+	//Tests that the NPC at location () exists
+	@Test
+	public void testNPC1() {
+		
+	}
+	
+	
+	//Tests that the NPC at location () exists
+	@Test
+	public void testNPC2() {
+		
+	}
+	
+	
+	//Tests that the NPC at location () exists
+	@Test
+	public void testNPC3() {
+		
+	}
+
+	/*************************************************************
+	 * Testing on the Deck of Cards 
+	 *************************************************************/
     Load/create the deck of cards
     Dealing the cards
 	
