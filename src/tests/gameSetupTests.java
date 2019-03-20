@@ -1,5 +1,7 @@
 package tests;
 
+import static org.junit.Assert.assertEquals;
+
 /*
  * This JUnit test, tests the the people are loaded properly,
  * that the deck of cards is both loaded and created properly,
@@ -7,13 +9,12 @@ package tests;
  *
 */
 
-import static org.junit.Assert.*;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import clueGame.Board;
+import clueGame.HumanPlayer;
 
 public class gameSetupTests {
 
@@ -22,7 +23,7 @@ public class gameSetupTests {
 	// This runs before every test 
 	
 	@Before
-	public static void setUp() {
+	public  void setUp() {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
@@ -38,6 +39,10 @@ public class gameSetupTests {
 	//Tests that the player has the correct name
 	@Test
 	public void playerName() {
+		//The first player name is Kernel Mustard
+		HumanPlayer player = new HumanPlayer();
+		String playerName = HumanPlayer.getName();
+		assertEquals("Kernel Mustard", playerName);
 		
 	}
 	
@@ -72,8 +77,8 @@ public class gameSetupTests {
 	 *************************************************************/
 	
 	
-    Load/create the deck of cards
-    Dealing the cards
+//    Load/create the deck of cards
+//    Dealing the cards
 	
 	
 }

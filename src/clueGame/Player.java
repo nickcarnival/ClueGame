@@ -26,4 +26,9 @@ public class Player {
 	public Card disproveSuggestion(Solution suggestion) {
 		return new Card();
 	}
+
+	public static String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

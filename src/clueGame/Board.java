@@ -19,6 +19,8 @@ import java.util.Scanner;
 import java.util.Set;
 import static java.lang.Math.toIntExact;
 
+//we use the same scanner method for every file, 
+//we should probably make a method called "loadFile()"
 public class Board {
 
 
@@ -48,19 +50,16 @@ public class Board {
 	}
 	
 	//sets the config file variables
-	public void setConfigFiles(String layout, String legend) {
+	public void setConfigFiles(String layout, String legend ) {
 		//test if the layout file is the correct length
 		this.layoutFile = layout;
 		this.legendFile = legend;
 	}
 
 
-	//calls two other methods that throw exceptions for JUnit
-	//these methods load the config files into local variables
-
 	/*///////////////////////////////////////////////////////////////////////////////////////////////////
-	/* Room Config Methods 
-	/*///////////////////////////////////////////////////////////////////////////////////////////////////
+	 * Config Methods 
+	*///////////////////////////////////////////////////////////////////////////////////////////////////
 	public void initialize() {
 
 		try {
@@ -69,6 +68,9 @@ public class Board {
 
 			loadRoomConfig();
 			loadBoardConfig();
+
+			loadPlayers();
+			loadCards();
 
 			//now that we have all our board cells, we can calculate each of their AdjacencyLists
 			calcAdjacencies();
@@ -80,7 +82,30 @@ public class Board {
 
 	}
 	
+	/*///////////////////////////////////////////////////////////////////////////////////////////////////
+	 * Player Config Methods 
+	*///////////////////////////////////////////////////////////////////////////////////////////////////
+	public void loadPlayers() throws BadConfigFormatException, FileNotFoundException{
+		String playerConfigFile = "playerConfig.txt";
+		Scanner scanner = new Scanner(new File(playerConfigFile));
+		
+		scanner.useDelimiter(COMMA);
 
+	}
+
+	/*///////////////////////////////////////////////////////////////////////////////////////////////////
+	 * Card Config Methods 
+	*///////////////////////////////////////////////////////////////////////////////////////////////////
+	public void loadCards() throws BadConfigFormatException, FileNotFoundException{ 
+		String cardConfigFile = "cardConfig.txt";
+		Scanner scanner = new Scanner(new File(cardConfigFile));
+		
+		scanner.useDelimiter(COMMA);
+
+	}
+	/*///////////////////////////////////////////////////////////////////////////////////////////////////
+	 * Room Config Methods 
+	*///////////////////////////////////////////////////////////////////////////////////////////////////
 	public void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException {
 		//these two functions write to NumRows and NumColumns variables
 		setNumRows();
@@ -240,8 +265,8 @@ public class Board {
 
 
 	/*///////////////////////////////////////////////////////////////////////////////////////////////////
-	/* Set Board Dimensions Methods 
-	/*///////////////////////////////////////////////////////////////////////////////////////////////////
+	 * Set Board Dimensions Methods 
+	*///////////////////////////////////////////////////////////////////////////////////////////////////
 
 	//gets the number of columns in the specified csv file
 	private int setNumColumns() {
@@ -293,9 +318,7 @@ public class Board {
 		try {
 			scanner = new Scanner(new File(layoutFile));
 			numRows = 0;
-			String line = null;
 			while(scanner.hasNextLine()) {
-				line = scanner.nextLine();
 				numRows++;
 			}
 		} catch (FileNotFoundException e) {
@@ -311,8 +334,8 @@ public class Board {
 	}
 	
 	/*///////////////////////////////////////////////////////////////////////////////////////////////////
-	/* Board Adjacency Methods 
-	/*///////////////////////////////////////////////////////////////////////////////////////////////////
+	 * Board Adjacency Methods 
+	*///////////////////////////////////////////////////////////////////////////////////////////////////
 
 	//returns the board cell at (row, column)
 	public BoardCell getCellAt(int row, int column) {
