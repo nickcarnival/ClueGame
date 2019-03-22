@@ -39,13 +39,17 @@ public class gameSetupTests {
 	//Tests that the player has the correct name
 	@Test
 	public void playerName() {
-//		//The first player name is Kernel Mustard
-//		HumanPlayer player = new HumanPlayer();
-//		String playerName = HumanPlayer.getName();
-//		assertEquals("Kernel Mustard", playerName);
+		//The first player name is Kernel Mustard
+		HumanPlayer player = new HumanPlayer("Yellow", "Kernel Mustard");
+		String playerName = player.getName();
+		assertEquals("Kernel Mustard", playerName);
 		
 	}
 	
+	@Test
+	public void playerColor() {
+		
+	}
 	//Tests that the player is in the correct location
 	@Test
 	public void humanExistence() {

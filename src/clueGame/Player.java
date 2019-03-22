@@ -10,6 +10,11 @@ public class Player {
 	private Color color;
 	private ArrayList<Card> myCards;
 	private ArrayList<Card> seenCards;
+	
+	public Player(String color, String name) {
+		this.playerName = name;
+		this.color = convertColor(color);
+	}
 
 	// Be sure to trim the color, we don't want spaces around the name 
 	public Color convertColor(String strColor) { 
@@ -27,8 +32,9 @@ public class Player {
 		return new Card();
 	}
 
-	public static String getName() {
+
+	public String getName() {
 		// TODO Auto-generated method stub
-		return null;
+		return playerName;
 	}
 }
