@@ -319,8 +319,10 @@ public class Board {
 		try {
 			scanner = new Scanner(new File(layoutFile));
 			numRows = 0;
+			String line = "";
 			while(scanner.hasNextLine()) {
 				numRows++;
+				line = scanner.nextLine();
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
