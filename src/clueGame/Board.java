@@ -86,7 +86,7 @@ public class Board {
 	 * Player Config Methods 
 	*///////////////////////////////////////////////////////////////////////////////////////////////////
 	public void loadPlayers() throws BadConfigFormatException, FileNotFoundException{
-		String playerConfigFile = "playerConfig.txt";
+		String playerConfigFile = "data/playerConfig.txt";
 		Scanner scanner = new Scanner(new File(playerConfigFile));
 		
 		scanner.useDelimiter(COMMA);
@@ -97,7 +97,7 @@ public class Board {
 	 * Card Config Methods 
 	*///////////////////////////////////////////////////////////////////////////////////////////////////
 	public void loadCards() throws BadConfigFormatException, FileNotFoundException{ 
-		String cardConfigFile = "cardConfig.txt";
+		String cardConfigFile = "data/cards.csv";
 		Scanner scanner = new Scanner(new File(cardConfigFile));
 		
 		scanner.useDelimiter(COMMA);
