@@ -15,4 +15,11 @@ public class Card {
 	public boolean equals() {
 		return false;
 	}
+	public CardType getType() {
+		return type;
+	}
+
+	public String getName() {
+		return cardName;
+	}
 }

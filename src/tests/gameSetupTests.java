@@ -18,6 +18,7 @@ import org.junit.Test;
 
 import clueGame.Board;
 import clueGame.Card;
+import clueGame.CardType;
 import clueGame.HumanPlayer;
 
 public class gameSetupTests {
@@ -84,6 +85,18 @@ public class gameSetupTests {
 		assertEquals(9, roomList.size());
 	}
 	
+	@Test
+	public void testCardTypes() {
+		
+		ArrayList<Card> weaponList = board.getWeaponCards();
+		assertEquals(CardType.WEAPON, weaponList.get(0).getType());
+		
+		ArrayList<Card> peopleList = board.getPeopleCards();
+		assertEquals(CardType.PERSON, peopleList.get(0).getType());
+
+		ArrayList<Card> roomList = board.getRoomCards();
+		assertEquals(CardType.ROOM, roomList.get(0).getType());
+	}
 	
 //    Load/create the deck of cards
 //    Dealing the cards
