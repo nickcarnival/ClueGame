@@ -5,10 +5,6 @@ package clueGame;
  */
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
-import static java.lang.Math.toIntExact;
 
 //we use the same scanner method for every file, 
 //we should probably make a method called "loadFile()"
@@ -39,6 +34,10 @@ public class Board {
 	private HashMap<Character, String> legendMap = new HashMap<Character, String>();
 	
 	private BoardCell[][] boardCellArray;
+
+	ArrayList<Card> weaponCardArray;
+	ArrayList<Card> roomCardArray;
+	ArrayList<Card> peopleCardArray;
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -99,8 +98,56 @@ public class Board {
 	public void loadCards() throws BadConfigFormatException, FileNotFoundException{ 
 		String cardConfigFile = "data/cards.csv";
 		Scanner scanner = new Scanner(new File(cardConfigFile));
+
+		String cardTypeString;
+		CardType cardType;
+		String cardName;
 		
-		scanner.useDelimiter(COMMA);
+		int lineCount = 0;
+
+		while(scanner.hasNextLine()) {
+			String line = scanner.nextLine();
+			lineCount ++;
+		}
+
+		//this stores every line of the file
+		String[] arrayOfLines = new String[lineCount];
+
+		//this will hold all of the cards and their types
+		peopleCardArray = new ArrayList<Card>();
+		weaponCardArray = new ArrayList<Card>();
+		roomCardArray = new ArrayList<Card>();
+
+		while(scanner.hasNextLine()) {
+
+			String currentLine = scanner.nextLine();
+			String[] cleanedLine = currentLine.split(COMMA);
+
+			cardName = cleanedLine[0];
+			cardTypeString = cleanedLine[1];
+
+			switch (cardTypeString) {
+				case "weapon":
+					cardType = CardType.WEAPON;
+					Card weaponCard = new Card(cardName, cardType); 
+					weaponCardArray.add(weaponCard);
+					break;
+				case "room":
+					cardType = CardType.ROOM;
+					Card roomCard = new Card(cardName, cardType); 
+					roomCardArray.add(roomCard);
+					break;
+				case "person":
+					cardType = CardType.PERSON;
+					Card personCard = new Card(cardName, cardType); 
+					peopleCardArray.add(personCard);
+					break;
+				default:
+					//for debugging so that we don't have null
+					cardType = CardType.NONE;
+					break;
+			}
+		}
 		scanner.close();
 
 	}

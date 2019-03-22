@@ -68,6 +68,10 @@ public class gameSetupTests {
 	/*************************************************************
 	 * Testing on the Deck of Cards 
 	 *************************************************************/
+	@Test
+	public void testCardTypes() {
+		
+	}
 	
 	
 //    Load/create the deck of cards
