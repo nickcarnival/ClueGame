@@ -95,6 +95,19 @@ public class Board {
 	/*///////////////////////////////////////////////////////////////////////////////////////////////////
 	 * Card Config Methods 
 	*///////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public ArrayList<Card> getWeaponCards() {
+		return weaponCardArray;
+	}
+
+	public ArrayList<Card> getPeopleCards() {
+		return peopleCardArray;
+	}
+
+	public ArrayList<Card> getRoomCards() {
+		return roomCardArray;
+	}
+
 	public void loadCards() throws BadConfigFormatException, FileNotFoundException{ 
 		String cardConfigFile = "data/cards.csv";
 		Scanner scanner = new Scanner(new File(cardConfigFile));
@@ -106,6 +119,7 @@ public class Board {
 		int lineCount = 0;
 
 		while(scanner.hasNextLine()) {
+			//this is necessary
 			String line = scanner.nextLine();
 			lineCount ++;
 		}
@@ -118,14 +132,15 @@ public class Board {
 		weaponCardArray = new ArrayList<Card>();
 		roomCardArray = new ArrayList<Card>();
 
+
+		scanner = new Scanner(new File(cardConfigFile));
 		while(scanner.hasNextLine()) {
 
 			String currentLine = scanner.nextLine();
 			String[] cleanedLine = currentLine.split(COMMA);
 
-			cardName = cleanedLine[0];
-			cardTypeString = cleanedLine[1];
-
+			cardName = cleanedLine[0].trim();
+			cardTypeString = cleanedLine[1].trim();
 			switch (cardTypeString) {
 				case "weapon":
 					cardType = CardType.WEAPON;
@@ -520,6 +535,12 @@ public class Board {
 	//getter for targets list. MUST BE CALLED AFTER calcTargets, otherwise will be a null pointer
 	public Set<BoardCell> getTargets() {
 		return targets;
+	}
+	
+	public static void main(String[] args) {
+		Board board = new Board();
+		board.setConfigFiles("data/CTest_ClueLayout.csv", "data/CTest_ClueLegend.txt");		
+		board.initialize();
 	}
 
 }

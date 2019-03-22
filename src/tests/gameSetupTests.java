@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.assertEquals;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 /*
  * This JUnit test, tests the the people are loaded properly,
@@ -16,6 +17,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import clueGame.Board;
+import clueGame.Card;
 import clueGame.HumanPlayer;
 
 public class gameSetupTests {
@@ -68,9 +70,18 @@ public class gameSetupTests {
 	/*************************************************************
 	 * Testing on the Deck of Cards 
 	 *************************************************************/
+
+	//tests the size of card arrays
 	@Test
-	public void testCardTypes() {
+	public void testCardArraySize() {
+		ArrayList<Card> weaponList = board.getWeaponCards();
+		assertEquals(6, weaponList.size());
 		
+		ArrayList<Card> peopleList = board.getPeopleCards();
+		assertEquals(6, peopleList.size());
+
+		ArrayList<Card> roomList = board.getRoomCards();
+		assertEquals(9, roomList.size());
 	}
 	
 	
