@@ -98,6 +98,8 @@ public class gameSetupTests {
 		assertEquals(CardType.ROOM, roomList.get(0).getType());
 	}
 	
+	public void testCardNames() {
+	}
 //    Load/create the deck of cards
 //    Dealing the cards
 	
