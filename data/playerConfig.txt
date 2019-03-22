@@ -1,6 +1,6 @@
-Kernel Mustard, Yellow
-Sandy Shrew, Green
-Jack Sparrow, Black
-Gordon Ramsay, White
-Tewordos Subira, Red
-Harry Potter, Blue
+Kernel Mustard, yellow
+Sandy Shrew, green
+Jack Sparrow, black
+Gordon Ramsay, white
+Tewordos Subira, red
+Harry Potter, blue

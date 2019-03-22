@@ -9,5 +9,6 @@ public class HumanPlayer extends Player {
 		// TODO Auto-generated constructor stub
 		super(color, name);
 	}
+
 	
 }
