@@ -104,10 +104,10 @@ public class gameSetupTests {
 		assertEquals("Candlestick", weaponList.get(0).getName());
 		
 		ArrayList<Card> peopleList = board.getPeopleCards();
-		assertEquals(CardType.PERSON, peopleList.get(0).getName());
+		assertEquals("Kernel Mustard", peopleList.get(0).getName());
 
 		ArrayList<Card> roomList = board.getRoomCards();
-		assertEquals(CardType.ROOM, roomList.get(0).getName());
+		assertEquals("Children's Room", roomList.get(0).getName());
 	}
 //    Load/create the deck of cards
 //    Dealing the cards
