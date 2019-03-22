@@ -98,9 +98,10 @@ public class gameSetupTests {
 		assertEquals(CardType.ROOM, roomList.get(0).getType());
 	}
 	
+	@Test
 	public void testCardNames() {
 		ArrayList<Card> weaponList = board.getWeaponCards();
-		assertEquals(CardType.WEAPON, weaponList.get(0).getName());
+		assertEquals("Candlestick", weaponList.get(0).getName());
 		
 		ArrayList<Card> peopleList = board.getPeopleCards();
 		assertEquals(CardType.PERSON, peopleList.get(0).getName());
