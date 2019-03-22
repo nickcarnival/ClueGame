@@ -90,7 +90,7 @@ public class Board {
 		Scanner scanner = new Scanner(new File(playerConfigFile));
 		
 		scanner.useDelimiter(COMMA);
-
+		scanner.close();
 	}
 
 	/*///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -101,6 +101,7 @@ public class Board {
 		Scanner scanner = new Scanner(new File(cardConfigFile));
 		
 		scanner.useDelimiter(COMMA);
+		scanner.close();
 
 	}
 	/*///////////////////////////////////////////////////////////////////////////////////////////////////

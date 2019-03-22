@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 */
 
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import clueGame.Board;
@@ -22,8 +22,8 @@ public class gameSetupTests {
 	private static Board board;
 	// This runs before every test 
 	
-	@Before
-	public  void setUp() {
+	@BeforeClass
+	public static void setUp() {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
