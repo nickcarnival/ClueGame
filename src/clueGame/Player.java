@@ -32,9 +32,25 @@ public class Player {
 		return new Card();
 	}
 
+	public void setLocation(int row, int column) {
+		this.row = row;
+		this.column = column;
+	}
+	
+	public int getRow() {
+		return row;
+	}
+
+	public int getColumn() {
+		return column;
+	}
 
 	public String getName() {
 		// TODO Auto-generated method stub
 		return playerName;
+	}
+	
+	public Color getColor() {
+		return color;
 	}
 }

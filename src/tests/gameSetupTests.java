@@ -2,6 +2,8 @@ package tests;
 
 import static org.junit.Assert.assertEquals;
 
+import java.awt.Color;
+
 /*
  * This JUnit test, tests the the people are loaded properly,
  * that the deck of cards is both loaded and created properly,
@@ -20,6 +22,7 @@ public class gameSetupTests {
 
 	
 	private static Board board;
+	private HumanPlayer kernel = new HumanPlayer("yellow", "Kernel Mustard");
 	// This runs before every test 
 	
 	@BeforeClass
@@ -35,21 +38,7 @@ public class gameSetupTests {
 	/*************************************************************
 	 *  Testing the Player's Existence
 	 *************************************************************/
-
-	//Tests that the player has the correct name
-	@Test
-	public void playerName() {
-		//The first player name is Kernel Mustard
-		HumanPlayer player = new HumanPlayer("Yellow", "Kernel Mustard");
-		String playerName = player.getName();
-		assertEquals("Kernel Mustard", playerName);
-		
-	}
 	
-	@Test
-	public void playerColor() {
-		
-	}
 	//Tests that the player is in the correct location
 	@Test
 	public void humanExistence() {
