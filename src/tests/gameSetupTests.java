@@ -118,7 +118,6 @@ public class gameSetupTests {
 	 * Testing the Solution
 	 *************************************************************/
 	@Test
-	//this method checks that the solution is not NULL
 	public void testSolution() {
 		Solution solution = board.getSolution();
 		assertNotNull(solution);
