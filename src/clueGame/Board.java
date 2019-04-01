@@ -71,9 +71,15 @@ public class Board {
 			loadRoomConfig();
 			loadBoardConfig();
 
+			//loads the players from the 'playerConfig.txt' file
 			loadPlayers();
+			//loads the cards from the 'cards.csv' file
 			loadCards();
 			
+			//deal the cards afterr loading the cards
+			dealCards();
+
+			//sets the card solution
 			setSolution();
 
 			//now that we have all our board cells, we can calculate each of their AdjacencyLists
@@ -89,6 +95,17 @@ public class Board {
 	/*///////////////////////////////////////////////////////////////////////////////////////////////////
 	 * Player Config Methods 
 	*///////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	//deals cards to both the human and the npc's
+	public void dealCards() {
+		//for every person
+		for(int i = 0; i <  peopleCardArray.size(); i++) {
+			//give them their cards and mark those cards as being used
+			
+			
+		}
+	}
+
 	public void loadPlayers() throws BadConfigFormatException, FileNotFoundException{
 		String playerConfigFile = "data/playerConfig.txt";
 		Scanner scanner = new Scanner(new File(playerConfigFile));
@@ -195,9 +212,11 @@ public class Board {
 		scanner.close();
 
 	}
-	/*///////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	/*************************************************************
 	 * Room Config Methods 
-	*///////////////////////////////////////////////////////////////////////////////////////////////////
+	 *************************************************************/
 	public void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException {
 		//these two functions write to NumRows and NumColumns variables
 		setNumRows();

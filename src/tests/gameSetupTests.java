@@ -49,9 +49,9 @@ public class gameSetupTests {
 		
 	}
 	
-	//Tests that the NPC at location () exists
+	//Tests that the NPC at location (1,1) exists
 	@Test
-	public void testNPC1() {
+	public void testComputerPlayer1_1() {
 		
 	}
 	
