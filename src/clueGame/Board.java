@@ -537,10 +537,10 @@ public class Board {
 		return targets;
 	}
 	
-	public static void main(String[] args) {
-		Board board = new Board();
-		board.setConfigFiles("data/CTest_ClueLayout.csv", "data/CTest_ClueLegend.txt");		
-		board.initialize();
-	}
+//	public static void main(String[] args) {
+//		Board board = new Board();
+//		board.setConfigFiles("data/CTest_ClueLayout.csv", "data/CTest_ClueLegend.txt");		
+//		board.initialize();
+//	}
 
 }

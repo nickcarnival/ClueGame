@@ -19,7 +19,25 @@ public class Card {
 		return type;
 	}
 
+	public boolean equals(Object o) {
+		if (o instanceof Card) {
+			Card c = (Card) o;
+			if (this.cardName.equals(c.cardName)) return true;
+		}
+		return false;
+
+	}
+
+	public void setCard(String card) {
+		this.cardName = card;
+	}
 	public String getName() {
 		return cardName;
 	}
+
+	@Override
+	public String toString() {
+		return cardName;
+	}
 }
+ 

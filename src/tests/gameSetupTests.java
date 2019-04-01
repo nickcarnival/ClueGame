@@ -100,16 +100,27 @@ public class gameSetupTests {
 	
 	@Test
 	public void testCardNames() {
+		//checks that the second weapon in the weapon list is the gun
 		ArrayList<Card> weaponList = board.getWeaponCards();
-		assertEquals("Candlestick", weaponList.get(0).getName());
+		assertEquals("Gun", weaponList.get(1).getName());
 		
+		//tests that the last person in cards has the proper name
 		ArrayList<Card> peopleList = board.getPeopleCards();
-		assertEquals("Kernel Mustard", peopleList.get(0).getName());
+		assertEquals("Harry Potter", peopleList.get(5).getName());
 
+		//tests that the first room in the list of rooms is the correct room
 		ArrayList<Card> roomList = board.getRoomCards();
 		assertEquals("Children's Room", roomList.get(0).getName());
 	}
-//    Load/create the deck of cards
+	
+	/*************************************************************
+	 * Testing the Solution
+	 *************************************************************/
+	@Test
+	public void testSolution() {
+		
+	}
+
 //    Dealing the cards
 	
 	
