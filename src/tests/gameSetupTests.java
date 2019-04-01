@@ -26,6 +26,7 @@ import clueGame.Solution;
 public class gameSetupTests {
 	
 	private static Board board;
+
 	private HumanPlayer kernel = new HumanPlayer("yellow", "Kernel Mustard");
 	// This runs before every test 
 	

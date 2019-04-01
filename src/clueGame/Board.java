@@ -1,10 +1,12 @@
 package clueGame;
+import java.awt.Color;
 /*
  * Jordan Newport
  * Nicholas Carnival
  */
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.DateFormat.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -98,23 +100,30 @@ public class Board {
 	/*///////////////////////////////////////////////////////////////////////////////////////////////////
 	 * Player Config Methods 
 	*///////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	//deals cards to both the human and the npc's
-	public void dealCards() {
-
-		for(int i = 0; i <  peopleCardArray.size(); i++) {
-			//give them their cards and mark those cards as being used
-			Player currentPlayer = peopleCardArray.get(i);
-			allPlayers.add(currentPlayer);
-		}
-	}
 
 	public void loadPlayers() throws BadConfigFormatException, FileNotFoundException{
 		String playerConfigFile = "data/playerConfig.txt";
 		Scanner scanner = new Scanner(new File(playerConfigFile));
 		
 		scanner.useDelimiter(COMMA);
+
+        while (scanner.hasNextLine()) {
+        	String currentLine = scanner.nextLine();
+        	String[] splitLine = currentLine.split(COMMA);
+        	
+        	String playerName = splitLine[0].trim();
+        	String playerColor = splitLine[1].trim();
+
+        	Player player = new ComputerPlayer(playerColor, playerName); 
+        	System.out.println(player);
+        }
+
 		scanner.close();
+	}
+
+	//deals cards to both the human and the npc's
+	public void dealCards() {
+
 	}
 
 	/*///////////////////////////////////////////////////////////////////////////////////////////////////

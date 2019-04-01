@@ -58,4 +58,9 @@ public abstract class Player {
 	public Color getColor() {
 		return color;
 	}
+	public String toString() {
+		return ("Name: " + getName() + " Color: " + this.color);
+		
+	}
+	
 }
