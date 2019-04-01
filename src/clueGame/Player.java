@@ -30,6 +30,13 @@ public abstract class Player {
 	} 
 	public abstract Card disproveSuggestion(Solution suggestion);
 
+	public void addCard(Card card) {
+		this.seenCards.add(card);
+		this.myCards.add(card);
+	}
+	public void seeCard(Card card) {
+		this.seenCards.add(card);
+	}
 	public void setLocation(int row, int column) {
 		this.row = row;
 		this.column = column;

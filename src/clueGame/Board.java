@@ -39,7 +39,10 @@ public class Board {
 	ArrayList<Card> weaponCardArray;
 	ArrayList<Card> roomCardArray;
 	ArrayList<Card> peopleCardArray;
-	
+
+	//array of all the players
+	ArrayList<Player> allPlayers ;
+
 	Solution solution = new Solution();
 
 	// variable used for singleton pattern
@@ -98,11 +101,11 @@ public class Board {
 	
 	//deals cards to both the human and the npc's
 	public void dealCards() {
-		//for every person
+
 		for(int i = 0; i <  peopleCardArray.size(); i++) {
 			//give them their cards and mark those cards as being used
-			
-			
+			Player currentPlayer = peopleCardArray.get(i);
+			allPlayers.add(currentPlayer);
 		}
 	}
 
