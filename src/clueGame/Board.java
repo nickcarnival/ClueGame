@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -38,6 +39,8 @@ public class Board {
 	ArrayList<Card> weaponCardArray;
 	ArrayList<Card> roomCardArray;
 	ArrayList<Card> peopleCardArray;
+	
+	Solution solution = new Solution();
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -70,6 +73,8 @@ public class Board {
 
 			loadPlayers();
 			loadCards();
+			
+			setSolution();
 
 			//now that we have all our board cells, we can calculate each of their AdjacencyLists
 			calcAdjacencies();
@@ -95,6 +100,32 @@ public class Board {
 	/*///////////////////////////////////////////////////////////////////////////////////////////////////
 	 * Card Config Methods 
 	*///////////////////////////////////////////////////////////////////////////////////////////////////
+
+	//This creates a new solution for each game
+	public void setSolution() {
+		
+		String solPerson;
+		String solWeapon;
+		String solRoom;
+		
+		//generate the random solution
+		Random random = new Random();
+		int randomPerson = random.nextInt((peopleCardArray.size()) ) ;
+		int randomWeapon = random.nextInt((weaponCardArray.size()) ) ;
+		int randomRoom = random.nextInt((roomCardArray.size()) ) ;
+
+		solWeapon = weaponCardArray.get(randomWeapon).getName();
+		solPerson = peopleCardArray.get(randomPerson).getName();
+		solRoom = roomCardArray.get(randomWeapon).getName();
+
+		// Solution(weapon, person, room)
+		solution = new Solution(solWeapon, solPerson, solRoom);
+
+	}
+	
+	public Solution getSolution() {
+		return solution;
+	}
 
 	public ArrayList<Card> getWeaponCards() {
 		return weaponCardArray;
@@ -158,8 +189,6 @@ public class Board {
 					peopleCardArray.add(personCard);
 					break;
 				default:
-					//for debugging so that we don't have null
-					cardType = CardType.NONE;
 					break;
 			}
 		}

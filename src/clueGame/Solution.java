@@ -11,6 +11,14 @@ public class Solution {
 		this.room = room;
 	}
 	
+
+	public Solution() {
+		this.weapon = "solution has no values";
+		this.room = "solution has no values";
+		this.person = "solution has no values";
+	}
+
+
 	@Override 
 	public String toString() {
 		return (person + " " + weapon + " " + room); 

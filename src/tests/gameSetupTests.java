@@ -1,6 +1,7 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -20,9 +21,9 @@ import clueGame.Board;
 import clueGame.Card;
 import clueGame.CardType;
 import clueGame.HumanPlayer;
+import clueGame.Solution;
 
 public class gameSetupTests {
-
 	
 	private static Board board;
 	private HumanPlayer kernel = new HumanPlayer("yellow", "Kernel Mustard");
@@ -117,8 +118,10 @@ public class gameSetupTests {
 	 * Testing the Solution
 	 *************************************************************/
 	@Test
+	//this method checks that the solution is not NULL
 	public void testSolution() {
-		
+		Solution solution = board.getSolution();
+		assertNotNull(solution);
 	}
 
 //    Dealing the cards
