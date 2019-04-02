@@ -168,7 +168,7 @@ public class gameSetupTests {
 			numsOfCards.add(a.size());
 		}
 		for (int i = 1; i < numsOfCards.size(); i++) {
-			if (Math.abs(numsOfCards.get(i) - numsOfCards.get(i-1)) <= 1) {
+			if (Math.abs(numsOfCards.get(i) - numsOfCards.get(i-1)) > 1) {
 				fail("players have non-close numbers of cards");
 			}
 		}
