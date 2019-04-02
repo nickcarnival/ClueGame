@@ -1,3 +1,5 @@
+//Author: Nicholas Carnival
+//Author: Jordan Newport
 package clueGame;
 
 public class Card {
