@@ -55,6 +55,13 @@ public class gameSetupTests {
 	public void humanExistence() {
 
 	}
+	//Tests that there were 6 people loaded
+	@Test
+	public void testNumPeopleLoaded() {
+		ArrayList<Player> players = board.getPlayers();
+		assertEquals(6, players.size());
+		assertEquals(1,0);
+	}
 	
 	//Tests that the first and third NPCs exist and have correct values
 	@Test
@@ -78,20 +85,6 @@ public class gameSetupTests {
 			color = null;
 		}
 		assertEquals(color, players.get(2).getColor());
-	}
-	
-	
-	//Tests that the NPC at location () exists
-	@Test
-	public void testNPC2() {
-		
-	}
-	
-	
-	//Tests that the NPC at location () exists
-	@Test
-	public void testNPC3() {
-		
 	}
 
 	/*************************************************************
