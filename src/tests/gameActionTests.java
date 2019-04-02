@@ -9,10 +9,14 @@ package tests;
  */
 import static org.junit.Assert.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 
 import clueGame.Board;
+import clueGame.BoardCell;
 import clueGame.ComputerPlayer;
 import clueGame.Player;
 
@@ -29,9 +33,11 @@ public class gameActionTests {
 		board.initialize();
 	}
 	public void testSelectTarget() {
+		Set<BoardCell> targets;  
+		targets = board.getTargets();
 		ComputerPlayer NPC = new ComputerPlayer("red", "Jimothy Jenkins");
-
-		
+		NPC.pickLocation(targets);
+		assertEquals(NPC.getLocation());
 	}
 	/*
 		if no rooms in list, select randomly

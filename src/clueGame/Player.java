@@ -8,13 +8,12 @@ import java.lang.reflect.Field;
 import java.util.ArrayList; 
 
 public abstract class Player {
-	private int row;
-	private int column;
 	private String playerName;
 	private Color color;
 	private ArrayList<Card> myCards;
 	private ArrayList<Card> seenCards;
-	
+	private BoardCell location;
+
 	public Player(String color, String name) {
 		this.playerName = name;
 		this.color = convertColor(color);
@@ -43,17 +42,12 @@ public abstract class Player {
 	public void seeCard(Card card) {
 		this.seenCards.add(card);
 	}
-	public void setLocation(int row, int column) {
-		this.row = row;
-		this.column = column;
+	public void setLocation(BoardCell target) {
+		this.location = target;
 	}
 	
-	public int getRow() {
-		return row;
-	}
-
-	public int getColumn() {
-		return column;
+	public BoardCell getLocation() {
+		return this.location;
 	}
 
 	public String getName() {
@@ -69,6 +63,10 @@ public abstract class Player {
 
 	public ArrayList<Card> getMyCards() {
 		return myCards;
+	}
+	
+	public void movePlayer(BoardCell target) {
+		this.location = target;
 	}
 	
 }
