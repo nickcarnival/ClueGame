@@ -11,6 +11,7 @@ import static org.junit.Assert.fail;
 import java.awt.Color;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /*
  * This JUnit test, tests the the people are loaded properly,
@@ -172,6 +173,19 @@ public class gameSetupTests {
 				fail("players have non-close numbers of cards");
 			}
 		}
+	}
+	
+	//test that no card was dealt twice
+	//HashSet cannot store repeated elements, so if a card was dealt twice
+	//then it must appear in the set only once, meaning that the sizes will not be equal
+	@Test
+	public void testCardsDealtOnce() {
+		ArrayList<Card> dealtCards = board.getDealtCards();
+		HashSet<Card> seenCards = new HashSet<Card>();
+		for (Card c : dealtCards) {
+			seenCards.add(c);
+		}
+		assertEquals(dealtCards.size(), seenCards.size());
 	}
 	
 	
