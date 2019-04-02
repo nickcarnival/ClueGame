@@ -42,6 +42,9 @@ public class Board {
 	ArrayList<Card> roomCardArray;
 	ArrayList<Card> peopleCardArray;
 
+	ArrayList<Card> allCards;
+	ArrayList<Card> dealtCards;
+
 	//array of all the players
 	ArrayList<Player> allPlayers ;
 
@@ -123,6 +126,7 @@ public class Board {
 	}
 
 	//deals cards to both the human and the npc's
+	//MUST BE CALLED AFTER SETSOLUTION
 	public void dealCards() {
 
 	}
@@ -151,6 +155,8 @@ public class Board {
 		// Solution(weapon, person, room)
 		solution = new Solution(solWeapon, solPerson, solRoom);
 
+		allCards = new ArrayList<Card>();
+		
 	}
 	
 	public Solution getSolution() {
@@ -600,6 +606,14 @@ public class Board {
 	
 	public ArrayList<Player> getPlayers() {
 		return allPlayers;
+	}
+	
+	public ArrayList<Card> getAllCards() {
+		return allCards;
+	}
+
+	public ArrayList<Card> getDealtCards() {
+		return dealtCards;
 	}
 	
 //	public static void main(String[] args) {

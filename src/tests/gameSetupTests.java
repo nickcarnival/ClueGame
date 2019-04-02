@@ -44,6 +44,7 @@ public class gameSetupTests {
 		// set the file names to use my config files
 		board.setConfigFiles("data/CTest_ClueLayout.csv", "data/CTest_ClueLegend.txt");		
 		board.initialize();
+		board.dealCards();
 	}
 	
 	/*************************************************************
@@ -144,6 +145,15 @@ public class gameSetupTests {
 	}
 
 //    Dealing the cards
+
+	//test dealing of cards: all cards are dealt
+	@Test
+	public void testAllCardsDealt() {
+		ArrayList<Card> allCards = board.getAllCards();
+		ArrayList<Card> dealtCards = board.getDealtCards();
+		assertEquals(0, allCards.size());
+		assertEquals(18, dealtCards.size());
+	}
 	
 	
 }
