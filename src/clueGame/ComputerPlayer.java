@@ -34,6 +34,7 @@ public class ComputerPlayer extends Player {
 			}
 			currentCell = randomCell;
 		}
+		this.location = currentCell;
 		return currentCell;
 	}
 	public BoardCell getLocation() {
