@@ -138,10 +138,10 @@ public class Board {
 		HashSet<Integer> ints = new HashSet<Integer>();
 		Random random = new Random();
 		int currentPlayer = 0;
-		for (int i = 0; i < 18; i++) {
-			int myint = random.nextInt(18);
+		for (int i = 0; i < allCards.size(); i++) {
+			int myint = random.nextInt(allCards.size());
 			while(ints.contains(myint)) {
-				myint = random.nextInt(18);
+				myint = random.nextInt(allCards.size());
 			}
 			allPlayers.get(currentPlayer).addCard(allCards.get(myint));
 			ints.add(myint);
