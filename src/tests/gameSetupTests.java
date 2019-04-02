@@ -1,9 +1,14 @@
+/*
+ * Jordan Newport
+ * Nicholas Carnival
+ */
 package tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.awt.Color;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 /*
@@ -20,6 +25,7 @@ import org.junit.Test;
 import clueGame.Board;
 import clueGame.Card;
 import clueGame.CardType;
+import clueGame.ComputerPlayer;
 import clueGame.HumanPlayer;
 import clueGame.Solution;
 
@@ -37,7 +43,6 @@ public class gameSetupTests {
 		// set the file names to use my config files
 		board.setConfigFiles("data/CTest_ClueLayout.csv", "data/CTest_ClueLegend.txt");		
 		board.initialize();
-		
 	}
 	
 	/*************************************************************
@@ -47,13 +52,31 @@ public class gameSetupTests {
 	//Tests that the player is in the correct location
 	@Test
 	public void humanExistence() {
-		
+
 	}
 	
-	//Tests that the NPC at location (1,1) exists
+	//Tests that the first and third NPCs exist and has correct values
 	@Test
 	public void testComputerPlayer1_1() {
-		
+		ArrayList<ComputerPlayer> players = board.getComputerPlayers();
+		assertEquals("Kernel Mustard", players.get(0).getName());
+		Color color;
+		try {
+			Field field = Class.forName("java.awt.Color").getField("yellow".trim());
+			color = (Color)field.get(null);
+		} catch (Exception e) {
+			color = null;
+		}
+		assertEquals(color, players.get(0).getColor());
+
+		assertEquals("Jack Sparrow", players.get(2).getName());
+		try {
+			Field field = Class.forName("java.awt.Color").getField("black".trim());
+			color = (Color)field.get(null);
+		} catch (Exception e) {
+			color = null;
+		}
+		assertEquals(color, players.get(2).getColor());
 	}
 	
 	
@@ -87,6 +110,7 @@ public class gameSetupTests {
 		assertEquals(9, roomList.size());
 	}
 	
+	//tests the type of card arrays
 	@Test
 	public void testCardTypes() {
 		
@@ -100,6 +124,7 @@ public class gameSetupTests {
 		assertEquals(CardType.ROOM, roomList.get(0).getType());
 	}
 	
+	//tests the names of the first loaded cards
 	@Test
 	public void testCardNames() {
 		//checks that the second weapon in the weapon list is the gun
@@ -118,6 +143,7 @@ public class gameSetupTests {
 	/*************************************************************
 	 * Testing the Solution
 	 *************************************************************/
+	// TODO: do more
 	@Test
 	public void testSolution() {
 		Solution solution = board.getSolution();

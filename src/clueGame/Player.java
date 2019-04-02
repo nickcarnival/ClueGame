@@ -1,3 +1,7 @@
+/*
+ * Jordan Newport
+ * Nicholas Carnival
+ */
 package clueGame;
 import java.awt.Color;  
 import java.lang.reflect.Field;
@@ -51,7 +55,6 @@ public abstract class Player {
 	}
 
 	public String getName() {
-		// TODO Auto-generated method stub
 		return playerName;
 	}
 	

@@ -597,6 +597,10 @@ public class Board {
 		return targets;
 	}
 	
+	public ArrayList<ComputerPlayer> getComputerPlayers() {
+		return new ArrayList<ComputerPlayer>();
+	}
+	
 //	public static void main(String[] args) {
 //		Board board = new Board();
 //		board.setConfigFiles("data/CTest_ClueLayout.csv", "data/CTest_ClueLegend.txt");		
