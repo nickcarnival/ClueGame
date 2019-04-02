@@ -32,7 +32,7 @@ import clueGame.HumanPlayer;
 import clueGame.Player;
 import clueGame.Solution;
 
-public class GameSetupTests {
+public class gameSetupTests {
 	
 	private static Board board;
 
