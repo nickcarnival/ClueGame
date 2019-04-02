@@ -1,3 +1,7 @@
+/*
+ * Jordan Newport
+ * Nicholas Carnival
+ */
 package clueGame;
 
 import java.util.Set;

@@ -1,9 +1,10 @@
-package clueGame;
-import java.awt.Color;
 /*
  * Jordan Newport
  * Nicholas Carnival
  */
+package clueGame;
+import java.awt.Color;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.DateFormat.Field;
