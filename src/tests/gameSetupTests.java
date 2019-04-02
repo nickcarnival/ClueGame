@@ -188,5 +188,4 @@ public class gameSetupTests {
 		assertEquals(dealtCards.size(), seenCards.size());
 	}
 	
-	
 }
