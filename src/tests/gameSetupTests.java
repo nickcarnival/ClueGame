@@ -6,6 +6,7 @@ package tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import java.awt.Color;
 import java.lang.reflect.Field;
@@ -152,6 +153,25 @@ public class gameSetupTests {
 		ArrayList<Card> dealtCards = board.getDealtCards();
 		assertEquals(0, allCards.size());
 		assertEquals(18, dealtCards.size());
+	}
+	
+	//test that each player has about the same number of cards
+	@Test
+	public void testPlayerCardCounts() {
+		ArrayList<ArrayList<Card>> playerCards = new ArrayList<ArrayList<Card>>();
+		ArrayList<Player> players = board.getPlayers();
+		for (Player p: players) {
+			playerCards.add(p.getMyCards());
+		}
+		ArrayList<Integer> numsOfCards = new ArrayList<Integer>();
+		for (ArrayList<Card> a : playerCards) {
+			numsOfCards.add(a.size());
+		}
+		for (int i = 1; i < numsOfCards.size(); i++) {
+			if (Math.abs(numsOfCards.get(i) - numsOfCards.get(i-1)) <= 1) {
+				fail("players have non-close numbers of cards");
+			}
+		}
 	}
 	
 	

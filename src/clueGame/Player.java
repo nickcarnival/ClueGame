@@ -66,5 +66,9 @@ public abstract class Player {
 	public String toString() {
 		return ("Name: " + getName() + " Color: " + this.color);
 	}
+
+	public ArrayList<Card> getMyCards() {
+		return myCards;
+	}
 	
 }
