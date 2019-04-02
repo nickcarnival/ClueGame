@@ -33,7 +33,16 @@ public class gameActionTests {
 		board.initialize();
 	}
 	public void testSelectTarget() {
+		BoardCell cell1 = new BoardCell(0, 0);
+		BoardCell cell2 = new BoardCell(0, 0);
+		BoardCell cell3 = new BoardCell(0, 0);
+
 		Set<BoardCell> targets;  
+
+		targets.add(cell1);
+		targets.add(cell2);
+		targets.add(cell3);
+
 		targets = board.getTargets();
 		ComputerPlayer NPC = new ComputerPlayer("red", "Jimothy Jenkins");
 		NPC.pickLocation(targets);
