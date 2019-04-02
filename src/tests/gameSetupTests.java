@@ -52,11 +52,6 @@ public class gameSetupTests {
 	 *  Testing the Player's Existence
 	 *************************************************************/
 	
-	//Tests that the player is in the correct location
-	@Test
-	public void humanExistence() {
-
-	}
 	//Tests that there were 6 people loaded
 	@Test
 	public void testNumPeopleLoaded() {
@@ -64,7 +59,7 @@ public class gameSetupTests {
 		assertEquals(6, players.size());
 	}
 	
-	//Tests that the first and third NPCs exist and have correct values
+	//Tests that the first and third players exist and have correct values
 	@Test
 	public void testPlayerExistence() {
 		ArrayList<Player> players = board.getPlayers();
@@ -147,7 +142,7 @@ public class gameSetupTests {
 
 //    Dealing the cards
 
-	//test dealing of cards: all cards are dealt
+	//test dealing of cards: all cards are dealt, and none remain to be dealt
 	@Test
 	public void testAllCardsDealt() {
 		ArrayList<Card> allCards = board.getAllCards();
@@ -159,17 +154,20 @@ public class gameSetupTests {
 	//test that each player has about the same number of cards
 	@Test
 	public void testPlayerCardCounts() {
+		// get players and their cards
 		ArrayList<ArrayList<Card>> playerCards = new ArrayList<ArrayList<Card>>();
 		ArrayList<Player> players = board.getPlayers();
 		for (Player p: players) {
 			playerCards.add(p.getMyCards());
 		}
+		// figure out how many cards each player has
 		ArrayList<Integer> numsOfCards = new ArrayList<Integer>();
 		for (ArrayList<Card> a : playerCards) {
 			numsOfCards.add(a.size());
 		}
+		// check that no number of cards is too far apart from the first number of cards
 		for (int i = 1; i < numsOfCards.size(); i++) {
-			if (Math.abs(numsOfCards.get(i) - numsOfCards.get(i-1)) > 1) {
+			if (Math.abs(numsOfCards.get(i) - numsOfCards.get(0)) > 1) {
 				fail("players have non-close numbers of cards");
 			}
 		}

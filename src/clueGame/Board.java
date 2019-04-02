@@ -42,8 +42,8 @@ public class Board {
 	ArrayList<Card> roomCardArray;
 	ArrayList<Card> peopleCardArray;
 
-	ArrayList<Card> allCards;
-	ArrayList<Card> dealtCards;
+	ArrayList<Card> allCards; //cards remaining to be dealt/cards in the "deck"
+	ArrayList<Card> dealtCards; //cards that have been dealt
 
 	//array of all the players
 	ArrayList<Player> allPlayers ;
@@ -125,8 +125,13 @@ public class Board {
 		scanner.close();
 	}
 
-	//deals cards to both the human and the npc's
-	//MUST BE CALLED AFTER SETSOLUTION
+	/*
+	deals cards to all players
+	MUST BE CALLED AFTER SETSOLUTION
+	generates all the numbers from 0 to 17 randomly without repeats (with a set),
+	deals the card at each one to the next player in line, and keeps track
+	of cards that have been dealt and cards that remain to be dealt (none)
+	*/
 	public void dealCards() {
 		dealtCards= new ArrayList<Card>();
 		HashSet<Integer> ints = new HashSet<Integer>();
@@ -166,9 +171,9 @@ public class Board {
 		solPerson = peopleCardArray.get(randomPerson).getName();
 		solRoom = roomCardArray.get(randomRoom).getName();
 
-		// Solution(weapon, person, room)
 		solution = new Solution(solWeapon, solPerson, solRoom);
 
+		// add all cards that are not in the solution to the list of all cards that must be dealt
 		allCards = new ArrayList<Card>();
 		for (int i = 0; i < peopleCardArray.size(); i++) {
 			if (i != randomPerson) {
