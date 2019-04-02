@@ -60,7 +60,6 @@ public class gameSetupTests {
 	public void testNumPeopleLoaded() {
 		ArrayList<Player> players = board.getPlayers();
 		assertEquals(6, players.size());
-		assertEquals(1,0);
 	}
 	
 	//Tests that the first and third NPCs exist and have correct values
