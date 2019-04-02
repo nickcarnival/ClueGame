@@ -158,9 +158,9 @@ public class Board {
 	//This creates a new solution for each game
 	public void setSolution() {
 		
-		String solPerson;
-		String solWeapon;
-		String solRoom;
+		Card solPerson;
+		Card solWeapon;
+		Card solRoom;
 		
 		//generate the random solution
 		Random random = new Random();
@@ -168,9 +168,9 @@ public class Board {
 		int randomWeapon = random.nextInt((weaponCardArray.size()) ) ;
 		int randomRoom = random.nextInt((roomCardArray.size()) ) ;
 
-		solWeapon = weaponCardArray.get(randomWeapon).getName();
-		solPerson = peopleCardArray.get(randomPerson).getName();
-		solRoom = roomCardArray.get(randomRoom).getName();
+		solWeapon = weaponCardArray.get(randomWeapon);
+		solPerson = peopleCardArray.get(randomPerson);
+		solRoom = roomCardArray.get(randomRoom);
 
 		solution = new Solution(solWeapon, solPerson, solRoom);
 

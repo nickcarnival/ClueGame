@@ -5,11 +5,11 @@
 package clueGame;
 
 public class Solution {
-	private String weapon;
-	private String person;
-	private String room;
+	private Card weapon;
+	private Card person;
+	private Card room;
 
-	public Solution(String weapon, String person, String room) {
+	public Solution(Card weapon, Card person, Card room) {
 		this.weapon = weapon;
 		this.person = person;
 		this.room = room;
@@ -17,9 +17,9 @@ public class Solution {
 	
 
 	public Solution() {
-		this.weapon = "solution has no values";
-		this.room = "solution has no values";
-		this.person = "solution has no values";
+		this.weapon = new Card();
+		this.room = new Card();
+		this.person = new Card();
 	}
 
 
