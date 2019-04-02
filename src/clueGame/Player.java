@@ -18,6 +18,8 @@ public abstract class Player {
 	public Player(String color, String name) {
 		this.playerName = name;
 		this.color = convertColor(color);
+		myCards = new ArrayList<Card>();
+		seenCards = new ArrayList<Card>();
 	}
 
 	// Be sure to trim the color, we don't want spaces around the name 
@@ -63,7 +65,6 @@ public abstract class Player {
 	}
 	public String toString() {
 		return ("Name: " + getName() + " Color: " + this.color);
-		
 	}
 	
 }

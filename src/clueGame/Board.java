@@ -84,11 +84,11 @@ public class Board {
 			//loads the cards from the 'cards.csv' file
 			loadCards();
 			
-			//deal the cards afterr loading the cards
-			dealCards();
-
 			//sets the card solution
 			setSolution();
+
+			//deal the cards after loading the cards
+			dealCards();
 
 			//now that we have all our board cells, we can calculate each of their AdjacencyLists
 			calcAdjacencies();
@@ -128,7 +128,21 @@ public class Board {
 	//deals cards to both the human and the npc's
 	//MUST BE CALLED AFTER SETSOLUTION
 	public void dealCards() {
-
+		dealtCards= new ArrayList<Card>();
+		HashSet<Integer> ints = new HashSet<Integer>();
+		Random random = new Random();
+		int currentPlayer = 0;
+		for (int i = 0; i < 18; i++) {
+			int myint = random.nextInt(18);
+			while(ints.contains(myint)) {
+				myint = random.nextInt(18);
+			}
+			allPlayers.get(currentPlayer).addCard(allCards.get(myint));
+			ints.add(myint);
+			dealtCards.add(allCards.get(myint));
+			currentPlayer = (currentPlayer + 1) % allPlayers.size();
+		}
+		allCards = new ArrayList<Card>();
 	}
 
 	/*///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -150,13 +164,27 @@ public class Board {
 
 		solWeapon = weaponCardArray.get(randomWeapon).getName();
 		solPerson = peopleCardArray.get(randomPerson).getName();
-		solRoom = roomCardArray.get(randomWeapon).getName();
+		solRoom = roomCardArray.get(randomRoom).getName();
 
 		// Solution(weapon, person, room)
 		solution = new Solution(solWeapon, solPerson, solRoom);
 
 		allCards = new ArrayList<Card>();
-		
+		for (int i = 0; i < peopleCardArray.size(); i++) {
+			if (i != randomPerson) {
+				allCards.add(peopleCardArray.get(i));
+			}
+		}
+		for (int i = 0; i < weaponCardArray.size(); i++) {
+			if (i != randomWeapon) {
+				allCards.add(weaponCardArray.get(i));
+			}
+		}
+		for (int i = 0; i < roomCardArray.size(); i++) {
+			if (i != randomRoom) {
+				allCards.add(roomCardArray.get(i));
+			}
+		}
 	}
 	
 	public Solution getSolution() {

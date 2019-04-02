@@ -44,7 +44,6 @@ public class gameSetupTests {
 		// set the file names to use my config files
 		board.setConfigFiles("data/CTest_ClueLayout.csv", "data/CTest_ClueLegend.txt");		
 		board.initialize();
-		board.dealCards();
 	}
 	
 	/*************************************************************
