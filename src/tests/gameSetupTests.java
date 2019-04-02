@@ -27,6 +27,7 @@ import clueGame.Card;
 import clueGame.CardType;
 import clueGame.ComputerPlayer;
 import clueGame.HumanPlayer;
+import clueGame.Player;
 import clueGame.Solution;
 
 public class gameSetupTests {
@@ -55,10 +56,10 @@ public class gameSetupTests {
 
 	}
 	
-	//Tests that the first and third NPCs exist and has correct values
+	//Tests that the first and third NPCs exist and have correct values
 	@Test
-	public void testComputerPlayer1_1() {
-		ArrayList<ComputerPlayer> players = board.getComputerPlayers();
+	public void testPlayerExistence() {
+		ArrayList<Player> players = board.getPlayers();
 		assertEquals("Kernel Mustard", players.get(0).getName());
 		Color color;
 		try {

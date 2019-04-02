@@ -104,6 +104,7 @@ public class Board {
 	public void loadPlayers() throws BadConfigFormatException, FileNotFoundException{
 		String playerConfigFile = "data/playerConfig.txt";
 		Scanner scanner = new Scanner(new File(playerConfigFile));
+		allPlayers = new ArrayList<Player>();
 		
 		scanner.useDelimiter(COMMA);
 
@@ -115,7 +116,7 @@ public class Board {
         	String playerColor = splitLine[1].trim();
 
         	Player player = new ComputerPlayer(playerColor, playerName); 
-        	System.out.println(player);
+        	allPlayers.add(player);
         }
 
 		scanner.close();
@@ -597,8 +598,8 @@ public class Board {
 		return targets;
 	}
 	
-	public ArrayList<ComputerPlayer> getComputerPlayers() {
-		return new ArrayList<ComputerPlayer>();
+	public ArrayList<Player> getPlayers() {
+		return allPlayers;
 	}
 	
 //	public static void main(String[] args) {
