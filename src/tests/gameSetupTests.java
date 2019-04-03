@@ -44,7 +44,7 @@ public class gameSetupTests {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
-		board.setConfigFiles("data/CTest_ClueLayout.csv", "data/CTest_ClueLegend.txt");		
+		board.setConfigFiles("data/testsMap.csv", "data/rooms.txt");		
 		board.initialize();
 	}
 	

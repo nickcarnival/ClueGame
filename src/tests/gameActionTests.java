@@ -25,8 +25,8 @@ public class gameActionTests {
 	
 	private static Board board;
 	
-	@Before
-	public void setUp() {
+	@BeforeClass
+	public static void setUp() {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
@@ -36,8 +36,10 @@ public class gameActionTests {
 	//this tests that the Computer Player chooses to enter a room given other options
 	@Test
 	public void testPickRoom() {
-		BoardCell cell1 = board.getCellAt(5, 2);
-		BoardCell cell2 = board.getCellAt(5, 4);
+		//cell1 and cell2 are walkways
+		BoardCell cell1 = board.getCellAt(0, 0);
+		BoardCell cell2 = board.getCellAt(20, 18);
+		//cell3 is a door
 		BoardCell cell3 = board.getCellAt(2, 4);
 
 		Set<BoardCell> targets = new HashSet<BoardCell>();  
@@ -46,14 +48,9 @@ public class gameActionTests {
 		targets.add(cell2);
 		targets.add(cell3);
 
-		System.out.println(cell1);
-		System.out.println(cell2);
-		System.out.println(cell3);
-		System.out.println();
-
 		ComputerPlayer NPC = new ComputerPlayer("red", "Jimothy Jenkins");
 		NPC.pickLocation(targets);
-		assertEquals(NPC.getLocation(), cell2);
+		assertEquals(NPC.getLocation(), cell3);
 	}
 	@Test
 	public void testPickRandom() {
@@ -62,6 +59,7 @@ public class gameActionTests {
 		BoardCell cell3 = board.getCellAt(7, 4);
 
 		Set<BoardCell> targets = new HashSet<BoardCell>();  
+		Set<BoardCell> randomCells = new HashSet<BoardCell>();
 
 		targets.add(cell1);
 		targets.add(cell2);
@@ -69,15 +67,17 @@ public class gameActionTests {
 
 		ComputerPlayer NPC = new ComputerPlayer("red", "Jimothy Jenkins");
 		
-		BoardCell firstPick = NPC.pickLocation(targets);
-		BoardCell secondPick = NPC.pickLocation(targets);
-		BoardCell thirdPick = NPC.pickLocation(targets);
-		
-		System.out.println(firstPick);
-		System.out.println(secondPick);
-		System.out.println(thirdPick);
+		BoardCell temp;
+		//Have the Computer pick a location 10000 times and then check that it picked each cell at least once
+		for(int i = 0; i < 10000; i++) {
+			NPC.pickLocation(targets);
+			temp = NPC.getLocation();
+			randomCells.add(temp);
+		}
 
-		assertEquals(NPC.getLocation(), cell3);
+		//This checks that all three cells were chosen
+		assertEquals(true,((randomCells.contains(cell1) && randomCells.contains(cell2) && randomCells.contains(cell3))));
+
 	}
 	/*
 		if no rooms in list, select randomly

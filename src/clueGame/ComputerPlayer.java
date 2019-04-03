@@ -15,7 +15,7 @@ public class ComputerPlayer extends Player {
 	public BoardCell pickLocation(Set<BoardCell> targets) {
 		BoardCell currentCell = null;
 		for(BoardCell b : targets) {
-			if(b.isRoom()) {
+			if(b.isDoorway()) {
 				currentCell = b;
 				break;
 			}

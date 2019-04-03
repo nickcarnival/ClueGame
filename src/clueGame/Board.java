@@ -26,6 +26,7 @@ public class Board {
 	public static final int MAX_BOARD_SIZE = 50;
 	private String layoutFile;
 	private String legendFile;
+
 	private static final String COMMA = ",";
 
 	private int numRows = 0;
