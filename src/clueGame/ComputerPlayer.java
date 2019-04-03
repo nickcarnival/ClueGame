@@ -18,6 +18,7 @@ public class ComputerPlayer extends Player {
 	}
 	public BoardCell pickLocation(Set<BoardCell> targets) {
 		BoardCell currentCell = null;
+		//check if any of the cells are doors
 		for(BoardCell b : targets) {
 			if(b.isDoorway()) {
 				currentCell = b;
@@ -25,23 +26,28 @@ public class ComputerPlayer extends Player {
 				break;
 			}
 		}
-		//if there are no rooms
+		//if there are no rooms set to a random cell
 		if(currentCell == null) {
-			BoardCell randomCell = null;
-			int randomInt = new Random().nextInt(targets.size());
-			int i = 0;
-			for(BoardCell cell : targets) {
-				if(i == randomInt) {
-					randomCell = cell;
-					this.lastVisited = randomCell;
-					break;
-				}
-				i++;
-			}
-			currentCell = randomCell;
+			currentCell = getRandomCell(targets);
 		}
 		this.location = currentCell;
 		return currentCell;
+	}
+	//randomly selects a board cell from a set
+	private BoardCell getRandomCell(Set<BoardCell> boardSet) {
+		BoardCell randomCell = null;
+		int randomInt = new Random().nextInt(boardSet.size());
+		int i = 0;
+		for(BoardCell cell : boardSet) {
+			if(i == randomInt) {
+				randomCell = cell;
+				this.lastVisited = randomCell;
+				break;
+			}
+			i++;
+		}
+		return randomCell;
+		
 	}
 	public BoardCell getLocation() {
 		return this.location;
