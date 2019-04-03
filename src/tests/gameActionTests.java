@@ -355,7 +355,6 @@ public class gameActionTests {
 	@Test
 	public void testDisproveSuggestionOneMatchingCard() {
 		// give a computer player one card, plus some irrelevant cards to fuzz
-		ArrayList<Card> cards = new ArrayList<Card>();
 		Card card = new Card("first", CardType.PERSON);
 		npc.addCard(card);
 		npc.addCard(new Card("second", CardType.PERSON));
@@ -369,7 +368,33 @@ public class gameActionTests {
 		Card match = npc.disproveSuggestion(suggestion);
 		assertEquals(card, match);
 	}
-
+	
+	// test that if a player has multiple matching cards one should be returned randomly
+	@Test
+	public void testDisproveSuggestionsMultipleMatchingCards() {
+		ArrayList<Card> cards = new ArrayList<Card>();
+		// give a computer player one of each card, plus some irrelevant cards to fuzz
+		Card card = new Card("first", CardType.PERSON);
+		npc.addCard(card);
+		npc.addCard(new Card("second", CardType.PERSON));
+		Card card2 = new Card("third", CardType.WEAPON);
+		npc.addCard(card2);
+		npc.addCard(new Card("fourth", CardType.WEAPON));
+		Card card3 = new Card("fifth", CardType.ROOM);
+		npc.addCard(card3);
+		npc.addCard(new Card("sixth", CardType.ROOM));
+		// pass in the solution with the same one of each card that the player has
+		Solution suggestion = new Solution(card2, card, card3);
+		
+		// matches will hold the cards returned.
+		// Should eventually get card1, card2, card3 and have size 3
+		Set<Card> matches = new HashSet<Card>();
+		for (int i = 0; i < 1000; i++) {
+			matches.add(npc.disproveSuggestion(suggestion));
+		}
+		assertEquals(3, matches.size());
+	}
+	
 	/*
 	(15pts) Handle suggestion - Board. Tests include:
 
