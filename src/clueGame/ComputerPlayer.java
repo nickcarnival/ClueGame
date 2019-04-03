@@ -60,11 +60,6 @@ public class ComputerPlayer extends Player {
 	public BoardCell getLocation() {
 		return this.location;
 	}
-	//accuse someone of being the killer
-	public Solution makeAccusation() {
-		return null;
-
-	}
 	//a suggestion is ...
 	public void createSuggestion() {
 		
