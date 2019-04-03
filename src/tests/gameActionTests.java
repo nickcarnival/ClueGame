@@ -254,6 +254,7 @@ public class gameActionTests {
 	public void testSuggestion() {
 		assertEquals(1, 2);
 	}
+
 	/*
 
 	(15pts) Disprove suggestion - ComputerPlayer. Tests include:
