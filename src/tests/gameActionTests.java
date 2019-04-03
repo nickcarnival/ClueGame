@@ -260,6 +260,58 @@ public class gameActionTests {
     If multiple weapons not seen, one of them is randomly selected
     If multiple persons not seen, one of them is randomly selected
     */
+	// make sure that a suggestion that is made in a room involves that room
+	@Test
+	public void testRoomMatchesCurrentLocation() {
+		ComputerPlayer npc = new ComputerPlayer("red", "Jimothy Jenkins");
+		npc.setPeopleCards(board.getPeopleCards());
+		npc.setRoomCards(board.getRoomCards());
+		npc.setWeaponCards(board.getWeaponCards());
+		// put the player in the library
+		BoardCell cell = board.getCellAt(5, 10);
+		npc.setLocation(cell);
+		// get the library from the board
+		Card roomCard = null;
+		for (Card c : board.getRoomCards()) {
+			if (c.getName() == "Library") {
+				roomCard = c;
+				break;
+			}
+		}
+		// make sure the suggestion they make has them in the library
+		Solution suggestion = npc.createSuggestion();
+		assertEquals(roomCard, suggestion.getRoom());
+		
+		// now put the player in the kitchen
+		cell = board.getCellAt(2, 4);
+		npc.setLocation(cell);
+		// get the kitchen from the board
+		for (Card c : board.getRoomCards()) {
+			if (c.getName() == "Kitchen") {
+				roomCard = c;
+				break;
+			}
+		}
+		// make sure the suggestion they make has them in the kitchen
+		suggestion = npc.createSuggestion();
+		assertEquals(roomCard, suggestion.getRoom());
+
+		// now put the player in the bedroom
+		cell = board.getCellAt(15, 7);
+		npc.setLocation(cell);
+		// get the bedroom from the board
+		for (Card c : board.getRoomCards()) {
+			if (c.getName() == "Bedroom") {
+				roomCard = c;
+				break;
+			}
+		}
+		// make sure the suggestion they make has them in the bedroom
+		suggestion = npc.createSuggestion();
+		assertEquals(roomCard, suggestion.getRoom());
+	}
+
+	//make sure that if only one person or weapon is not seen it is suggested
 	@Test
 	public void testOneUnseenCardSuggestion() {
 		ComputerPlayer npc = new ComputerPlayer("red", "Jimothy Jenkins");
