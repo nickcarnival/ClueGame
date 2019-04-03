@@ -191,7 +191,7 @@ public class gameActionTests {
 		ArrayList<Card> peopleCards = board.getPeopleCards();
 		Card roomCard = null, peopleCard = null, weaponCard = null;
 		for(Card c : weaponCards) {
-			if(!dealtCards.contains(c)) {
+			if(dealtCards.contains(c)) {
 				weaponCard = c;
 			}
 		}
