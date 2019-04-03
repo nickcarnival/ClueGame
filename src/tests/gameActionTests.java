@@ -371,8 +371,7 @@ public class gameActionTests {
 	
 	// test that if a player has multiple matching cards one should be returned randomly
 	@Test
-	public void testDisproveSuggestionsMultipleMatchingCards() {
-		ArrayList<Card> cards = new ArrayList<Card>();
+	public void testDisproveSuggestionMultipleMatchingCards() {
 		// give a computer player one of each card, plus some irrelevant cards to fuzz
 		Card card = new Card("first", CardType.PERSON);
 		npc.addCard(card);
@@ -394,6 +393,16 @@ public class gameActionTests {
 		}
 		assertEquals(3, matches.size());
 	}
+	
+	// test that if a player has no matching cards then disproving the suggestion returns null
+	@Test
+	public void testDisproveSuggestionNoMatches() {
+		Solution suggestion = new Solution(new Card("weapon", CardType.WEAPON),
+				new Card("person", CardType.PERSON), new Card("room", CardType.ROOM));
+		Card card = npc.disproveSuggestion(suggestion);
+		assertNull(card);
+	}
+
 	
 	/*
 	(15pts) Handle suggestion - Board. Tests include:
