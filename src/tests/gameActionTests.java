@@ -9,6 +9,7 @@ package tests;
  */
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,6 +19,7 @@ import org.junit.Test;
 
 import clueGame.Board;
 import clueGame.BoardCell;
+import clueGame.Card;
 import clueGame.ComputerPlayer;
 import clueGame.Player;
 import clueGame.Solution;
@@ -124,10 +126,29 @@ public class gameActionTests {
 	@Test
 	public void testCorrectAccusation() {
 		Solution testSolution = board.getSolution();
+		ArrayList<Card> dealtCards = board.getDealtCards();
+		ArrayList<Card> weaponCards = board.getWeaponCards();
+		ArrayList<Card> roomCards = board.getRoomCards();
+		ArrayList<Card> peopleCards = board.getPeopleCards();
+		Card roomCard, peopleCard, weaponCard;
+		for(Card c : weaponCards) {
+			if(!dealtCards.contains(c)) {
+				weaponCard = c;
+			}
+		}
+		for(Card c : roomCards) {
+			if(!dealtCards.contains(c)) {
+				roomCard = c;
+			}
+		}
+		for(Card c : peopleCards) {
+			if(!dealtCards.contains(c)) {
+				peopleCard = c;
+			}
+		}
+		Accusation accusation = new Accusation(roomCard, peopleCard, weaponCard);
 		
-		ComputerPlayer NPC = new ComputerPlayer("red", "Jimothy Jenkins");
-
-		assertEquals(NPC.makeAccusation(), testSolution);
+		assertEquals(true, board.validateAccusation(accusation));
 
 	}
 	/*
