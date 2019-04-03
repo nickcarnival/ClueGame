@@ -407,7 +407,7 @@ public class Board {
 						}
 						boardCellArray[row][column].setDoorway(false);
 						//everything other than a walkway or closet is a room
-						if(cleanedGridLine[column] != "X" && cleanedGridLine[column] != "W") {
+						if(cleanedGridLine[column].equals("X") && cleanedGridLine[column].contentEquals("W")) {
 							boardCellArray[row][column].setRoom(true);
 						}
 					//this runs if the initial string is a door
@@ -448,9 +448,9 @@ public class Board {
 	}
 
 
-	/*///////////////////////////////////////////////////////////////////////////////////////////////////
-	 * Set Board Dimensions Methods 
-	*///////////////////////////////////////////////////////////////////////////////////////////////////
+	/*************************************************************
+	 * Set Board Dimension 
+	 *************************************************************/
 
 	//gets the number of columns in the specified csv file
 	private int setNumColumns() {
@@ -519,9 +519,9 @@ public class Board {
 		return numRows;
 	}
 	
-	/*///////////////////////////////////////////////////////////////////////////////////////////////////
-	 * Board Adjacency Methods 
-	*///////////////////////////////////////////////////////////////////////////////////////////////////
+	/*************************************************************
+	 * Board Adjacency  
+	 *************************************************************/
 
 	//returns the board cell at (row, column)
 	public BoardCell getCellAt(int row, int column) {
@@ -653,6 +653,10 @@ public class Board {
 		findAllTargets(b, pathLength);
 	}
 
+
+	public BoardCell[][] getBoardCellArray() {
+		return boardCellArray;
+	}
 	//getter for targets list. MUST BE CALLED AFTER calcTargets, otherwise will be a null pointer
 	public Set<BoardCell> getTargets() {
 		return targets;

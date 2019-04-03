@@ -99,6 +99,11 @@ public class gameActionTests {
 
 		Set<BoardCell> targets = board.getTargets(); 
 		Set<BoardCell> randomCells = new HashSet<BoardCell>();
+		
+		System.out.println(cell1);
+		System.out.println(cell2);
+		System.out.println(cell3);
+		System.out.println(cell4);
 
 		targets.add(cell1);
 		targets.add(cell2);
