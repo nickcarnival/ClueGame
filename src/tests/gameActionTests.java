@@ -21,6 +21,7 @@ import clueGame.Accusation;
 import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.Card;
+import clueGame.CardType;
 import clueGame.ComputerPlayer;
 import clueGame.Player;
 import clueGame.Solution;
@@ -98,11 +99,6 @@ public class gameActionTests {
 		Set<BoardCell> targets = board.getTargets(); 
 		Set<BoardCell> randomCells = new HashSet<BoardCell>();
 		
-		System.out.println(cell1);
-		System.out.println(cell2);
-		System.out.println(cell3);
-		System.out.println(cell4);
-
 		targets.add(cell1);
 		targets.add(cell2);
 		targets.add(cell3);
@@ -358,7 +354,20 @@ public class gameActionTests {
 	// test that if a player has only one card it is used to disprove a suggestion
 	@Test
 	public void testDisproveSuggestionOneMatchingCard() {
-		assertEquals(1,2);
+		// give a computer player one card, plus some irrelevant cards to fuzz
+		ArrayList<Card> cards = new ArrayList<Card>();
+		Card card = new Card("first", CardType.PERSON);
+		npc.addCard(card);
+		npc.addCard(new Card("second", CardType.PERSON));
+		npc.addCard(new Card("third", CardType.PERSON));
+		npc.addCard(new Card("fourth", CardType.PERSON));
+		npc.addCard(new Card("fifth", CardType.PERSON));
+		npc.addCard(new Card("sixth", CardType.PERSON));
+		// 
+		Solution suggestion = new Solution(new Card("weapon", CardType.WEAPON),
+				card, new Card("room", CardType.ROOM));
+		Card match = npc.disproveSuggestion(suggestion);
+		assertEquals(card, match);
 	}
 
 	/*
