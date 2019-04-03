@@ -28,6 +28,7 @@ import clueGame.Solution;
 public class gameActionTests {
 	
 	private static Board board;
+	private static ComputerPlayer npc;
 	
 	@BeforeClass
 	public static void setUp() {
@@ -36,6 +37,8 @@ public class gameActionTests {
 		// set the file names to use my config files
 		board.setConfigFiles("data/testsMap.csv", "data/rooms.txt");		
 		board.initialize();
+		npc = new ComputerPlayer("red", "Jimothy Jenkins");
+		npc.setBoard(board);
 	}
 	//this tests that the Computer Player chooses to enter a room given other options
 	@Test
@@ -52,9 +55,8 @@ public class gameActionTests {
 		targets.add(cell2);
 		targets.add(cell3);
 
-		ComputerPlayer NPC = new ComputerPlayer("red", "Jimothy Jenkins");
-		NPC.pickLocation(targets);
-		assertEquals(NPC.getLocation(), cell3);
+		npc.pickLocation(targets);
+		assertEquals(npc.getLocation(), cell3);
 	}
 	//tests that the computer player chooses a different walkway each time
 	@Test
@@ -70,13 +72,11 @@ public class gameActionTests {
 		targets.add(cell2);
 		targets.add(cell3);
 
-		ComputerPlayer NPC = new ComputerPlayer("red", "Jimothy Jenkins");
-		
 		BoardCell temp;
 		//Have the Computer pick a location 10000 times and then check that it picked each cell at least once
 		for(int i = 0; i < 10000; i++) {
-			NPC.pickLocation(targets);
-			temp = NPC.getLocation();
+			npc.pickLocation(targets);
+			temp = npc.getLocation();
 			randomCells.add(temp);
 		}
 
@@ -93,8 +93,6 @@ public class gameActionTests {
 		BoardCell cell3 = board.getCellAt(7, 4);
 		BoardCell cell4 = board.getCellAt(7, 4);
 
-		ComputerPlayer NPC = new ComputerPlayer("red", "Jimothy Jenkins");
-		
 		board.calcTargets(5, 2, 2);
 
 		Set<BoardCell> targets = board.getTargets(); 
@@ -109,13 +107,13 @@ public class gameActionTests {
 		targets.add(cell2);
 		targets.add(cell3);
 		
-		NPC.setLastVisited(cell3);
+		npc.setLastVisited(cell3);
 
 		BoardCell temp;
 		//Have the Computer pick a location 10000 times and then check that it picked each cell at least once
 		for(int i = 0; i < 10000; i++) {
-			NPC.pickLocation(targets);
-			temp = NPC.getLocation();
+			npc.pickLocation(targets);
+			temp = npc.getLocation();
 			randomCells.add(temp);
 		}
 		//This checks that all three cells were chosen
@@ -263,8 +261,6 @@ public class gameActionTests {
 	// make sure that a suggestion that is made in a room involves that room
 	@Test
 	public void testRoomMatchesCurrentLocation() {
-		ComputerPlayer npc = new ComputerPlayer("red", "Jimothy Jenkins");
-		npc.setBoard(board);
 		// put the player in the library
 		BoardCell cell = board.getCellAt(5, 10);
 		npc.setLocation(cell);
@@ -312,7 +308,6 @@ public class gameActionTests {
 	//make sure that if only one person or weapon is not seen it is suggested
 	@Test
 	public void testOneUnseenCardSuggestion() {
-		ComputerPlayer npc = new ComputerPlayer("red", "Jimothy Jenkins");
 		// needs to be in a location, but it doesn't really matter which one
 		BoardCell cell = board.getCellAt(0, 0);
 		npc.setLocation(cell);
@@ -339,8 +334,6 @@ public class gameActionTests {
 	// test that if a player has not seen multiple cards then it will randomly suggest any of them
 	@Test
 	public void testMultipleUnseenCards() {
-		ComputerPlayer npc = new ComputerPlayer("red", "Jimothy Jenkins");
-		npc.setBoard(board);
 		BoardCell cell = board.getCellAt(0, 0);
 		npc.setLocation(cell);
 		HashSet<Card> people = new HashSet<Card>();
@@ -361,7 +354,14 @@ public class gameActionTests {
     If player has only one matching card it should be returned
     If players has >1 matching card, returned card should be chosen randomly
     If player has no matching cards, null is returned
+    */
+	// test that if a player has only one card it is used to disprove a suggestion
+	@Test
+	public void testDisproveSuggestionOneMatchingCard() {
+		assertEquals(1,2);
+	}
 
+	/*
 	(15pts) Handle suggestion - Board. Tests include:
 
     Suggestion no one can disprove returns null
