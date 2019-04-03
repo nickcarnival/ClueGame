@@ -90,10 +90,13 @@ public class gameActionTests {
 		BoardCell cell2 = board.getCellAt(8, 4);
 		//these are both doors
 		BoardCell cell3 = board.getCellAt(7, 4);
+		BoardCell cell4 = board.getCellAt(7, 4);
 
 		ComputerPlayer NPC = new ComputerPlayer("red", "Jimothy Jenkins");
 		
-		Set<BoardCell> targets = new HashSet<BoardCell>();  
+		board.calcTargets(5, 2, 2);
+
+		Set<BoardCell> targets = board.getTargets(); 
 		Set<BoardCell> randomCells = new HashSet<BoardCell>();
 
 		targets.add(cell1);
@@ -109,8 +112,6 @@ public class gameActionTests {
 			temp = NPC.getLocation();
 			randomCells.add(temp);
 		}
-		NPC.pickLocation(targets);
-		
 
 		//This checks that all three cells were chosen
 		assertEquals(true,((randomCells.contains(cell1) && randomCells.contains(cell2) && randomCells.contains(cell3))));
