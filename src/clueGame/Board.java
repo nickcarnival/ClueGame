@@ -129,6 +129,11 @@ public class Board {
 		scanner.close();
 	}
 
+	public boolean validateAccusation(Accusation accusation) {
+		System.out.println("accusatin: " + accusation);
+		System.out.println("solution: " + getSolution());
+		return (accusation == getSolution());
+	}
 
 	/*///////////////////////////////////////////////////////////////////////////////////////////////////
 	 * Card Methods 

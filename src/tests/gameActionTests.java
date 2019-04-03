@@ -17,6 +17,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import clueGame.Accusation;
 import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.Card;
@@ -130,7 +131,7 @@ public class gameActionTests {
 		ArrayList<Card> weaponCards = board.getWeaponCards();
 		ArrayList<Card> roomCards = board.getRoomCards();
 		ArrayList<Card> peopleCards = board.getPeopleCards();
-		Card roomCard, peopleCard, weaponCard;
+		Card roomCard = null, peopleCard = null, weaponCard = null;
 		for(Card c : weaponCards) {
 			if(!dealtCards.contains(c)) {
 				weaponCard = c;
@@ -146,7 +147,7 @@ public class gameActionTests {
 				peopleCard = c;
 			}
 		}
-		Accusation accusation = new Accusation(roomCard, peopleCard, weaponCard);
+		Accusation accusation = new Accusation(weaponCard, peopleCard, roomCard);
 		
 		assertEquals(true, board.validateAccusation(accusation));
 
