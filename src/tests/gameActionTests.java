@@ -56,6 +56,7 @@ public class gameActionTests {
 		NPC.pickLocation(targets);
 		assertEquals(NPC.getLocation(), cell3);
 	}
+	//tests that the computer player chooses a different walkway each time
 	@Test
 	public void testPickRandom() {
 		BoardCell cell1 = board.getCellAt(5, 2);
@@ -124,6 +125,8 @@ public class gameActionTests {
     solution with wrong weapon
     solution with wrong room
 	*/
+	// figure out the correct solution by process of elimination 
+	// then pass it in as an accusation
 	@Test
 	public void testCorrectAccusation() {
 		Solution testSolution = board.getSolution();
@@ -153,6 +156,8 @@ public class gameActionTests {
 
 	}
 
+	// pass in the correct room and weapon, but the first person we find
+	// that is not correct
 	@Test
 	public void testWrongPerson() {
 		Solution testSolution = board.getSolution();
@@ -182,6 +187,8 @@ public class gameActionTests {
 
 	}
 
+	// pass in the correct room and person, but the first weapon we find
+	// that is not correct
 	@Test
 	public void testWrongWeapon() {
 		Solution testSolution = board.getSolution();
@@ -211,6 +218,8 @@ public class gameActionTests {
 
 	}
 
+	// pass in the correct person and weapon, but the first room we find
+	// that is not correct
 	@Test
 	public void testWrongRoom() {
 		Solution testSolution = board.getSolution();
