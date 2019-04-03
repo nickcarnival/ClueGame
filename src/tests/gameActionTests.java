@@ -160,7 +160,6 @@ public class gameActionTests {
 	// that is not correct
 	@Test
 	public void testWrongPerson() {
-		Solution testSolution = board.getSolution();
 		ArrayList<Card> dealtCards = board.getDealtCards();
 		ArrayList<Card> weaponCards = board.getWeaponCards();
 		ArrayList<Card> roomCards = board.getRoomCards();
@@ -191,7 +190,6 @@ public class gameActionTests {
 	// that is not correct
 	@Test
 	public void testWrongWeapon() {
-		Solution testSolution = board.getSolution();
 		ArrayList<Card> dealtCards = board.getDealtCards();
 		ArrayList<Card> weaponCards = board.getWeaponCards();
 		ArrayList<Card> roomCards = board.getRoomCards();
@@ -222,7 +220,6 @@ public class gameActionTests {
 	// that is not correct
 	@Test
 	public void testWrongRoom() {
-		Solution testSolution = board.getSolution();
 		ArrayList<Card> dealtCards = board.getDealtCards();
 		ArrayList<Card> weaponCards = board.getWeaponCards();
 		ArrayList<Card> roomCards = board.getRoomCards();
