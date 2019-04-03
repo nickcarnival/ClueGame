@@ -111,7 +111,6 @@ public class gameActionTests {
 			randomCells.add(temp);
 		}
 		NPC.pickLocation(targets);
-		
 
 		//This checks that all three cells were chosen
 		assertEquals(true,((randomCells.contains(cell1) && randomCells.contains(cell2) && randomCells.contains(cell3))));
@@ -256,12 +255,26 @@ public class gameActionTests {
     If only one person not seen, it's selected (can be same test as weapon)
     If multiple weapons not seen, one of them is randomly selected
     If multiple persons not seen, one of them is randomly selected
-    
     */
-	
 	@Test
-	public void testSuggestion() {
-		assertEquals(1, 2);
+	public void testOneUnseenCardSuggestion() {
+		ComputerPlayer npc = new ComputerPlayer("red", "Jimothy Jenkins");
+		// computer will see all weapon and people cards except for the last of each
+		for(int i = 0; i < board.getWeaponCards().size() - 1; i++) {
+			if(!npc.getSeenCards().contains(board.getWeaponCards().get(i))) {
+				npc.seeCard(board.getWeaponCards().get(i));
+			}
+		}
+		for(int i = 0; i < board.getPeopleCards().size() - 1; i++) {
+			if(!npc.getSeenCards().contains(board.getPeopleCards().get(i))) {
+				npc.seeCard(board.getPeopleCards().get(i));
+			}
+		}
+		Card lastWeaponCard = board.getWeaponCards().get(board.getWeaponCards().size() - 1);
+		Card lastPeopleCard = board.getPeopleCards().get(board.getPeopleCards().size() - 1);
+		Solution suggestion = npc.createSuggestion();
+		assertEquals(lastPeopleCard, suggestion.getPerson());
+		assertEquals(lastWeaponCard, suggestion.getWeapon());
 	}
 
 	/*
