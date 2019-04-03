@@ -129,10 +129,12 @@ public class Board {
 		scanner.close();
 	}
 
+	//checks if the accusation is equal to the solution
 	public boolean validateAccusation(Accusation accusation) {
-		System.out.println("accusatin: " + accusation);
-		System.out.println("solution: " + getSolution());
-		return (accusation == getSolution());
+		return (accusation.getWeapon() == getSolution().getWeapon()
+				&& accusation.getRoom() == getSolution().getRoom()
+				&& accusation.getPerson() == getSolution().getPerson()
+				);
 	}
 
 	/*///////////////////////////////////////////////////////////////////////////////////////////////////
