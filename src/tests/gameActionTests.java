@@ -181,6 +181,35 @@ public class gameActionTests {
 		assertNotEquals(true, board.validateAccusation(accusation));
 
 	}
+
+	@Test
+	public void testWrongWeapon() {
+		Solution testSolution = board.getSolution();
+		ArrayList<Card> dealtCards = board.getDealtCards();
+		ArrayList<Card> weaponCards = board.getWeaponCards();
+		ArrayList<Card> roomCards = board.getRoomCards();
+		ArrayList<Card> peopleCards = board.getPeopleCards();
+		Card roomCard = null, peopleCard = null, weaponCard = null;
+		for(Card c : weaponCards) {
+			if(!dealtCards.contains(c)) {
+				weaponCard = c;
+			}
+		}
+		for(Card c : roomCards) {
+			if(!dealtCards.contains(c)) {
+				roomCard = c;
+			}
+		}
+		for(Card c : peopleCards) {
+			if(!dealtCards.contains(c)) {
+				peopleCard = c;
+			}
+		}
+		Accusation accusation = new Accusation(weaponCard, peopleCard, roomCard);
+		
+		assertNotEquals(true, board.validateAccusation(accusation));
+
+	}
 	/*
 	(15pts) Create suggestion. Tests include:
 
