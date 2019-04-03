@@ -225,7 +225,7 @@ public class gameActionTests {
 			}
 		}
 		for(Card c : roomCards) {
-			if(!dealtCards.contains(c)) {
+			if(dealtCards.contains(c)) {
 				roomCard = c;
 			}
 		}
