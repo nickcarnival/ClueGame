@@ -270,6 +270,9 @@ public class gameActionTests {
 				npc.seeCard(board.getPeopleCards().get(i));
 			}
 		}
+		npc.setPeopleCards(board.getPeopleCards());
+		npc.setRoomCards(board.getRoomCards());
+		npc.setWeaponCards(board.getWeaponCards());
 		Card lastWeaponCard = board.getWeaponCards().get(board.getWeaponCards().size() - 1);
 		Card lastPeopleCard = board.getPeopleCards().get(board.getPeopleCards().size() - 1);
 		Solution suggestion = npc.createSuggestion();

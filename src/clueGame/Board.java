@@ -44,7 +44,7 @@ public class Board {
 	ArrayList<Card> roomCardArray;
 	ArrayList<Card> peopleCardArray;
 	
-	private ArrayList<Card> cardArray;
+	private ArrayList<Card> cardArray; //TODO: could this be replaced by one of the below?
 
 	ArrayList<Card> allCards; //cards remaining to be dealt/cards in the "deck"
 	ArrayList<Card> dealtCards; //cards that have been dealt
@@ -147,6 +147,8 @@ public class Board {
 	generates all the numbers from 0 to 17 randomly without repeats (with a set),
 	deals the card at each one to the next player in line, and keeps track
 	of cards that have been dealt and cards that remain to be dealt (none)
+	
+	Also makes sure that each player knows what all the cards are--for suggestions
 	*/
 	public void dealCards() {
 		dealtCards= new ArrayList<Card>();
@@ -164,6 +166,11 @@ public class Board {
 			currentPlayer = (currentPlayer + 1) % allPlayers.size();
 		}
 		allCards = new ArrayList<Card>();
+		for (Player p : allPlayers) {
+			p.setPeopleCards(peopleCardArray);
+			p.setWeaponCards(weaponCardArray);
+			p.setRoomCards(roomCardArray);
+		}
 	}
 
 	//This creates a new solution for each game

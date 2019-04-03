@@ -22,6 +22,21 @@ public class Solution {
 		this.person = new Card();
 	}
 
+	public void setWeapon(Card weapon) {
+		this.weapon = weapon;
+	}
+
+
+	public void setPerson(Card person) {
+		this.person = person;
+	}
+
+
+	public void setRoom(Card room) {
+		this.room = room;
+	}
+
+
 	public Card getWeapon() {
 		return this.weapon;
 	}
