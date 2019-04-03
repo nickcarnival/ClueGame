@@ -82,13 +82,36 @@ public class gameActionTests {
 	
 	@Test
 	public void testLastVisited() {
+		BoardCell cell1 = board.getCellAt(5, 2);
+		BoardCell cell2 = board.getCellAt(8, 4);
+		//these are both doors
+		BoardCell cell3 = board.getCellAt(7, 4);
+
+		ComputerPlayer NPC = new ComputerPlayer("red", "Jimothy Jenkins");
 		
+		Set<BoardCell> targets = new HashSet<BoardCell>();  
+		Set<BoardCell> randomCells = new HashSet<BoardCell>();
+
+		targets.add(cell1);
+		targets.add(cell2);
+		targets.add(cell3);
+		
+		NPC.setLastVisited(cell3);
+
+		BoardCell temp;
+		//Have the Computer pick a location 10000 times and then check that it picked each cell at least once
+		for(int i = 0; i < 10000; i++) {
+			NPC.pickLocation(targets);
+			temp = NPC.getLocation();
+			randomCells.add(temp);
+		}
+		NPC.pickLocation(targets);
+		
+
+		//This checks that all three cells were chosen
+		assertEquals(true,((randomCells.contains(cell1) && randomCells.contains(cell2) && randomCells.contains(cell3))));
 	}
 
-	/*
-		if room in list that was not just visited, must select it
-		if room just visited is in list, each target (including room) selected randomly
-	 */
 }
 
 

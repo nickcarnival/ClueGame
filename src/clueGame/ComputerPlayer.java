@@ -21,9 +21,11 @@ public class ComputerPlayer extends Player {
 		//check if any of the cells are doors
 		for(BoardCell b : targets) {
 			if(b.isDoorway()) {
-				currentCell = b;
-				this.lastVisited = currentCell;
-				break;
+				if(b != lastVisited) {
+					currentCell = b;
+					this.lastVisited = currentCell;
+					break;
+				}
 			}
 		}
 		//if there are no rooms set to a random cell
@@ -48,6 +50,9 @@ public class ComputerPlayer extends Player {
 		}
 		return randomCell;
 		
+	}
+	public void setLastVisited(BoardCell last) {
+		this.lastVisited = last;
 	}
 	public BoardCell getLocation() {
 		return this.location;
