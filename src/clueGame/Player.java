@@ -67,6 +67,10 @@ public abstract class Player {
 		return myCards;
 	}
 	
+	public ArrayList<Card> getSeenCards() {
+		return seenCards;
+	}
+	
 	public void movePlayer(BoardCell target) {
 		this.location = target;
 	}

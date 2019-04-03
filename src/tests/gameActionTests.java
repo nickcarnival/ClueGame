@@ -20,6 +20,7 @@ import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.ComputerPlayer;
 import clueGame.Player;
+import clueGame.Solution;
 
 public class gameActionTests {
 	
@@ -112,10 +113,6 @@ public class gameActionTests {
 		assertEquals(true,((randomCells.contains(cell1) && randomCells.contains(cell2) && randomCells.contains(cell3))));
 	}
 
-	@Test
-	public void testAccusation() {
-		assertEquals(false, true);
-	}
 	/*
 	 * (15pts) Make an accusation. Tests include:
 
@@ -123,6 +120,39 @@ public class gameActionTests {
     solution with wrong person
     solution with wrong weapon
     solution with wrong room
+	*/
+	@Test
+	public void testCorrectAccusation() {
+		Solution testSolution = board.getSolution();
+		
+		ComputerPlayer NPC = new ComputerPlayer("red", "Jimothy Jenkins");
+
+		assertEquals(NPC.makeAccusation(), testSolution);
+
+	}
+	/*
+	(15pts) Create suggestion. Tests include:
+
+    Room matches current location
+    If only one weapon not seen, it's selected
+    If only one person not seen, it's selected (can be same test as weapon)
+    If multiple weapons not seen, one of them is randomly selected
+    If multiple persons not seen, one of them is randomly selected
+
+	(15pts) Disprove suggestion - ComputerPlayer. Tests include:
+
+    If player has only one matching card it should be returned
+    If players has >1 matching card, returned card should be chosen randomly
+    If player has no matching cards, null is returned
+
+	(15pts) Handle suggestion - Board. Tests include:
+
+    Suggestion no one can disprove returns null
+    Suggestion only accusing player can disprove returns null
+    Suggestion only human can disprove returns answer (i.e., card that disproves suggestion)
+    Suggestion only human can disprove, but human is accuser, returns null
+    Suggestion that two players can disprove, correct player (based on starting with next player in list) returns answer
+    Suggestion that human and another player can disprove, other player is next in list, ensure other player returns answer
 
 	 */
 }

@@ -4,6 +4,7 @@
  */
 package clueGame;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -60,8 +61,9 @@ public class ComputerPlayer extends Player {
 		return this.location;
 	}
 	//accuse someone of being the killer
-	public void makeAccusation() {
-		
+	public Solution makeAccusation() {
+		return null;
+
 	}
 	//a suggestion is ...
 	public void createSuggestion() {

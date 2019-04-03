@@ -43,6 +43,8 @@ public class Board {
 	ArrayList<Card> weaponCardArray;
 	ArrayList<Card> roomCardArray;
 	ArrayList<Card> peopleCardArray;
+	
+	private ArrayList<Card> cardArray;
 
 	ArrayList<Card> allCards; //cards remaining to be dealt/cards in the "deck"
 	ArrayList<Card> dealtCards; //cards that have been dealt
@@ -127,6 +129,11 @@ public class Board {
 		scanner.close();
 	}
 
+
+	/*///////////////////////////////////////////////////////////////////////////////////////////////////
+	 * Card Methods 
+	*///////////////////////////////////////////////////////////////////////////////////////////////////
+
 	/*
 	deals cards to all players
 	MUST BE CALLED AFTER SETSOLUTION
@@ -151,10 +158,6 @@ public class Board {
 		}
 		allCards = new ArrayList<Card>();
 	}
-
-	/*///////////////////////////////////////////////////////////////////////////////////////////////////
-	 * Card Config Methods 
-	*///////////////////////////////////////////////////////////////////////////////////////////////////
 
 	//This creates a new solution for each game
 	public void setSolution() {
@@ -198,6 +201,10 @@ public class Board {
 		return solution;
 	}
 
+	public ArrayList<Card> getAllCards() {
+		return cardArray;
+	}
+
 	public ArrayList<Card> getWeaponCards() {
 		return weaponCardArray;
 	}
@@ -233,6 +240,8 @@ public class Board {
 		peopleCardArray = new ArrayList<Card>();
 		weaponCardArray = new ArrayList<Card>();
 		roomCardArray = new ArrayList<Card>();
+		
+		cardArray = new ArrayList<Card>();
 
 
 		scanner = new Scanner(new File(cardConfigFile));
@@ -248,16 +257,19 @@ public class Board {
 					cardType = CardType.WEAPON;
 					Card weaponCard = new Card(cardName, cardType); 
 					weaponCardArray.add(weaponCard);
+					cardArray.add(weaponCard);
 					break;
 				case "room":
 					cardType = CardType.ROOM;
 					Card roomCard = new Card(cardName, cardType); 
 					roomCardArray.add(roomCard);
+					cardArray.add(roomCard);
 					break;
 				case "person":
 					cardType = CardType.PERSON;
 					Card personCard = new Card(cardName, cardType); 
 					peopleCardArray.add(personCard);
+					cardArray.add(personCard);
 					break;
 				default:
 					break;
@@ -641,10 +653,6 @@ public class Board {
 	
 	public ArrayList<Player> getPlayers() {
 		return allPlayers;
-	}
-	
-	public ArrayList<Card> getAllCards() {
-		return allCards;
 	}
 
 	public ArrayList<Card> getDealtCards() {
