@@ -16,6 +16,7 @@ public class ComputerPlayer extends Player {
 	public ComputerPlayer(String color, String name) {
 		super(color, name);
 	}
+	//picks a location, prioritizing rooms
 	public BoardCell pickLocation(Set<BoardCell> targets) {
 		BoardCell currentCell = null;
 		//check if any of the cells are doors
@@ -51,15 +52,18 @@ public class ComputerPlayer extends Player {
 		return randomCell;
 		
 	}
+	//this is only for JUnit tests
 	public void setLastVisited(BoardCell last) {
 		this.lastVisited = last;
 	}
 	public BoardCell getLocation() {
 		return this.location;
 	}
+	//accuse someone of being the killer
 	public void makeAccusation() {
 		
 	}
+	//a suggestion is ...
 	public void createSuggestion() {
 		
 	}

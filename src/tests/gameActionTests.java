@@ -112,6 +112,19 @@ public class gameActionTests {
 		assertEquals(true,((randomCells.contains(cell1) && randomCells.contains(cell2) && randomCells.contains(cell3))));
 	}
 
+	@Test
+	public void testAccusation() {
+		assertEquals(false, true);
+	}
+	/*
+	 * (15pts) Make an accusation. Tests include:
+
+    solution that is correct
+    solution with wrong person
+    solution with wrong weapon
+    solution with wrong room
+
+	 */
 }
 
 
