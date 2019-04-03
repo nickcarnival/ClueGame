@@ -13,12 +13,10 @@ public abstract class Player {
 	private Color color;
 	private ArrayList<Card> myCards;
 	protected ArrayList<Card> seenCards;
-	private BoardCell location;
-	private BoardCell lastVisited;
+	protected BoardCell location;
+	protected BoardCell lastVisited;
 
-	protected ArrayList<Card> peopleCards;
-	protected ArrayList<Card> weaponCards;
-	protected ArrayList<Card> roomCards;
+	protected Board board;
 
 	public Player(String color, String name) {
 		this.playerName = name;
@@ -78,29 +76,16 @@ public abstract class Player {
 	public void movePlayer(BoardCell target) {
 		this.location = target;
 	}
-	
-	public ArrayList<Card> getPeopleCards() {
-		return peopleCards;
-	}
 
-	public void setPeopleCards(ArrayList<Card> peopleCards) {
-		this.peopleCards = peopleCards;
-	}
-
-	public ArrayList<Card> getWeaponCards() {
-		return weaponCards;
-	}
-
-	public void setWeaponCards(ArrayList<Card> weaponCards) {
-		this.weaponCards = weaponCards;
-	}
-
-	public ArrayList<Card> getRoomCards() {
-		return roomCards;
-	}
-
-	public void setRoomCards(ArrayList<Card> roomCards) {
-		this.roomCards = roomCards;
+	public void setBoard(Board board) {
+		this.board = board;
 	}
 	
+	public BoardCell getLastVisited() {
+		return lastVisited;
+	}
+
+	public void setLastVisited(BoardCell lastVisited) {
+		this.lastVisited = lastVisited;
+	}
 }

@@ -10,10 +10,6 @@ import java.util.Random;
 import java.util.Set;
 
 public class ComputerPlayer extends Player {
-
-	private BoardCell location;
-	private BoardCell lastVisited;
-
 	public ComputerPlayer(String color, String name) {
 		super(color, name);
 	}
@@ -53,36 +49,34 @@ public class ComputerPlayer extends Player {
 		return randomCell;
 		
 	}
-	//this is only for JUnit tests
-	public void setLastVisited(BoardCell last) {
-		this.lastVisited = last;
-	}
-	public BoardCell getLocation() {
-		return this.location;
-	}
 	//a suggestion is ...
 	public Solution createSuggestion() {
 		Solution suggestion = new Solution();
-		for(Card c : peopleCards) {
+		// set person to one we haven't seen
+		for(Card c : board.getPeopleCards()) {
 			if(!seenCards.contains(c)) {
 				suggestion.setPerson(c);
 				break;
 			}
 		}
-		for(Card c : roomCards) {
-			if(!seenCards.contains(c)) {
-				suggestion.setRoom(c);
-				break;
-			}
-		}
-		for(Card c : weaponCards) {
+		// set weapon to one we haven't seen
+		for(Card c : board.getWeaponCards()) {
 			if(!seenCards.contains(c)) {
 				suggestion.setWeapon(c);
 				break;
 			}
 		}
+		// set room to one we're in
+		System.out.println(location);
+		char currentRoom = location.getInitial();
+		String room = board.getLegend().get(currentRoom);
+		for (Card c : board.getRoomCards()) {
+			if (c.getName().equals(room)) {
+				suggestion.setRoom(c);
+				break;
+			}
+		}
 		return suggestion;
-		// char currentRoom = location.getInitial();
 	}
 
 	public Card disproveSuggestion(Solution suggestion) {

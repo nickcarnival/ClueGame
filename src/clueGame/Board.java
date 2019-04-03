@@ -148,7 +148,8 @@ public class Board {
 	deals the card at each one to the next player in line, and keeps track
 	of cards that have been dealt and cards that remain to be dealt (none)
 	
-	Also makes sure that each player knows what all the cards are--for suggestions
+	Also makes sure that each player knows what board it's on
+	TODO: move that
 	*/
 	public void dealCards() {
 		dealtCards= new ArrayList<Card>();
@@ -167,9 +168,7 @@ public class Board {
 		}
 		allCards = new ArrayList<Card>();
 		for (Player p : allPlayers) {
-			p.setPeopleCards(peopleCardArray);
-			p.setWeaponCards(weaponCardArray);
-			p.setRoomCards(roomCardArray);
+			p.setBoard(this);
 		}
 	}
 

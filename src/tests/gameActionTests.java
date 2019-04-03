@@ -264,16 +264,14 @@ public class gameActionTests {
 	@Test
 	public void testRoomMatchesCurrentLocation() {
 		ComputerPlayer npc = new ComputerPlayer("red", "Jimothy Jenkins");
-		npc.setPeopleCards(board.getPeopleCards());
-		npc.setRoomCards(board.getRoomCards());
-		npc.setWeaponCards(board.getWeaponCards());
+		npc.setBoard(board);
 		// put the player in the library
 		BoardCell cell = board.getCellAt(5, 10);
 		npc.setLocation(cell);
 		// get the library from the board
 		Card roomCard = null;
 		for (Card c : board.getRoomCards()) {
-			if (c.getName() == "Library") {
+			if (c.getName().equals("Library")) {
 				roomCard = c;
 				break;
 			}
@@ -287,7 +285,7 @@ public class gameActionTests {
 		npc.setLocation(cell);
 		// get the kitchen from the board
 		for (Card c : board.getRoomCards()) {
-			if (c.getName() == "Kitchen") {
+			if (c.getName().equals("Kitchen")) {
 				roomCard = c;
 				break;
 			}
@@ -301,7 +299,7 @@ public class gameActionTests {
 		npc.setLocation(cell);
 		// get the bedroom from the board
 		for (Card c : board.getRoomCards()) {
-			if (c.getName() == "Bedroom") {
+			if (c.getName().equals("Bedroom")) {
 				roomCard = c;
 				break;
 			}
@@ -315,6 +313,9 @@ public class gameActionTests {
 	@Test
 	public void testOneUnseenCardSuggestion() {
 		ComputerPlayer npc = new ComputerPlayer("red", "Jimothy Jenkins");
+		// needs to be in a location, but it doesn't really matter which one
+		BoardCell cell = board.getCellAt(0, 0);
+		npc.setLocation(cell);
 		// computer will see all weapon and people cards except for the last of each
 		for(int i = 0; i < board.getWeaponCards().size() - 1; i++) {
 			if(!npc.getSeenCards().contains(board.getWeaponCards().get(i))) {
@@ -326,9 +327,7 @@ public class gameActionTests {
 				npc.seeCard(board.getPeopleCards().get(i));
 			}
 		}
-		npc.setPeopleCards(board.getPeopleCards());
-		npc.setRoomCards(board.getRoomCards());
-		npc.setWeaponCards(board.getWeaponCards());
+		npc.setBoard(board);
 		Card lastWeaponCard = board.getWeaponCards().get(board.getWeaponCards().size() - 1);
 		Card lastPeopleCard = board.getPeopleCards().get(board.getPeopleCards().size() - 1);
 		Solution suggestion = npc.createSuggestion();
