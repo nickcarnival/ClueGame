@@ -67,7 +67,6 @@ public class ComputerPlayer extends Player {
 			}
 		}
 		// set room to one we're in
-		System.out.println(location);
 		char currentRoom = location.getInitial();
 		String room = board.getLegend().get(currentRoom);
 		for (Card c : board.getRoomCards()) {

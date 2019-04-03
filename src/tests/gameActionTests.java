@@ -335,6 +335,24 @@ public class gameActionTests {
 		assertEquals(lastPeopleCard, suggestion.getPerson());
 		assertEquals(lastWeaponCard, suggestion.getWeapon());
 	}
+	
+	// test that if a player has not seen multiple cards then it will randomly suggest any of them
+	@Test
+	public void testMultipleUnseenCards() {
+		ComputerPlayer npc = new ComputerPlayer("red", "Jimothy Jenkins");
+		npc.setBoard(board);
+		BoardCell cell = board.getCellAt(0, 0);
+		npc.setLocation(cell);
+		HashSet<Card> people = new HashSet<Card>();
+		HashSet<Card> weapons = new HashSet<Card>();
+		for (int i = 0; i < 1000; i++) {
+			Solution suggestion = npc.createSuggestion();
+			people.add(suggestion.getPerson());
+			weapons.add(suggestion.getWeapon());
+		}
+		assertEquals(6, people.size());
+		assertEquals(6, weapons.size());
+	}
 
 	/*
 
