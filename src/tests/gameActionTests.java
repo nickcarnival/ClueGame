@@ -29,10 +29,10 @@ import clueGame.Solution;
 public class gameActionTests {
 	
 	private static Board board;
-	private static ComputerPlayer npc;
+	private ComputerPlayer npc;
 	
-	@BeforeClass
-	public static void setUp() {
+	@Before
+	public void setUp() {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
