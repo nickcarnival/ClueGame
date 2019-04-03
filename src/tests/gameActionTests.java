@@ -178,7 +178,7 @@ public class gameActionTests {
 		}
 		Accusation accusation = new Accusation(weaponCard, peopleCard, roomCard);
 		
-		assertEquals(true, board.validateAccusation(accusation));
+		assertNotEquals(true, board.validateAccusation(accusation));
 
 	}
 	/*
