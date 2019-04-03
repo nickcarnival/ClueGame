@@ -11,7 +11,7 @@ import java.util.Set;
 public abstract class Player {
 	private String playerName;
 	private Color color;
-	private ArrayList<Card> myCards;
+	protected ArrayList<Card> myCards;
 	protected ArrayList<Card> seenCards;
 	protected BoardCell location;
 	protected BoardCell lastVisited;

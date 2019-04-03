@@ -84,7 +84,22 @@ public class ComputerPlayer extends Player {
 	}
 
 	public Card disproveSuggestion(Solution suggestion) {
-		return new Card();
+		Random random = new Random();
+		ArrayList<Card> matches = new ArrayList<Card>();
+		if(myCards.contains(suggestion.getRoom())) {
+			matches.add(suggestion.getRoom());
+		}
+		if(myCards.contains(suggestion.getPerson())) {
+			matches.add(suggestion.getPerson());
+		}
+		if(myCards.contains(suggestion.getWeapon())) {
+			matches.add(suggestion.getWeapon());
+		}
+		if(matches.size() > 0) {
+			return matches.get(random.nextInt(matches.size()));
+		} else {
+			return null;
+		}
 	}
 
 }
