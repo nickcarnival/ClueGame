@@ -79,8 +79,13 @@ public class gameActionTests {
 		assertEquals(true,((randomCells.contains(cell1) && randomCells.contains(cell2) && randomCells.contains(cell3))));
 
 	}
+	
+	@Test
+	public void testLastVisited() {
+		
+	}
+
 	/*
-		if no rooms in list, select randomly
 		if room in list that was not just visited, must select it
 		if room just visited is in list, each target (including room) selected randomly
 	 */

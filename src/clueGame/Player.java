@@ -5,7 +5,8 @@
 package clueGame;
 import java.awt.Color;  
 import java.lang.reflect.Field;
-import java.util.ArrayList; 
+import java.util.ArrayList;
+import java.util.Set; 
 
 public abstract class Player {
 	private String playerName;
@@ -13,6 +14,7 @@ public abstract class Player {
 	private ArrayList<Card> myCards;
 	private ArrayList<Card> seenCards;
 	private BoardCell location;
+	private BoardCell lastVisited;
 
 	public Player(String color, String name) {
 		this.playerName = name;
