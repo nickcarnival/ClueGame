@@ -63,6 +63,24 @@ public class ComputerPlayer extends Player {
 	//a suggestion is ...
 	public Solution createSuggestion() {
 		Solution suggestion = new Solution();
+		for(Card c : peopleCards) {
+			if(!seenCards.contains(c)) {
+				suggestion.setPerson(c);
+				break;
+			}
+		}
+		for(Card c : roomCards) {
+			if(!seenCards.contains(c)) {
+				suggestion.setRoom(c);
+				break;
+			}
+		}
+		for(Card c : weaponCards) {
+			if(!seenCards.contains(c)) {
+				suggestion.setWeapon(c);
+				break;
+			}
+		}
 		return suggestion;
 		// char currentRoom = location.getInitial();
 	}

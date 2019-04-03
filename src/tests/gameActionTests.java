@@ -273,9 +273,13 @@ public class gameActionTests {
 				npc.seeCard(board.getPeopleCards().get(i));
 			}
 		}
+		npc.setPeopleCards(board.getPeopleCards());
+		npc.setRoomCards(board.getRoomCards());
+		npc.setWeaponCards(board.getWeaponCards());
 		Card lastWeaponCard = board.getWeaponCards().get(board.getWeaponCards().size() - 1);
 		Card lastPeopleCard = board.getPeopleCards().get(board.getPeopleCards().size() - 1);
 		Solution suggestion = npc.createSuggestion();
+		// make sure that the card the computer suggests is the one that hasn't been seen
 		assertEquals(lastPeopleCard, suggestion.getPerson());
 		assertEquals(lastWeaponCard, suggestion.getWeapon());
 	}
