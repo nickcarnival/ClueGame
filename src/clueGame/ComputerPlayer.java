@@ -62,6 +62,7 @@ public class ComputerPlayer extends Player {
 	}
 	//a suggestion is ...
 	public void createSuggestion() {
+		char currentRoom = location.getInitial();
 		
 	}
 
