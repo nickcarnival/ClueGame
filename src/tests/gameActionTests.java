@@ -56,6 +56,7 @@ public class gameActionTests {
 		NPC.pickLocation(targets);
 		assertEquals(NPC.getLocation(), cell3);
 	}
+	//tests that the computer player chooses a different walkway each time
 	@Test
 	public void testPickRandom() {
 		BoardCell cell1 = board.getCellAt(5, 2);
@@ -112,7 +113,6 @@ public class gameActionTests {
 			temp = NPC.getLocation();
 			randomCells.add(temp);
 		}
-
 		//This checks that all three cells were chosen
 		assertEquals(true,((randomCells.contains(cell1) && randomCells.contains(cell2) && randomCells.contains(cell3))));
 	}
@@ -125,6 +125,8 @@ public class gameActionTests {
     solution with wrong weapon
     solution with wrong room
 	*/
+	// figure out the correct solution by process of elimination 
+	// then pass it in as an accusation
 	@Test
 	public void testCorrectAccusation() {
 		Solution testSolution = board.getSolution();
@@ -154,6 +156,8 @@ public class gameActionTests {
 
 	}
 
+	// pass in the correct room and weapon, but the first person we find
+	// that is not correct
 	@Test
 	public void testWrongPerson() {
 		Solution testSolution = board.getSolution();
@@ -183,6 +187,8 @@ public class gameActionTests {
 
 	}
 
+	// pass in the correct room and person, but the first weapon we find
+	// that is not correct
 	@Test
 	public void testWrongWeapon() {
 		Solution testSolution = board.getSolution();
@@ -212,6 +218,8 @@ public class gameActionTests {
 
 	}
 
+	// pass in the correct person and weapon, but the first room we find
+	// that is not correct
 	@Test
 	public void testWrongRoom() {
 		Solution testSolution = board.getSolution();
@@ -248,12 +256,26 @@ public class gameActionTests {
     If only one person not seen, it's selected (can be same test as weapon)
     If multiple weapons not seen, one of them is randomly selected
     If multiple persons not seen, one of them is randomly selected
-    
     */
-	
 	@Test
-	public void testSuggestion() {
-		assertEquals(1, 2);
+	public void testOneUnseenCardSuggestion() {
+		ComputerPlayer npc = new ComputerPlayer("red", "Jimothy Jenkins");
+		// computer will see all weapon and people cards except for the last of each
+		for(int i = 0; i < board.getWeaponCards().size() - 1; i++) {
+			if(!npc.getSeenCards().contains(board.getWeaponCards().get(i))) {
+				npc.seeCard(board.getWeaponCards().get(i));
+			}
+		}
+		for(int i = 0; i < board.getPeopleCards().size() - 1; i++) {
+			if(!npc.getSeenCards().contains(board.getPeopleCards().get(i))) {
+				npc.seeCard(board.getPeopleCards().get(i));
+			}
+		}
+		Card lastWeaponCard = board.getWeaponCards().get(board.getWeaponCards().size() - 1);
+		Card lastPeopleCard = board.getPeopleCards().get(board.getPeopleCards().size() - 1);
+		Solution suggestion = npc.createSuggestion();
+		assertEquals(lastPeopleCard, suggestion.getPerson());
+		assertEquals(lastWeaponCard, suggestion.getWeapon());
 	}
 
 	/*

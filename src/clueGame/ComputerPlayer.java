@@ -61,9 +61,10 @@ public class ComputerPlayer extends Player {
 		return this.location;
 	}
 	//a suggestion is ...
-	public void createSuggestion() {
-		char currentRoom = location.getInitial();
-		
+	public Solution createSuggestion() {
+		Solution suggestion = new Solution();
+		return suggestion;
+		// char currentRoom = location.getInitial();
 	}
 
 	public Card disproveSuggestion(Solution suggestion) {
