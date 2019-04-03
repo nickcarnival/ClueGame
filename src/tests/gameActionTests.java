@@ -247,6 +247,14 @@ public class gameActionTests {
     If only one person not seen, it's selected (can be same test as weapon)
     If multiple weapons not seen, one of them is randomly selected
     If multiple persons not seen, one of them is randomly selected
+    
+    */
+	
+	@Test
+	public void testSuggestion() {
+		assertEquals(1, 2);
+	}
+	/*
 
 	(15pts) Disprove suggestion - ComputerPlayer. Tests include:
 
