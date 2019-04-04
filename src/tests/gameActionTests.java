@@ -14,6 +14,7 @@ import clueGame.BoardCell;
 import clueGame.Card;
 import clueGame.CardType;
 import clueGame.ComputerPlayer;
+import clueGame.HumanPlayer;
 import clueGame.Player;
 import clueGame.Solution;
 
@@ -21,6 +22,7 @@ public class gameActionTests {
 	
 	/*
 	 	What class is supposed to do what:
+
 		Selecting a target location - ComputerPlayer
 		Checking an accusation - Board
 		Disproving a suggestion - Player
@@ -417,9 +419,9 @@ public class gameActionTests {
 	//Suggestion no one can disprove returns null
 	@Test
 	public void testNoDisprove() {
-		ComputerPlayer npc1 = new ComputerPlayer("Abraham Lincoln", "purple");
-		ComputerPlayer npc2 = new ComputerPlayer("Babraham Bincoln", "yellow");
-		ComputerPlayer npc3 = new ComputerPlayer("David Johnson", "red");
+		ComputerPlayer npc1 = new ComputerPlayer("purple", "Abraham Lincoln");
+		ComputerPlayer npc2 = new ComputerPlayer("yellow", "Babraham Bincoln" );
+		ComputerPlayer npc3 = new ComputerPlayer("red", "David Johnson");
 
 		Solution solution = board.getSolution();
 
@@ -455,7 +457,41 @@ public class gameActionTests {
 	//Suggestion only accusing player can disprove returns null
 	@Test
 	public void  testAccusingDisprove() {
-		assertEquals(1,4);
+		ComputerPlayer npc1 = new ComputerPlayer("purple", "Abraham Lincoln");
+		ComputerPlayer npc2 = new ComputerPlayer("yellow", "Babraham Bincoln" );
+		ComputerPlayer npc3 = new ComputerPlayer("red", "David Johnson");
+
+		HumanPlayer player = new HumanPlayer("You", "black");
+
+		Solution solution = board.getSolution();
+
+		Solution accusation = new Solution(
+				new Card("String", CardType.WEAPON),
+				new Card("Garfiel", CardType.PERSON),
+				new Card("Kitchen", CardType.ROOM));
+		
+		//give all computer players some player cards
+		npc1.addCard(new Card("Daveed", CardType.PERSON));
+		npc2.addCard(new Card("Jason", CardType.PERSON));
+		npc3.addCard(new Card("Alex", CardType.PERSON));
+		
+		//give all computer players some weapon cards
+		npc1.addCard(new Card("Dagger", CardType.WEAPON));
+		npc2.addCard(new Card("Jack", CardType.WEAPON));
+		npc3.addCard(new Card("Axe", CardType.WEAPON));
+
+		//give all computer players some room cards
+		npc1.addCard(new Card("Denver", CardType.ROOM));
+		npc2.addCard(new Card("Jacksonville", CardType.ROOM));
+		npc3.addCard(new Card("Alabame", CardType.ROOM));
+
+		Card disproveCard1 = npc1.disproveSuggestion(accusation);
+		Card disproveCard2 = npc2.disproveSuggestion(accusation);
+		Card disproveCard3 = npc3.disproveSuggestion(accusation);
+		
+		assertEquals(null, disproveCard1);
+		assertEquals(null, disproveCard2);
+		assertEquals(null, disproveCard3);
 	}
 }
 
