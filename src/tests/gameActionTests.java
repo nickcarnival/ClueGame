@@ -409,7 +409,6 @@ public class gameActionTests {
 	/*
 	(15pts) Handle suggestion - Board. Tests include:
 
-    Suggestion only human can disprove, but human is accuser, returns null
     Suggestion that two players can disprove, correct player (based on starting with next player in list) returns answer
     Suggestion that human and another player can disprove, other player is next in list, ensure other player returns answer
 
@@ -538,6 +537,54 @@ public class gameActionTests {
 		
 	}
 	
+	//Suggestion only human can disprove, but human is accuser, returns null
+	@Test
+	public void testHumanAccuser() {
+		
+		ComputerPlayer npc1 = new ComputerPlayer("purple", "Abraham Lincoln");
+		ComputerPlayer npc2 = new ComputerPlayer("yellow", "Babraham Bincoln" );
+		ComputerPlayer npc3 = new ComputerPlayer("red", "David Johnson");
+		
+		HumanPlayer player = new HumanPlayer("You", "black");
+		
+		//give all computer players some player cards
+		npc1.addCard(new Card("Daveed", CardType.PERSON));
+		npc2.addCard(new Card("Jason", CardType.PERSON));
+		npc3.addCard(new Card("Alex", CardType.PERSON));
+		player.addCard(new Card("Garfiel", CardType.PERSON));
+		
+		//give all computer players some weapon cards
+		npc1.addCard(new Card("Dagger", CardType.WEAPON));
+		npc2.addCard(new Card("Jack", CardType.WEAPON));
+		npc3.addCard(new Card("Axe", CardType.WEAPON));
+		player.addCard(new Card("String", CardType.WEAPON));
+
+		//give all computer players some room cards
+		npc1.addCard(new Card("Denver", CardType.ROOM));
+		npc2.addCard(new Card("Jacksonville", CardType.ROOM));
+		npc3.addCard(new Card("Alabame", CardType.ROOM));
+		player.addCard(new Card("Portugal", CardType.ROOM));
+		
+
+		//places the player in the kitchen
+		BoardCell cell = board.getCellAt(2, 4);
+
+
+		npc1.setLocation(cell);
+		npc1.setBoard(board);
+
+		Solution accusation = player.createSuggestion();
+
+		Card disproveCard1 = npc1.disproveSuggestion(accusation);
+		Card disproveCard2 = npc2.disproveSuggestion(accusation);
+		Card disproveCard3 = npc3.disproveSuggestion(accusation);
+		Card humanDisprove = player.disproveSuggestion(accusation);
+		
+		assertEquals(null, disproveCard1);
+		assertEquals(null, disproveCard2);
+		assertEquals(null, disproveCard3);
+		assertEquals(null, humanDisprove);
+	}
 }
 
 
