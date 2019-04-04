@@ -530,9 +530,10 @@ public class gameActionTests {
 		npc3.addCard(new Card("Alabame", CardType.ROOM));
 		player.addCard(new Card("Pueblo", CardType.ROOM));
 		
-		player.disproveSuggestion(accusation);
+		Card playerDisprove = player.disproveSuggestion(accusation);
 		
-		assertEquals(accusation, playerDisprove);
+		//this tests that the player showed the right card to disprove
+		assertEquals(accusationPerson, playerDisprove);
 		
 		
 	}
