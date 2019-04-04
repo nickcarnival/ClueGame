@@ -4,7 +4,7 @@
  */
 package clueGame;
 import java.awt.Color;
-
+import java.awt.Graphics;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.DateFormat.Field;
@@ -18,9 +18,11 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JPanel;
+
 //we use the same scanner method for every file, 
 //we should probably make a method called "loadFile()"
-public class Board {
+public class Board extends JPanel {
 
 
 	public static final int MAX_BOARD_SIZE = 50;
@@ -430,10 +432,17 @@ public class Board {
 				for(int column = 0; column < numColumns; column++) {
 					//create a new board cell at a certain location with its char
 					boardCellArray[row][column] = new BoardCell(row,column);
+					boardCellArray[row][column].setBoard(this);
 
 					//checks that the initial string is not a door
 					//i.e. if there is not more than one char or the second char is N
 					if(cleanedGridLine[column].length() == 1 || cleanedGridLine[column].charAt(1) == 'N'){
+						//handle cells whose second character is N
+						if(cleanedGridLine[column].length() > 1) {
+							if(cleanedGridLine[column].charAt(1) == 'N') {
+								boardCellArray[row][column].setNameDrawer(true);
+							}
+						}
 						//load in initial character for board cell
 						if(cleanedGridLine[column].charAt(0) == 'W') {
 							boardCellArray[row][column].setWalkway(true);
@@ -447,7 +456,7 @@ public class Board {
 						}
 						boardCellArray[row][column].setDoorway(false);
 						//everything other than a walkway or closet is a room
-						if(cleanedGridLine[column].equals("X") && cleanedGridLine[column].contentEquals("W")) {
+						if(!cleanedGridLine[column].equals("X") && !cleanedGridLine[column].contentEquals("W")) {
 							boardCellArray[row][column].setRoom(true);
 						}
 					//this runs if the initial string is a door
@@ -710,10 +719,11 @@ public class Board {
 		return dealtCards;
 	}
 	
-//	public static void main(String[] args) {
-//		Board board = new Board();
-//		board.setConfigFiles("data/CTest_ClueLayout.csv", "data/CTest_ClueLegend.txt");		
-//		board.initialize();
-//	}
-
+	public void paintComponent(Graphics g) {
+		for (int r = 0; r < numRows; r++) {
+			for (int c = 0; c < numColumns; c++) {
+				boardCellArray[r][c].draw(g);
+			}
+		}
+	}
 }
