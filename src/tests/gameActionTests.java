@@ -1,12 +1,4 @@
 package tests;
-/*
-    Selecting a target location - ComputerPlayer
-    Checking an accusation - Board
-    Disproving a suggestion - Player
-    Handling a suggestion - Board
-    Creating a suggestion - ComputerPlayer
-
- */
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -27,6 +19,15 @@ import clueGame.Solution;
 
 public class gameActionTests {
 	
+	/*
+	 	What class is supposed to do what:
+		Selecting a target location - ComputerPlayer
+		Checking an accusation - Board
+		Disproving a suggestion - Player
+		Handling a suggestion - Board
+		Creating a suggestion - ComputerPlayer
+
+	 */
 	private static Board board;
 	private ComputerPlayer npc;
 	
