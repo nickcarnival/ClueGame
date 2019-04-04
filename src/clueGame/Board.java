@@ -130,7 +130,7 @@ public class Board {
 	}
 
 	//checks if the accusation is equal to the solution
-	public boolean validateAccusation(Accusation accusation) {
+	public boolean validateAccusation(Solution accusation) {
 		return (accusation.getWeapon() == getSolution().getWeapon()
 				&& accusation.getRoom() == getSolution().getRoom()
 				&& accusation.getPerson() == getSolution().getPerson()

@@ -17,7 +17,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import clueGame.Accusation;
 import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.Card;
@@ -149,7 +148,7 @@ public class gameActionTests {
 				peopleCard = c;
 			}
 		}
-		Accusation accusation = new Accusation(weaponCard, peopleCard, roomCard);
+		Solution accusation = new Solution(weaponCard, peopleCard, roomCard);
 		
 		assertEquals(true, board.validateAccusation(accusation));
 
@@ -179,7 +178,7 @@ public class gameActionTests {
 				peopleCard = c;
 			}
 		}
-		Accusation accusation = new Accusation(weaponCard, peopleCard, roomCard);
+		Solution accusation = new Solution(weaponCard, peopleCard, roomCard);
 		
 		assertNotEquals(true, board.validateAccusation(accusation));
 
@@ -209,7 +208,7 @@ public class gameActionTests {
 				peopleCard = c;
 			}
 		}
-		Accusation accusation = new Accusation(weaponCard, peopleCard, roomCard);
+		Solution accusation = new Solution(weaponCard, peopleCard, roomCard);
 		
 		assertNotEquals(true, board.validateAccusation(accusation));
 
@@ -240,7 +239,7 @@ public class gameActionTests {
 				peopleCard = c;
 			}
 		}
-		Accusation accusation = new Accusation(weaponCard, peopleCard, roomCard);
+		Solution accusation = new Solution(weaponCard, peopleCard, roomCard);
 		
 		assertNotEquals(true, board.validateAccusation(accusation));
 
@@ -418,7 +417,39 @@ public class gameActionTests {
 	
 	@Test
 	public void testNoDisprove() {
+		ComputerPlayer npc1 = new ComputerPlayer("Abraham Lincoln", "purple");
+		ComputerPlayer npc2 = new ComputerPlayer("Babraham Bincoln", "yellow");
+		ComputerPlayer npc3 = new ComputerPlayer("David Johnson", "red");
+
+		Solution solution = board.getSolution();
+
+		Solution accusation = new Solution(
+				new Card("String", CardType.WEAPON),
+				new Card("Garfiel", CardType.PERSON),
+				new Card("Kitchen", CardType.ROOM));
 		
+		//give all computer players some player cards
+		npc1.addCard(new Card("Daveed", CardType.PERSON));
+		npc2.addCard(new Card("Jason", CardType.PERSON));
+		npc3.addCard(new Card("Alex", CardType.PERSON));
+		
+		//give all computer players some weapon cards
+		npc1.addCard(new Card("Dagger", CardType.WEAPON));
+		npc2.addCard(new Card("Jack", CardType.WEAPON));
+		npc3.addCard(new Card("Axe", CardType.WEAPON));
+
+		//give all computer players some room cards
+		npc1.addCard(new Card("Denver", CardType.ROOM));
+		npc2.addCard(new Card("Jacksonville", CardType.ROOM));
+		npc3.addCard(new Card("Alabame", CardType.ROOM));
+
+		Card disproveCard1 = npc1.disproveSuggestion(accusation);
+		Card disproveCard2 = npc2.disproveSuggestion(accusation);
+		Card disproveCard3 = npc3.disproveSuggestion(accusation);
+		
+		assertEquals(null, disproveCard1);
+		assertEquals(null, disproveCard2);
+		assertEquals(null, disproveCard3);
 	}
 }
 
