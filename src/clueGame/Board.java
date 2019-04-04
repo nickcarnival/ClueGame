@@ -145,14 +145,18 @@ public class Board {
 	 * Handle Suggestion
 	 *************************************************************/
 	
+	//this method returns the player that disproves the suggestion,
 	public Player handleSuggestion(Solution accusation) {
 		Player disprovenPlayer = null;
 		Boolean disproven = false;
 
 		ArrayList<Player> playerList = getPlayers();
 
+		//iterate over every player
 		for(Player p : playerList) {
+			//if it hasn't already been disproven
 			if(!disproven) {
+				//if the player has at least one of the cards in the accusation
 				if(p.disproveSuggestion(accusation) == accusation.getPerson()
 						|| p.disproveSuggestion(accusation) == accusation.getRoom()
 						|| p.disproveSuggestion(accusation) == accusation.getWeapon()){
