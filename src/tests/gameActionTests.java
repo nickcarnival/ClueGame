@@ -673,7 +673,7 @@ public class gameActionTests {
 		
 		Player disprovenPlayer = board.handleSuggestion(accusation);
 		
-		assertEquals(npc1, disprovenPlayer);
+		assertEquals(player, disprovenPlayer);
 	}
 
 }
