@@ -381,6 +381,11 @@ public class gameActionTests {
     Suggestion that human and another player can disprove, other player is next in list, ensure other player returns answer
 
 	 */
+	
+	@Test
+	public void testNoDisprove() {
+		
+	}
 }
 
 
