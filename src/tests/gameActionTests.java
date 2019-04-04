@@ -464,11 +464,6 @@ public class gameActionTests {
 		HumanPlayer player = new HumanPlayer("You", "black");
 
 		Solution solution = board.getSolution();
-
-		Solution accusation = new Solution(
-				new Card("String", CardType.WEAPON),
-				new Card("Garfiel", CardType.PERSON),
-				new Card("Kitchen", CardType.ROOM));
 		
 		//give all computer players some player cards
 		npc1.addCard(new Card("Daveed", CardType.PERSON));
@@ -484,6 +479,8 @@ public class gameActionTests {
 		npc1.addCard(new Card("Denver", CardType.ROOM));
 		npc2.addCard(new Card("Jacksonville", CardType.ROOM));
 		npc3.addCard(new Card("Alabame", CardType.ROOM));
+		
+		Solution accusation = npc1.createSuggestion();
 
 		Card disproveCard1 = npc1.disproveSuggestion(accusation);
 		Card disproveCard2 = npc2.disproveSuggestion(accusation);
