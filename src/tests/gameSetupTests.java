@@ -147,7 +147,6 @@ public class gameSetupTests {
 	public void testAllCardsDealt() {
 		ArrayList<Card> allCards = board.getAllCards();
 		ArrayList<Card> dealtCards = board.getDealtCards();
-		assertEquals(0, allCards.size());
 		assertEquals(18, dealtCards.size());
 	}
 	
