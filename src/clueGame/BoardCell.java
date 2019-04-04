@@ -6,6 +6,8 @@ package clueGame;
  * automatically generated functions. Super simple.
  */
 
+import java.awt.Graphics;
+
 public class BoardCell {
 	private int row;
 	private int column;
@@ -13,11 +15,21 @@ public class BoardCell {
 	private boolean isRoom;
 	private boolean isDoorway;
 	private boolean isWalkway;
+	private boolean isNameDrawer;
 	private char initial;
+	private Board board;
 	
 	public BoardCell(int row, int column) {
 		this.row = row;
 		this.column = column;
+	}
+	
+	public void draw(Graphics g) { 
+		System.out.println("I am drawing, but the method is not implemented");
+		if(isNameDrawer) {
+			System.out.print("It is my job to draw the name, and my name is");
+			System.out.println(board.getLegend().get(initial));
+		}
 	}
 
 	public int getRow() {
@@ -95,5 +107,13 @@ public class BoardCell {
 
 	public void setRoom(boolean isRoom) {
 		this.isRoom = isRoom;
+	}
+
+	public void setBoard(Board board) {
+		this.board = board;
+	}
+
+	public void setNameDrawer(boolean isNameDrawer) {
+		this.isNameDrawer = isNameDrawer;
 	}
 }

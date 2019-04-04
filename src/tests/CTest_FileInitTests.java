@@ -32,11 +32,11 @@ public class CTest_FileInitTests {
 
 	// NOTE: I made Board static because I only want to set it up one 
 	// time (using @BeforeClass), no need to do setup before each test.
-	private static Board board;
+	private Board board;
 	
 	
-	@BeforeClass
-	public static void setUp() {
+	@Before
+	public void setUp() {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
