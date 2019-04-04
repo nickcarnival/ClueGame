@@ -593,28 +593,39 @@ public class gameActionTests {
 		ComputerPlayer npc2 = new ComputerPlayer("yellow", "Babraham Bincoln" );
 		ComputerPlayer npc3 = new ComputerPlayer("red", "David Johnson");
 		
-		HumanPlayer player = new HumanPlayer("black", "You");
-		
+		ArrayList<Player> playerList = new ArrayList<Player>();
+
+		playerList.add(npc1);
+		playerList.add(npc2);
+		playerList.add(npc3);
+
+		board.setPlayersList(playerList);
+
+		Solution accusation = new Solution(
+				new Card("String", CardType.WEAPON),
+				new Card("Garfiel", CardType.PERSON),
+				new Card("Kitchen", CardType.ROOM));
+
 		//give all computer players some player cards
-		npc1.addCard(new Card("Daveed", CardType.PERSON));
+		npc1.addCard(new Card("Garfiel", CardType.PERSON));
 		npc2.addCard(new Card("Jason", CardType.PERSON));
 		npc3.addCard(new Card("Alex", CardType.PERSON));
-		player.addCard(new Card("Garfiel", CardType.PERSON));
 		
 		//give all computer players some weapon cards
 		npc1.addCard(new Card("Dagger", CardType.WEAPON));
-		npc2.addCard(new Card("Jack", CardType.WEAPON));
+		npc2.addCard(new Card("String", CardType.WEAPON));
 		npc3.addCard(new Card("Axe", CardType.WEAPON));
-		player.addCard(new Card("String", CardType.WEAPON));
 
 		//give all computer players some room cards
 		npc1.addCard(new Card("Denver", CardType.ROOM));
 		npc2.addCard(new Card("Jacksonville", CardType.ROOM));
 		npc3.addCard(new Card("Alabame", CardType.ROOM));
-		player.addCard(new Card("Portugal", CardType.ROOM));
 		
-		
+		//we need to create a list of players and determine which order they disprove
 		ComputerPlayer disprovingPlayer = null;
+
+		disprovingPlayer = (ComputerPlayer) board.handleSuggestion(accusation);
+
 		assertEquals(disprovingPlayer, npc1);
 	}
 }

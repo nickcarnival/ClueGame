@@ -136,7 +136,36 @@ public class Board {
 				&& accusation.getPerson() == getSolution().getPerson()
 				);
 	}
+	
+	public void setPlayersList(ArrayList<Player> playerList) {
+		this.allPlayers = playerList;
+	}
 
+	/*************************************************************
+	 * Handle Suggestion
+	 *************************************************************/
+	
+	public Player handleSuggestion(Solution accusation) {
+		Player disprovenPlayer = null;
+		Boolean disproven = false;
+
+		ArrayList<Player> playerList = getPlayers();
+
+		for(Player p : playerList) {
+			if(!disproven) {
+				if(p.disproveSuggestion(accusation) == accusation.getPerson()
+						|| p.disproveSuggestion(accusation) == accusation.getRoom()
+						|| p.disproveSuggestion(accusation) == accusation.getWeapon()){
+					disproven = true;
+					disprovenPlayer = p;
+					break;
+				}
+			}
+		}
+
+		return disprovenPlayer;
+	}
+	
 	/*************************************************************
 	 * Card Methods
 	 *************************************************************/
