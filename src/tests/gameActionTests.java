@@ -406,8 +406,6 @@ public class gameActionTests {
 	/*
 	(15pts) Handle suggestion - Board. Tests include:
 
-    Suggestion no one can disprove returns null
-    Suggestion only accusing player can disprove returns null
     Suggestion only human can disprove returns answer (i.e., card that disproves suggestion)
     Suggestion only human can disprove, but human is accuser, returns null
     Suggestion that two players can disprove, correct player (based on starting with next player in list) returns answer
@@ -415,6 +413,7 @@ public class gameActionTests {
 
 	 */
 	
+	//Suggestion no one can disprove returns null
 	@Test
 	public void testNoDisprove() {
 		ComputerPlayer npc1 = new ComputerPlayer("Abraham Lincoln", "purple");
@@ -450,6 +449,12 @@ public class gameActionTests {
 		assertEquals(null, disproveCard1);
 		assertEquals(null, disproveCard2);
 		assertEquals(null, disproveCard3);
+	}
+	
+	//Suggestion only accusing player can disprove returns null
+	@Test
+	public void  testAccusingDisprove() {
+		assertEquals(1,4);
 	}
 }
 
