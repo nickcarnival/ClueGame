@@ -570,8 +570,8 @@ public class gameActionTests {
 		BoardCell cell = board.getCellAt(2, 4);
 
 
-		npc1.setLocation(cell);
-		npc1.setBoard(board);
+		player.setLocation(cell);
+		player.setBoard(board);
 
 		Solution accusation = player.createSuggestion();
 
