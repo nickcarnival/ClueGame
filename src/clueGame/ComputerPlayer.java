@@ -52,6 +52,7 @@ public class ComputerPlayer extends Player {
 	
 	public Solution createSuggestion() {
 		Solution suggestion = new Solution();
+		
 		Random random = new Random();
 		// set person to one we haven't seen
 		ArrayList<Card> people = new ArrayList<Card>();

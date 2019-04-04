@@ -480,6 +480,14 @@ public class gameActionTests {
 		npc2.addCard(new Card("Jacksonville", CardType.ROOM));
 		npc3.addCard(new Card("Alabame", CardType.ROOM));
 		
+
+		//places the player in the kitchen
+		BoardCell cell = board.getCellAt(2, 4);
+
+
+		npc1.setLocation(cell);
+		npc1.setBoard(board);
+
 		Solution accusation = npc1.createSuggestion();
 
 		Card disproveCard1 = npc1.disproveSuggestion(accusation);
@@ -490,6 +498,7 @@ public class gameActionTests {
 		assertEquals(null, disproveCard2);
 		assertEquals(null, disproveCard3);
 	}
+	
 }
 
 
