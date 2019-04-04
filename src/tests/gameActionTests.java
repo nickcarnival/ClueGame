@@ -409,7 +409,6 @@ public class gameActionTests {
 	/*
 	(15pts) Handle suggestion - Board. Tests include:
 
-    Suggestion only human can disprove returns answer (i.e., card that disproves suggestion)
     Suggestion only human can disprove, but human is accuser, returns null
     Suggestion that two players can disprove, correct player (based on starting with next player in list) returns answer
     Suggestion that human and another player can disprove, other player is next in list, ensure other player returns answer
@@ -461,8 +460,6 @@ public class gameActionTests {
 		ComputerPlayer npc2 = new ComputerPlayer("yellow", "Babraham Bincoln" );
 		ComputerPlayer npc3 = new ComputerPlayer("red", "David Johnson");
 
-		HumanPlayer player = new HumanPlayer("You", "black");
-
 		Solution solution = board.getSolution();
 		
 		//give all computer players some player cards
@@ -497,6 +494,47 @@ public class gameActionTests {
 		assertEquals(null, disproveCard1);
 		assertEquals(null, disproveCard2);
 		assertEquals(null, disproveCard3);
+	}
+	
+	@Test
+	//Suggestion only human can disprove returns answer (i.e., card that disproves suggestion)
+	public void testHumanDisprove() {
+		
+		ComputerPlayer npc1 = new ComputerPlayer("purple", "Abraham Lincoln");
+		ComputerPlayer npc2 = new ComputerPlayer("yellow", "Babraham Bincoln" );
+		ComputerPlayer npc3 = new ComputerPlayer("red", "David Johnson");
+
+		HumanPlayer player = new HumanPlayer("You", "black");
+
+		Card accusationWeapon = new Card("String", CardType.WEAPON);
+		Card accusationPerson = new Card("Garfiel", CardType.PERSON);
+		Card accusationRoom = new Card("Kitchen", CardType.ROOM);
+		
+		Solution  accusation = new Solution(accusationRoom, accusationPerson, accusationWeapon);
+		
+		//give all computer players some player cards
+		npc1.addCard(new Card("Daveed", CardType.PERSON));
+		npc2.addCard(new Card("Jason", CardType.PERSON));
+		npc3.addCard(new Card("Alex", CardType.PERSON));
+		player.addCard(accusationPerson);
+		
+		//give all computer players some weapon cards
+		npc1.addCard(new Card("Dagger", CardType.WEAPON));
+		npc2.addCard(new Card("Jack", CardType.WEAPON));
+		npc3.addCard(new Card("Axe", CardType.WEAPON));
+		player.addCard(new Card("Pencil", CardType.WEAPON));
+
+		//give all computer players some room cards
+		npc1.addCard(new Card("Denver", CardType.ROOM));
+		npc2.addCard(new Card("Jacksonville", CardType.ROOM));
+		npc3.addCard(new Card("Alabame", CardType.ROOM));
+		player.addCard(new Card("Pueblo", CardType.ROOM));
+		
+		player.disproveSuggestion(accusation);
+		
+		assertEquals(accusation, playerDisprove);
+		
+		
 	}
 	
 }

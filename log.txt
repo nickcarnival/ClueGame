@@ -1,0 +1,1300 @@
+commit 26465467a478e60d55eb7e3e1c60ab1b658cec7b
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Wed Apr 3 21:05:25 2019 -0600
+
+    passing previous test
+
+commit 63bd9c49f807afef4cf73877a8598e2df00f18a6
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Wed Apr 3 20:38:11 2019 -0600
+
+    updated testAccusingDisprove is still failing but has been updated
+
+commit 3068bc06455750e3ab59aeeb843beb5f15ff8198
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Wed Apr 3 20:07:06 2019 -0600
+
+    failing accusationDisprove when the accusing player knows the cards
+
+commit 7780b84c65f92e025472acd8d7cc502420184589
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Wed Apr 3 19:23:39 2019 -0600
+
+    added comments to the tests
+
+commit 585f22709d4875d2234921ac295bee70c5db3e08
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Wed Apr 3 19:21:30 2019 -0600
+
+    added failing test for when only the accusing player can disprove the suggestion
+
+commit 4c87e2c1bc2a34d23c55157e0f1c95a9109ba5d1
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Wed Apr 3 19:18:31 2019 -0600
+
+    added failing test for when no one can disprove. Removed the accusation class because it was the same as the Solution class
+
+commit f1aab33d7415283ebbcc0a68b95eeaafbd9f2719
+Merge: ad00d48 f93aa47
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Wed Apr 3 18:27:19 2019 -0600
+
+    Merge branch 'wip' of https://github.com/ncarn2/ClueGame into wip
+
+commit ad00d482db530c8e07d74e69dc801aca1f01a18b
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Wed Apr 3 18:26:53 2019 -0600
+
+    some more test consolidation
+
+commit f93aa47e2e235cdf59ff8435a56865ebbda66691
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Apr 3 17:36:31 2019 -0600
+
+    added test to disprove suggestion with no matches; already passed
+
+commit 5fc3c0488919d40a092ffe7562c13033b875dc44
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Apr 3 17:27:47 2019 -0600
+
+    test for disproving suggestions with multiple matching cards, which passes
+
+commit 774f24fdbd85fd47024b6eda3a8afc294ff70dae
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Apr 3 15:56:56 2019 -0600
+
+    fixed that problem by changing beforeClass to before
+
+commit 9851cad55016b2794c4121adcd2e21debb2b1f2e
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Apr 3 15:48:08 2019 -0600
+
+    test for disproving suggestion with one matching card passes, but a different one fails
+
+commit a1c0bc57230596dd17896527f7f494cc42360d0a
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Apr 3 15:42:54 2019 -0600
+
+    added test for disproving suggestion with one matching card
+
+commit f4e7c3b38a16fb68a5036e7e18ac3b05b308716d
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Apr 3 15:15:56 2019 -0600
+
+    refactoring to reduce duplication
+
+commit 5f53069f5f14e3c9945ff7923051ac59df7d9a60
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Apr 3 15:04:36 2019 -0600
+
+    test for multiple unseen cards passes
+
+commit 536ddeb4d56a2389ce790805443eee73cf800e17
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Apr 3 13:51:00 2019 -0600
+
+    added test for multiple unseen cards
+
+commit e4e71eff4015b236c9fa522a2fdd8ee985af3688
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Apr 3 13:33:42 2019 -0600
+
+    passing test for room matching current location
+
+commit d45e5d43a9c5ac75663d6cd615946d7848bf0cca
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Apr 3 13:17:34 2019 -0600
+
+    modified gitignore to skip libreoffice lock files
+
+commit d0947b1ddbb8eba22d724e92f6a10f1395f4e51a
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Apr 3 13:16:23 2019 -0600
+
+    added test for room matching current location
+
+commit 973128c5386741a41fee44a435b3955da28f8669
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Wed Apr 3 12:11:42 2019 -0600
+
+    unified some comments so that they match a similar scheme
+
+commit 77041749f59e682199b1b4f1e972f0147bc5c079
+Merge: 5bed846 3f1f8b7
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Wed Apr 3 12:04:19 2019 -0600
+
+    Merge branch 'wip' of https://github.com/ncarn2/ClueGame into wip
+
+commit 5bed84621aa6e0995ee7750db55214ffcb65af9c
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Wed Apr 3 12:04:08 2019 -0600
+
+    fixed the issue where every cell was a room. 'Used .equals instead of =='.
+
+commit 3f1f8b70224fd2c93541abaf60af0d0fddee9835
+Merge: 832760f 00df133
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Apr 3 12:00:21 2019 -0600
+
+    Merge branch 'wip' of github.com:ncarn2/ClueGame into wip
+
+commit 832760fbbdfac7a79e57b235b57b0a13bdacd65b
+Merge: 9749a37 8a03f88
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Apr 3 11:58:54 2019 -0600
+
+    Merge branch 'wip' of github.com:ncarn2/ClueGame into wip
+
+commit 00df133e16fadee62014976349a538a7aa8f772d
+Merge: 9749a37 8a03f88
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Apr 3 11:58:54 2019 -0600
+
+    Merge branch 'wip' of github.com:ncarn2/ClueGame into wip
+
+commit 9749a3769da82238691da7f1e4ab2c0e10da7d7e
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Apr 3 11:58:48 2019 -0600
+
+    test for one unseen card passes
+
+commit 8a03f886cad17b39f21e04e8b5bcb43601e7df21
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Wed Apr 3 11:52:00 2019 -0600
+
+    removed unecessary variables in the tests
+
+commit 0122aae22b8da243eef6802b6d0ce6750118a1e0
+Merge: 9ca2ccf f12a4bb
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Wed Apr 3 11:49:42 2019 -0600
+
+    fixed merge conflicts
+
+commit 9ca2ccf59151af0796c5e87f606077ff9d93ac4c
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Wed Apr 3 11:49:01 2019 -0600
+
+    everything should not be a room
+
+commit f12a4bb49ba7e7641a9eddc55b2d986fc117510b
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Apr 3 11:45:55 2019 -0600
+
+    added test for one unseen card
+
+commit b19e985608a3b9cc05710a31df394e9fa428c541
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Apr 3 11:27:14 2019 -0600
+
+    added documentation for tests
+
+commit 802132885b23d32b77f4d0ad63b9e91475eddbcc
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 21:46:18 2019 -0600
+
+    updated some test
+
+commit a7900a8ee3bf214ad25c5b517ed73006ee3c466d
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 21:42:40 2019 -0600
+
+    created and failing suggestion test
+
+commit e296c0d2575ef6507a6bf811c84f83d1709ce81e
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 21:40:51 2019 -0600
+
+    passing testWrongRoom test
+
+commit 9d757d1619686a85e41e721aec47089eec0a4693
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 21:40:20 2019 -0600
+
+    added testWrongRoom, failing
+
+commit 275b840cc09e690b64b13f1bb01d9d743b1eb9f7
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 21:39:22 2019 -0600
+
+    passing testWrongWeapon passes
+
+commit 7bf77ad511c4bca534ce4fad9b6ae90442b59a45
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 21:38:53 2019 -0600
+
+    failing testWrongWeapon()
+
+commit a419df7a06d8038b59ee65fbebfa6689974e14da
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 21:37:46 2019 -0600
+
+    passing testWrongPerson
+
+commit 9f08ae25a8dbe5be640b40fc38fa62cd314eab39
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 21:36:53 2019 -0600
+
+    added failing testWrongPerson()
+
+commit d369c7cd6ddbbad09232415449e3e4010d106cc9
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 21:23:58 2019 -0600
+
+    added a equals operator to Solution
+
+commit a5076c44696a5c8795d4c8d212932f934d15454d
+Merge: fa6e038 ef2b42f
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Apr 2 21:12:38 2019 -0600
+
+    Merge branch 'wip' of github.com:ncarn2/ClueGame into wip
+
+commit fa6e038bf7dd55691a0e798de84d1c7bf9b05577
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Apr 2 21:12:31 2019 -0600
+
+    wrote test for accusation
+
+commit ef2b42f1d0d19fa9dd1ba089da32b03ce3b1c2db
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 21:10:47 2019 -0600
+
+    added accusationi.java
+
+commit c759ce459c0b78e08847cb9ff66016b5281a2b42
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 20:54:53 2019 -0600
+
+    added MakeAccusation class
+
+commit 7a12a8aa6d80fc58f5824d01d9cc43925c9fba99
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 20:51:56 2019 -0600
+
+    added failing testCorrectSolutions method
+
+commit a5903c3e7b0a6c21df3ae7c2feef1339dd6eb48a
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 20:21:32 2019 -0600
+
+    added failing accusation test
+
+commit fa417bf95be5bc14868482fff2f1bf89557ef66c
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 20:06:26 2019 -0600
+
+    passing last visited tests
+
+commit 947704fe7b4322a06301f922d8bab2a8aea74be8
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 19:36:17 2019 -0600
+
+    added getRandomCell function to reduce repeated code in ComputerPlayer.java
+
+commit 94c4435bd19725ab405d7b4eafb949867ba2a9d1
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 19:32:54 2019 -0600
+
+    added testLastVisited test, this tests that the computer selects a room if it hasnt visited. It also checks that if the Cell was the last visited, the Computer will choose  randomly
+
+commit 7e4ca0b016e422a020acfd3ccb1f6e946b9d3707
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 19:24:21 2019 -0600
+
+    testPickRandom success, the computer player successfully picks randomly
+
+commit 15675092afde962782e93919a9c73e9f1f757aac
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 16:30:01 2019 -0600
+
+    passing testPickRoom, added failing testPickRandom. These test the computers decision making
+
+commit 94bedd244fbd5eecb0b9f09a5112284ff4b10159
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 12:27:59 2019 -0600
+
+    almost passsing setup ttests
+
+commit 25786fb583ed6408ca1e53ae48ddc9f94099b0cb
+Merge: c01c1cc c3321a9
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 12:27:15 2019 -0600
+
+    :q
+    Merge branch 'wip' of https://github.com/ncarn2/ClueGame into wip
+
+commit c01c1cc6cf881d071ccbf0f92f4cfcaa73ee0e72
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 12:27:01 2019 -0600
+
+    almost passing gameActionTest()
+
+commit c3321a916e549d88958050e1cfd6b9c4ddd0fc6a
+Merge: b7f0990 6a00f06
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Apr 2 11:55:17 2019 -0600
+
+    Merge branch 'wip' of github.com:ncarn2/ClueGame into wip
+
+commit b7f099019cd88c7952e4f81b1325ae1500a328b1
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Apr 2 11:55:11 2019 -0600
+
+    refactored solution to use cards not strings
+
+commit 6a00f06b9c7269a4867f3dd04e03ea3f30aaa688
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 11:37:08 2019 -0600
+
+    added testSelectTargets()
+
+commit d061e9fab47d27e6ce36f3eab4c489e7058b0b2b
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Apr 2 11:36:08 2019 -0600
+
+    refactored to remove some magic numbers
+
+commit f8b68ec6c4b3ad17e4f4239db21c35567380096c
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 11:22:15 2019 -0600
+
+    created gameActionTests.java
+
+commit b8436d336c9fd53e75e1d64e28ec8289874c4848
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 11:12:29 2019 -0600
+
+    added the git log to the project, have to resubmit
+
+commit d88c7a2455184341ae858db77e25b5e2bb72b11a
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Apr 2 11:03:10 2019 -0600
+
+    added authors to files without authors
+
+commit c0876e2cf5f21c26cc5fcbc4d808951c696ce646
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Apr 2 01:19:06 2019 -0600
+
+    author comments
+
+commit 80a96b90087240eb543153417fd186912b7e8861
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Apr 2 01:08:52 2019 -0600
+
+    documentation
+
+commit e24e3ba27865d4d734671d4bbb0f2d61e6181861
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Apr 2 00:59:24 2019 -0600
+
+    passing test for double-dealing
+
+commit 4709f93f6d5888f7717b6961b8e8596ee19bbace
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Apr 2 00:59:02 2019 -0600
+
+    added test for double-dealing
+
+commit 027b780cbb5fa7f7d0b5719f154a067b35cf695b
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Apr 2 00:53:48 2019 -0600
+
+    test for player card counts passes
+
+commit 93c710fed8f5516039c69a7cc332626fa636691f
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Apr 2 00:53:25 2019 -0600
+
+    added test for player card counts
+
+commit 37e9d8315c426201f8f6b9cccf580906042568c7
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Apr 2 00:41:36 2019 -0600
+
+    passing test for number of dealt cards
+
+commit 65ba7e124b2b91b55b139a1ed6de2ecc8533992b
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Apr 2 00:19:47 2019 -0600
+
+    made test for number of dealt cards
+
+commit 506496272877823c982ba18bb308c1eb9cfb7dbc
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Mon Apr 1 23:57:14 2019 -0600
+
+    test for number of players loaded passes
+
+commit df2dc817eaa9e7a77e38e6969118b18861f6e2e0
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Mon Apr 1 23:56:21 2019 -0600
+
+    added test for correct number of players loaded
+
+commit ac30b1783085e4a39446dd5376ee07229d0e1892
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Mon Apr 1 23:42:53 2019 -0600
+
+    test for loading NPCs works
+
+commit 01f887cfae66d1edb513995a798d1714cd5800eb
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Mon Apr 1 23:34:49 2019 -0600
+
+    added test for loading of NPCs from file
+
+commit 1f9b81ff3e1311a66656466e460e8ee4a66f88ea
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Mon Apr 1 15:53:57 2019 -0600
+
+    failing player color tests
+
+commit 2734878d9c6db6a85af6a6d816d8e05fa22b770a
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Mon Apr 1 15:21:08 2019 -0600
+
+    have to create all of the players before dealing all of the cards
+
+commit c278feffdf2b3af67c6d2200dac4259fdf0b48c6
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Mon Apr 1 14:59:06 2019 -0600
+
+    created dealCards() method to try and deal cards to players, currently failing tests
+
+commit 32a805f7ff138a0e2ad053587b51968f4b62f286
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Mon Apr 1 14:26:45 2019 -0600
+
+    failed testComputerPlayer1_1
+
+commit 6c4bc8fa2094ce40aeb8eced8fd804e6fc609ca8
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Mon Apr 1 14:20:09 2019 -0600
+
+    solution now exists and is random
+
+commit 88976b2faa96ad95e0cac04b9142623d47e91b88
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Mon Apr 1 13:53:00 2019 -0600
+
+    testing the solution
+
+commit 86ee535779bb1bb7d73ac28c3324c038d7bdd05a
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Mon Apr 1 13:28:21 2019 -0600
+
+    updated gitignore
+
+commit 99337102e76e00adb552599fcf3720bd213e2380
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Thu Mar 21 21:57:32 2019 -0600
+
+    kernel mustard is no longer just a person
+
+commit d5c4dae62497f77e5fc31b603da5caf99882ce88
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Thu Mar 21 21:56:07 2019 -0600
+
+    added another failing test
+
+commit bcc9e1a75e732adbc7ff0f33b22400314fbbe542
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Thu Mar 21 21:52:52 2019 -0600
+
+    currently passing testCardNames()
+
+commit caf013ffd41b6f5ee261570f1ad5c1fda6173f0e
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Thu Mar 21 21:51:38 2019 -0600
+
+    added failing test for the card names
+
+commit fb4ef61f82f23020e3ccc8fd195759c6a2e0eed2
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Thu Mar 21 21:49:22 2019 -0600
+
+    card types work...
+
+commit 0de712916ef407e0b77e346ab8a2666d137d236f
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Thu Mar 21 21:39:38 2019 -0600
+
+    arraySize is the correcet size
+
+commit 97c43883c4382a75ad0709e9303226f25f3dfcce
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Thu Mar 21 21:21:15 2019 -0600
+
+    loadCard() should work now
+
+commit 4628354a6ccd67ccf778a1a7dfb7d42cf0d42447
+Merge: c8d0985 e40a9a4
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Thu Mar 21 20:44:52 2019 -0600
+
+    Merge branch 'wip' of github.com:ncarn2/ClueGame into wip
+
+commit c8d0985e659e9b07c13fbf8b07a2bdbcd7edc201
+Merge: 501c63d 5bb2cfb
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Thu Mar 21 20:44:46 2019 -0600
+
+    merge conflict with humanPlayer fixed
+
+commit e40a9a4657ec589c797070d52fb315e3a79bcdeb
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Thu Mar 21 20:44:21 2019 -0600
+
+    bleh
+
+commit 501c63d35e520ff324012fd67a69aeb21c8400fd
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Thu Mar 21 20:43:30 2019 -0600
+
+    made Player abstract
+
+commit 5bb2cfb33ba659407aa596974af129b7904972fd
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Thu Mar 21 20:29:58 2019 -0600
+
+    player name works
+
+commit c79f0a445ed798a718b812c96cd52423adb77422
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Thu Mar 21 20:20:11 2019 -0600
+
+    put input files in data/
+
+commit 7a65edf4ac2e1407731b4e3392fac6ec678c81d9
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Thu Mar 21 20:08:26 2019 -0600
+
+    fixed infinite loop
+
+commit 9e5706ef61b1378633cc4a7199e85ff968939c91
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Thu Mar 21 19:13:30 2019 -0600
+
+    closed the scanners in loadPlayers and loadCards
+
+commit 2bd0c211f1d56b5abd1dbd7ea65d1013913c9e32
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Thu Mar 21 12:08:40 2019 -0600
+
+    added cards config file
+
+commit 4697a255a1f64c7d23bba6f6947f228fc32c8678
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Wed Mar 20 17:26:48 2019 -0600
+
+    added some config files for both players and cards
+
+commit 330b11c0ce4ebc9c9ddb44fde151babe1635a9fe
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Mar 19 12:11:20 2019 -0600
+
+    added playerconfig
+
+commit 2a53b3056b320e3f41fdb02b9e69c17fef4fb1d8
+Merge: ab5c0aa 9bd6f5c
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Mar 19 12:04:47 2019 -0600
+
+    Merge branch 'wip' of github.com:ncarn2/ClueGame into wip
+
+commit ab5c0aa98cd4534f0838e9f549a77429907df432
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Mar 19 12:04:23 2019 -0600
+
+    implemented basic UML for players and cards
+
+commit 9bd6f5c29906982b267db517922ad9ce15c853f2
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Mar 19 12:04:26 2019 -0600
+
+    added more skelton code for gameSetupTests.java
+
+commit a389377e4bc829302c6310cc91b2e86a7be04bc2
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Mar 19 11:56:07 2019 -0600
+
+    created gameSetupTests
+
+commit 8aa4af66c064cfa44d443d2076beb99fb27a09d9
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Tue Mar 19 11:38:34 2019 -0600
+
+    created gameSetupTests.java
+
+commit 79ef9e19168a8663fd38bc05af6e16fc848c6109
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Mon Mar 18 16:51:01 2019 -0600
+
+    added the C17 txt file and put it in an ignored directory so that we don't commit assignment files
+
+commit 8460e5cfdda035ce332a83d435b21748efb5a808
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Sun Mar 17 15:32:24 2019 -0600
+
+    cleaned up how exceptions are thrown during initialization
+
+commit c8c6413eeb38d93de1f9d611bd1d73a7e9cdd0bb
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Sun Mar 17 15:21:25 2019 -0600
+
+    made layoutFile and legendFile lowerCamelCase
+
+commit 490ff3d2fb324666d9697891e8fe1873c1e07449
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Sun Mar 17 15:19:39 2019 -0600
+
+    made setNumRows less confusing
+
+commit b797b8e0c680bb39603397f299d5712df1b6d919
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Sun Mar 17 00:03:29 2019 -0600
+
+    reduced duplication of calcTargets code
+
+commit 68eae5cfbc53dd154f963cce86a08d2ef7ca0fd0
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Sat Mar 16 23:58:55 2019 -0600
+
+    fixed capitalization of numRows and numColumns
+
+commit 4e6aa158c1cdfee873cc08d8c0a15e3c3c37a242
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Sat Mar 16 17:37:49 2019 -0600
+
+    added the isWalkway vairable to each boardcell in order to clean up our large if statements. Went from .getinitial() == 'W' to .isWalkway().
+
+commit e10ff7e451d44ca9a275207931294d82535ded24
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Sat Mar 16 17:23:57 2019 -0600
+
+    removed unneccessary variables and imports
+
+commit e9204b581464c4d9b710f9dab4b1847dcb5c8a6f
+Merge: 39f1103 71b1af2
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Sat Mar 16 17:06:38 2019 -0600
+
+    merge wip and master
+
+commit 71b1af2da9b73a72d0c9f36aa3f18f6d3ecfab1e
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Sat Mar 16 17:02:41 2019 -0600
+
+    refactored NumRows and NumColumns to have both a getter and a setter. setNumRows, set NumColumns
+
+commit 39f11034c6db9174ea42621149eaffd202fbbf06
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Thu Mar 14 18:27:18 2019 -0600
+
+    Removed redundancy of getNumRows() and getNumColumns()
+
+commit feca5e268911c5b8d7866d8406a63848070adb92
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Thu Mar 14 18:18:02 2019 -0600
+
+    merging master with passAdjTests
+
+commit 6fdfb9a430152b73360c21d1ee2348f6d7f6b68d
+Merge: 5a8a457 d97e218
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Mar 13 20:46:37 2019 -0600
+
+    concluding merge of failAdjTests into passAdjTests
+
+commit 5a8a4574f0d443b385a89c5859988dd63be50fd1
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Mar 13 20:45:09 2019 -0600
+
+    just committing the bin/.gitignore
+
+commit d97e2189272cc0a118524ba2811f60131474bcf1
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Mar 13 20:42:35 2019 -0600
+
+    refactoring and documentation
+
+commit 66809017268ea02d550cdc097788dd2876393628
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Wed Mar 13 18:44:24 2019 -0600
+
+    all tests pass
+
+commit c3ce7e0fafe3ce3ee1baa220be5d1461f23a6449
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Wed Mar 13 18:34:17 2019 -0600
+
+    all tests pass
+
+commit 9fe88800c73345fb5c7bf9247994366640da6cbc
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Wed Mar 13 18:07:23 2019 -0600
+
+    there tests passgit add .
+
+commit d438d9711f002d2b08396098fc867d86f8fd60d1
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Wed Mar 13 16:47:53 2019 -0600
+
+    refactors calcAdjacencies
+
+commit bc720b48901e16d4408d0bfa0632e19da099e25e
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Wed Mar 13 16:08:20 2019 -0600
+
+    added board2 to main
+
+commit 5ee7bf7d557f3eeb9b9150d315429f983e7691e4
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Tue Mar 12 22:20:54 2019 -0600
+
+    passing 9 tests
+
+commit fac0b732eea88fc76de96f9320095dbda19954c2
+Merge: bcb20d8 27d0289
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Mar 12 21:56:54 2019 -0600
+
+    overloading
+
+commit bcb20d85b38ae0278e8ece73ca746b690cd3a4ab
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Mar 12 21:55:22 2019 -0600
+
+    overloading
+
+commit 27d02897d050442e662c2212952a282fad7ef572
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Tue Mar 12 21:54:58 2019 -0600
+
+    worked on final all targets
+
+commit 5a45b3188a6766a49bf65ac0bb1e8bb2beb4f779
+Merge: 1d54f03 cbaa17d
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Mar 12 21:19:58 2019 -0600
+
+    Merge branch 'failAdjTests' of github.com:ncarn2/ClueGame into failAdjTests
+
+commit 1d54f03b61daafe84e34a6c292dde48e8e14de57
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Mar 12 18:57:55 2019 -0600
+
+    fixed our tests
+
+commit cbaa17d208b7b8739bab851dc97011660d91f3c9
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Mar 12 18:57:55 2019 -0600
+
+    fixed our tests
+
+commit bddc82b981e0b0710fed26d39f747627c033b817
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Mar 12 18:38:57 2019 -0600
+
+    another adjacency test working
+
+commit 1a9903e6a03451538fdb3b7cc0606730b42c3728
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Mar 12 18:21:25 2019 -0600
+
+    got a third test passing
+
+commit dc4ed2fb6a437ef74a43463ea57a3ef8b2d834b8
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Mon Mar 11 23:09:05 2019 -0600
+
+    two passing tests
+
+commit 376273992c7f5b9717be952a2bdcea4ab9190897
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Mon Mar 11 22:59:22 2019 -0600
+
+    doors have correct adjacencies
+
+commit da297098267563f12937be077b9bd43e7666302c
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Mon Mar 11 21:56:15 2019 -0600
+
+    refactor
+
+commit b618e021a9a28e2263aa44e1e58c0ff578427d2c
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Mon Mar 11 21:53:02 2019 -0600
+
+    updates to calcAdjacencies
+
+commit 0778bc660168866d0f927135c547b910f34eb515
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Sun Mar 10 20:20:06 2019 -0600
+
+    all tests fail
+
+commit c0c5b382f185ede12890ebdcc312b3ade9446004
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Sun Mar 10 20:19:24 2019 -0600
+
+    all tests fail
+
+commit 70c7441531651806fee67280779e42879e26b4a6
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Sun Mar 10 20:04:34 2019 -0600
+
+    switching this branch to failingAdjTests branch
+
+commit 8a293998653b1ecc965930d71b2a3d185550861a
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Sun Mar 10 19:50:46 2019 -0600
+
+    finished skeleton code
+
+commit b2037118524c6453a60cd5d698d493f9a99505d8
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Sun Mar 10 19:49:34 2019 -0600
+
+    finished skeleton code
+
+commit 9f6d4003e05cb69fe58f217d5713f0e40004827c
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Sun Mar 10 18:45:29 2019 -0600
+
+    updated excelmap. Finished skeleton for walkway tests, not doors.
+
+commit 67969f3404a5245550283af116d724433a93cc54
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Sun Mar 10 16:54:56 2019 -0600
+
+    added skeleton testAdjWalkways
+
+commit acecbe3cd20f349f9d89088ef4b9451cc5a9ca70
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Sun Mar 10 16:34:31 2019 -0600
+
+    added the skeleton for testAdjacencyDoorways
+
+commit 14c4676d71a748cd84c8c2e94926771760a0adfe
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Sun Mar 10 13:32:52 2019 -0600
+
+    skeleton for testAdjacencyRoomExit
+
+commit 3254eb2b762a35ee4ab626f51390420055b8ae88
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Sun Mar 10 13:14:03 2019 -0600
+
+    testAdjacenciesInsideRoom method protrays actual board cell values with relation to the excel file:
+
+commit a48a7f0ef84691b2d256a0826d186c180135c4b7
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Sun Mar 10 13:04:43 2019 -0600
+
+    created our test class
+
+commit b62b7e38d3a10852048987e14724f8bbb405aefa
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Sun Mar 10 13:01:01 2019 -0600
+
+    updated map colors and added testsMap.csv
+
+commit 6e601f21e176483f1c32a743297bd4ab567c07dd
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Sat Mar 9 21:00:26 2019 -0700
+
+    added the new map.csv
+
+commit 3e6cd76c555633c2907900afbab27656e8289f78
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Sat Mar 9 10:21:54 2019 -0700
+
+    some more additions/refactoring
+
+commit 74338b35a5980d2c68b35377854e4dd7d5b853d8
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Sat Mar 9 10:16:26 2019 -0700
+
+    Copied IntBoard methods to Board; some refactoring
+
+commit e4e08e30b59867f4ea2bea2fe228f15f06981c7c
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Sat Mar 9 09:35:39 2019 -0700
+
+    getAdjList
+
+commit cc7fe3bb1f7f55988795fbacb6a6c74dc9efbe66
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Sat Mar 9 09:15:01 2019 -0700
+
+    created new branch
+
+commit b1f26bbffbf99007ae2ebaf1a9ab3aab80a690e2
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Thu Mar 7 23:42:11 2019 -0700
+
+    added comments to every method, removed the main method, cleaned up the board.java file as a whole
+
+commit c95e0daadef2e85e810d06b5c7a70e3776ee6a28
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Thu Mar 7 22:26:34 2019 -0700
+
+    created auto generated methods in board.java
+
+commit 0af4051c53c4d27883b41344e54dc5829e15ee6b
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Thu Mar 7 22:12:33 2019 -0700
+
+    added the new test
+
+commit 284b7683f4f0abc97b9a44f29e26758022970aef
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Thu Mar 7 22:11:45 2019 -0700
+
+    added the file
+
+commit 5b07755650c0d6d0b80123f7bafbed7789b6f0e7
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Thu Mar 7 12:09:00 2019 -0700
+
+    removed some commented out code
+
+commit b19ebdc0b8b68e5f4bc4423b73a14f53e38fb2a6
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Thu Mar 7 12:07:47 2019 -0700
+
+    imported board adj tests
+
+commit 86f324686486fdb376dcc20f8410a0a4457731a2
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Thu Mar 7 09:57:01 2019 -0700
+
+    fixed bug and added authors
+
+commit 9c8285bc0435319a0ced5405665243c34bf19ab1
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Mar 6 23:37:41 2019 -0700
+
+    asdf
+
+commit 3f83e40a32100391da92d7082b4c2e17adeb20a1
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Wed Mar 6 23:17:10 2019 -0700
+
+    fileinit tests passes twice
+
+commit be77653f0ddc21ebe669c94bda43491173376d94
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Wed Mar 6 22:50:58 2019 -0700
+
+    finished exceptions
+
+commit ff6e8bc018d00ab401d538a609c733774d285000
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Wed Mar 6 22:40:28 2019 -0700
+
+    finished test 2 of the exceptions
+
+commit fc01d91dd3657e4d72c22b889744f5dd0aabdcc6
+Merge: ff2b896 fabc784
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Mar 6 22:24:21 2019 -0700
+
+    Merge branch 'badFormat' of github.com:ncarn2/ClueGame into badFormat
+
+commit fabc7844e02bb337c41faba70ad8fa42a7d2837d
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Wed Mar 6 22:23:47 2019 -0700
+
+    finished first testss
+
+commit ff2b896b948bd73fb72964b844a3723374cbde19
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Wed Mar 6 22:23:05 2019 -0700
+
+    fixed data/CTest...
+
+commit bc458d682ec3844890f39b4fd34671bd07a2214f
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Wed Mar 6 22:11:32 2019 -0700
+
+    working on bad format
+
+commit a1fb4b68c9e5cb4833dd4801a5ae3a403ba8ccb7
+Merge: 35da990 4479182
+Author: Nicholas Carnival <36806704+ncarn2@users.noreply.github.com>
+Date:   Wed Mar 6 19:09:16 2019 -0700
+
+    Merge pull request #5 from ncarn2/passingTests
+    
+    current working state
+
+commit 4479182c894e2ae2809ce13e164c7a2b11d04f94
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Wed Mar 6 19:08:49 2019 -0700
+
+    current working state
+
+commit 35da990a272b042e70abf4d2097b8086afc79e94
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Wed Mar 6 16:57:20 2019 -0700
+
+    this is very important and will be what I revert back to if anything breaks, it has FileInitTests working as well as CTest_FileInitTests working
+
+commit 6afe2269332feaabfc5db48eccf154167ad49212
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Wed Mar 6 16:28:04 2019 -0700
+
+    ctest fileinit, fileinit, and intboardtests All work
+
+commit 52e2be1ce3e96610139f6887877c92a89e09abfa
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Wed Mar 6 15:28:29 2019 -0700
+
+    quick commit
+
+commit 62c43fcf67dacc00081e7155d3df8e001b53387e
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Wed Mar 6 15:15:24 2019 -0700
+
+    CTestPFileINitTests does some shit that works
+
+commit 5833c3ed4e86c691737a82dc427af5036dfb7231
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Wed Mar 6 15:00:19 2019 -0700
+
+    working 4/5 on CTest_FileInitTest
+
+commit 24357e41666d91d93e649446a4f247a628e588ea
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Wed Mar 6 14:29:25 2019 -0700
+
+    finished all five testsgit add .git add .git add .git add .
+
+commit dd746623c949a216456c9d6bff31b90264a70c30
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Wed Mar 6 14:16:51 2019 -0700
+
+    finished testRoomInitials
+
+commit 85157d92bf690e3500650ace6391eb47f39c4f7c
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Wed Mar 6 14:07:24 2019 -0700
+
+    finished testing doorways
+
+commit 0553ff755359ba10f770802898ade59731bd2c5c
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Tue Mar 5 21:12:53 2019 -0700
+
+    we have 22 columns
+
+commit ad89f3786b123d2441505bf45aa93ee77258d818
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Tue Mar 5 21:11:11 2019 -0700
+
+    finished test 2
+
+commit 9d0cf6883536296def8412bc3e000f905374ef94
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Tue Mar 5 20:49:24 2019 -0700
+
+    passing the first test
+
+commit 8bb792a38f563478831138eb6a247919a0ac761b
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Tue Mar 5 17:24:50 2019 -0700
+
+    working on initialize and badconfigformat exceptions
+
+commit 337211f94da63da7a9165f8510761285b39a73f1
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Tue Mar 5 16:59:31 2019 -0700
+
+    workin state, CSV parsing in progress
+
+commit c0fe7321f41edb846a008a2da631bff578a76e4e
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Tue Mar 5 16:15:36 2019 -0700
+
+    added door direction enum
+
+commit ded29835259e09dd144739e44bbef0376bfb51ef
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Tue Mar 5 15:40:02 2019 -0700
+
+    resolved conflicts
+
+commit 113a72a759c20db1a8e764f091f37f1d89280f51
+Merge: 09530fd 34912c3
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Tue Mar 5 15:38:13 2019 -0700
+
+    fixed conflict
+
+commit 09530fd8518c3e63c91c7d93bca3250c05e286a1
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Tue Mar 5 15:37:07 2019 -0700
+
+    moved shit around
+
+commit 34912c3163250fc3edb9fe1111393eda93e8b09c
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Mar 5 15:32:14 2019 -0700
+
+    Failing tests that work
+
+commit 6011f283eaadf1e288df34367a2dc640576b8015
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Tue Mar 5 12:07:02 2019 -0700
+
+    set config, removed two get rows
+
+commit 748cd95d345edade5c04f04f4f85da257f5c2159
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Mar 5 11:55:00 2019 -0700
+
+    moved rooms.txt
+
+commit d9b04e3ccaebc84ac91c4fee7ac8512065787a0c
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Tue Mar 5 11:54:07 2019 -0700
+
+    removed numbers from map
+
+commit 1549cffe34007625dc8d21ef55f7e98158d52f11
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Tue Mar 5 11:44:17 2019 -0700
+
+    created dummy methods
+
+commit 6e3f1b059d54a64e0ae6e40fc6e1090a65d258d8
+Merge: 5d03f0f a531584
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Tue Mar 5 11:41:55 2019 -0700
+
+    Merge branch 'master' of https://www.github.com/ncarn2/ClueGame
+
+commit 5d03f0f49fd168b229dc11c37fbe12596a7f2d1b
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Tue Mar 5 11:41:45 2019 -0700
+
+    added map and rooms
+
+commit a53158459cf24ee49b736b33bdd745e41e0d5163
+Merge: 085c016 318b7ce
+Author: Nicholas Carnival <36806704+ncarn2@users.noreply.github.com>
+Date:   Tue Mar 5 11:37:00 2019 -0700
+
+    Merge pull request #3 from ncarn2/failingTests
+    
+    created stub classes
+
+commit 085c01628454fb7576593b6cbeed0d2c9e3845b2
+Merge: 570c6f3 30543b1
+Author: Nicholas Carnival <36806704+ncarn2@users.noreply.github.com>
+Date:   Tue Mar 5 11:31:39 2019 -0700
+
+    Merge pull request #2 from ncarn2/passingTests
+    
+    Passing tests
+
+commit 318b7ce69bf1ee66d404fcbe0b627f90244b1b81
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Tue Mar 5 11:30:34 2019 -0700
+
+    created stub classes
+
+commit 30543b1c8eae15536def8ea5ee2fbdfc56b138cc
+Merge: 652aafa a4b4850
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Mar 5 11:22:41 2019 -0700
+
+    Merge branch 'wip' of github.com:ncarn2/ClueGame into wip
+
+commit 570c6f3069739891b300326506218e43315763ee
+Merge: 14292bb 8479780
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Tue Mar 5 11:20:45 2019 -0700
+
+    Merge branch 'master' of https://www.github.com/ncarn2/ClueGame
+
+commit 14292bb77096d96ef1dabdd17478a31bc4bd484a
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Tue Mar 5 11:20:36 2019 -0700
+
+    added a readme
+
+commit 652aafaffd095f4a288ba60230a7dd417f78f448
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Mar 5 11:20:16 2019 -0700
+
+    dir structure for c13
+
+commit 8479780ee6bb8c0e2a8209abcdd8ac0db6e51fac
+Merge: 62e256a a4b4850
+Author: Nicholas Carnival <36806704+ncarn2@users.noreply.github.com>
+Date:   Tue Mar 5 11:16:32 2019 -0700
+
+    Merge pull request #1 from ncarn2/wip
+    
+    Wip Merge to Master
+
+commit a4b485029247e0343e898f6f7aa1380073e9a47b
+Merge: 9805b32 70106d4
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Tue Mar 5 11:13:10 2019 -0700
+
+    attempt at conflict resolution
+
+commit 9805b32506ce8eac93bd69ae76acbb43aafe7b0d
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Tue Mar 5 11:08:05 2019 -0700
+
+    removed metadata because metadata should be in the workspace not the java project
+
+commit 70106d48fdee9b8c488c3850942bce6a82fd77e6
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Tue Mar 5 10:55:30 2019 -0700
+
+    fixes to tracked files
+
+commit 07141be0df00c26a9bc1b3c4d017104465b5f4ec
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Mon Mar 4 23:31:10 2019 -0700
+
+    passing target tests
+
+commit 40f325b7301f4f3de9246f7eca2ee19ea0316d59
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Mon Mar 4 22:45:49 2019 -0700
+
+    some fixes to targeting
+
+commit f8b964410a590fc7cc35da17ae91410918742064
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Mon Mar 4 21:29:51 2019 -0700
+
+    passing adjacency tests
+
+commit 62e256a87cc62526f6cf97716026039cdb93bd78
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Mon Mar 4 17:27:17 2019 -0700
+
+    temporarily working
+
+commit cf7c1b1a7674054fd2627eb762e5d8e8429c91cc
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Mon Mar 4 17:26:09 2019 -0700
+
+    added junit4
+
+commit 5ac2168bb173d02a08a0c6d9e1a24f083f624171
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Mon Mar 4 17:22:41 2019 -0700
+
+    created a new project
