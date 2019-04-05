@@ -5,9 +5,14 @@
 package clueGame;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,15 +20,17 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/*
+ * This class controls all of the GUI
+ */
+
 public class ControlPanel extends JFrame{
-	
-	private JTextField titleBar;
 
 	public ControlPanel() {
 
 		setTitle("Clue Game");
 		setSize(1080, 720);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		createLayout();
 	}
 	
@@ -31,31 +38,40 @@ public class ControlPanel extends JFrame{
 
 		@Override
 		public void actionPerformed(ActionEvent action) {
-			String message = "Hello" + titleBar.getText();
-			JOptionPane.showMessageDialog(null, message);
+			System.out.println(action.getSource());
 		}
 		
 	}
 	public void createLayout() {
-		JPanel topPanel = new JPanel();
-		JPanel middlePanel = new JPanel();
-		JPanel bottomPanel = new JPanel();
-		JPanel rightPanel = new JPanel();
+        JLabel label = new JLabel("File");
+        JLabel whoseTurn = new JLabel("Whose turn? ");
+        JLabel myCards = new JLabel("My Cards");
 
-		JLabel nameLabel = new JLabel("File");
-		JButton nextPlayerButton = new JButton("Next Player");
-		JButton makeAccusationButton = new JButton("Make an Accusation");
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        JPanel topPanel = new JPanel();
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel rightPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
-		titleBar = new JTextField(20);
+        JButton makeAccusationButton = new JButton("Make Accusation");
+        JButton nextPlayerButton = new JButton("Next Player");
 
-		nextPlayerButton.addActionListener(new ButtonListener());
+        bottomPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        rightPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-		topPanel.add(nameLabel, BorderLayout.NORTH);
-		topPanel.add(titleBar, BorderLayout.CENTER);
+        makeAccusationButton.setPreferredSize(new Dimension(300, 50));
+        nextPlayerButton.setPreferredSize(new Dimension(300, 50));
 
-		add(nextPlayerButton, BorderLayout.SOUTH);
-		//add(makeAccusationButton, BorderLayout.SOUTH);
+        bottomPanel.add(nextPlayerButton);
+        bottomPanel.add(makeAccusationButton);
 
+
+        mainPanel.add(topPanel, BorderLayout.NORTH);
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+
+        topPanel.add(label);
+
+        add(mainPanel);
+        setVisible(true);
 	}
 	public static void main(String args[]) {
 		ControlPanel cp = new ControlPanel();
