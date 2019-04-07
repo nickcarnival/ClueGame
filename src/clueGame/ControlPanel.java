@@ -208,6 +208,7 @@ public class ControlPanel extends JFrame{
 	public void setPastGuess(String past) {
 		pastGuess = past;
 	}
+
 	public String getPastGuess() {
 		return pastGuess;
 	}
