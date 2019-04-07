@@ -30,6 +30,7 @@ public class ControlPanel extends JFrame{
 
 	//these values go in the text fields
 	private String whoseTurnString = "Miss Scarlet";
+	private String pastGuess = "Miss Scarley Lounge Candlestick";
 	private String diceValue = "4";
 	private String emptyString = "    ";
 
@@ -74,12 +75,18 @@ public class ControlPanel extends JFrame{
         JPanel boardPanel = new JPanel();
 
         //cards
-        JPanel cardPanel = new JPanel();
+        JPanel cardPanel = new JPanel(new GridLayout(3, 0));
         JLabel myCards = new JLabel("My Cards");
 
         JPanel peopleCardPanel = new JPanel();
         JPanel weaponCardPanel = new JPanel();
         JPanel roomCardPanel = new JPanel();
+
+        //contains upperBottomPanel and lowerBottomPanel
+        JPanel bottomPanel = new JPanel(new GridLayout(2, 0));
+
+        //contains buttons and whoseturn
+        JPanel upperBottomPanel = new JPanel(new GridLayout(1, 3)); //2rows 3columns
 
         //whose turn
         JPanel whoseTurnPanel = new JPanel();
@@ -89,10 +96,12 @@ public class ControlPanel extends JFrame{
         whoseTurnField.setEditable(false);
         whoseTurnField.setText(whoseTurnString );
 
-
         //buttons
         JButton nextPlayerButton = new JButton("Next Player");
         JButton makeAccusationButton = new JButton("Make Accusation");
+
+        //contains dice roll and guess
+        JPanel lowerBottomPanel = new JPanel(new GridLayout(1, 3));
 
         //dice
         JPanel diePanel = new JPanel(new GridLayout(1,2));
@@ -103,20 +112,15 @@ public class ControlPanel extends JFrame{
         
         //guess's
         JPanel guessPanel = new JPanel(new GridLayout(1,2));
+        JTextField guess = new JTextField(pastGuess);
 
         JPanel guessResultPanel = new JPanel(new GridLayout(1,2));
+        JLabel guessResultLabel = new JLabel("Respone");
         JTextField guessResult = new JTextField();
         guessResult.setEditable(false);
+        guessResultPanel.add(guessResultLabel);
+        guessResultPanel.add(guessResult);
 
-
-        //contains buttons and whoseturn
-        JPanel bottomPanel = new JPanel(new GridLayout(1, 3));
-        bottomPanel.add(diePanel);
-        bottomPanel.add(guessPanel);
-        bottomPanel.add(guessResultPanel);
-
-        //contains dice roll and guess
-        JPanel lowerBottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         
         boardPanel.add(board);
         
@@ -131,6 +135,7 @@ public class ControlPanel extends JFrame{
         roomCardPanel.setBorder(new TitledBorder("Rooms"));
         diePanel.setBorder(new TitledBorder("Dice"));
         guessPanel.setBorder(new TitledBorder("Guess"));
+        guessResultPanel.setBorder(new TitledBorder("Guess Result"));
         whoseTurnPanel.setBorder(new TitledBorder("Whose Turn"));
         bottomPanel.setBorder(new TitledBorder("Bottom Panel"));
 
@@ -144,19 +149,18 @@ public class ControlPanel extends JFrame{
 
         whoseTurnPanel.add(whoseTurnField);
         
-        guessPanel.add(guessResult);
+        guessPanel.add(guess);
 
-        //setting the button size
-        makeAccusationButton.setPreferredSize(new Dimension(300, 50));
-        nextPlayerButton.setPreferredSize(new Dimension(300, 50));
+        upperBottomPanel.add(whoseTurnPanel);
+        upperBottomPanel.add(nextPlayerButton);
+        upperBottomPanel.add(makeAccusationButton);
 
-        bottomPanel.add(whoseTurnPanel, BorderLayout.SOUTH);
-        bottomPanel.add(guessPanel);
-        bottomPanel.add(guessResultPanel);
-
-        bottomPanel.add(nextPlayerButton);
-        bottomPanel.add(makeAccusationButton);
-
+        lowerBottomPanel.add(diePanel);
+        lowerBottomPanel.add(guessPanel);
+        lowerBottomPanel.add(guessResultPanel);
+    
+    
+        bottomPanel.add(upperBottomPanel);
         bottomPanel.add(lowerBottomPanel);
 
         mainPanel.add(topPanel, BorderLayout.NORTH);
