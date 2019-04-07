@@ -113,6 +113,7 @@ public class ControlPanel extends JFrame{
         //guess's
         JPanel guessPanel = new JPanel(new GridLayout(1,2));
         JTextField guess = new JTextField(pastGuess);
+        guess.setEditable(false);
 
         JPanel guessResultPanel = new JPanel(new GridLayout(1,2));
         JLabel guessResultLabel = new JLabel("Respone");
