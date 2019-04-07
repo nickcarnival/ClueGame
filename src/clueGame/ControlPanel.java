@@ -26,6 +26,10 @@ import javax.swing.JTextField;
 
 public class ControlPanel extends JFrame{
 
+	//these values go in the text fields
+	private String whoseTurnString = "Miss Scarlet";
+	private String diceValue = "4";
+
 	public ControlPanel() {
 
 		setTitle("Clue Game");
@@ -43,38 +47,73 @@ public class ControlPanel extends JFrame{
 		
 	}
 	public void createLayout() {
+
+        /*
+         * Desired Layout of the GUI:
+			 * Board
+			 * Card
+			 * Weapon
+			 * People 
+			 * Room
+			 * Whose Turn
+			 * Buttons
+			 * Dice
+			 * Guess
+         */
+		
         JLabel board = new JLabel("board");
 
         JPanel mainPanel = new JPanel(new BorderLayout());
         JLabel label = new JLabel("File");
 
         JPanel topPanel = new JPanel();
+        
+        //board
         JPanel boardPanel = new JPanel();
 
+        //cards
         JPanel cardPanel = new JPanel();
-        JLabel whoseTurn = new JLabel("Whose turn? ");
         JLabel myCards = new JLabel("My Cards");
 
         JPanel peopleCardPanel = new JPanel();
         JLabel peopleCardLabel = new JLabel("People Cards");
-
         JPanel weaponCardPanel = new JPanel();
         JLabel weaponCardLabel = new JLabel("Weapon Cards");
-
         JPanel roomCardPanel = new JPanel();
         JLabel roomCardLabel = new JLabel("Room Cards");
 
+        //whose turn
+        JPanel whoseTurnPanel = new JPanel();
+
+        //this contains the actual text
+        JTextField whoseTurnField = new JTextField();
+
+        whoseTurnField.setText("Who's turn " + whoseTurnString );
+        JLabel whoseTurnLabel = new JLabel("Whose turn?");
+
+        //buttons
+        JButton nextPlayerButton = new JButton("Next Player");
+        JButton makeAccusationButton = new JButton("Make Accusation");
+
+        //dice
+        JPanel diePanel = new JPanel();
+        JTextField diceRoll = new JTextField();
+        diceRoll.setText(diceValue);
+        
+        //guess's
+        JPanel guessPanel = new JPanel();
+
+        JPanel guessResultPanel = new JPanel();
+
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
-        JButton makeAccusationButton = new JButton("Make Accusation");
-        JButton nextPlayerButton = new JButton("Next Player");
 
         topPanel.add(label);
         
         boardPanel.add(board);
         
-        board.setPreferredSize(new Dimension(400, 400));
-        cardPanel.setPreferredSize(new Dimension(100, 680));
+        board.setPreferredSize(new Dimension(550, 550));
+        cardPanel.setPreferredSize(new Dimension(150, 680));
 
         //setting border colors
         board.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -82,9 +121,9 @@ public class ControlPanel extends JFrame{
         weaponCardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         peopleCardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         roomCardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        diePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        guessPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         bottomPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-
 
         //adding each type of card to the card panel
         cardPanel.add(weaponCardPanel, BorderLayout.NORTH);
@@ -95,7 +134,9 @@ public class ControlPanel extends JFrame{
         peopleCardPanel.add(peopleCardLabel);
         roomCardPanel.add(roomCardLabel);
 
-        cardPanel.add(whoseTurn);
+        whoseTurnPanel.add(whoseTurnLabel);
+
+        bottomPanel.add(whoseTurnPanel);
 
         //setting the button size
         makeAccusationButton.setPreferredSize(new Dimension(300, 50));
@@ -113,6 +154,25 @@ public class ControlPanel extends JFrame{
         add(mainPanel);
         setVisible(true);
 	}
+	
+	//whose turn getters and setters
+	public void setWhoseTurn(String whose) {
+		whoseTurnString = whose;
+	}
+
+	public String getWhoseTurn() {
+		return whoseTurnString;
+	}
+
+	//dice getters and setters
+	public void setDiceValue(String dice) {
+		diceValue = dice;
+	}
+	public String getDiceValue() {
+		return diceValue;
+	}
+	
+	
 	public static void main(String args[]) {
 		ControlPanel cp = new ControlPanel();
 		cp.setVisible(true);
