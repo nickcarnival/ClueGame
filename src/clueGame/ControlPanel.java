@@ -28,7 +28,7 @@ import javax.swing.border.TitledBorder;
 
 public class ControlPanel extends JFrame{
 
-	//these values go in the text fields
+	//these are all set to temporary values, but will later be updated by the board
 	private String whoseTurnString = "Miss Scarlet";
 	private String pastGuess = "Miss Scarley Lounge Candlestick";
 	private String diceValue = "4";
@@ -37,7 +37,9 @@ public class ControlPanel extends JFrame{
 	public ControlPanel() {
 
 		setTitle("Clue Game");
+		//seems like a good size
 		setSize(1080, 720);
+		//exit on close so that the program ends when the window closes
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		createLayout();
 	}
@@ -123,12 +125,12 @@ public class ControlPanel extends JFrame{
         guessResultPanel.add(guessResult);
 
         
-        boardPanel.add(board);
         
+        //set panel sizes
         board.setPreferredSize(new Dimension(550, 550));
         cardPanel.setPreferredSize(new Dimension(150, 680));
 
-        //setting border colors
+        //set borders for each panel
         mainPanel.setBorder(new TitledBorder("File"));
         cardPanel.setBorder(new TitledBorder("Card Panel"));
         weaponCardPanel.setBorder(new TitledBorder("Weapons"));
@@ -139,6 +141,13 @@ public class ControlPanel extends JFrame{
         guessResultPanel.setBorder(new TitledBorder("Guess Result"));
         whoseTurnPanel.setBorder(new TitledBorder("Whose Turn"));
         bottomPanel.setBorder(new TitledBorder("Bottom Panel"));
+
+        /*
+         * Add components to each panel
+         */
+
+        //add the board to the board panel
+        boardPanel.add(board);
 
         //adding each type of card to the card panel
         cardPanel.add(weaponCardPanel, BorderLayout.NORTH);
@@ -152,18 +161,22 @@ public class ControlPanel extends JFrame{
         
         guessPanel.add(guess);
 
+        //add whoseturn and buttons to the upper bottom panel
         upperBottomPanel.add(whoseTurnPanel);
         upperBottomPanel.add(nextPlayerButton);
         upperBottomPanel.add(makeAccusationButton);
 
+        //add dice, and guess panels to the bottom most panel
         lowerBottomPanel.add(diePanel);
         lowerBottomPanel.add(guessPanel);
         lowerBottomPanel.add(guessResultPanel);
     
     
+        //add both of the bottom panels to the bottom of the GUI
         bottomPanel.add(upperBottomPanel);
         bottomPanel.add(lowerBottomPanel);
 
+        //add all of the panels to the main panel
         mainPanel.add(topPanel, BorderLayout.NORTH);
         mainPanel.add(boardPanel, BorderLayout.WEST);
         mainPanel.add(cardPanel, BorderLayout.EAST);
@@ -191,6 +204,13 @@ public class ControlPanel extends JFrame{
 		return diceValue;
 	}
 	
+	//dice getters and setters
+	public void setPastGuess(String past) {
+		pastGuess = past;
+	}
+	public String getPastGuess() {
+		return pastGuess;
+	}
 	
 	public static void main(String args[]) {
 		ControlPanel cp = new ControlPanel();
