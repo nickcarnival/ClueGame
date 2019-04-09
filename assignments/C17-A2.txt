@@ -1,0 +1,187 @@
+Nicholas Carnival
+Jordan Newport
+
+Before:
+		catch (BadConfigFormatException e) {
+			System.out.println("Unable to initialize the board");
+		} 
+	}
+
+
+	public void loadRoomConfig() throws BadConfigFormatException{
+		//these two functions write to NumRows and NumColumns variables
+		setNumRows();
+		setNumColumns();
+		//-1 is an error state for NumColumns
+		if(numColumns == -1) {
+			System.out.println("The Bad Format Has Been Thrown");
+			throw new BadConfigFormatException("Bad Columns");
+		}
+		boardCellArray = new BoardCell[numRows][numColumns];
+
+		//Get scanner instance
+        Scanner scanner = null;
+		try {
+			scanner = new Scanner(new File(legendFile));
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+
+        //Set the delimiter used in file
+        scanner.useDelimiter(COMMA);
+        //finds the length of the file
+        int count = 0;
+        while (scanner.hasNextLine()) {
+            count++;
+            scanner.nextLine();
+        }
+        String[] valueArray = new String[count];
+        char legendLetter ;
+        String legendRoom = "";
+        String legendCardType = "";
+        //this is size three because of how the legend must be formatted
+        String[] splitArray = new String[3];
+
+        //opens the legend file
+        try {
+			scanner = new Scanner(new File(legendFile));
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+        //iterates through each line of the legend file and adds it to the legendMap
+        for(int i = 0; i < count; i ++) {
+        	valueArray[i] = scanner.nextLine();
+        	splitArray = valueArray[i].split(COMMA);
+        	legendLetter = splitArray[0].charAt(0);
+        	legendRoom = splitArray[1];
+        	legendCardType = splitArray[2];
+        	
+        	legendRoom = legendRoom.trim();
+        	legendCardType = legendCardType.trim();
+
+        	//if the legend has something that is neither a regular room nor a walkway/closet
+        	if(!legendCardType.contentEquals("Card") && !legendCardType.contentEquals("Other")) {
+        		scanner.close();
+
+
+After:
+		calcAdjacencies();
+		} catch (BadConfigFormatException e) {
+			System.out.println("Unable to initialize the board");
+		} catch (FileNotFoundException e) {
+			System.out.println("A specified file was not found");
+		}
+
+	}
+
+
+	public void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException {
+		//these two functions write to NumRows and NumColumns variables
+		setNumRows();
+		setNumColumns();
+		//-1 is an error state for NumColumns
+		if(numColumns == -1) {
+			System.out.println("The Bad Format Has Been Thrown");
+			throw new BadConfigFormatException("Bad Columns");
+		}
+		boardCellArray = new BoardCell[numRows][numColumns];
+
+		//Get scanner instance
+		Scanner scanner = new Scanner(new File(legendFile));
+
+        //Set the delimiter used in file
+        scanner.useDelimiter(COMMA);
+        //finds the length of the file
+        int count = 0;
+        while (scanner.hasNextLine()) {
+            count++;
+            scanner.nextLine();
+        }
+        String[] valueArray = new String[count];
+        char legendLetter ;
+        String legendRoom = "";
+        String legendCardType = "";
+        //this is size three because of how the legend must be formatted
+        String[] splitArray = new String[3];
+
+        //opens the legend file
+		scanner = new Scanner(new File(legendFile));
+        //iterates through each line of the legend file and adds it to the legendMap
+        for(int i = 0; i < count; i ++) {
+        	valueArray[i] = scanner.nextLine();
+        	splitArray = valueArray[i].split(COMMA);
+        	legendLetter = splitArray[0].charAt(0);
+        	legendRoom = splitArray[1];
+        	legendCardType = splitArray[2];
+        	
+        	legendRoom = legendRoom.trim();
+        	legendCardType = legendCardType.trim();
+
+        	//if the legend has something that is neither a regular room nor a walkway/closet
+        	if(!legendCardType.contentEquals("Card") && !legendCardType.contentEquals("Other")) {
+        		scanner.close();
+
+Explanation:
+    We removed multiple unnecessary try catches. This cleaned up the code and makes this segment throw less exceptions. It also allows for easier debugging. 
+
+commit 8460e5cfdda035ce332a83d435b21748efb5a808
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Sun Mar 17 15:32:24 2019 -0600
+
+    cleaned up how exceptions are thrown during initialization
+
+commit c8c6413eeb38d93de1f9d611bd1d73a7e9cdd0bb
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Sun Mar 17 15:21:25 2019 -0600
+
+    made layoutFile and legendFile lowerCamelCase
+
+commit 490ff3d2fb324666d9697891e8fe1873c1e07449
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Sun Mar 17 15:19:39 2019 -0600
+
+    made setNumRows less confusing
+
+commit b797b8e0c680bb39603397f299d5712df1b6d919
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Sun Mar 17 00:03:29 2019 -0600
+
+    reduced duplication of calcTargets code
+
+commit 68eae5cfbc53dd154f963cce86a08d2ef7ca0fd0
+Author: Jordan Newport <jordannewport@mymail.mines.edu>
+Date:   Sat Mar 16 23:58:55 2019 -0600
+
+    fixed capitalization of numRows and numColumns
+
+commit 4e6aa158c1cdfee873cc08d8c0a15e3c3c37a242
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Sat Mar 16 17:37:49 2019 -0600
+
+    added the isWalkway variable to each boardcell in order to clean up our large if statements. Went from .getinitial() == 'W' to .isWalkway().
+
+commit e10ff7e451d44ca9a275207931294d82535ded24
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Sat Mar 16 17:23:57 2019 -0600
+
+    removed unneccessary variables and imports
+
+commit e9204b581464c4d9b710f9dab4b1847dcb5c8a6f
+Merge: 39f1103 71b1af2
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Sat Mar 16 17:06:38 2019 -0600
+
+    merge wip and master
+
+commit 71b1af2da9b73a72d0c9f36aa3f18f6d3ecfab1e
+Author: ncarn2 <carnivalnicholas2@gmail.com>
+Date:   Sat Mar 16 17:02:41 2019 -0600
+
+    refactored NumRows and NumColumns to have both a getter and a setter. setNumRows, set NumColumns
+
+commit 39f11034c6db9174ea42621149eaffd202fbbf06
+Author: Nicholas Carnival <ncarnival2@yahoo.com>
+Date:   Thu Mar 14 18:27:18 2019 -0600
+
+    Removed redundancy of getNumRows() and getNumColumns()
+
