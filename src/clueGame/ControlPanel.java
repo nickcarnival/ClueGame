@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,11 +29,11 @@ import javax.swing.border.TitledBorder;
 
 public class ControlPanel extends JFrame{
 
+	private static Board board;
 	//these are all set to temporary values, but will later be updated by the board
 	private String whoseTurnString = "Miss Scarlet";
 	private String pastGuess = "Miss Scarley Lounge Candlestick";
 	private String diceValue = "4";
-	private String emptyString = "    ";
 
 	public ControlPanel() {
 
@@ -67,7 +68,7 @@ public class ControlPanel extends JFrame{
 			 * Guess
          */
 		
-        JLabel board = new JLabel("board");
+		
 
         JPanel mainPanel = new JPanel(new BorderLayout());
 
@@ -147,11 +148,13 @@ public class ControlPanel extends JFrame{
          */
 
         //add the board to the board panel
-        boardPanel.add(board);
+        BoardCell boardCell = new BoardCell(5, 5);
+        boardPanel.add(boardCell, BorderLayout.CENTER);
 
         //adding each type of card to the card panel
         cardPanel.add(weaponCardPanel, BorderLayout.NORTH);
         cardPanel.add(peopleCardPanel, BorderLayout.CENTER);
+
         cardPanel.add(roomCardPanel, BorderLayout.SOUTH);
 
         diePanel.add(diceLabel);
@@ -214,6 +217,12 @@ public class ControlPanel extends JFrame{
 	}
 	
 	public static void main(String args[]) {
+		// Board is singleton, get the only instance
+		board = Board.getInstance();
+		// set the file names to use my config files
+		board.setConfigFiles("data/testsMap.csv", "data/rooms.txt");		
+		board.initialize();
+
 		ControlPanel cp = new ControlPanel();
 		cp.setVisible(true);
 		

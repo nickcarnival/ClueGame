@@ -6,13 +6,18 @@ package clueGame;
  * automatically generated functions. Super simple.
  */
 
+import java.awt.Color;
 import java.awt.Graphics;
 
-public class BoardCell {
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class BoardCell extends JPanel{
 	private int row;
 	private int column;
-	private int rowPixels;
-	private int columnPixels;
+
+	private int width = 50;
+	private int height = 50;
 
 	private DoorDirection doorDirection;
 	private boolean isRoom;
@@ -34,6 +39,13 @@ public class BoardCell {
 			System.out.println(board.getLegend().get(initial));
 		}
 	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.setColor(Color.BLUE);
+		g.drawRect(200, 200, width, height);
+	}
 
 	public int getRow() {
 		return row;
@@ -41,6 +53,14 @@ public class BoardCell {
 
 	public int getColumn() {
 		return column;
+	}
+
+	public int getWidth () {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
 	}
 
 	@Override
