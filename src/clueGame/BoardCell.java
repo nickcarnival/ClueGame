@@ -11,6 +11,9 @@ import java.awt.Graphics;
 public class BoardCell {
 	private int row;
 	private int column;
+	private int rowPixels;
+	private int columnPixels;
+
 	private DoorDirection doorDirection;
 	private boolean isRoom;
 	private boolean isDoorway;

@@ -719,6 +719,7 @@ public class Board extends JPanel {
 		return dealtCards;
 	}
 	
+	@Override
 	public void paintComponent(Graphics g) {
 		for (int r = 0; r < numRows; r++) {
 			for (int c = 0; c < numColumns; c++) {
