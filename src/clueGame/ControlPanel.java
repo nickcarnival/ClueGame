@@ -34,6 +34,7 @@ public class ControlPanel extends JFrame{
 	private String whoseTurnString = "Miss Scarlet";
 	private String pastGuess = "Miss Scarley Lounge Candlestick";
 	private String diceValue = "4";
+	private BoardCell boardCell;
 
 	public ControlPanel() {
 
@@ -75,7 +76,7 @@ public class ControlPanel extends JFrame{
         JPanel topPanel = new JPanel();
         
         //board
-        JPanel boardPanel = new JPanel();
+        JPanel boardPanel = new JPanel(new GridLayout(20, 20));
 
         //cards
         JPanel cardPanel = new JPanel(new GridLayout(3, 0));
@@ -128,7 +129,7 @@ public class ControlPanel extends JFrame{
         
         
         //set panel sizes
-        board.setPreferredSize(new Dimension(550, 550));
+        boardPanel.setPreferredSize(new Dimension(650, 650));
         cardPanel.setPreferredSize(new Dimension(150, 680));
 
         //set borders for each panel
@@ -142,15 +143,17 @@ public class ControlPanel extends JFrame{
         guessResultPanel.setBorder(new TitledBorder("Guess Result"));
         whoseTurnPanel.setBorder(new TitledBorder("Whose Turn"));
         bottomPanel.setBorder(new TitledBorder("Bottom Panel"));
+        boardPanel.setBorder(new TitledBorder("Board Panel"));
 
         /*
          * Add components to each panel
          */
 
         //add the board to the board panel
-        BoardCell boardCell = new BoardCell(5, 5);
-        boardPanel.add(boardCell, BorderLayout.CENTER);
-
+        System.out.println("Board Cell: " + boardCell);
+        boardPanel.add(board, BorderLayout.CENTER);
+        
+        
         //adding each type of card to the card panel
         cardPanel.add(weaponCardPanel, BorderLayout.NORTH);
         cardPanel.add(peopleCardPanel, BorderLayout.CENTER);

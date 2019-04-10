@@ -727,4 +727,7 @@ public class Board extends JPanel {
 			}
 		}
 	}
+	
+	public static void main(String args[]) {
+	}
 }

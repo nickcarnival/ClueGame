@@ -26,25 +26,60 @@ public class BoardCell extends JPanel{
 	private boolean isNameDrawer;
 	private char initial;
 	private Board board;
-	
+
 	public BoardCell(int row, int column) {
 		this.row = row;
 		this.column = column;
 	}
-	
+
 	public void draw(Graphics g) { 
-		System.out.println("I am drawing, but the method is not implemented");
+		super.paintComponent(g);
+		g.setColor(Color.BLUE);
+		g.drawRect(10, 15, 20, 20);
+		//if the board cell is a doorway, we have to display something different
+		if(this.isDoorway) {
+			System.out.println("This is a doorway, coming from BoardCell draw");
+			super.paintComponent(g);
+			g.setColor(Color.BLUE);
+			g.drawRect(20, 25, 20, 20);
+
+			//display doorway direction
+			switch (this.doorDirection) {
+			//display each cell's direction image
+			case LEFT:
+				System.out.println("left door");
+				super.paintComponent(g);
+				g.setColor(Color.RED);
+				g.drawRect(200, 200, width, height);
+				break;
+			case RIGHT:
+				System.out.println("right door");
+				super.paintComponent(g);
+				g.setColor(Color.YELLOW);
+				g.drawRect(200, 200, width, height);
+				break;
+			case UP:
+				System.out.println("up door");
+				super.paintComponent(g);
+				g.setColor(Color.ORANGE);
+				g.drawRect(200, 200, 21, 21);
+				break;
+			case DOWN:
+				System.out.println("down door");
+				super.paintComponent(g);
+				g.setColor(Color.GREEN);
+				g.drawRect(200, 200, width, height);
+				break;
+			default:
+				break;
+			}
+
+		}
 		if(isNameDrawer) {
 			System.out.print("It is my job to draw the name, and my name is");
 			System.out.println(board.getLegend().get(initial));
 		}
-	}
-	
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		g.setColor(Color.BLUE);
-		g.drawRect(200, 200, width, height);
+		repaint();
 	}
 
 	public int getRow() {
