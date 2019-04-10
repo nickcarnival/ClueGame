@@ -37,7 +37,6 @@ public class BoardCell extends JPanel{
 
 	public void draw(Graphics g) { 
 
-
 		x = (width * row);
 		y = (height * column);
 
@@ -59,7 +58,7 @@ public class BoardCell extends JPanel{
 			case LEFT:
 				super.paintComponent(g);
 				g.setColor(Color.gray);
-				g.drawRect(x, y, width + 10, height );
+				g.fillRect(x, y, width + 10, height );
 				g.drawRect(x , y, width + 10, height );
 				break;
 			case RIGHT:
@@ -98,6 +97,7 @@ public class BoardCell extends JPanel{
 			g.setColor(Color.RED);
 			g.fillRect((width * row), (height * column), width, height);
 		}
+		//this displays the room name
 		if(isNameDrawer) {
 			System.out.print("It is my job to draw the name, and my name is");
 			System.out.println(board.getLegend().get(initial));
@@ -126,7 +126,7 @@ public class BoardCell extends JPanel{
 	@Override
 	public String toString() {
 		return "BoardCell [row=" + row + ", column=" + column + ", doorDirection=" + doorDirection + ", isRoom="
-				+ isRoom + ", isDoorway=" + isDoorway + ", initial=" + initial + "]";
+				+ isRoom + ", isDoorway=" + isDoorway + ", initial=" + initial + ", isNameDrawer=" + isNameDrawer + "]";
 	}
 
 	@Override
