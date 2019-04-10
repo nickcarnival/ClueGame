@@ -76,7 +76,7 @@ public class ControlPanel extends JFrame{
         JPanel topPanel = new JPanel();
         
         //board
-        JPanel boardPanel = new JPanel(new GridLayout(20, 20));
+        JPanel boardPanel = new JPanel(new BorderLayout());
 
         //cards
         JPanel cardPanel = new JPanel(new GridLayout(3, 0));
@@ -129,7 +129,7 @@ public class ControlPanel extends JFrame{
         
         
         //set panel sizes
-        boardPanel.setPreferredSize(new Dimension(650, 650));
+        boardPanel.setPreferredSize(new Dimension(640, 640));
         cardPanel.setPreferredSize(new Dimension(150, 680));
 
         //set borders for each panel
@@ -150,9 +150,10 @@ public class ControlPanel extends JFrame{
          */
 
         //add the board to the board panel
+
         System.out.println("Board Cell: " + boardCell);
-        boardPanel.add(board, BorderLayout.SOUTH);
-        
+        boardPanel.add(board, BorderLayout.CENTER);
+
         
         //adding each type of card to the card panel
         cardPanel.add(weaponCardPanel, BorderLayout.NORTH);
@@ -184,7 +185,7 @@ public class ControlPanel extends JFrame{
 
         //add all of the panels to the main panel
         mainPanel.add(topPanel, BorderLayout.NORTH);
-        mainPanel.add(boardPanel, BorderLayout.WEST);
+        mainPanel.add(boardPanel, BorderLayout.CENTER);
         mainPanel.add(cardPanel, BorderLayout.EAST);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 

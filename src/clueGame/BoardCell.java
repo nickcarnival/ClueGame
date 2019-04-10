@@ -36,23 +36,27 @@ public class BoardCell extends JPanel{
 
 	public void draw(Graphics g) { 
 
+
 		//if is not doorway
 		System.out.println("Current Cell: " + " Is Doorway: " + isDoorway + " isNameDrawer: " + isNameDrawer +
-				" Row: " + row + " Column: " + column);
+				" Row: " + ((row)) + " Column: " + ((column)));
 		if(!this.isDoorway) {
+			super.repaint();
 			super.paintComponent(g);
 			g.setColor(Color.BLUE);
 			//x, y, width, height
 			g.fillRect( (32 * row), (32 * column), width, height);
-			g.setColor(Color.PINK);
-			g.fillRect(0, 0, width, height);
+			g.setColor(Color.BLACK);
+			g.drawRect( (32 * row), (32 * column), width, height);
 		}
 		//if is doorway
 		else {
 			System.out.println("This is a doorway, coming from BoardCell draw");
 			super.paintComponent(g);
 			g.setColor(Color.GREEN);
-			g.fillRect(32 + (2 * row), 32 + (20 * column), width, height);
+			g.fillRect((32 * row), (32 * column), width, height);
+			g.setColor(Color.BLACK);
+			g.drawRect( (20 * row), (20 * column) - 20, width, height);
 
 			//display doorway direction
 			switch (this.doorDirection) {
