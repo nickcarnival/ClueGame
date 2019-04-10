@@ -18,13 +18,12 @@ public class BoardCell extends JPanel{
 
 	private int width = 32;
 	private int height = 32;
-	private int x = 0;
-	private int y = 0;
 
 	private DoorDirection doorDirection;
 	private boolean isRoom;
 	private boolean isDoorway;
 	private boolean isWalkway;
+	private boolean isCloset;
 	private boolean isNameDrawer;
 	private char initial;
 	private Board board;
@@ -38,56 +37,63 @@ public class BoardCell extends JPanel{
 
 
 		//if is not doorway
-		System.out.println("Current Cell: " + " Is Doorway: " + isDoorway + " isNameDrawer: " + isNameDrawer +
-				" Row: " + ((row)) + " Column: " + ((column)));
 		if(!this.isDoorway) {
 			super.repaint();
 			super.paintComponent(g);
 			g.setColor(Color.BLUE);
 			//x, y, width, height
-			g.fillRect( (32 * row), (32 * column), width, height);
+			g.fillRect((width * row), (height * column), width, height);
 			g.setColor(Color.BLACK);
-			g.drawRect( (32 * row), (32 * column), width, height);
+			g.drawRect((width * row), (height * column), width, height);
 		}
 		//if is doorway
-		else {
-			System.out.println("This is a doorway, coming from BoardCell draw");
-			super.paintComponent(g);
-			g.setColor(Color.GREEN);
-			g.fillRect((32 * row), (32 * column), width, height);
-			g.setColor(Color.BLACK);
-			g.drawRect( (20 * row), (20 * column) - 20, width, height);
-
+		else if (isDoorway){
 			//display doorway direction
 			switch (this.doorDirection) {
 			//display each cell's direction image
 			case LEFT:
-				System.out.println("left door");
 				super.paintComponent(g);
-				g.setColor(Color.RED);
-				g.drawRect(200, 200, width, height);
+				g.setColor(Color.gray);
+				g.drawRect((width * row), (height * column), width + 10, height );
+				g.drawRect((width * row) , (height * column), width + 10, height );
 				break;
 			case RIGHT:
-				System.out.println("right door");
 				super.paintComponent(g);
-				g.setColor(Color.YELLOW);
-				g.drawRect(200, 200, width, height);
+				g.setColor(Color.gray);
+				g.fillRect((width * row), (height * column), width, height);
 				break;
 			case UP:
-				System.out.println("up door");
 				super.paintComponent(g);
-				g.setColor(Color.ORANGE);
-				g.drawRect(200, 200, 21, 21);
+				g.setColor(Color.gray);
+				g.fillRect((width * row), (height * column), width, height);
 				break;
 			case DOWN:
-				System.out.println("down door");
 				super.paintComponent(g);
-				g.setColor(Color.GREEN);
-				g.drawRect(200, 200, width, height);
+				g.setColor(Color.gray);
+				g.fillRect((width * row), (height * column), width, height);
 				break;
 			default:
+				g.setColor(Color.ORANGE);
+				g.fillRect((width * row), (height * column), width, height);
 				break;
 			}
+			
+		}
+		//if the cell is a room
+		if(this.isRoom) {
+			System.out.println("This is a room: " + this);
+			super.paintComponent(g);
+			g.setColor(Color.gray);
+			g.fillRect((width * row), (height * column), width, height );
+		}
+		//if is closet
+		if(this.isCloset) {
+			System.out.println("This is a closet");
+			g.setColor(Color.RED);
+			g.fillRect((width * row), (height * column), width, height);
+			g.setColor(Color.BLACK);
+			g.drawRect((width * row), (height * column), width, height);
+			g.drawString("X", (width * row), (height * column));
 		}
 		if(isNameDrawer) {
 			System.out.print("It is my job to draw the name, and my name is");
@@ -187,5 +193,9 @@ public class BoardCell extends JPanel{
 
 	public void setNameDrawer(boolean isNameDrawer) {
 		this.isNameDrawer = isNameDrawer;
+	}
+	
+	public void setIsCloset(Boolean bool) {
+		this.isCloset = bool;
 	}
 }

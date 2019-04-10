@@ -459,6 +459,9 @@ public class Board extends JPanel {
 						if(!cleanedGridLine[column].equals("X") && !cleanedGridLine[column].contentEquals("W")) {
 							boardCellArray[row][column].setRoom(true);
 						}
+						if(cleanedGridLine[column].equals("X") ) {
+							boardCellArray[row][column].setIsCloset(true);
+						}
 					//this runs if the initial string is a door
 					} else {
 						//load in initial character for board cell
