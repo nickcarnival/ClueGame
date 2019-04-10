@@ -18,6 +18,8 @@ public class BoardCell extends JPanel{
 
 	private int width = 32;
 	private int height = 32;
+	private int x = 0;
+	private int y = 0;
 
 	private DoorDirection doorDirection;
 	private boolean isRoom;
@@ -36,15 +38,18 @@ public class BoardCell extends JPanel{
 	public void draw(Graphics g) { 
 
 
+		x = (width * row);
+		y = (height * column);
+
 		//if is not doorway
 		if(!this.isDoorway) {
 			super.repaint();
 			super.paintComponent(g);
 			g.setColor(Color.BLUE);
 			//x, y, width, height
-			g.fillRect((width * row), (height * column), width, height);
+			g.fillRect(x, y, width, height);
 			g.setColor(Color.BLACK);
-			g.drawRect((width * row), (height * column), width, height);
+			g.drawRect(x, y, width, height);
 		}
 		//if is doorway
 		else if (isDoorway){
@@ -54,8 +59,8 @@ public class BoardCell extends JPanel{
 			case LEFT:
 				super.paintComponent(g);
 				g.setColor(Color.gray);
-				g.drawRect((width * row), (height * column), width + 10, height );
-				g.drawRect((width * row) , (height * column), width + 10, height );
+				g.drawRect(x, y, width + 10, height );
+				g.drawRect(x , y, width + 10, height );
 				break;
 			case RIGHT:
 				super.paintComponent(g);
@@ -89,17 +94,17 @@ public class BoardCell extends JPanel{
 		//if is closet
 		if(this.isCloset) {
 			System.out.println("This is a closet");
+			super.paintComponent(g);
 			g.setColor(Color.RED);
 			g.fillRect((width * row), (height * column), width, height);
-			g.setColor(Color.BLACK);
-			g.drawRect((width * row), (height * column), width, height);
-			g.drawString("X", (width * row), (height * column));
 		}
 		if(isNameDrawer) {
 			System.out.print("It is my job to draw the name, and my name is");
 			System.out.println(board.getLegend().get(initial));
+			super.paintComponent(g);
+			g.setColor(Color.white);
+			g.drawString(board.getLegend().get(initial), x, y + 32);
 		}
-		repaint();
 	}
 
 	public int getRow() {
