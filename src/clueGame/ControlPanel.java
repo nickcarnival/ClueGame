@@ -151,7 +151,7 @@ public class ControlPanel extends JFrame{
 
         //add the board to the board panel
         System.out.println("Board Cell: " + boardCell);
-        boardPanel.add(board, BorderLayout.CENTER);
+        boardPanel.add(board, BorderLayout.SOUTH);
         
         
         //adding each type of card to the card panel

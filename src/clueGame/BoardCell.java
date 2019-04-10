@@ -16,8 +16,10 @@ public class BoardCell extends JPanel{
 	private int row;
 	private int column;
 
-	private int width = 50;
-	private int height = 50;
+	private int width = 32;
+	private int height = 32;
+	private int x = 0;
+	private int y = 0;
 
 	private DoorDirection doorDirection;
 	private boolean isRoom;
@@ -33,15 +35,24 @@ public class BoardCell extends JPanel{
 	}
 
 	public void draw(Graphics g) { 
-		super.paintComponent(g);
-		g.setColor(Color.BLUE);
-		g.drawRect(10, 15, 20, 20);
-		//if the board cell is a doorway, we have to display something different
-		if(this.isDoorway) {
-			System.out.println("This is a doorway, coming from BoardCell draw");
+
+		//if is not doorway
+		System.out.println("Current Cell: " + " Is Doorway: " + isDoorway + " isNameDrawer: " + isNameDrawer +
+				" Row: " + row + " Column: " + column);
+		if(!this.isDoorway) {
 			super.paintComponent(g);
 			g.setColor(Color.BLUE);
-			g.drawRect(20, 25, 20, 20);
+			//x, y, width, height
+			g.fillRect( (32 * row), (32 * column), width, height);
+			g.setColor(Color.PINK);
+			g.fillRect(0, 0, width, height);
+		}
+		//if is doorway
+		else {
+			System.out.println("This is a doorway, coming from BoardCell draw");
+			super.paintComponent(g);
+			g.setColor(Color.GREEN);
+			g.fillRect(32 + (2 * row), 32 + (20 * column), width, height);
 
 			//display doorway direction
 			switch (this.doorDirection) {
@@ -73,7 +84,6 @@ public class BoardCell extends JPanel{
 			default:
 				break;
 			}
-
 		}
 		if(isNameDrawer) {
 			System.out.print("It is my job to draw the name, and my name is");
