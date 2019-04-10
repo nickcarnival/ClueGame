@@ -103,7 +103,7 @@ public class BoardCell extends JPanel{
 			System.out.println(board.getLegend().get(initial));
 			super.paintComponent(g);
 			g.setColor(Color.white);
-			g.drawString(board.getLegend().get(initial), x, y + 32);
+			g.drawString(board.getLegend().get(initial), x - (width), y + height);
 		}
 	}
 
