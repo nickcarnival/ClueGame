@@ -18,8 +18,8 @@ public class BoardCell extends JPanel{
 
 	private int width = 25;
 	private int height = 25;
-	private int doorWidth = 25;
-	private int doorHeight = 25;
+	private int doorWidth = width/5;
+	private int doorHeight = height/5;
 	private int x = 0;
 	private int y = 0;
 
@@ -62,24 +62,28 @@ public class BoardCell extends JPanel{
 				g.setColor(Color.gray);
 				g.fillRect(x, y, width + 10, height );
 				g.setColor(Color.BLUE);
-				g.fillRect(x , y, width/3, height);
+				g.fillRect(x , y, doorWidth, height);
 				break;
 			case RIGHT:
 				super.paintComponent(g);
 				g.setColor(Color.gray);
 				g.fillRect(x, y, width, height);
 				g.setColor(Color.BLUE);
-				g.fillRect(x , y, width/2, height);
+				g.fillRect(x + 20, y, doorWidth, height);
 				break;
 			case UP:
 				super.paintComponent(g);
 				g.setColor(Color.gray);
 				g.fillRect(x, y, width, height);
+				g.setColor(Color.BLUE);
+				g.fillRect(x, y, width, doorHeight);
 				break;
 			case DOWN:
 				super.paintComponent(g);
 				g.setColor(Color.gray);
 				g.fillRect(x, y, width, height);
+				g.setColor(Color.BLUE);
+				g.fillRect(x, y + 20, width, doorHeight);
 				break;
 			default:
 				g.setColor(Color.ORANGE);
