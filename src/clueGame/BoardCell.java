@@ -39,8 +39,8 @@ public class BoardCell extends JPanel{
 
 	public void draw(Graphics g) { 
 
-		x = (width * row);
-		y = (height * column);
+		x = (width * column);
+		y = (height * row);
 
 		//if is not doorway
 		if(this.isWalkway) {
@@ -62,48 +62,46 @@ public class BoardCell extends JPanel{
 				g.setColor(Color.gray);
 				g.fillRect(x, y, width + 10, height );
 				g.setColor(Color.BLUE);
-				g.fillRect(x , y, width + 10, height );
+				g.fillRect(x , y, width/3, height);
 				break;
 			case RIGHT:
 				super.paintComponent(g);
 				g.setColor(Color.gray);
-				g.fillRect((width * row), (height * column), width, height);
+				g.fillRect(x, y, width, height);
+				g.setColor(Color.BLUE);
+				g.fillRect(x , y, width/2, height);
 				break;
 			case UP:
 				super.paintComponent(g);
 				g.setColor(Color.gray);
-				g.fillRect((width * row), (height * column), width, height);
+				g.fillRect(x, y, width, height);
 				break;
 			case DOWN:
 				super.paintComponent(g);
 				g.setColor(Color.gray);
-				g.fillRect((width * row), (height * column), width, height);
+				g.fillRect(x, y, width, height);
 				break;
 			default:
 				g.setColor(Color.ORANGE);
-				g.fillRect((width * row), (height * column), width, height);
+				g.fillRect(x, y, width, height);
 				break;
 			}
 			
 		}
 		//if the cell is a room
 		if(this.isRoom && !this.isDoorway) {
-			System.out.println("This is a room: " + this);
 			super.paintComponent(g);
 			g.setColor(Color.gray);
-			g.fillRect((width * row), (height * column), width, height );
+			g.fillRect(x, y, width, height );
 		}
 		//if is closet
 		if(this.isCloset && !this.isDoorway) {
-			System.out.println("This is a closet");
 			super.paintComponent(g);
 			g.setColor(Color.RED);
-			g.fillRect((width * row), (height * column), width, height);
+			g.fillRect(x, y, width, height);
 		}
 		//this displays the room name
 		if(isNameDrawer && !this.isDoorway) {
-			System.out.print("It is my job to draw the name, and my name is");
-			System.out.println(board.getLegend().get(initial));
 			super.paintComponent(g);
 			g.setColor(Color.white);
 			g.drawString(board.getLegend().get(initial), x - (width), y + height);

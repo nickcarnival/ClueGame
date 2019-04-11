@@ -724,11 +724,11 @@ public class Board extends JPanel {
 	
 	@Override
 	public void paintComponent(Graphics g) {
-		for (int r = 0; r < numRows; r++) {
-			for (int c = 0; c < numColumns; c++) {
-				boardCellArray[r][c].draw(g);
+		for (int column = 0; column < numColumns; column++) {
+			for (int row = 0; row < numRows; row++) {
+				boardCellArray[row][column].draw(g);
 			}
 		}
-		boardCellArray[0][0].draw(g);
+//		boardCellArray[0][0].draw(g);
 	}
 }
