@@ -86,8 +86,6 @@ public class BoardCell extends JPanel{
 				g.fillRect(x, y + 20, width, doorHeight);
 				break;
 			default:
-				g.setColor(Color.ORANGE);
-				g.fillRect(x, y, width, height);
 				break;
 			}
 			
