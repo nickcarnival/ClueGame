@@ -16,8 +16,10 @@ public class BoardCell extends JPanel{
 	private int row;
 	private int column;
 
-	private int width = 32;
-	private int height = 32;
+	private int width = 25;
+	private int height = 25;
+	private int doorWidth = 25;
+	private int doorHeight = 25;
 	private int x = 0;
 	private int y = 0;
 
@@ -41,10 +43,10 @@ public class BoardCell extends JPanel{
 		y = (height * column);
 
 		//if is not doorway
-		if(!this.isDoorway) {
+		if(this.isWalkway) {
 			super.repaint();
 			super.paintComponent(g);
-			g.setColor(Color.BLUE);
+			g.setColor(Color.YELLOW);
 			//x, y, width, height
 			g.fillRect(x, y, width, height);
 			g.setColor(Color.BLACK);
@@ -59,7 +61,8 @@ public class BoardCell extends JPanel{
 				super.paintComponent(g);
 				g.setColor(Color.gray);
 				g.fillRect(x, y, width + 10, height );
-				g.drawRect(x , y, width + 10, height );
+				g.setColor(Color.BLUE);
+				g.fillRect(x , y, width + 10, height );
 				break;
 			case RIGHT:
 				super.paintComponent(g);
@@ -84,21 +87,21 @@ public class BoardCell extends JPanel{
 			
 		}
 		//if the cell is a room
-		if(this.isRoom) {
+		if(this.isRoom && !this.isDoorway) {
 			System.out.println("This is a room: " + this);
 			super.paintComponent(g);
 			g.setColor(Color.gray);
 			g.fillRect((width * row), (height * column), width, height );
 		}
 		//if is closet
-		if(this.isCloset) {
+		if(this.isCloset && !this.isDoorway) {
 			System.out.println("This is a closet");
 			super.paintComponent(g);
 			g.setColor(Color.RED);
 			g.fillRect((width * row), (height * column), width, height);
 		}
 		//this displays the room name
-		if(isNameDrawer) {
+		if(isNameDrawer && !this.isDoorway) {
 			System.out.print("It is my job to draw the name, and my name is");
 			System.out.println(board.getLegend().get(initial));
 			super.paintComponent(g);

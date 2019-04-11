@@ -5,20 +5,14 @@
 package clueGame;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
@@ -34,13 +28,12 @@ public class ControlPanel extends JFrame{
 	private String whoseTurnString = "Miss Scarlet";
 	private String pastGuess = "Miss Scarley Lounge Candlestick";
 	private String diceValue = "4";
-	private BoardCell boardCell;
 
 	public ControlPanel() {
 
 		setTitle("Clue Game");
 		//seems like a good size
-		setSize(1080, 720);
+		setSize(750, 750);
 		//exit on close so that the program ends when the window closes
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		createLayout();
@@ -129,7 +122,9 @@ public class ControlPanel extends JFrame{
         
         
         //set panel sizes
-        boardPanel.setPreferredSize(new Dimension(640, 640));
+        boardPanel.setMaximumSize(new Dimension(600,600));
+        boardPanel.setMinimumSize(new Dimension(600,600));
+        boardPanel.setPreferredSize(new Dimension(600, 600));
         cardPanel.setPreferredSize(new Dimension(150, 680));
 
         //set borders for each panel
@@ -143,7 +138,6 @@ public class ControlPanel extends JFrame{
         guessResultPanel.setBorder(new TitledBorder("Guess Result"));
         whoseTurnPanel.setBorder(new TitledBorder("Whose Turn"));
         bottomPanel.setBorder(new TitledBorder("Bottom Panel"));
-        boardPanel.setBorder(new TitledBorder("Board Panel"));
 
         /*
          * Add components to each panel
@@ -151,7 +145,6 @@ public class ControlPanel extends JFrame{
 
         //add the board to the board panel
 
-        System.out.println("Board Cell: " + boardCell);
         boardPanel.add(board, BorderLayout.CENTER);
 
         
