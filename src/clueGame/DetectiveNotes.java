@@ -1,5 +1,8 @@
 package clueGame;
-
+/*
+ * Nicholas Carnival
+ * Jordan Newport
+ */
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
