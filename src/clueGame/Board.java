@@ -127,8 +127,37 @@ public class Board extends JPanel {
         	Player player = new ComputerPlayer(playerColor, playerName); 
         	allPlayers.add(player);
         }
-
 		scanner.close();
+		
+		//setting the players locations
+		Random random = new Random();
+
+		BoardCell cell1 = boardCellArray[21][5];
+		BoardCell cell2 = boardCellArray[16][7];
+		BoardCell cell3 = boardCellArray[3][14];
+		BoardCell cell4 = boardCellArray[5][21];
+		BoardCell cell5 = boardCellArray[5][21];
+		BoardCell cell6 = boardCellArray[5][21];
+
+		int randomNumber = random.nextInt(6);
+		//sets the position randomly
+		switch (randomNumber) {
+			case 1:
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+			case 5:
+				break;
+			case 6:
+				break;
+			default :
+				break;
+		}
+		
 	}
 
 	//checks if the accusation is equal to the solution
@@ -730,5 +759,9 @@ public class Board extends JPanel {
 			}
 		}
 		boardCellArray[0][0].draw(g);
+		
+		for(int i = 0; i < allPlayers.size(); i++) {
+			System.out.println(allPlayers.get(i));
+		}
 	}
 }

@@ -24,6 +24,8 @@ public class BoardCell extends JPanel{
 	private int y = 0;
 
 	private DoorDirection doorDirection;
+	private boolean isPlayer;
+	private Color playerColor;
 	private boolean isRoom;
 	private boolean isDoorway;
 	private boolean isWalkway;
@@ -108,6 +110,12 @@ public class BoardCell extends JPanel{
 			g.setColor(Color.BLUE);
 			g.drawString(board.getLegend().get(initial), x, y);
 		}
+		//draw the players and the player colors
+		if(this.isPlayer && !this.isDoorway) {
+			super.paintComponent(g);
+			g.setColor(this.playerColor);
+			g.fillOval(x, y, width, height);
+		}
 	}
 
 	public int getRow() {
@@ -157,8 +165,20 @@ public class BoardCell extends JPanel{
 		return true;
 	}
 
+	public void setPlayerColor(Color color) {
+		this.playerColor = color;
+	}
+
+	public void setPlayer(boolean player) {
+		this.isPlayer = player;
+	}
+
 	public void setDoorway(boolean isDoorway) {
 		this.isDoorway = isDoorway;
+	}
+
+	public boolean isPlayer() {
+		return isPlayer;
 	}
 
 	public boolean isDoorway() {
@@ -185,6 +205,10 @@ public class BoardCell extends JPanel{
 
 	public void setInitial(char initial) {
 		this.initial = initial;
+	}
+
+	public boolean isCloset() {
+		return isCloset;
 	}
 
 	public boolean isRoom() {
