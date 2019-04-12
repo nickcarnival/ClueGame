@@ -20,6 +20,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class DetectiveNotes extends JDialog {
+
 	private ArrayList<JCheckBox> playerCheckBoxes = new ArrayList<JCheckBox>();
 	private ArrayList<JCheckBox> roomCheckBoxes = new ArrayList<JCheckBox>();
 	private ArrayList<JCheckBox> weaponCheckBoxes = new ArrayList<JCheckBox>();

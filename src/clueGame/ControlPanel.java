@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
@@ -75,7 +76,7 @@ public class ControlPanel extends JFrame implements ActionListener{
         JMenuBar fileMenuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
 
-        JMenu exit = new JMenu("Exit");
+        JMenuItem exit = new JMenuItem("Exit");
 
         JMenuItem detectiveNotes = new JMenuItem("Detective Notes");
 
@@ -189,15 +190,14 @@ public class ControlPanel extends JFrame implements ActionListener{
         
         //menu bar
         exit.addActionListener(this);
-        fileMenuBar.add(fileMenu);
-        fileMenuBar.add(exit);
+        detectiveNotes.addActionListener(this);
         fileMenu.add(detectiveNotes);
+        fileMenu.add(exit);
 
-        topPanel.add(fileMenuBar);
-        topPanel.add(exit);
+        fileMenuBar.add(fileMenu);
 
         //add all of the panels to the main panel
-        mainPanel.add(topPanel, BorderLayout.NORTH);
+        mainPanel.add(fileMenuBar, BorderLayout.NORTH);
         mainPanel.add(boardPanel, BorderLayout.CENTER);
         mainPanel.add(cardPanel, BorderLayout.EAST);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
@@ -208,11 +208,15 @@ public class ControlPanel extends JFrame implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent ae) { 
-	  String choice = ae.getActionCommand(); 
-	  if (choice.equals("Quit")) { 
-		 System.exit(0); 
-	  } 
-   } 	
+		String choice = ae.getActionCommand(); 
+		if (choice.equals("Exit")) { 
+			JOptionPane.showMessageDialog(this, "You hit exit");
+		} 
+		if (choice.equals("Detective Notes")) { 
+			JOptionPane.showMessageDialog(this, "You hit detective notes");
+		} 
+
+	} 	
 	
 	//whose turn getters and setters
 	public void setWhoseTurn(String whose) {
