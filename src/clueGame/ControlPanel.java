@@ -210,12 +210,12 @@ public class ControlPanel extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent ae) { 
 		String choice = ae.getActionCommand(); 
 		if (choice.equals("Exit")) { 
-			JOptionPane.showMessageDialog(this, "You hit exit");
+			System.exit(0);
 		} 
 		if (choice.equals("Detective Notes")) { 
 			DetectiveNotes dn = new DetectiveNotes(board);
+			dn.setResizable(false);
 			dn.setVisible(true);
-			JOptionPane.showMessageDialog(this, "You hit detective notes");
 		} 
 
 	} 	
