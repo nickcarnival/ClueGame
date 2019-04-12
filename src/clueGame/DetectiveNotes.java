@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -40,7 +41,7 @@ public class DetectiveNotes extends JDialog {
 	private JPanel mainPanel;
 
 	public DetectiveNotes(Board b) {
-		setTitle("Login Dialog");
+		setTitle("Detective Notes");
 		setSize(750, 750);
 		setLayout(new GridLayout(1, 3));
 
@@ -88,6 +89,7 @@ public class DetectiveNotes extends JDialog {
 		for (JCheckBox cb : weaponCheckBoxes) {
 			weaponsPanel.add(cb);
 		}
+
 		playersGuessPanel.add(playerGuessMenu);
 		roomsGuessPanel.add(roomGuessMenu);
 		weaponsGuessPanel.add(weaponGuessMenu);
