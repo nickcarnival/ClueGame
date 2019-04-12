@@ -132,30 +132,63 @@ public class Board extends JPanel {
 		//setting the players locations
 		Random random = new Random();
 
-		BoardCell cell1 = boardCellArray[21][5];
-		BoardCell cell2 = boardCellArray[16][7];
+		BoardCell cell1 = boardCellArray[20][4];
+		BoardCell cell2 = boardCellArray[14][7];
 		BoardCell cell3 = boardCellArray[3][14];
-		BoardCell cell4 = boardCellArray[5][21];
-		BoardCell cell5 = boardCellArray[5][21];
+		BoardCell cell4 = boardCellArray[3][5];
+		BoardCell cell5 = boardCellArray[5][14];
 		BoardCell cell6 = boardCellArray[5][21];
 
-		int randomNumber = random.nextInt(6);
-		//sets the position randomly
-		switch (randomNumber) {
-			case 1:
-				break;
-			case 2:
-				break;
-			case 3:
-				break;
-			case 4:
-				break;
-			case 5:
-				break;
-			case 6:
-				break;
-			default :
-				break;
+		for(int i = 0; i < allPlayers.size(); i++) {
+			int randomNumber = random.nextInt(6);
+			//sets the position randomly
+			switch (randomNumber) {
+				case 1:
+					if(!boardCellArray[20][4].isPlayer()) {
+						allPlayers.get(i).setLocation(cell1);
+						boardCellArray[20][4].setPlayer(true);
+						boardCellArray[20][4].setPlayerColor(allPlayers.get(randomNumber).getColor());
+					}
+					break;
+				case 2:
+					if(!boardCellArray[20][4].isPlayer()) {
+						allPlayers.get(i).setLocation(cell1);
+						boardCellArray[20][4].setPlayer(true);
+						boardCellArray[20][4].setPlayerColor(allPlayers.get(randomNumber).getColor());
+					}
+					break;
+				case 3:
+					if(!boardCellArray[20][4].isPlayer()) {
+						allPlayers.get(i).setLocation(cell1);
+						boardCellArray[20][4].setPlayer(true);
+						boardCellArray[20][4].setPlayerColor(allPlayers.get(randomNumber).getColor());
+					}
+					break;
+				case 4:
+					if(!boardCellArray[20][4].isPlayer()) {
+						allPlayers.get(i).setLocation(cell1);
+						boardCellArray[20][4].setPlayer(true);
+						boardCellArray[20][4].setPlayerColor(allPlayers.get(randomNumber).getColor());
+					}
+					break;
+				case 5:
+					if(!boardCellArray[20][4].isPlayer()) {
+						allPlayers.get(i).setLocation(cell1);
+						boardCellArray[20][4].setPlayer(true);
+						boardCellArray[20][4].setPlayerColor(allPlayers.get(randomNumber).getColor());
+					}
+					break;
+				case 6:
+					if(!boardCellArray[20][4].isPlayer()) {
+						allPlayers.get(i).setLocation(cell1);
+						boardCellArray[20][4].setPlayer(true);
+						boardCellArray[20][4].setPlayerColor(allPlayers.get(randomNumber).getColor());
+					}
+					break;
+				default :
+					break;
+			}
+			
 		}
 		
 	}
