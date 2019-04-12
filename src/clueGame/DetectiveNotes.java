@@ -45,18 +45,24 @@ public class DetectiveNotes extends JDialog {
 		setSize(750, 750);
 		setLayout(new GridLayout(1, 3));
 
+		//this panel contains everything 
 		mainPanel = new JPanel(new GridLayout(3, 2));
 
 		playersPanel = new JPanel(new GridLayout(3, 2));
 		playersPanel.setBorder(new TitledBorder("Players"));
+
 		roomsPanel = new JPanel(new GridLayout(3, 2));
 		roomsPanel.setBorder(new TitledBorder("Rooms"));
+
 		weaponsPanel = new JPanel(new GridLayout(3, 2));
 		weaponsPanel.setBorder(new TitledBorder("Weapons"));
+
 		playersGuessPanel = new JPanel();
 		playersGuessPanel.setBorder(new TitledBorder("Player Guess"));
+
 		roomsGuessPanel = new JPanel();
 		roomsGuessPanel.setBorder(new TitledBorder("Room Guess"));
+
 		weaponsGuessPanel = new JPanel();
 		weaponsGuessPanel.setBorder(new TitledBorder("Weapon Guess"));
 		
@@ -64,21 +70,28 @@ public class DetectiveNotes extends JDialog {
 		roomGuessMenu = new JMenu("Room Guess");
 		weaponGuessMenu = new JMenu("Weapon Guess");
 
+		//add every player to the check boxes
 		for (Player p : b.getPlayers()) {
 			playerCheckBoxes.add(new JCheckBox(p.getName()));
 			JMenuItem m = new JMenuItem(p.getName());
 			playerGuessMenu.add(m);
 		}
+		//add every room to the check boxes
 		for (Card c : b.getRoomCards()) {
 			roomCheckBoxes.add(new JCheckBox(c.getName()));
 			JMenuItem m = new JMenuItem(c.getName());
 			playerGuessMenu.add(m);
 		}
+		//add every card to the check boxes
 		for (Card c : b.getWeaponCards()) {
 			weaponCheckBoxes.add(new JCheckBox(c.getName()));
 			JMenuItem m = new JMenuItem(c.getName());
 			playerGuessMenu.add(m);
 		}
+
+		/********************************************************************
+		 * Add all of the players, cards, and room to their associated panels
+		 *********************************************************************/
 
 		for (JCheckBox cb : playerCheckBoxes) {
 			playersPanel.add(cb);
@@ -91,14 +104,19 @@ public class DetectiveNotes extends JDialog {
 		}
 
 		playersGuessPanel.add(playerGuessMenu);
+
 		roomsGuessPanel.add(roomGuessMenu);
+
 		weaponsGuessPanel.add(weaponGuessMenu);
+
 		mainPanel.add(playersPanel);
 		mainPanel.add(playersGuessPanel);
 		mainPanel.add(roomsPanel);
 		mainPanel.add(roomsGuessPanel);
 		mainPanel.add(weaponsPanel);
 		mainPanel.add(weaponsGuessPanel);
+
+		//set the main JDialog to be visible, and add main panel to the view
 		add(mainPanel);
 		setVisible(true);
 	}
