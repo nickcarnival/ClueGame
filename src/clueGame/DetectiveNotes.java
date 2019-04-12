@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.BorderLayout;
 import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.GraphicsConfiguration;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -26,9 +28,9 @@ public class DetectiveNotes extends JDialog {
 	private ArrayList<JCheckBox> roomCheckBoxes = new ArrayList<JCheckBox>();
 	private ArrayList<JCheckBox> weaponCheckBoxes = new ArrayList<JCheckBox>();
 	
-	private JMenu playerGuessMenu;
-	private JMenu roomGuessMenu;
-	private JMenu weaponGuessMenu;
+	private JComboBox playerGuessMenu;
+	private JComboBox roomGuessMenu;
+	private JComboBox weaponGuessMenu;
 	
 	private JPanel playersPanel;
 	private JPanel roomsPanel;
@@ -57,24 +59,21 @@ public class DetectiveNotes extends JDialog {
 		weaponsGuessPanel = new JPanel();
 		weaponsGuessPanel.setBorder(new TitledBorder("Weapon Guess"));
 		
-		playerGuessMenu = new JMenu("Player Guess");
-		roomGuessMenu = new JMenu("Room Guess");
-		weaponGuessMenu = new JMenu("Weapon Guess");
+		playerGuessMenu = new JComboBox();
+		roomGuessMenu = new JComboBox();
+		weaponGuessMenu = new JComboBox();
 
 		for (Player p : b.getPlayers()) {
 			playerCheckBoxes.add(new JCheckBox(p.getName()));
-			JMenuItem m = new JMenuItem(p.getName());
-			playerGuessMenu.add(m);
+			playerGuessMenu.addItem(p.getName());
 		}
 		for (Card c : b.getRoomCards()) {
 			roomCheckBoxes.add(new JCheckBox(c.getName()));
-			JMenuItem m = new JMenuItem(c.getName());
-			playerGuessMenu.add(m);
+			roomGuessMenu.addItem(c.getName());
 		}
 		for (Card c : b.getWeaponCards()) {
 			weaponCheckBoxes.add(new JCheckBox(c.getName()));
-			JMenuItem m = new JMenuItem(c.getName());
-			playerGuessMenu.add(m);
+			weaponGuessMenu.addItem(c.getName());
 		}
 
 		for (JCheckBox cb : playerCheckBoxes) {
@@ -86,9 +85,9 @@ public class DetectiveNotes extends JDialog {
 		for (JCheckBox cb : weaponCheckBoxes) {
 			weaponsPanel.add(cb);
 		}
-		playersGuessPanel.add(playerGuessMenu);
-		roomsGuessPanel.add(roomGuessMenu);
-		weaponsGuessPanel.add(weaponGuessMenu);
+		playersGuessPanel.add(playerGuessMenu, BorderLayout.CENTER);
+		roomsGuessPanel.add(roomGuessMenu, BorderLayout.CENTER);
+		weaponsGuessPanel.add(weaponGuessMenu, BorderLayout.CENTER);
 		mainPanel.add(playersPanel);
 		mainPanel.add(playersGuessPanel);
 		mainPanel.add(roomsPanel);
