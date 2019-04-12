@@ -25,7 +25,7 @@ public class BoardCell extends JPanel{
 
 	private DoorDirection doorDirection;
 	private boolean isPlayer;
-	private Color playerColor = Color.BLACK;
+	private Color playerColor = Color.ORANGE;
 	private boolean isRoom;
 	private boolean isDoorway;
 	private boolean isWalkway;
@@ -54,6 +54,7 @@ public class BoardCell extends JPanel{
 			g.setColor(Color.BLACK);
 			g.drawRect(x, y, width, height);
 		}
+		
 		//if is doorway
 		else if (isDoorway){
 			//display doorway direction
@@ -111,7 +112,7 @@ public class BoardCell extends JPanel{
 			g.drawString(board.getLegend().get(initial), x, y);
 		}
 		//draw the players and the player colors
-		if(this.isPlayer && !this.isDoorway) {
+		if(this.isPlayer && this.isWalkway) {
 			super.paintComponent(g);
 			g.setColor(this.playerColor);
 			g.fillOval(x, y, width, height);

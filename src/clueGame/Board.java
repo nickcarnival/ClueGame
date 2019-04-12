@@ -138,11 +138,11 @@ public class Board extends JPanel {
 		BoardCell cell4 = boardCellArray[5][4];
 		BoardCell cell5 = boardCellArray[5][19];
 		BoardCell cell6 = boardCellArray[12][17];
+		BoardCell cell7 = boardCellArray[0][8];
 
+		//there are seven start locations
 		for(int i = 0; i < allPlayers.size(); i++) {
-			System.out.println("I :" + i);
-			int randomNumber = random.nextInt(6);
-			System.out.println("Random: " + randomNumber);
+			int randomNumber = random.nextInt(7);
 			//sets the position randomly
 			switch (randomNumber) {
 				case 0:
@@ -211,9 +211,19 @@ public class Board extends JPanel {
 						i--;
 					}
 					break;
-				default :
+				case 6:
+					if(!boardCellArray[0][8].isPlayer()) {
+						allPlayers.get(i).setLocation(cell7);
+						boardCellArray[0][8].setPlayer(true);
+						boardCellArray[0][8].setPlayerColor(allPlayers.get(i).getColor());
+						System.out.println("7");
+					}
+					else {
+						i--;
+					}
 					break;
 			}
+			System.out.println(allPlayers.get(i));
 			
 		}
 		
