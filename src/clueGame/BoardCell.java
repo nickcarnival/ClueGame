@@ -39,7 +39,7 @@ public class BoardCell extends JPanel{
 		this.column = column;
 	}
 
-	public void draw(Graphics g) { 
+	public BoardCell draw(Graphics g) { 
 
 		x = (width * column);
 		y = (height * row);
@@ -105,17 +105,22 @@ public class BoardCell extends JPanel{
 			g.setColor(Color.RED);
 			g.fillRect(x, y, width, height);
 		}
-		//this displays the room name
-		if(isNameDrawer && !this.isDoorway) {
-			super.paintComponent(g);
-			g.setColor(Color.BLUE);
-			g.drawString(board.getLegend().get(initial), x, y);
-		}
 		//draw the players and the player colors
 		if(this.isPlayer && this.isWalkway) {
 			super.paintComponent(g);
 			g.setColor(this.playerColor);
 			g.fillOval(x, y, width, height);
+		}
+		
+		//this displays the room name
+		if(isNameDrawer && !this.isDoorway) {
+			super.paintComponent(g);
+			g.setColor(Color.BLUE);
+			g.drawString(board.getLegend().get(initial), x, y);
+			return this;
+		} 
+		else {
+			return null;
 		}
 	}
 
