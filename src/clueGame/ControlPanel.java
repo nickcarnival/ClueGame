@@ -9,13 +9,18 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.MenuListener;
 
 /*
  * This class controls all of the GUI
@@ -65,6 +70,14 @@ public class ControlPanel extends JFrame{
 		
 
         JPanel mainPanel = new JPanel(new BorderLayout());
+        
+        //file & exit
+        JMenuBar fileMenuBar = new JMenuBar();
+        JMenu fileMenu = new JMenu("File");
+
+        JMenu exit = new JMenu("Exit");
+
+        JMenuItem detectiveNotes = new JMenuItem("Detective Notes");
 
         JPanel topPanel = new JPanel();
         
@@ -128,7 +141,6 @@ public class ControlPanel extends JFrame{
         cardPanel.setPreferredSize(new Dimension(150, 680));
 
         //set borders for each panel
-        mainPanel.setBorder(new TitledBorder("File"));
         cardPanel.setBorder(new TitledBorder("Card Panel"));
         weaponCardPanel.setBorder(new TitledBorder("Weapons"));
         peopleCardPanel.setBorder(new TitledBorder("People"));
@@ -137,7 +149,6 @@ public class ControlPanel extends JFrame{
         guessPanel.setBorder(new TitledBorder("Guess"));
         guessResultPanel.setBorder(new TitledBorder("Guess Result"));
         whoseTurnPanel.setBorder(new TitledBorder("Whose Turn"));
-        bottomPanel.setBorder(new TitledBorder("Bottom Panel"));
 
         /*
          * Add components to each panel
@@ -175,6 +186,15 @@ public class ControlPanel extends JFrame{
         //add both of the bottom panels to the bottom of the GUI
         bottomPanel.add(upperBottomPanel);
         bottomPanel.add(lowerBottomPanel);
+        
+        //menu bar
+        exit.addActionListener(new exitApp());
+        fileMenuBar.add(fileMenu);
+        fileMenuBar.add(exit);
+        fileMenu.add(detectiveNotes);
+
+        topPanel.add(fileMenuBar);
+        topPanel.add(exit);
 
         //add all of the panels to the main panel
         mainPanel.add(topPanel, BorderLayout.NORTH);

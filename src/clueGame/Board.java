@@ -359,6 +359,7 @@ public class Board extends JPanel {
 		return peopleCardArray;
 	}
 
+
 	public ArrayList<Card> getRoomCards() {
 		return roomCardArray;
 	}
@@ -822,10 +823,17 @@ public class Board extends JPanel {
 	
 	@Override
 	public void paintComponent(Graphics g) {
+		ArrayList<BoardCell> nameDrawers = new ArrayList<BoardCell>();
 		for (int column = 0; column < numColumns; column++) {
 			for (int row = 0; row < numRows; row++) {
-				boardCellArray[row][column].draw(g);
+				BoardCell b = boardCellArray[row][column].draw(g); 
+				if(b != null) {
+					nameDrawers.add(b);
+				}
 			}
+		}
+		for(BoardCell b : nameDrawers) {
+			b.draw(g);
 		}
 		boardCellArray[0][0].draw(g);
 		
