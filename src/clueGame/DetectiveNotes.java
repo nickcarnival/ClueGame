@@ -1,29 +1,17 @@
 package clueGame;
 
 import java.awt.BorderLayout;
-import java.awt.Dialog;
-import java.awt.Frame;
-import java.awt.GraphicsConfiguration;
-import java.awt.Window;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 public class DetectiveNotes extends JDialog {
+
 	private ArrayList<JCheckBox> playerCheckBoxes = new ArrayList<JCheckBox>();
 	private ArrayList<JCheckBox> roomCheckBoxes = new ArrayList<JCheckBox>();
 	private ArrayList<JCheckBox> weaponCheckBoxes = new ArrayList<JCheckBox>();
@@ -41,8 +29,9 @@ public class DetectiveNotes extends JDialog {
 	private JPanel mainPanel;
 
 	public DetectiveNotes(Board b) {
-		setTitle("Login Dialog");
+		setTitle("Detective Notes");
 		setSize(750, 750);
+		setLayout(new GridLayout(1, 3));
 
 		mainPanel = new JPanel(new GridLayout(3, 2));
 
