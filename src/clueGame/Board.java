@@ -150,7 +150,6 @@ public class Board extends JPanel {
 						allPlayers.get(i).setLocation(cell1);
 						boardCellArray[20][4].setPlayer(true);
 						boardCellArray[20][4].setPlayerColor(allPlayers.get(i).getColor());
-						System.out.println("1");
 					}
 					else {
 						i--;
@@ -161,7 +160,6 @@ public class Board extends JPanel {
 						allPlayers.get(i).setLocation(cell2);
 						boardCellArray[14][10].setPlayer(true);
 						boardCellArray[14][10].setPlayerColor(allPlayers.get(i).getColor());
-						System.out.println("2");
 					}
 					else {
 						i--;
@@ -172,7 +170,6 @@ public class Board extends JPanel {
 						allPlayers.get(i).setLocation(cell3);
 						boardCellArray[7][14].setPlayer(true);
 						boardCellArray[7][14].setPlayerColor(allPlayers.get(i).getColor());
-						System.out.println("3");
 					}
 					else {
 						i--;
@@ -183,7 +180,6 @@ public class Board extends JPanel {
 						allPlayers.get(i).setLocation(cell4);
 						boardCellArray[5][4].setPlayer(true);
 						boardCellArray[5][4].setPlayerColor(allPlayers.get(i).getColor());
-						System.out.println("4");
 					}
 					else {
 						i--;
@@ -194,7 +190,6 @@ public class Board extends JPanel {
 						allPlayers.get(i).setLocation(cell5);
 						boardCellArray[5][19].setPlayer(true);
 						boardCellArray[5][19].setPlayerColor(allPlayers.get(i).getColor());
-						System.out.println("5");
 					}
 					else {
 						i--;
@@ -205,7 +200,6 @@ public class Board extends JPanel {
 						allPlayers.get(i).setLocation(cell6);
 						boardCellArray[12][17].setPlayer(true);
 						boardCellArray[12][17].setPlayerColor(allPlayers.get(i).getColor());
-						System.out.println("6");
 					}
 					else {
 						i--;
@@ -216,14 +210,12 @@ public class Board extends JPanel {
 						allPlayers.get(i).setLocation(cell7);
 						boardCellArray[0][8].setPlayer(true);
 						boardCellArray[0][8].setPlayerColor(allPlayers.get(i).getColor());
-						System.out.println("7");
 					}
 					else {
 						i--;
 					}
 					break;
 			}
-			System.out.println(allPlayers.get(i));
 			
 		}
 		

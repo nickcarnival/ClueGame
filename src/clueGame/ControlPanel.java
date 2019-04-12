@@ -26,7 +26,7 @@ import javax.swing.event.MenuListener;
  * This class controls all of the GUI
  */
 
-public class ControlPanel extends JFrame{
+public class ControlPanel extends JFrame implements ActionListener{
 
 	private static Board board;
 	//these are all set to temporary values, but will later be updated by the board
@@ -188,7 +188,7 @@ public class ControlPanel extends JFrame{
         bottomPanel.add(lowerBottomPanel);
         
         //menu bar
-        exit.addActionListener(new exitApp());
+        exit.addActionListener(this);
         fileMenuBar.add(fileMenu);
         fileMenuBar.add(exit);
         fileMenu.add(detectiveNotes);
@@ -206,6 +206,13 @@ public class ControlPanel extends JFrame{
         add(mainPanel);
         setVisible(true);
 	}
+	
+	public void actionPerformed(ActionEvent ae) { 
+	  String choice = ae.getActionCommand(); 
+	  if (choice.equals("Quit")) { 
+		 System.exit(0); 
+	  } 
+   } 	
 	
 	//whose turn getters and setters
 	public void setWhoseTurn(String whose) {
