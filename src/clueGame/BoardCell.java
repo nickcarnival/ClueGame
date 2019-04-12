@@ -105,8 +105,8 @@ public class BoardCell extends JPanel{
 		//this displays the room name
 		if(isNameDrawer && !this.isDoorway) {
 			super.paintComponent(g);
-			g.setColor(Color.white);
-			g.drawString(board.getLegend().get(initial), x - (width), y + height);
+			g.setColor(Color.BLUE);
+			g.drawString(board.getLegend().get(initial), x, y);
 		}
 	}
 

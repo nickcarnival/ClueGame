@@ -729,6 +729,6 @@ public class Board extends JPanel {
 				boardCellArray[row][column].draw(g);
 			}
 		}
-//		boardCellArray[0][0].draw(g);
+		boardCellArray[0][0].draw(g);
 	}
 }
