@@ -15,9 +15,11 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
 
 public class DetectiveNotes extends JDialog {
 
@@ -44,34 +46,47 @@ public class DetectiveNotes extends JDialog {
 		playersPanel = new JPanel();
 		playersPanel.setBorder(new TitledBorder("Players"));
 		roomsPanel = new JPanel();
+		roomsPanel.setBorder(new TitledBorder("Rooms"));
 		weaponsPanel = new JPanel();
+		weaponsPanel.setBorder(new TitledBorder("Weapons"));
 		playersGuessPanel = new JPanel();
+		playersGuessPanel.setBorder(new TitledBorder("Player Guess"));
 		roomsGuessPanel = new JPanel();
+		roomsGuessPanel.setBorder(new TitledBorder("Room Guess"));
 		weaponsGuessPanel = new JPanel();
+		weaponsGuessPanel.setBorder(new TitledBorder("Weapon Guess"));
+		
+		playerGuessMenu = new JMenu("Player Guess");
+		roomGuessMenu = new JMenu("Room Guess");
+		weaponGuessMenu = new JMenu("Weapon Guess");
 
 		for (Player p : b.getPlayers()) {
 			playerCheckBoxes.add(new JCheckBox(p.getName()));
+			JMenuItem m = new JMenuItem(p.getName());
+			playerGuessMenu.add(m);
 		}
 		for (Card c : b.getRoomCards()) {
 			roomCheckBoxes.add(new JCheckBox(c.getName()));
+			JMenuItem m = new JMenuItem(c.getName());
+			playerGuessMenu.add(m);
 		}
 		for (Card c : b.getWeaponCards()) {
 			weaponCheckBoxes.add(new JCheckBox(c.getName()));
+			JMenuItem m = new JMenuItem(c.getName());
+			playerGuessMenu.add(m);
 		}
-		add(playersLabel);
+
 		for (JCheckBox cb : playerCheckBoxes) {
-			add(cb);
+			playersPanel.add(cb);
 		}
-		add(roomsLabel);
 		for (JCheckBox cb : roomCheckBoxes) {
-			add(cb);
+			roomsPanel.add(cb);
 		}
-		add(weaponLabel);
 		for (JCheckBox cb : weaponCheckBoxes) {
-			add(cb);
+			weaponsPanel.add(cb);
 		}
-		playerGuessMenu = new JMenuBar();
-		roomGuessMenu = new JMenuBar();
-		weaponGuessMenu = new JMenuBar();
+		playersGuessPanel.add(playerGuessMenu);
+		roomsGuessPanel.add(roomGuessMenu);
+		weaponsGuessPanel.add(weaponGuessMenu);
 	}
 }
