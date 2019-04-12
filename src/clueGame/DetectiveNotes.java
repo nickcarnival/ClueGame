@@ -40,7 +40,7 @@ public class DetectiveNotes extends JDialog {
 
 	public DetectiveNotes(Board b) {
 		setTitle("Login Dialog");
-		setSize(800, 600);
+		setSize(750, 750);
 		setLayout(new GridLayout(1, 3));
 
 		playersPanel = new JPanel();

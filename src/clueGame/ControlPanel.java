@@ -213,6 +213,8 @@ public class ControlPanel extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(this, "You hit exit");
 		} 
 		if (choice.equals("Detective Notes")) { 
+			DetectiveNotes dn = new DetectiveNotes(board);
+			dn.setVisible(true);
 			JOptionPane.showMessageDialog(this, "You hit detective notes");
 		} 
 
