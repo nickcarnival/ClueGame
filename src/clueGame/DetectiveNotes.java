@@ -36,17 +36,19 @@ public class DetectiveNotes extends JDialog {
 	private JPanel playersGuessPanel;
 	private JPanel roomsGuessPanel;
 	private JPanel weaponsGuessPanel;
+	private JPanel mainPanel;
 
 	public DetectiveNotes(Board b) {
 		setTitle("Login Dialog");
-		setSize(800, 600);
-		setLayout(new GridLayout(1, 3));
+		setSize(750, 750);
 
-		playersPanel = new JPanel();
+		mainPanel = new JPanel(new GridLayout(3, 2));
+
+		playersPanel = new JPanel(new GridLayout(3, 2));
 		playersPanel.setBorder(new TitledBorder("Players"));
-		roomsPanel = new JPanel();
+		roomsPanel = new JPanel(new GridLayout(3, 2));
 		roomsPanel.setBorder(new TitledBorder("Rooms"));
-		weaponsPanel = new JPanel();
+		weaponsPanel = new JPanel(new GridLayout(3, 2));
 		weaponsPanel.setBorder(new TitledBorder("Weapons"));
 		playersGuessPanel = new JPanel();
 		playersGuessPanel.setBorder(new TitledBorder("Player Guess"));
@@ -87,5 +89,22 @@ public class DetectiveNotes extends JDialog {
 		playersGuessPanel.add(playerGuessMenu);
 		roomsGuessPanel.add(roomGuessMenu);
 		weaponsGuessPanel.add(weaponGuessMenu);
+		mainPanel.add(playersPanel);
+		mainPanel.add(playersGuessPanel);
+		mainPanel.add(roomsPanel);
+		mainPanel.add(roomsGuessPanel);
+		mainPanel.add(weaponsPanel);
+		mainPanel.add(weaponsGuessPanel);
+		add(mainPanel);
+		setVisible(true);
+	}
+	
+	public static void main(String args[]) {
+		Board b = Board.getInstance();
+		b.setConfigFiles("data/testsMap.csv", "data/rooms.txt");
+		b.initialize();
+		
+		DetectiveNotes dn = new DetectiveNotes(b);
+		dn.setVisible(true);
 	}
 }
