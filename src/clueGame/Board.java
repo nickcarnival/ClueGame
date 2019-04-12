@@ -133,56 +133,82 @@ public class Board extends JPanel {
 		Random random = new Random();
 
 		BoardCell cell1 = boardCellArray[20][4];
-		BoardCell cell2 = boardCellArray[14][7];
-		BoardCell cell3 = boardCellArray[3][14];
-		BoardCell cell4 = boardCellArray[3][5];
-		BoardCell cell5 = boardCellArray[5][14];
-		BoardCell cell6 = boardCellArray[5][21];
+		BoardCell cell2 = boardCellArray[14][10];
+		BoardCell cell3 = boardCellArray[7][14];
+		BoardCell cell4 = boardCellArray[5][4];
+		BoardCell cell5 = boardCellArray[5][19];
+		BoardCell cell6 = boardCellArray[12][17];
 
 		for(int i = 0; i < allPlayers.size(); i++) {
+			System.out.println("I :" + i);
 			int randomNumber = random.nextInt(6);
+			System.out.println("Random: " + randomNumber);
 			//sets the position randomly
 			switch (randomNumber) {
-				case 1:
+				case 0:
 					if(!boardCellArray[20][4].isPlayer()) {
 						allPlayers.get(i).setLocation(cell1);
 						boardCellArray[20][4].setPlayer(true);
-						boardCellArray[20][4].setPlayerColor(allPlayers.get(randomNumber).getColor());
+						boardCellArray[20][4].setPlayerColor(allPlayers.get(i).getColor());
+						System.out.println("1");
+					}
+					else {
+						i--;
+					}
+					break;
+				case 1:
+					if(!boardCellArray[14][10].isPlayer()) {
+						allPlayers.get(i).setLocation(cell2);
+						boardCellArray[14][10].setPlayer(true);
+						boardCellArray[14][10].setPlayerColor(allPlayers.get(i).getColor());
+						System.out.println("2");
+					}
+					else {
+						i--;
 					}
 					break;
 				case 2:
-					if(!boardCellArray[20][4].isPlayer()) {
-						allPlayers.get(i).setLocation(cell1);
-						boardCellArray[20][4].setPlayer(true);
-						boardCellArray[20][4].setPlayerColor(allPlayers.get(randomNumber).getColor());
+					if(!boardCellArray[7][14].isPlayer()) {
+						allPlayers.get(i).setLocation(cell3);
+						boardCellArray[7][14].setPlayer(true);
+						boardCellArray[7][14].setPlayerColor(allPlayers.get(i).getColor());
+						System.out.println("3");
+					}
+					else {
+						i--;
 					}
 					break;
 				case 3:
-					if(!boardCellArray[20][4].isPlayer()) {
-						allPlayers.get(i).setLocation(cell1);
-						boardCellArray[20][4].setPlayer(true);
-						boardCellArray[20][4].setPlayerColor(allPlayers.get(randomNumber).getColor());
+					if(!boardCellArray[5][4].isPlayer()) {
+						allPlayers.get(i).setLocation(cell4);
+						boardCellArray[5][4].setPlayer(true);
+						boardCellArray[5][4].setPlayerColor(allPlayers.get(i).getColor());
+						System.out.println("4");
+					}
+					else {
+						i--;
 					}
 					break;
 				case 4:
-					if(!boardCellArray[20][4].isPlayer()) {
-						allPlayers.get(i).setLocation(cell1);
-						boardCellArray[20][4].setPlayer(true);
-						boardCellArray[20][4].setPlayerColor(allPlayers.get(randomNumber).getColor());
+					if(!boardCellArray[5][19].isPlayer()) {
+						allPlayers.get(i).setLocation(cell5);
+						boardCellArray[5][19].setPlayer(true);
+						boardCellArray[5][19].setPlayerColor(allPlayers.get(i).getColor());
+						System.out.println("5");
+					}
+					else {
+						i--;
 					}
 					break;
 				case 5:
-					if(!boardCellArray[20][4].isPlayer()) {
-						allPlayers.get(i).setLocation(cell1);
-						boardCellArray[20][4].setPlayer(true);
-						boardCellArray[20][4].setPlayerColor(allPlayers.get(randomNumber).getColor());
+					if(!boardCellArray[12][17].isPlayer()) {
+						allPlayers.get(i).setLocation(cell6);
+						boardCellArray[12][17].setPlayer(true);
+						boardCellArray[12][17].setPlayerColor(allPlayers.get(i).getColor());
+						System.out.println("6");
 					}
-					break;
-				case 6:
-					if(!boardCellArray[20][4].isPlayer()) {
-						allPlayers.get(i).setLocation(cell1);
-						boardCellArray[20][4].setPlayer(true);
-						boardCellArray[20][4].setPlayerColor(allPlayers.get(randomNumber).getColor());
+					else {
+						i--;
 					}
 					break;
 				default :
@@ -793,8 +819,5 @@ public class Board extends JPanel {
 		}
 		boardCellArray[0][0].draw(g);
 		
-		for(int i = 0; i < allPlayers.size(); i++) {
-			System.out.println(allPlayers.get(i));
-		}
 	}
 }
