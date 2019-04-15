@@ -155,33 +155,28 @@ public class ControlPanel extends JFrame implements ActionListener{
 
         boardPanel.add(board, BorderLayout.CENTER);
 
-        
-        //adding each type of card to the card panel
-        JTextField weaponsText = new JTextField();
-        JTextField peopleText = new JTextField();
-        JTextField roomsText = new JTextField();
-
-        weaponsText.setEditable(false);
-        peopleText.setEditable(false);
-        roomsText.setEditable(false);
-
-        weaponCardPanel.add(weaponsText);
-        peopleCardPanel.add(peopleText);
-        roomCardPanel.add(roomsText);
-
         whoseTurnField.setText(whoseTurnString );
 
         //adding cards to the card panels
         for(Card c : humanCards) {
         	switch (c.getType()) {
         	case PERSON :
+        		JTextField peopleText = new JTextField();
         		peopleText.setText(c.toString());
+        		peopleText.setEditable(false);
+        		peopleCardPanel.add(peopleText);
         		break;
         	case WEAPON:
-        		weaponsText.setText(c.toString());
+        		JTextField weaponText = new JTextField();
+        		weaponText.setText(c.toString());
+        		weaponText.setEditable(false);
+        		weaponCardPanel.add(weaponText);
         		break;
         	case ROOM:
-        		roomsText.setText(c.toString());
+        		JTextField roomText = new JTextField();
+        		roomText.setText(c.toString());
+        		roomText.setEditable(false);
+        		roomCardPanel.add(roomText);
         		break;
         	}
         	
