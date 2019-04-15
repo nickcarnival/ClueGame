@@ -10,6 +10,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -34,6 +35,9 @@ public class ControlPanel extends JFrame implements ActionListener{
 	private String whoseTurnString = "Miss Scarlet";
 	private String pastGuess = "Miss Scarley Lounge Candlestick";
 	private String diceValue = "4";
+	
+	private static HumanPlayer humanPlayer;
+	private static ArrayList<Card> humanCards;
 
 	public ControlPanel() {
 
@@ -53,6 +57,7 @@ public class ControlPanel extends JFrame implements ActionListener{
 		}
 		
 	}
+
 	public void createLayout() {
 
         /*
@@ -68,10 +73,9 @@ public class ControlPanel extends JFrame implements ActionListener{
 			 * Guess
          */
 		
-		
 
         JPanel mainPanel = new JPanel(new BorderLayout());
-        
+        JOptionPane.showMessageDialog(mainPanel, "You are " + humanPlayer.getName() + ", press Next Player to begin play");
         //file & exit
         JMenuBar fileMenuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
@@ -175,9 +179,21 @@ public class ControlPanel extends JFrame implements ActionListener{
 
         whoseTurnField.setText(whoseTurnString );
 
-        weaponsText.setText("weapon");
-        peopleText.setText("people");
-        roomsText.setText("rooms");
+        //adding cards to the card panels
+        for(Card c : humanCards) {
+        	switch (c.getType()) {
+        	case PERSON :
+        		peopleText.setText(c.toString());
+        		break;
+        	case WEAPON:
+        		weaponsText.setText(c.toString());
+        		break;
+        	case ROOM:
+        		roomsText.setText(c.toString());
+        		break;
+        	}
+        	
+        }
 
         cardPanel.add(weaponCardPanel, BorderLayout.NORTH);
         cardPanel.add(peopleCardPanel, BorderLayout.CENTER);
@@ -272,12 +288,12 @@ public class ControlPanel extends JFrame implements ActionListener{
 		board.setSolution();
 		board.dealCards();
 
+		//set the human player
+		humanPlayer = board.getHumanPlayer();
+		humanCards = humanPlayer.getMyCards();
+
 		ControlPanel cp = new ControlPanel();
 		cp.setVisible(true);
-		
-		for(Player p : board.getPlayers() ) {
-			System.out.println(p.getName() + " cards: " + p.getMyCards());
-		}
 	}
 
 }

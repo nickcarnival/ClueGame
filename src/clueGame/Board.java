@@ -28,6 +28,7 @@ public class Board extends JPanel {
 	public static final int MAX_BOARD_SIZE = 50;
 	private String layoutFile;
 	private String legendFile;
+	private String playerConfigFile = "data/playerConfig.txt";
 
 	private static final String COMMA = ",";
 
@@ -116,12 +117,17 @@ public class Board extends JPanel {
 		return humanPlayer;
 	}
 
+	//loads in all of the players from the config file
 	public void loadPlayers() throws BadConfigFormatException, FileNotFoundException{
-		String playerConfigFile = "data/playerConfig.txt";
 		Scanner scanner = new Scanner(new File(playerConfigFile));
 		allPlayers = new ArrayList<Player>();
 		
 		scanner.useDelimiter(COMMA);
+		Random random = new Random();
+
+		//random number max size all players...
+		int randomint = random.nextInt(6);
+		int count = 0;
 
         while (scanner.hasNextLine()) {
         	String currentLine = scanner.nextLine();
@@ -130,12 +136,21 @@ public class Board extends JPanel {
         	String playerName = splitLine[0].trim();
         	String playerColor = splitLine[1].trim();
 
-        	//sets the human and computer players
-        	Player player = new ComputerPlayer(playerColor, playerName); 
-        	allPlayers.add(player);
+        	//randomly create the human player
+        	if(count == randomint) {
+        		humanPlayer = new HumanPlayer(playerColor, playerName);
+        		allPlayers.add(humanPlayer);
+        	}else {
+				//sets the computer players
+				Player player = new ComputerPlayer(playerColor, playerName); 
+				allPlayers.add(player);
+        	}
+        	count++;
         }
+
 		scanner.close();
 		
+		//this method creates the possile starting positions
 		setStartingLocations();
 		
 	}

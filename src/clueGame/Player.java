@@ -11,7 +11,6 @@ import java.util.Set;
 public abstract class Player {
 	private String playerName;
 	private Color color;
-	private Boolean isHuman;
 
 	protected ArrayList<Card> myCards;
 	protected ArrayList<Card> seenCards;
@@ -57,7 +56,7 @@ public abstract class Player {
 	}
 
 	public String getName() {
-		return playerName;
+		return this.playerName;
 	}
 	
 	public Color getColor() {
