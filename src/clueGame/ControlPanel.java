@@ -47,15 +47,6 @@ public class ControlPanel extends JFrame implements ActionListener{
 		createLayout();
 	}
 	
-	private class ButtonListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent action) {
-			System.out.println(action.getSource());
-		}
-		
-	}
-
 	public void createLayout() {
 
         /*
@@ -112,6 +103,9 @@ public class ControlPanel extends JFrame implements ActionListener{
         //buttons
         JButton nextPlayerButton = new JButton("Next Player");
         JButton makeAccusationButton = new JButton("Make Accusation");
+
+        nextPlayerButton.addActionListener(this);
+        makeAccusationButton.addActionListener(this);
 
         //contains dice roll and guess
         JPanel lowerBottomPanel = new JPanel(new GridLayout(1, 3));
@@ -238,17 +232,25 @@ public class ControlPanel extends JFrame implements ActionListener{
         setVisible(true);
 	}
 	
+	//this handles what all of the buttons do
 	public void actionPerformed(ActionEvent ae) { 
 		String choice = ae.getActionCommand(); 
-		if (choice.equals("Exit")) { 
-			System.exit(0);
-		} 
-		if (choice.equals("Detective Notes")) { 
-			DetectiveNotes dn = new DetectiveNotes(board);
-			dn.setResizable(false);
-			dn.setVisible(true);
-		} 
-
+		switch (choice) {
+			case "Exit" :
+				System.exit(0);
+				break;
+			case "Detective Notes" :
+				DetectiveNotes dn = new DetectiveNotes(board);
+				dn.setResizable(false);
+				dn.setVisible(true);
+				break;
+			case "Next Player" :
+				System.out.println("this button is not yet implemented");
+				break;
+			case "Make Accusation" :
+				System.out.println("this button is not yet implemented");
+				break;
+		}
 	} 	
 	
 	//whose turn getters and setters
