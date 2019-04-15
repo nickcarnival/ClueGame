@@ -11,6 +11,7 @@ import java.util.Set;
 public abstract class Player {
 	private String playerName;
 	private Color color;
+	private Boolean isHuman;
 
 	protected ArrayList<Card> myCards;
 	protected ArrayList<Card> seenCards;

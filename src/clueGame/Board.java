@@ -110,6 +110,7 @@ public class Board extends JPanel {
 	 * Player Methods
 	 *************************************************************/
 
+
 	public void loadPlayers() throws BadConfigFormatException, FileNotFoundException{
 		String playerConfigFile = "data/playerConfig.txt";
 		Scanner scanner = new Scanner(new File(playerConfigFile));
@@ -129,7 +130,12 @@ public class Board extends JPanel {
         }
 		scanner.close();
 		
-		//setting the players locations
+		setStartingLocations();
+		
+	}
+	
+	//sets the starting locations
+	private void setStartingLocations() {
 		Random random = new Random();
 
 		BoardCell cell1 = boardCellArray[20][4];

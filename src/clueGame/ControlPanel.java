@@ -161,9 +161,26 @@ public class ControlPanel extends JFrame implements ActionListener{
 
         
         //adding each type of card to the card panel
+        JTextField weaponsText = new JTextField();
+        JTextField peopleText = new JTextField();
+        JTextField roomsText = new JTextField();
+
+        weaponsText.setEditable(false);
+        peopleText.setEditable(false);
+        roomsText.setEditable(false);
+
+        weaponCardPanel.add(weaponsText);
+        peopleCardPanel.add(peopleText);
+        roomCardPanel.add(roomsText);
+
+        whoseTurnField.setText(whoseTurnString );
+
+        weaponsText.setText("weapon");
+        peopleText.setText("people");
+        roomsText.setText("rooms");
+
         cardPanel.add(weaponCardPanel, BorderLayout.NORTH);
         cardPanel.add(peopleCardPanel, BorderLayout.CENTER);
-
         cardPanel.add(roomCardPanel, BorderLayout.SOUTH);
 
         diePanel.add(diceLabel);
@@ -252,10 +269,15 @@ public class ControlPanel extends JFrame implements ActionListener{
 		// set the file names to use my config files
 		board.setConfigFiles("data/testsMap.csv", "data/rooms.txt");		
 		board.initialize();
+		board.setSolution();
+		board.dealCards();
 
 		ControlPanel cp = new ControlPanel();
 		cp.setVisible(true);
 		
+		for(Player p : board.getPlayers() ) {
+			System.out.println(p.getName() + " cards: " + p.getMyCards());
+		}
 	}
 
 }
