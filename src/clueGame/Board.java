@@ -53,6 +53,8 @@ public class Board extends JPanel {
 
 	//array of all the players
 	ArrayList<Player> allPlayers ;
+	
+	HumanPlayer humanPlayer;
 
 	Solution solution = new Solution();
 
@@ -109,7 +111,10 @@ public class Board extends JPanel {
 	/*************************************************************
 	 * Player Methods
 	 *************************************************************/
-
+	
+	public HumanPlayer getHumanPlayer() {
+		return humanPlayer;
+	}
 
 	public void loadPlayers() throws BadConfigFormatException, FileNotFoundException{
 		String playerConfigFile = "data/playerConfig.txt";
@@ -125,6 +130,7 @@ public class Board extends JPanel {
         	String playerName = splitLine[0].trim();
         	String playerColor = splitLine[1].trim();
 
+        	//sets the human and computer players
         	Player player = new ComputerPlayer(playerColor, playerName); 
         	allPlayers.add(player);
         }
