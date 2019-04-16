@@ -43,6 +43,11 @@ public class HumanPlayer extends Player {
 		return suggestion;
 	}
 	
+	public Boolean canChangeTurn() {
+
+		return null; 
+	}
+
 	public Card disproveSuggestion(Solution suggestion) {
 		Random random = new Random();
 		ArrayList<Card> matches = new ArrayList<Card>();

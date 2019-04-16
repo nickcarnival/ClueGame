@@ -33,6 +33,7 @@ public class ControlPanel extends JFrame implements ActionListener{
 	private String whoseTurnString = "Miss Scarlet";
 	private String pastGuess = "Miss Scarlet Lounge Candlestick";
 	private String diceValue = "4";
+	private JPanel mainPanel;
 	
 	private static HumanPlayer humanPlayer;
 	private static ArrayList<Card> humanCards;
@@ -63,7 +64,7 @@ public class ControlPanel extends JFrame implements ActionListener{
          */
 		
 
-        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel = new JPanel(new BorderLayout());
         //file & exit
         JMenuBar fileMenuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
@@ -241,6 +242,11 @@ public class ControlPanel extends JFrame implements ActionListener{
 				dn.setVisible(true);
 				break;
 			case "Next Player" :
+				if(humanPlayer.canChangeTurn()) {
+					
+				}else {
+					JOptionPane.showMessageDialog(mainPanel, "You cannot change your turn yet.");
+				}
 				System.out.println("Next Player is not yet implemented");
 				break;
 			case "Make Accusation" :
