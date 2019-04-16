@@ -26,6 +26,7 @@ public class Board extends JPanel {
 
 
 	public static final int MAX_BOARD_SIZE = 50;
+	public static final int CARDS_PER_PLAYER = 3;
 	private String layoutFile;
 	private String legendFile;
 	private String playerConfigFile = "data/playerConfig.txt";
@@ -312,26 +313,24 @@ public class Board extends JPanel {
 	of cards that have been dealt and cards that remain to be dealt (none)
 	
 	Also makes sure that each player knows what board it's on
-	TODO: move that
 	*/
 	public void dealCards() {
-		dealtCards= new ArrayList<Card>();
-		HashSet<Integer> ints = new HashSet<Integer>();
-		Random random = new Random();
-		int currentPlayer = 0;
-		for (int i = 0; i < allCards.size(); i++) {
-			int myint = random.nextInt(allCards.size());
-			while(ints.contains(myint)) {
-				myint = random.nextInt(allCards.size());
-			}
-			allPlayers.get(currentPlayer).addCard(allCards.get(myint));
-			ints.add(myint);
-			dealtCards.add(allCards.get(myint));
-			currentPlayer = (currentPlayer + 1) % allPlayers.size();
-		}
-		allCards = new ArrayList<Card>();
 		for (Player p : allPlayers) {
 			p.setBoard(this);
+		}
+		dealtCards = new ArrayList<Card>();
+		Random r = new Random();
+		for (int i = 0; i < allCards.size(); i++) {
+			while (true) {
+				int random = r.nextInt(allPlayers.size());
+				if (allPlayers.get(random).getMyCards().size() >= CARDS_PER_PLAYER) {
+					continue;
+				} else {
+					allPlayers.get(random).addCard(allCards.get(i));
+					dealtCards.add(allCards.get(i));
+				}
+				break;
+			}
 		}
 	}
 
