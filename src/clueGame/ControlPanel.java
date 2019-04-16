@@ -62,11 +62,9 @@ public class ControlPanel extends JFrame implements ActionListener {
 	}
 	
 	public void paintComponent(Graphics g) {
-		System.out.println("this is happening");
 		super.paintComponents(g);
 		g.setColor(Color.PINK);
 		for(Point p : points) {
-			System.out.println("Printing Oval at: " + p.x + " " + p.y);
 			g.fillOval(p.x, p.y, 100, 100);
 		}
 		

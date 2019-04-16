@@ -3,12 +3,9 @@
  * Nicholas Carnival
  */
 package clueGame;
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.text.DateFormat.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -434,7 +431,6 @@ public class Board extends JPanel {
 		setNumColumns();
 		//-1 is an error state for NumColumns
 		if(numColumns == -1) {
-			System.out.println("The Bad Format Has Been Thrown");
 			throw new BadConfigFormatException("Bad Columns");
 		}
 		boardCellArray = new BoardCell[numRows][numColumns];
@@ -502,7 +498,6 @@ public class Board extends JPanel {
 
 		//numColumns will be -1 if the columns are formatted improperly
 		if(numColumns == -1) {
-			System.out.println("threw bad column format");
 			throw new BadConfigFormatException("Bad column format");
 
 		//loads the csv if the columns are proper

@@ -84,12 +84,6 @@ public class IntBoard {
 		visited.clear();
 		visited.add(startCell);
 		findAllTargets(startCell, pathLength);
-		System.out.println("sc " + startCell + "\tpl " + pathLength);
-		System.out.println("size " + targets.size());
-		for (BoardCell b : targets) {
-			System.out.println(b);
-		}
-		System.out.println();
 	}
 
 	//
