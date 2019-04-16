@@ -259,6 +259,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 			points.add(event.getPoint());
 			repaint();
 		}
+
 		//these must all be implemented
 		public void mouseEntered(MouseEvent event) {}
 		public void mouseExited(MouseEvent event) {}
