@@ -38,9 +38,18 @@ public class BoardCell extends JPanel{
 		this.row = row;
 		this.column = column;
 	}
+	
+	private Color handleColor(Color foo, boolean specialColor) {
+		if (specialColor) {
+			return Color.CYAN;
+		} else {
+			return foo;
+		}
+	}
 
-	public BoardCell draw(Graphics g) { 
-
+	// specialColor defines whether or not we want to highlight this cell
+	// (e.g. for target display)
+	public BoardCell draw(Graphics g, boolean specialColor) { 
 		x = (width * column);
 		y = (height * row);
 
@@ -48,7 +57,7 @@ public class BoardCell extends JPanel{
 		if(this.isWalkway) {
 			super.repaint();
 			super.paintComponent(g);
-			g.setColor(Color.YELLOW);
+			g.setColor(handleColor(Color.YELLOW, specialColor));
 			//x, y, width, height
 			g.fillRect(x, y, width, height);
 			g.setColor(Color.BLACK);
@@ -62,28 +71,28 @@ public class BoardCell extends JPanel{
 			//display each cell's direction image
 			case LEFT:
 				super.paintComponent(g);
-				g.setColor(Color.gray);
+				g.setColor(handleColor(Color.GRAY, specialColor));
 				g.fillRect(x, y, width + 10, height );
 				g.setColor(Color.BLUE);
 				g.fillRect(x , y, doorWidth, height);
 				break;
 			case RIGHT:
 				super.paintComponent(g);
-				g.setColor(Color.gray);
+				g.setColor(handleColor(Color.GRAY, specialColor));
 				g.fillRect(x, y, width, height);
 				g.setColor(Color.BLUE);
 				g.fillRect(x + 20, y, doorWidth, height);
 				break;
 			case UP:
 				super.paintComponent(g);
-				g.setColor(Color.gray);
+				g.setColor(handleColor(Color.GRAY, specialColor));
 				g.fillRect(x, y, width, height);
 				g.setColor(Color.BLUE);
 				g.fillRect(x, y, width, doorHeight);
 				break;
 			case DOWN:
 				super.paintComponent(g);
-				g.setColor(Color.gray);
+				g.setColor(handleColor(Color.GRAY, specialColor));
 				g.fillRect(x, y, width, height);
 				g.setColor(Color.BLUE);
 				g.fillRect(x, y + 20, width, doorHeight);

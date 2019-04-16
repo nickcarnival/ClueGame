@@ -816,17 +816,17 @@ public class Board extends JPanel {
 		ArrayList<BoardCell> nameDrawers = new ArrayList<BoardCell>();
 		for (int column = 0; column < numColumns; column++) {
 			for (int row = 0; row < numRows; row++) {
-				BoardCell b = boardCellArray[row][column].draw(g); 
+				BoardCell b = boardCellArray[row][column].draw(g, false); 
 				if(b != null) {
 					nameDrawers.add(b);
 				}
 			}
 		}
 		for(BoardCell b : nameDrawers) {
-			b.draw(g);
+			b.draw(g, false);
 		}
 
-		boardCellArray[0][0].draw(g);
+		boardCellArray[0][0].draw(g, false);
 	}
 
 	public void advanceTurn() {
@@ -839,5 +839,14 @@ public class Board extends JPanel {
 
 	public void setCurrentPlayerIndex(int currentPlayerIndex) {
 		this.currentPlayerIndex = currentPlayerIndex;
+	}
+	
+	// calculate the targets for the current player, then draw them in a special color
+	public void showTargets(Graphics g, int dieRoll) {
+		calcTargets(allPlayers.get(currentPlayerIndex).location, dieRoll);
+		targets = getTargets();
+		for (BoardCell b: targets) {
+			b.draw(g, true);
+		}
 	}
 }
