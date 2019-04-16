@@ -42,7 +42,7 @@ public class ControlPanel extends JFrame implements ActionListener{
 
 	public ControlPanel() {
 
-		dns = new DetectiveNotesState();
+		dns = new DetectiveNotesState(board);
 		setTitle("Clue Game");
 		//seems like a good size
 		setSize(750, 750);
@@ -241,7 +241,7 @@ public class ControlPanel extends JFrame implements ActionListener{
 				break;
 			case "Detective Notes" :
 				// TODO: why the hell does this work, board is never defined anywhere
-				DetectiveNotes dn = new DetectiveNotes(board, dns);
+				DetectiveNotes dn = new DetectiveNotes(dns);
 				dn.setResizable(false);
 				dn.setVisible(true);
 				break;
