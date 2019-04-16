@@ -5,10 +5,15 @@
 package clueGame;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -26,7 +31,7 @@ import javax.swing.border.TitledBorder;
  * This class controls all of the GUI
  */
 
-public class ControlPanel extends JFrame implements ActionListener{
+public class ControlPanel extends JFrame implements ActionListener {
 
 	private static Board board;
 	//these are all set to temporary values, but will later be updated by the board
@@ -38,17 +43,31 @@ public class ControlPanel extends JFrame implements ActionListener{
 	
 	private static HumanPlayer humanPlayer;
 	private static ArrayList<Card> humanCards;
+	
+	//mouse stuff
+	private ArrayList<Point> points; 
 
 	public ControlPanel() {
-
+		points = new ArrayList<Point>();
 		setTitle("Clue Game");
 		//seems like a good size
 		setSize(750, 750);
 		//exit on close so that the program ends when the window closes
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        addMouseListener(new dotsListener());
 		createLayout();
 	}
 	
+	public void paintComponent(Graphics g) {
+		System.out.println("this is happening");
+		super.paintComponents(g);
+		g.setColor(Color.PINK);
+		for(Point p : points) {
+			System.out.println("Printing Oval at: " + p.x + " " + p.y);
+			g.fillOval(p.x, p.y, 100, 100);
+		}
+		
+	}
 	public void createLayout() {
 
         /*
@@ -228,6 +247,20 @@ public class ControlPanel extends JFrame implements ActionListener{
         setVisible(true);
 
         JOptionPane.showMessageDialog(mainPanel, "You are " + humanPlayer.getName() + ", press Next Player to begin play");
+        
+	}
+	
+	private class dotsListener implements MouseListener {
+		//when the mouse is clicked, 
+		public void mouseClicked(MouseEvent event) {
+			points.add(event.getPoint());
+			repaint();
+		}
+		//these must all be implemented
+		public void mouseEntered(MouseEvent event) {}
+		public void mouseExited(MouseEvent event) {}
+		public void mousePressed(MouseEvent event) {}
+		public void mouseReleased(MouseEvent event) {}
 	}
 	
 	//this handles what all of the buttons do

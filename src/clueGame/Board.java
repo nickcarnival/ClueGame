@@ -5,6 +5,7 @@
 package clueGame;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.DateFormat.Field;
@@ -27,6 +28,7 @@ public class Board extends JPanel {
 
 	public static final int MAX_BOARD_SIZE = 50;
 	public static final int CARDS_PER_PLAYER = 3;
+
 	private String layoutFile;
 	private String legendFile;
 	private String playerConfigFile = "data/playerConfig.txt";
@@ -62,10 +64,17 @@ public class Board extends JPanel {
 
 	Solution solution = new Solution();
 
+	public static final int  WIDTH  = 10;
+	public static final int  HEIGHT = 10;
+
+	ArrayList<Point> points;
+
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
+
 	// constructor is private to ensure only one can be created
 	private Board() {}
+
 	// this method returns the only Board
 	public static Board getInstance() {
 		return theInstance;
@@ -864,6 +873,11 @@ public class Board extends JPanel {
 		for(BoardCell b : nameDrawers) {
 			b.draw(g);
 		}
+		
+//		for(Point p : points) {
+//			g.fillOval(p.x, p.y, WIDTH, HEIGHT);
+//		}
+
 		boardCellArray[0][0].draw(g);
 		
 	}
