@@ -86,7 +86,6 @@ public class ControlPanel extends JFrame implements ActionListener {
 			 * Guess
          */
 		
-
         mainPanel = new JPanel(new BorderLayout());
         //file & exit
         JMenuBar fileMenuBar = new JMenuBar();

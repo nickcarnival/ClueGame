@@ -21,6 +21,7 @@ import java.util.Set;
 
 import javax.swing.JPanel;
 
+// TODO
 //we use the same scanner method for every file, 
 //we should probably make a method called "loadFile()"
 public class Board extends JPanel {
@@ -46,28 +47,27 @@ public class Board extends JPanel {
 	
 	private BoardCell[][] boardCellArray;
 
-	ArrayList<Card> weaponCardArray;
-	ArrayList<Card> roomCardArray;
-	ArrayList<Card> peopleCardArray;
+	private ArrayList<Card> weaponCardArray;
+	private ArrayList<Card> roomCardArray;
+	private ArrayList<Card> peopleCardArray;
 	
 	private ArrayList<Card> cardArray; //TODO: could this be replaced by one of the below?
 
-	ArrayList<Card> allCards; //cards remaining to be dealt/cards in the "deck"
-	ArrayList<Card> dealtCards; //cards that have been dealt
+	private ArrayList<Card> allCards; //cards remaining to be dealt/cards in the "deck"
+	private ArrayList<Card> dealtCards; //cards that have been dealt
 
 	//array of all the players
-	ArrayList<Player> allPlayers ;
-	
-	Player whoseTurn;
+	private ArrayList<Player> allPlayers ;
+	private int currentPlayerIndex;
 
-	HumanPlayer humanPlayer;
+	private HumanPlayer humanPlayer;
 
-	Solution solution = new Solution();
+	private Solution solution;
 
 	public static final int  WIDTH  = 10;
 	public static final int  HEIGHT = 10;
 
-	ArrayList<Point> points;
+	private ArrayList<Point> points;
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -124,14 +124,6 @@ public class Board extends JPanel {
 	/*************************************************************
 	 * Player Methods
 	 *************************************************************/
-	
-	public Player getWhoseTurn() {
-		return whoseTurn;
-	}
-
-	public void setWhoseTurn(Player whose) {
-		whoseTurn = whose;
-	}
 
 	public HumanPlayer getHumanPlayer() {
 		return humanPlayer;
@@ -160,7 +152,7 @@ public class Board extends JPanel {
         	if(count == randomint) {
         		humanPlayer = new HumanPlayer(playerColor, playerName);
         		allPlayers.add(humanPlayer);
-        		setWhoseTurn(humanPlayer);
+        		setCurrentPlayerIndex(count);
         	}else {
 				//sets the computer players
 				Player player = new ComputerPlayer(playerColor, playerName); 
@@ -883,5 +875,13 @@ public class Board extends JPanel {
 
 	public void advanceTurn() {
 		System.out.println("In board.advanceTurn");
+	}
+
+	public int getCurrentPlayerIndex() {
+		return currentPlayerIndex;
+	}
+
+	public void setCurrentPlayerIndex(int currentPlayerIndex) {
+		this.currentPlayerIndex = currentPlayerIndex;
 	}
 }
