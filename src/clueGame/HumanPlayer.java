@@ -45,7 +45,7 @@ public class HumanPlayer extends Player {
 	
 	public Boolean canChangeTurn() {
 
-		return null; 
+		return false; 
 	}
 
 	public Card disproveSuggestion(Solution suggestion) {
