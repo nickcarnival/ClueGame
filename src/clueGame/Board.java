@@ -683,10 +683,9 @@ public class Board extends JPanel {
 		try {
 			scanner = new Scanner(new File(layoutFile));
 			numRows = 0;
-			String line = "";
 			while(scanner.hasNextLine()) {
 				numRows++;
-				line = scanner.nextLine();
+				scanner.nextLine();
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -865,10 +864,6 @@ public class Board extends JPanel {
 		for(BoardCell b : nameDrawers) {
 			b.draw(g);
 		}
-		
-//		for(Point p : points) {
-//			g.fillOval(p.x, p.y, WIDTH, HEIGHT);
-//		}
 
 		boardCellArray[0][0].draw(g);
 	}
