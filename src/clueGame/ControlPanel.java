@@ -31,7 +31,7 @@ public class ControlPanel extends JFrame implements ActionListener{
 	private static Board board;
 	//these are all set to temporary values, but will later be updated by the board
 	private String whoseTurnString = "Miss Scarlet";
-	private String pastGuess = "Miss Scarley Lounge Candlestick";
+	private String pastGuess = "Miss Scarlet Lounge Candlestick";
 	private String diceValue = "4";
 	
 	private static HumanPlayer humanPlayer;
@@ -64,7 +64,6 @@ public class ControlPanel extends JFrame implements ActionListener{
 		
 
         JPanel mainPanel = new JPanel(new BorderLayout());
-        JOptionPane.showMessageDialog(mainPanel, "You are " + humanPlayer.getName() + ", press Next Player to begin play");
         //file & exit
         JMenuBar fileMenuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
@@ -225,6 +224,8 @@ public class ControlPanel extends JFrame implements ActionListener{
 
         add(mainPanel);
         setVisible(true);
+
+        JOptionPane.showMessageDialog(mainPanel, "You are " + humanPlayer.getName() + ", press Next Player to begin play");
 	}
 	
 	//this handles what all of the buttons do
@@ -240,10 +241,10 @@ public class ControlPanel extends JFrame implements ActionListener{
 				dn.setVisible(true);
 				break;
 			case "Next Player" :
-				System.out.println("this button is not yet implemented");
+				System.out.println("Next Player is not yet implemented");
 				break;
 			case "Make Accusation" :
-				System.out.println("this button is not yet implemented");
+				System.out.println("Make Accusation is not yet implemented");
 				break;
 		}
 	} 	
