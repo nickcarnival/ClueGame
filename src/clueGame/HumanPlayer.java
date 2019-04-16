@@ -9,6 +9,8 @@ import java.util.Random;
 
 public class HumanPlayer extends Player {
 	
+	private boolean hasMoved;
+
 	public Solution createSuggestion() {
 		Solution suggestion = new Solution();
 		
@@ -44,8 +46,7 @@ public class HumanPlayer extends Player {
 	}
 	
 	public Boolean canChangeTurn() {
-
-		return false; 
+		return hasMoved;
 	}
 
 	public Card disproveSuggestion(Solution suggestion) {
@@ -71,5 +72,8 @@ public class HumanPlayer extends Player {
 		super(color, name);
 	}
 
+	public void setHasMoved(boolean hasMoved) {
+		this.hasMoved = hasMoved;
+	}
 	
 }

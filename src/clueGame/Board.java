@@ -879,6 +879,9 @@ public class Board extends JPanel {
 //		}
 
 		boardCellArray[0][0].draw(g);
-		
+	}
+
+	public void advanceTurn() {
+		System.out.println("In board.advanceTurn");
 	}
 }

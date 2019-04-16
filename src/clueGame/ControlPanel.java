@@ -275,18 +275,18 @@ public class ControlPanel extends JFrame implements ActionListener {
 				System.exit(0);
 				break;
 			case "Detective Notes" :
-				// TODO: why the hell does this work, board is never defined anywhere
 				DetectiveNotes dn = new DetectiveNotes(dns);
 				dn.setResizable(false);
 				dn.setVisible(true);
 				break;
 			case "Next Player" :
+				// TODO: we never actually change this state
 				if(humanPlayer.canChangeTurn()) {
-					
+					board.advanceTurn();
 				} else {
-					JOptionPane.showMessageDialog(mainPanel, "You cannot change your turn yet.");
+					JOptionPane.showMessageDialog(mainPanel,
+							"You cannot change your turn yet. You must move first.");
 				}
-				System.out.println("Next Player is not yet implemented");
 				break;
 			case "Make Accusation" :
 				System.out.println("Make Accusation is not yet implemented");
