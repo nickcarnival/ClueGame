@@ -292,7 +292,8 @@ public class ControlPanel extends JFrame implements ActionListener {
 	} 	
 	
 	public void advanceTurn() {
-		System.out.println("in advanceTurn");
+		board.setCurrentPlayerIndex((board.getCurrentPlayerIndex() + 1) % board.getPlayers().size());
+		board.setUpMove(g);
 	}
 	
 	//whose turn getters and setters

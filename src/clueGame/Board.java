@@ -838,11 +838,24 @@ public class Board extends JPanel {
 	}
 	
 	// calculate the targets for the current player, then draw them in a special color
-	public void showTargets(Graphics g, int dieRoll) {
-		calcTargets(allPlayers.get(currentPlayerIndex).location, dieRoll);
-		targets = getTargets();
+	public void showTargets(Graphics g, Set<BoardCell> targets) {
 		for (BoardCell b: targets) {
 			b.draw(g, true);
 		}
+	}
+	
+	// rolls a die, sets targets, and if the player is human then draws them
+	public void setUpMove(Graphics g) {
+		Player currentPlayer = allPlayers.get(currentPlayerIndex);
+		int dieRoll = currentPlayer.rollDie();
+		calcTargets(allPlayers.get(currentPlayerIndex).location, dieRoll);
+		targets = getTargets();
+		// if the player is human do human player things
+		if (currentPlayer == humanPlayer) {
+			showTargets(g, targets);
+		} 
+	}
+	
+	public void doAMove(Graphics g) {
 	}
 }

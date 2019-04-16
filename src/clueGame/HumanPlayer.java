@@ -4,13 +4,13 @@
  */
 package clueGame;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class HumanPlayer extends Player {
 	
 	private boolean hasMoved;
-	private int dieRoll;
 
 	public Solution createSuggestion() {
 		Solution suggestion = new Solution();
@@ -71,21 +71,10 @@ public class HumanPlayer extends Player {
 
 	public HumanPlayer(String color, String name) {
 		super(color, name);
-		dieRoll = 0;
 	}
 
 	public void setHasMoved(boolean hasMoved) {
 		this.hasMoved = hasMoved;
-	}
-	
-	public int rollDie() {
-		Random random = new Random();
-		dieRoll = random.nextInt(6) + 1;
-		return dieRoll;
-	}
-	
-	public void doMove() {
-		
 	}
 	
 }

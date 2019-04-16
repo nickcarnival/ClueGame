@@ -3,7 +3,8 @@
  * Nicholas Carnival
  */
 package clueGame;
-import java.awt.Color;  
+import java.awt.Color;
+import java.awt.Graphics;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Set; 
@@ -18,12 +19,14 @@ public abstract class Player {
 	protected BoardCell lastVisited;
 
 	protected Board board;
+	protected int dieRoll;
 
 	public Player(String color, String name) {
 		this.playerName = name;
 		this.color = convertColor(color);
 		myCards = new ArrayList<Card>();
 		seenCards = new ArrayList<Card>();
+		dieRoll = 0;
 	}
 
 	// Be sure to trim the color, we don't want spaces around the name 
@@ -92,6 +95,10 @@ public abstract class Player {
 		this.lastVisited = lastVisited;
 	}
 	
-	public abstract void doMove();
+	public int rollDie() {
+		Random random = new Random();
+		dieRoll = random.nextInt(6) + 1;
+		return dieRoll;
+	}
 
 }

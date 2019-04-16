@@ -4,6 +4,7 @@
  */
 package clueGame;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
@@ -101,10 +102,6 @@ public class ComputerPlayer extends Player {
 		} else {
 			return null;
 		}
-	}
-	
-	public void doMove() {
-		
 	}
 
 }
