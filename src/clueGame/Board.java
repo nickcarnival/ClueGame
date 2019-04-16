@@ -51,8 +51,6 @@ public class Board extends JPanel {
 	private ArrayList<Card> roomCardArray;
 	private ArrayList<Card> peopleCardArray;
 	
-	private ArrayList<Card> cardArray; //TODO: could this be replaced by one of the below?
-
 	private ArrayList<Card> allCards; //cards remaining to be dealt/cards in the "deck"
 	private ArrayList<Card> dealtCards; //cards that have been dealt
 
@@ -66,8 +64,6 @@ public class Board extends JPanel {
 
 	public static final int  WIDTH  = 10;
 	public static final int  HEIGHT = 10;
-
-	private ArrayList<Point> points;
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -354,31 +350,14 @@ public class Board extends JPanel {
 
 		solution = new Solution(solWeapon, solPerson, solRoom);
 
-		// add all cards that are not in the solution to the list of all cards that must be dealt
-		allCards = new ArrayList<Card>();
-		for (int i = 0; i < peopleCardArray.size(); i++) {
-			if (i != randomPerson) {
-				allCards.add(peopleCardArray.get(i));
-			}
-		}
-		for (int i = 0; i < weaponCardArray.size(); i++) {
-			if (i != randomWeapon) {
-				allCards.add(weaponCardArray.get(i));
-			}
-		}
-		for (int i = 0; i < roomCardArray.size(); i++) {
-			if (i != randomRoom) {
-				allCards.add(roomCardArray.get(i));
-			}
-		}
+		// remove all cards that are in the solution from the list of all cards
+		allCards.remove(solWeapon);
+		allCards.remove(solPerson);
+		allCards.remove(solRoom);
 	}
 	
 	public Solution getSolution() {
 		return solution;
-	}
-
-	public ArrayList<Card> getAllCards() {
-		return cardArray;
 	}
 
 	public ArrayList<Card> getWeaponCards() {
@@ -407,9 +386,8 @@ public class Board extends JPanel {
 		weaponCardArray = new ArrayList<Card>();
 		roomCardArray = new ArrayList<Card>();
 		
-		cardArray = new ArrayList<Card>();
-
-
+		allCards = new ArrayList<Card>();
+		
 		scanner = new Scanner(new File(cardConfigFile));
 		while(scanner.hasNextLine()) {
 
@@ -424,19 +402,19 @@ public class Board extends JPanel {
 					cardType = CardType.WEAPON;
 					Card weaponCard = new Card(cardName, cardType); 
 					weaponCardArray.add(weaponCard);
-					cardArray.add(weaponCard);
+					allCards.add(weaponCard);
 					break;
 				case "room":
 					cardType = CardType.ROOM;
 					Card roomCard = new Card(cardName, cardType); 
 					roomCardArray.add(roomCard);
-					cardArray.add(roomCard);
+					allCards.add(roomCard);
 					break;
 				case "person":
 					cardType = CardType.PERSON;
 					Card personCard = new Card(cardName, cardType); 
 					peopleCardArray.add(personCard);
-					cardArray.add(personCard);
+					allCards.add(personCard);
 					break;
 				default:
 					break;

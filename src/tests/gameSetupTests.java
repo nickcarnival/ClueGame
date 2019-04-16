@@ -145,7 +145,6 @@ public class gameSetupTests {
 	//test dealing of cards: all cards are dealt, and none remain to be dealt
 	@Test
 	public void testAllCardsDealt() {
-		ArrayList<Card> allCards = board.getAllCards();
 		ArrayList<Card> dealtCards = board.getDealtCards();
 		assertEquals(18, dealtCards.size());
 	}
