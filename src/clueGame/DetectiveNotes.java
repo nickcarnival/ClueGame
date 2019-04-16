@@ -14,16 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 public class DetectiveNotes extends JDialog {
-
-	// Lists of checkboxes for player, room and weapon
-	private ArrayList<JCheckBox> playerCheckBoxes = new ArrayList<JCheckBox>();
-	private ArrayList<JCheckBox> roomCheckBoxes = new ArrayList<JCheckBox>();
-	private ArrayList<JCheckBox> weaponCheckBoxes = new ArrayList<JCheckBox>();
-	
-	// combo boxes for guesses of player, room, and weapon
-	private JComboBox playerGuessMenu;
-	private JComboBox roomGuessMenu;
-	private JComboBox weaponGuessMenu;
 	
 	// seven panels: one to hold each of the above things, plus a main to hold those panels
 	private JPanel playersPanel;
@@ -35,7 +25,8 @@ public class DetectiveNotes extends JDialog {
 	private JPanel mainPanel;
 
 	// takes in a board so it knows what players, rooms, and weapons there are
-	public DetectiveNotes(Board b) {
+	// takes in a state class so we can store info persistently
+	public DetectiveNotes(DetectiveNotesState dns) {
 		setTitle("Detective Notes");
 		setSize(750, 750);
 		setLayout(new GridLayout(1, 3));
@@ -63,54 +54,21 @@ public class DetectiveNotes extends JDialog {
 		weaponsGuessPanel = new JPanel();
 		weaponsGuessPanel.setBorder(new TitledBorder("Weapon Guess"));
 		
-		// each menu is actually a combo box
-		playerGuessMenu = new JComboBox();
-		roomGuessMenu = new JComboBox();
-		weaponGuessMenu = new JComboBox();
-		
-		// add a none option to each checkbox
-		playerGuessMenu.addItem("None");
-		roomGuessMenu.addItem("None");
-		weaponGuessMenu.addItem("None");
-
-		// go through players, rooms, weapons
-		// and add them to the checkboxes and the combo box options
-		for (Player p : b.getPlayers()) {
-			playerCheckBoxes.add(new JCheckBox(p.getName()));
-			playerGuessMenu.addItem(p.getName());
-		}
-		//add every room to the check boxes
-		for (Card c : b.getRoomCards()) {
-			roomCheckBoxes.add(new JCheckBox(c.getName()));
-			roomGuessMenu.addItem(c.getName());
-		}
-		//add every card to the check boxes
-		for (Card c : b.getWeaponCards()) {
-			weaponCheckBoxes.add(new JCheckBox(c.getName()));
-			weaponGuessMenu.addItem(c.getName());
-		}
-		
 		// add each checkbox to the correct panel
-		for (JCheckBox cb : playerCheckBoxes) {
+		for (JCheckBox cb : dns.playerChecks) {
 			playersPanel.add(cb);
 		}
-		for (JCheckBox cb : roomCheckBoxes) {
+		for (JCheckBox cb : dns.roomChecks) {
 			roomsPanel.add(cb);
 		}
-		for (JCheckBox cb : weaponCheckBoxes) {
+		for (JCheckBox cb : dns.weaponChecks) {
 			weaponsPanel.add(cb);
 		}
-
-		playersGuessPanel.add(playerGuessMenu);
-
-		roomsGuessPanel.add(roomGuessMenu);
-
-		weaponsGuessPanel.add(weaponGuessMenu);
 		
-		// add each chekckbox to the middle of the guess panel
-		playersGuessPanel.add(playerGuessMenu, BorderLayout.CENTER);
-		roomsGuessPanel.add(roomGuessMenu, BorderLayout.CENTER);
-		weaponsGuessPanel.add(weaponGuessMenu, BorderLayout.CENTER);
+		// add each combo box to the middle of the guess panel
+		playersGuessPanel.add(dns.playerGuess, BorderLayout.CENTER);
+		roomsGuessPanel.add(dns.roomGuess, BorderLayout.CENTER);
+		weaponsGuessPanel.add(dns.weaponGuess, BorderLayout.CENTER);
 
 		mainPanel.add(playersPanel);
 		mainPanel.add(playersGuessPanel);
