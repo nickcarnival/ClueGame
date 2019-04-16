@@ -48,10 +48,10 @@ public class FileInitTests {
 		assertEquals(LEGEND_SIZE, legend.size());
 		// To ensure data is correctly loaded, test retrieving a few rooms 
 		// from the hash, including the first and last in the file and a few others
-		assertEquals("Children's Room", legend.get('C'));
+		assertEquals("Cellar", legend.get('C'));
 		assertEquals("Kitchen", legend.get('K'));
 		assertEquals("Helipad", legend.get('H'));
-		assertEquals("Dining Room", legend.get('D'));
+		assertEquals("Den", legend.get('D'));
 		assertEquals("Walkway", legend.get('W'));
 	}
 	

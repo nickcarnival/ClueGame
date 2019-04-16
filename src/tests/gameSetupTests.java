@@ -66,7 +66,7 @@ public class gameSetupTests {
 		assertEquals("Kernel Mustard", players.get(0).getName());
 		Color color;
 		try {
-			Field field = Class.forName("java.awt.Color").getField("yellow".trim());
+			Field field = Class.forName("java.awt.Color").getField("orange".trim());
 			color = (Color)field.get(null);
 		} catch (Exception e) {
 			color = null;
@@ -127,7 +127,7 @@ public class gameSetupTests {
 
 		//tests that the first room in the list of rooms is the correct room
 		ArrayList<Card> roomList = board.getRoomCards();
-		assertEquals("Children's Room", roomList.get(0).getName());
+		assertEquals("Cellar", roomList.get(0).getName());
 	}
 	
 	/*************************************************************

@@ -55,6 +55,8 @@ public class Board extends JPanel {
 	//array of all the players
 	ArrayList<Player> allPlayers ;
 	
+	Player whoseTurn;
+
 	HumanPlayer humanPlayer;
 
 	Solution solution = new Solution();
@@ -113,6 +115,14 @@ public class Board extends JPanel {
 	 * Player Methods
 	 *************************************************************/
 	
+	public Player getWhoseTurn() {
+		return whoseTurn;
+	}
+
+	public void setWhoseTurn(Player whose) {
+		whoseTurn = whose;
+	}
+
 	public HumanPlayer getHumanPlayer() {
 		return humanPlayer;
 	}
@@ -140,6 +150,7 @@ public class Board extends JPanel {
         	if(count == randomint) {
         		humanPlayer = new HumanPlayer(playerColor, playerName);
         		allPlayers.add(humanPlayer);
+        		setWhoseTurn(humanPlayer);
         	}else {
 				//sets the computer players
 				Player player = new ComputerPlayer(playerColor, playerName); 

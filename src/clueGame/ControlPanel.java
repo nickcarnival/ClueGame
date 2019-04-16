@@ -30,7 +30,7 @@ public class ControlPanel extends JFrame implements ActionListener{
 
 	private static Board board;
 	//these are all set to temporary values, but will later be updated by the board
-	private String whoseTurnString = "Miss Scarlet";
+	private static String whoseTurnString = "Miss Scarlet";
 	private String pastGuess = "Miss Scarlet Lounge Candlestick";
 	private String diceValue = "4";
 	private JPanel mainPanel;
@@ -293,6 +293,8 @@ public class ControlPanel extends JFrame implements ActionListener{
 		//set the human player
 		humanPlayer = board.getHumanPlayer();
 		humanCards = humanPlayer.getMyCards();
+		
+		whoseTurnString = board.getWhoseTurn().getName();
 
 		ControlPanel cp = new ControlPanel();
 		cp.setVisible(true);
