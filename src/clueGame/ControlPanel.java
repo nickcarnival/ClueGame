@@ -288,13 +288,12 @@ public class ControlPanel extends JFrame implements ActionListener{
 		// set the file names to use my config files
 		board.setConfigFiles("data/testsMap.csv", "data/rooms.txt");		
 		board.initialize();
-		board.setSolution();
 
 		//set the human player
 		humanPlayer = board.getHumanPlayer();
 		humanCards = humanPlayer.getMyCards();
 		
-//		whoseTurnString = board.getWhoseTurn().getName();
+		whoseTurnString = board.getWhoseTurn().getName();
 
 		ControlPanel cp = new ControlPanel();
 		cp.setVisible(true);
