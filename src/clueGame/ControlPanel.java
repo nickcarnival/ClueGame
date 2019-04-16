@@ -33,6 +33,7 @@ public class ControlPanel extends JFrame implements ActionListener{
 	private static String whoseTurnString = "Miss Scarlet";
 	private String pastGuess = "Miss Scarlet Lounge Candlestick";
 	private String diceValue = "4";
+
 	private JPanel mainPanel;
 	
 	private static HumanPlayer humanPlayer;
@@ -288,13 +289,12 @@ public class ControlPanel extends JFrame implements ActionListener{
 		board.setConfigFiles("data/testsMap.csv", "data/rooms.txt");		
 		board.initialize();
 		board.setSolution();
-		board.dealCards();
 
 		//set the human player
 		humanPlayer = board.getHumanPlayer();
 		humanCards = humanPlayer.getMyCards();
 		
-		whoseTurnString = board.getWhoseTurn().getName();
+//		whoseTurnString = board.getWhoseTurn().getName();
 
 		ControlPanel cp = new ControlPanel();
 		cp.setVisible(true);
