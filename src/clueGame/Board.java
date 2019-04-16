@@ -402,17 +402,6 @@ public class Board extends JPanel {
 		CardType cardType;
 		String cardName;
 		
-		int lineCount = 0;
-
-		while(scanner.hasNextLine()) {
-			//this is necessary
-			String line = scanner.nextLine();
-			lineCount ++;
-		}
-
-		//this stores every line of the file
-		String[] arrayOfLines = new String[lineCount];
-
 		//this will hold all of the cards and their types
 		peopleCardArray = new ArrayList<Card>();
 		weaponCardArray = new ArrayList<Card>();
