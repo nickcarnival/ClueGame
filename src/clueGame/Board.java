@@ -841,6 +841,11 @@ public class Board extends JPanel {
 		this.currentPlayerIndex = currentPlayerIndex;
 	}
 	
+	public int rollDie() {
+		Random random = new Random();
+		return random.nextInt(6) + 1;
+	}
+	
 	// calculate the targets for the current player, then draw them in a special color
 	public void showTargets(Graphics g, int dieRoll) {
 		calcTargets(allPlayers.get(currentPlayerIndex).location, dieRoll);
