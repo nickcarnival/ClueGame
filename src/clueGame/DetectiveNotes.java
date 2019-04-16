@@ -20,11 +20,6 @@ public class DetectiveNotes extends JDialog {
 	private ArrayList<JCheckBox> roomCheckBoxes = new ArrayList<JCheckBox>();
 	private ArrayList<JCheckBox> weaponCheckBoxes = new ArrayList<JCheckBox>();
 	
-	// combo boxes for guesses of player, room, and weapon
-	private JComboBox playerGuessMenu;
-	private JComboBox roomGuessMenu;
-	private JComboBox weaponGuessMenu;
-	
 	// seven panels: one to hold each of the above things, plus a main to hold those panels
 	private JPanel playersPanel;
 	private JPanel roomsPanel;
@@ -35,8 +30,7 @@ public class DetectiveNotes extends JDialog {
 	private JPanel mainPanel;
 
 	// takes in a board so it knows what players, rooms, and weapons there are
-	public DetectiveNotes(Board b) {
-		DetectiveNotesState dns = new DetectiveNotesState();
+	public DetectiveNotes(Board b, DetectiveNotesState dns) {
 		setTitle("Detective Notes");
 		setSize(750, 750);
 		setLayout(new GridLayout(1, 3));
@@ -64,32 +58,29 @@ public class DetectiveNotes extends JDialog {
 		weaponsGuessPanel = new JPanel();
 		weaponsGuessPanel.setBorder(new TitledBorder("Weapon Guess"));
 		
-		// each menu is actually a combo box
-		playerGuessMenu = new JComboBox();
-		roomGuessMenu = new JComboBox();
-		weaponGuessMenu = new JComboBox();
-		
-		// add a none option to each checkbox
-		playerGuessMenu.addItem("None");
-		roomGuessMenu.addItem("None");
-		weaponGuessMenu.addItem("None");
+		// add a none option to each combo box
+		dns.playerGuess.addItem("None");
+		dns.roomGuess.addItem("None");
+		dns.weaponGuess.addItem("None");
 
 		// go through players, rooms, weapons
 		// and add them to the checkboxes and the combo box options
 		for (Player p : b.getPlayers()) {
-			dns.playerChecks.add(p.getName());
-			playerCheckBoxes.add(new JCheckBox(dns.playerChecks.get(dns.playerChecks.size()-1)));
-			playerGuessMenu.addItem(dns.playerChecks.get(dns.playerChecks.size()-1));
+			dns.playerChecks.add(new JCheckBox(p.getName()));
+			playerCheckBoxes.add(dns.playerChecks.get(dns.playerChecks.size()-1));
+			dns.playerGuess.addItem(p.getName());
 		}
 		//add every room to the check boxes
 		for (Card c : b.getRoomCards()) {
-			dns.roomChecks.add(c.getName());
-			roomCheckBoxes.add(new JCheckBox(dns.roomChecks.get(dns.roomChecks.size()-1)));
+			dns.roomChecks.add(new JCheckBox(c.getName()));
+			roomCheckBoxes.add(dns.roomChecks.get(dns.roomChecks.size()-1));
+			dns.roomGuess.addItem(c.getName());
 		}
 		//add every card to the check boxes
 		for (Card c : b.getWeaponCards()) {
-			dns.weaponChecks.add(c.getName());
-			weaponCheckBoxes.add(new JCheckBox(dns.weaponChecks.get(dns.weaponChecks.size()-1)));
+			dns.weaponChecks.add(new JCheckBox(c.getName()));
+			weaponCheckBoxes.add(dns.weaponChecks.get(dns.weaponChecks.size()-1));
+			dns.weaponGuess.addItem(c.getName());
 		}
 		
 		// add each checkbox to the correct panel
@@ -102,17 +93,11 @@ public class DetectiveNotes extends JDialog {
 		for (JCheckBox cb : weaponCheckBoxes) {
 			weaponsPanel.add(cb);
 		}
-
-		playersGuessPanel.add(playerGuessMenu);
-
-		roomsGuessPanel.add(roomGuessMenu);
-
-		weaponsGuessPanel.add(weaponGuessMenu);
 		
 		// add each checkbox to the middle of the guess panel
-		playersGuessPanel.add(playerGuessMenu, BorderLayout.CENTER);
-		roomsGuessPanel.add(roomGuessMenu, BorderLayout.CENTER);
-		weaponsGuessPanel.add(weaponGuessMenu, BorderLayout.CENTER);
+		playersGuessPanel.add(dns.playerGuess, BorderLayout.CENTER);
+		roomsGuessPanel.add(dns.roomGuess, BorderLayout.CENTER);
+		weaponsGuessPanel.add(dns.weaponGuess, BorderLayout.CENTER);
 
 		mainPanel.add(playersPanel);
 		mainPanel.add(playersGuessPanel);

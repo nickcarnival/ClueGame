@@ -2,21 +2,24 @@ package clueGame;
 
 import java.util.ArrayList;
 
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+
 public class DetectiveNotesState {
 
-	public ArrayList<String> playerChecks;
-	public ArrayList<String> roomChecks;
-	public ArrayList<String> weaponChecks;
-	public String playerGuess;
-	public String roomGuess;
-	public String weaponGuess;
+	public ArrayList<JCheckBox> playerChecks;
+	public ArrayList<JCheckBox> roomChecks;
+	public ArrayList<JCheckBox> weaponChecks;
+	public JComboBox<String> playerGuess;
+	public JComboBox<String> roomGuess;
+	public JComboBox<String> weaponGuess;
 	public DetectiveNotesState() {
-		playerChecks = new ArrayList<String>();
-		roomChecks = new ArrayList<String>();
-		weaponChecks = new ArrayList<String>();
-		playerGuess = new String();
-		roomGuess = new String();
-		weaponGuess = new String();
+		playerChecks = new ArrayList<JCheckBox>();
+		roomChecks = new ArrayList<JCheckBox>();
+		weaponChecks = new ArrayList<JCheckBox>();
+		playerGuess = new JComboBox<String>();
+		roomGuess = new JComboBox<String>();
+		weaponGuess = new JComboBox<String>();
 	}
 
 }

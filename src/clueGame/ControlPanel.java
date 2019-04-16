@@ -38,9 +38,11 @@ public class ControlPanel extends JFrame implements ActionListener{
 	
 	private static HumanPlayer humanPlayer;
 	private static ArrayList<Card> humanCards;
+	private static DetectiveNotesState dns;
 
 	public ControlPanel() {
 
+		dns = new DetectiveNotesState();
 		setTitle("Clue Game");
 		//seems like a good size
 		setSize(750, 750);
@@ -238,14 +240,15 @@ public class ControlPanel extends JFrame implements ActionListener{
 				System.exit(0);
 				break;
 			case "Detective Notes" :
-				DetectiveNotes dn = new DetectiveNotes(board);
+				// TODO: why the hell does this work, board is never defined anywhere
+				DetectiveNotes dn = new DetectiveNotes(board, dns);
 				dn.setResizable(false);
 				dn.setVisible(true);
 				break;
 			case "Next Player" :
 				if(humanPlayer.canChangeTurn()) {
 					
-				}else {
+				} else {
 					JOptionPane.showMessageDialog(mainPanel, "You cannot change your turn yet.");
 				}
 				System.out.println("Next Player is not yet implemented");
