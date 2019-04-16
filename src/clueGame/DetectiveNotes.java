@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 public class DetectiveNotes extends JDialog {
-
+	
 	// Lists of checkboxes for player, room and weapon
 	private ArrayList<JCheckBox> playerCheckBoxes = new ArrayList<JCheckBox>();
 	private ArrayList<JCheckBox> roomCheckBoxes = new ArrayList<JCheckBox>();
@@ -36,6 +36,7 @@ public class DetectiveNotes extends JDialog {
 
 	// takes in a board so it knows what players, rooms, and weapons there are
 	public DetectiveNotes(Board b) {
+		DetectiveNotesState dns = new DetectiveNotesState();
 		setTitle("Detective Notes");
 		setSize(750, 750);
 		setLayout(new GridLayout(1, 3));
@@ -76,18 +77,19 @@ public class DetectiveNotes extends JDialog {
 		// go through players, rooms, weapons
 		// and add them to the checkboxes and the combo box options
 		for (Player p : b.getPlayers()) {
-			playerCheckBoxes.add(new JCheckBox(p.getName()));
-			playerGuessMenu.addItem(p.getName());
+			dns.playerChecks.add(p.getName());
+			playerCheckBoxes.add(new JCheckBox(dns.playerChecks.get(dns.playerChecks.size()-1)));
+			playerGuessMenu.addItem(dns.playerChecks.get(dns.playerChecks.size()-1));
 		}
 		//add every room to the check boxes
 		for (Card c : b.getRoomCards()) {
-			roomCheckBoxes.add(new JCheckBox(c.getName()));
-			roomGuessMenu.addItem(c.getName());
+			dns.roomChecks.add(c.getName());
+			roomCheckBoxes.add(new JCheckBox(dns.roomChecks.get(dns.roomChecks.size()-1)));
 		}
 		//add every card to the check boxes
 		for (Card c : b.getWeaponCards()) {
-			weaponCheckBoxes.add(new JCheckBox(c.getName()));
-			weaponGuessMenu.addItem(c.getName());
+			dns.weaponChecks.add(c.getName());
+			weaponCheckBoxes.add(new JCheckBox(dns.weaponChecks.get(dns.weaponChecks.size()-1)));
 		}
 		
 		// add each checkbox to the correct panel
@@ -107,7 +109,7 @@ public class DetectiveNotes extends JDialog {
 
 		weaponsGuessPanel.add(weaponGuessMenu);
 		
-		// add each chekckbox to the middle of the guess panel
+		// add each checkbox to the middle of the guess panel
 		playersGuessPanel.add(playerGuessMenu, BorderLayout.CENTER);
 		roomsGuessPanel.add(roomGuessMenu, BorderLayout.CENTER);
 		weaponsGuessPanel.add(weaponGuessMenu, BorderLayout.CENTER);
