@@ -102,5 +102,9 @@ public class ComputerPlayer extends Player {
 			return null;
 		}
 	}
+	
+	public void doMove() {
+		
+	}
 
 }

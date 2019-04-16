@@ -37,7 +37,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 	//these are all set to temporary values, but will later be updated by the board
 	private static String whoseTurnString = "Miss Scarlet";
 	private String pastGuess = "Miss Scarlet Lounge Candlestick";
-	private String diceValue = "4";
+	private String diceValue = "No dice roll yet";
 
 	private JPanel mainPanel;
 	
@@ -279,7 +279,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 			case "Next Player" :
 				// TODO: we never actually change this state
 				if(humanPlayer.canChangeTurn()) {
-					board.advanceTurn();
+					advanceTurn();
 				} else {
 					JOptionPane.showMessageDialog(mainPanel,
 							"You cannot change your turn yet. You must move first.");
@@ -290,6 +290,10 @@ public class ControlPanel extends JFrame implements ActionListener {
 				break;
 		}
 	} 	
+	
+	public void advanceTurn() {
+		System.out.println("in advanceTurn");
+	}
 	
 	//whose turn getters and setters
 	public void setWhoseTurn(String whose) {
@@ -308,7 +312,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 		return diceValue;
 	}
 	
-	//dice getters and setters
+	//guess getters and setters
 	public void setPastGuess(String past) {
 		pastGuess = past;
 	}

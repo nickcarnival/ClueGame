@@ -91,4 +91,7 @@ public abstract class Player {
 	public void setLastVisited(BoardCell lastVisited) {
 		this.lastVisited = lastVisited;
 	}
+	
+	public abstract void doMove();
+
 }

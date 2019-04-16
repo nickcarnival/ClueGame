@@ -829,21 +829,12 @@ public class Board extends JPanel {
 		boardCellArray[0][0].draw(g, false);
 	}
 
-	public void advanceTurn() {
-		System.out.println("In board.advanceTurn");
-	}
-
 	public int getCurrentPlayerIndex() {
 		return currentPlayerIndex;
 	}
 
 	public void setCurrentPlayerIndex(int currentPlayerIndex) {
 		this.currentPlayerIndex = currentPlayerIndex;
-	}
-	
-	public int rollDie() {
-		Random random = new Random();
-		return random.nextInt(6) + 1;
 	}
 	
 	// calculate the targets for the current player, then draw them in a special color
