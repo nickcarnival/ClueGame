@@ -328,7 +328,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 		humanPlayer = board.getHumanPlayer();
 		humanCards = humanPlayer.getMyCards();
 		
-		whoseTurnString = board.getWhoseTurn().getName();
+		whoseTurnString = board.getPlayers().get(board.getCurrentPlayerIndex()).getName();
 
 		ControlPanel cp = new ControlPanel();
 		cp.setVisible(true);

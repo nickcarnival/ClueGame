@@ -18,9 +18,8 @@ import java.util.Set;
 
 import javax.swing.JPanel;
 
-// TODO
-//we use the same scanner method for every file, 
-//we should probably make a method called "loadFile()"
+// TODO: we use the same scanner method for every file--
+// we should probably make a method called "loadFile()"
 public class Board extends JPanel {
 
 
