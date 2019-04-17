@@ -280,7 +280,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 				break;
 			case "Next Player" :
 				if(humanPlayer.canChangeTurn()) {
-					advanceTurn();
+					advanceTurn(g);
 				} else {
 					JOptionPane.showMessageDialog(mainPanel,
 							"You cannot change your turn yet. You must move first.");
@@ -291,6 +291,11 @@ public class ControlPanel extends JFrame implements ActionListener {
 				break;
 		}
 	} 	
+	
+	public void advanceTurn(Graphics g) {
+		board.setCurrentPlayerIndex((board.getCurrentPlayerIndex() + 1) % board.getPlayers().size());
+		board.setUpMove(g);
+	}
 	
 	//whose turn getters and setters
 	public void setWhoseTurn(String whose) {
