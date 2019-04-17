@@ -36,7 +36,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 	private static Board board;
 	private ArrayList<BoardCell> targets;
 	//these are all set to temporary values, but will later be updated by the board
-	private static String whoseTurnString = "Miss Scarlet";
+	private static String whoseTurnString = "No player yet";
 	private String pastGuess = "Miss Scarlet Lounge Candlestick";
 	private String diceValue = "No dice roll yet";
 
@@ -52,6 +52,9 @@ public class ControlPanel extends JFrame implements ActionListener {
 	
 	private JPanel diePanel;
 	private JTextField diceRoll;
+	
+	private JTextField whoseTurnField;
+	private JPanel upperBottomPanel;
 
 	public ControlPanel() {
 		points = new ArrayList<Point>();
@@ -115,15 +118,15 @@ public class ControlPanel extends JFrame implements ActionListener {
         JPanel bottomPanel = new JPanel(new GridLayout(2, 0));
 
         //contains buttons and whoseturn
-        JPanel upperBottomPanel = new JPanel(new GridLayout(1, 3)); //2rows 3columns
+        upperBottomPanel = new JPanel(new GridLayout(1, 3)); //2rows 3columns
 
         //whose turn
         JPanel whoseTurnPanel = new JPanel();
 
 			//this contains the actual text
-        JTextField whoseTurnField = new JTextField();
+        whoseTurnField = new JTextField();
         whoseTurnField.setEditable(false);
-        whoseTurnField.setText(whoseTurnString );
+        whoseTurnField.setText(whoseTurnString);
 
         //buttons
         JButton nextPlayerButton = new JButton("Next Player");
@@ -179,8 +182,6 @@ public class ControlPanel extends JFrame implements ActionListener {
         //add the board to the board panel
 
         boardPanel.add(board, BorderLayout.CENTER);
-
-        whoseTurnField.setText(whoseTurnString );
 
         //adding cards to the card panels
         for(Card c : humanCards) {
@@ -251,7 +252,8 @@ public class ControlPanel extends JFrame implements ActionListener {
         add(mainPanel);
         setVisible(true);
 
-        JOptionPane.showMessageDialog(mainPanel, "You are " + humanPlayer.getName() + ", press Next Player to begin play");
+        JOptionPane.showMessageDialog(mainPanel, "You are " + humanPlayer.getName()
+        + " and your color is " + humanPlayer.getColorString() + ", press Next Player to begin play");
         
 	}
 	
@@ -298,23 +300,22 @@ public class ControlPanel extends JFrame implements ActionListener {
 	} 	
 	
 	public void advanceTurn() {
+		// update who is playing
 		board.setCurrentPlayerIndex((board.getCurrentPlayerIndex() + 1) % board.getPlayers().size());
+		// update targets
 		board.setUpMove();
+		// repaint board--showing targets if player is human
 		board.repaint();
+		// update display of dice roll
 		diceValue = Integer.toString(board.getPlayers().get(board.getCurrentPlayerIndex()).getDieRoll());
 		diceRoll.setText(diceValue);
 		diePanel.repaint();
+		// update display of who is playing
+		whoseTurnString = board.getPlayers().get(board.getCurrentPlayerIndex()).getName();
+		whoseTurnField.setText(whoseTurnString);
+		upperBottomPanel.repaint();
 	}
 	
-	//whose turn getters and setters
-	public void setWhoseTurn(String whose) {
-		whoseTurnString = whose;
-	}
-
-	public String getWhoseTurn() {
-		return whoseTurnString;
-	}
-
 	//dice getters and setters
 	public void setDiceValue(String dice) {
 		diceValue = dice;

@@ -13,6 +13,7 @@ import java.util.Set;
 public abstract class Player {
 	private String playerName;
 	private Color color;
+	private String colorString;
 
 	protected ArrayList<Card> myCards;
 	protected ArrayList<Card> seenCards;
@@ -23,6 +24,7 @@ public abstract class Player {
 	protected int dieRoll;
 
 	public Player(String color, String name) {
+		this.colorString = color;
 		this.playerName = name;
 		this.color = convertColor(color);
 		myCards = new ArrayList<Card>();
@@ -104,6 +106,10 @@ public abstract class Player {
 	
 	public int getDieRoll() {
 		return dieRoll;
+	}
+	
+	public String getColorString() {
+		return colorString;
 	}
 
 }
