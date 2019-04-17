@@ -296,6 +296,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 	public void advanceTurn() {
 		board.setCurrentPlayerIndex((board.getCurrentPlayerIndex() + 1) % board.getPlayers().size());
 		board.setUpMove();
+		board.repaint();
 		diceValue = Integer.toString(board.getPlayers().get(board.getCurrentPlayerIndex()).getDieRoll());
 	}
 	

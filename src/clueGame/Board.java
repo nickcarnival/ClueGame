@@ -847,6 +847,7 @@ public class Board extends JPanel {
 	}	
 
 	public void showTargets(Graphics g) {
+		System.out.println("yo");
 		for (BoardCell b : targets) {
 			b.draw(g, true);
 		}
