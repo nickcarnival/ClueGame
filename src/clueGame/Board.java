@@ -841,16 +841,45 @@ public class Board extends JPanel {
 		this.currentPlayerIndex = currentPlayerIndex;
 	}
 
-	// sets up targets by rolling a die
+	// sets up targets by rolling a die and calculating targets
 	public void setUpMove() {
 		int ri = allPlayers.get(currentPlayerIndex).rollDie();
 		calcTargets(allPlayers.get(currentPlayerIndex).location, ri);
 	}	
 
+	// prints targets in a different color
 	public void showTargets(Graphics g) {
 		for (BoardCell b : targets) {
 			b.draw(g, true);
 		}
+	}
+	
+	// Does human move once a boardCell is selected
+	public void doMoveHuman(BoardCell b) {
+		BoardCell oldLocation = humanPlayer.location;
+		humanPlayer.movePlayer(b);
+		oldLocation.setPlayer(false);
+		b.setPlayer(true);
+		this.repaint();
+	}
+
+	// does computer move at random
+	public void doMoveComputer() {
+		Random r = new Random();
+		int ri = r.nextInt(targets.size());
+		BoardCell oldLocation = allPlayers.get(currentPlayerIndex).location;
+		int i = 0;
+		for (BoardCell b: targets) {
+			if (i == ri) {
+				allPlayers.get(currentPlayerIndex).movePlayer(b);
+				b.setPlayer(true);
+				break;
+			} else {
+				i++;
+			}
+		}
+		oldLocation.setPlayer(false);
+		this.repaint();
 	}
 
 }
