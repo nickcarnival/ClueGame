@@ -122,7 +122,7 @@ public class BoardCell extends JPanel{
 			g.fillRect(x, y, width, height);
 		}
 		//draw the players and the player colors
-		if(this.isPlayer && this.isWalkway) {
+		if(this.isPlayer) {
 			super.paintComponent(g);
 			g.setColor(this.playerColor);
 			g.fillOval(x, y, width, height);
