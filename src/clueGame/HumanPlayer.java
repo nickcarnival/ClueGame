@@ -11,7 +11,11 @@ import java.util.Random;
 public class HumanPlayer extends Player {
 	
 	private boolean hasMoved;
-	private boolean canChangeTurn;
+
+	public HumanPlayer(String color, String name) {
+		super(color, name);
+		hasMoved = false;
+	}
 
 	public Solution createSuggestion() {
 		Solution suggestion = new Solution();
@@ -70,16 +74,8 @@ public class HumanPlayer extends Player {
 		}
 	}
 
-	public HumanPlayer(String color, String name) {
-		super(color, name);
-	}
-
 	public void setHasMoved(boolean hasMoved) {
 		this.hasMoved = hasMoved;
-	}
-
-	public void setCanChangeTurn(Boolean bool) {
-		this.canChangeTurn = bool;
 	}
 	
 }

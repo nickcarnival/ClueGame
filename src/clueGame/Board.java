@@ -860,6 +860,7 @@ public class Board extends JPanel {
 		humanPlayer.movePlayer(b);
 		oldLocation.setPlayer(false);
 		b.setPlayer(true);
+		humanPlayer.setHasMoved(false);
 		repaint();
 	}
 

@@ -280,9 +280,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 				dn.setVisible(true);
 				break;
 			case "Next Player" :
-        		//FIXME
-//				if(humanPlayer.canChangeTurn()) {
-				if(true) {
+				if(humanPlayer.canChangeTurn()) {
 					advanceTurn();
 				} else {
 					JOptionPane.showMessageDialog(mainPanel,
@@ -305,6 +303,9 @@ public class ControlPanel extends JFrame implements ActionListener {
 			// TODO: accusation
 			board.doMoveComputer();
 			// TODO: suggestion
+		} else {
+			// if human, flag that we haven't moved yet
+			humanPlayer.setHasMoved(false);
 		}
 		// repaint board--showing targets if player is human, showing computer move if computer
 		board.repaint();
@@ -346,6 +347,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 		//set the human player
 		humanPlayer = board.getHumanPlayer();
 		humanCards = humanPlayer.getMyCards();
+		humanPlayer.setHasMoved(false);
 		
 		whoseTurnString = board.getHumanPlayer().getName();
 
