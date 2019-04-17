@@ -860,7 +860,7 @@ public class Board extends JPanel {
 		humanPlayer.movePlayer(b);
 		oldLocation.setPlayer(false);
 		b.setPlayer(true);
-		this.repaint();
+		repaint();
 	}
 
 	// does computer move at random
@@ -879,7 +879,7 @@ public class Board extends JPanel {
 			}
 		}
 		oldLocation.setPlayer(false);
-		this.repaint();
+		repaint();
 	}
 
 }
