@@ -346,7 +346,6 @@ public class ControlPanel extends JFrame implements ActionListener {
 		ControlPanel cp = new ControlPanel();
 		board.setCurrentPlayerIndex(board.getCurrentPlayerIndex() - 1);
 		System.out.println(board.getCurrentPlayerIndex());
-		cp.advanceTurn();
 		cp.setVisible(true);
 	}
 
