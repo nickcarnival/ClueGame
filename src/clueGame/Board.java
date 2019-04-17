@@ -863,21 +863,12 @@ public class Board extends JPanel {
 		repaint();
 	}
 
-	// does computer move at random
+	// does computer move and updates board's view of player's location
 	public void doMoveComputer() {
-		Random r = new Random();
-		int ri = r.nextInt(targets.size());
 		BoardCell oldLocation = allPlayers.get(currentPlayerIndex).location;
-		int i = 0;
-		for (BoardCell b: targets) {
-			if (i == ri) {
-				allPlayers.get(currentPlayerIndex).movePlayer(b);
-				b.setPlayer(true);
-				break;
-			} else {
-				i++;
-			}
-		}
+		BoardCell newLocation = ((ComputerPlayer) allPlayers.get(currentPlayerIndex)).pickLocation(targets);
+		newLocation.setPlayer(true);
+		newLocation.setPlayerColor(allPlayers.get(currentPlayerIndex).getColor());
 		oldLocation.setPlayer(false);
 		repaint();
 	}

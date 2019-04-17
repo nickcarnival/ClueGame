@@ -298,11 +298,17 @@ public class ControlPanel extends JFrame implements ActionListener {
 	public void advanceTurn() {
 		// update who is playing
 		board.setCurrentPlayerIndex((board.getCurrentPlayerIndex() + 1) % board.getPlayers().size());
-		System.out.println(board.getCurrentPlayerIndex());
 		// update targets
 		board.setUpMove();
-		// repaint board--showing targets if player is human
+		// if computer, move
+		if (board.getPlayers().get(board.getCurrentPlayerIndex()) != humanPlayer) {
+			// TODO: accusation
+			board.doMoveComputer();
+			// TODO: suggestion
+		}
+		// repaint board--showing targets if player is human, showing computer move if computer
 		board.repaint();
+		// if human, wait for move here
 		// update display of dice roll
 		diceValue = Integer.toString(board.getPlayers().get(board.getCurrentPlayerIndex()).getDieRoll());
 		diceRoll.setText(diceValue);

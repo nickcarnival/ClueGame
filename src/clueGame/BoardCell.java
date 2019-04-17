@@ -25,7 +25,7 @@ public class BoardCell extends JPanel{
 
 	private DoorDirection doorDirection;
 	private boolean isPlayer;
-	private Color playerColor = Color.ORANGE;
+	private Color playerColor;
 	private boolean isRoom;
 	private boolean isDoorway;
 	private boolean isWalkway;

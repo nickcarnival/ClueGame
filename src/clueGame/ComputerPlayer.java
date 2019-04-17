@@ -14,7 +14,8 @@ public class ComputerPlayer extends Player {
 	public ComputerPlayer(String color, String name) {
 		super(color, name);
 	}
-	//picks a location, prioritizing rooms
+	// picks a location, prioritizing rooms
+	// also moves the player
 	public BoardCell pickLocation(Set<BoardCell> targets) {
 		BoardCell currentCell = null;
 		//check if any of the cells are doors
