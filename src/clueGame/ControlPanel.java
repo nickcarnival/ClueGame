@@ -34,10 +34,9 @@ import javax.swing.border.TitledBorder;
 public class ControlPanel extends JFrame implements ActionListener {
 
 	private static Board board;
-	private ArrayList<BoardCell> targets;
 	//these are all set to temporary values, but will later be updated by the board
 	private static String whoseTurnString = "No player yet";
-	private String pastGuess = "Miss Scarlet Lounge Candlestick";
+	private String pastGuess = "Miss Scarlet Lounge Candlestick"; //TODO
 	private String diceValue = "No dice roll yet";
 
 	private JPanel mainPanel;
@@ -100,15 +99,12 @@ public class ControlPanel extends JFrame implements ActionListener {
         JMenuItem exit = new JMenuItem("Exit");
 
         JMenuItem detectiveNotes = new JMenuItem("Detective Notes");
-
-        JPanel topPanel = new JPanel();
         
         //board
         JPanel boardPanel = new JPanel(new BorderLayout());
 
         //cards
         JPanel cardPanel = new JPanel(new GridLayout(3, 0));
-        JLabel myCards = new JLabel("My Cards");
 
         JPanel peopleCardPanel = new JPanel();
         JPanel weaponCardPanel = new JPanel();
@@ -302,6 +298,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 	public void advanceTurn() {
 		// update who is playing
 		board.setCurrentPlayerIndex((board.getCurrentPlayerIndex() + 1) % board.getPlayers().size());
+		System.out.println(board.getCurrentPlayerIndex());
 		// update targets
 		board.setUpMove();
 		// repaint board--showing targets if player is human
@@ -348,6 +345,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 
 		ControlPanel cp = new ControlPanel();
 		board.setCurrentPlayerIndex(board.getCurrentPlayerIndex() - 1);
+		System.out.println(board.getCurrentPlayerIndex());
 		cp.advanceTurn();
 		cp.setVisible(true);
 	}

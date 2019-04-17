@@ -130,7 +130,7 @@ public class Board extends JPanel {
 		Random random = new Random();
 
 		//random number max size all players...
-		int randomint = random.nextInt(6);
+		currentPlayerIndex = random.nextInt(6);
 		int count = 0;
 
         while (scanner.hasNextLine()) {
@@ -141,7 +141,7 @@ public class Board extends JPanel {
         	String playerColor = splitLine[1].trim();
 
         	//randomly create the human player
-        	if(count == randomint) {
+        	if(count == currentPlayerIndex) {
         		humanPlayer = new HumanPlayer(playerColor, playerName);
         		allPlayers.add(humanPlayer);
         	} else {
