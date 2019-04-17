@@ -117,6 +117,46 @@ public class Board extends JPanel {
 	 * Player Methods
 	 *************************************************************/
 
+	public int getCurrentPlayerIndex() {
+		return currentPlayerIndex;
+	}
+
+	public void setCurrentPlayerIndex(int currentPlayerIndex) {
+		this.currentPlayerIndex = currentPlayerIndex;
+	}
+
+	// sets up targets by rolling a die and calculating targets
+	public void setUpMove() {
+		int ri = allPlayers.get(currentPlayerIndex).rollDie();
+		calcTargets(allPlayers.get(currentPlayerIndex).location, ri);
+	}	
+
+	// prints targets in a different color
+	public void showTargets(Graphics g) {
+		for (BoardCell b : targets) {
+			b.draw(g, true);
+		}
+	}
+	
+	// Does human move once a boardCell is selected
+	public void doMoveHuman(BoardCell b) {
+		BoardCell oldLocation = humanPlayer.location;
+		humanPlayer.movePlayer(b);
+		oldLocation.setPlayer(false);
+		b.setPlayer(true);
+		humanPlayer.setHasMoved(false);
+		repaint();
+	}
+
+	// does computer move and updates board's view of player's location
+	public void doMoveComputer() {
+		BoardCell oldLocation = allPlayers.get(currentPlayerIndex).location;
+		BoardCell newLocation = ((ComputerPlayer) allPlayers.get(currentPlayerIndex)).pickLocation(targets);
+		newLocation.setPlayer(true);
+		newLocation.setPlayerColor(allPlayers.get(currentPlayerIndex).getColor());
+		oldLocation.setPlayer(false);
+		repaint();
+	}
 	public HumanPlayer getHumanPlayer() {
 		return humanPlayer;
 	}
@@ -833,45 +873,5 @@ public class Board extends JPanel {
 		boardCellArray[0][0].draw(g, false);
 	}
 
-	public int getCurrentPlayerIndex() {
-		return currentPlayerIndex;
-	}
-
-	public void setCurrentPlayerIndex(int currentPlayerIndex) {
-		this.currentPlayerIndex = currentPlayerIndex;
-	}
-
-	// sets up targets by rolling a die and calculating targets
-	public void setUpMove() {
-		int ri = allPlayers.get(currentPlayerIndex).rollDie();
-		calcTargets(allPlayers.get(currentPlayerIndex).location, ri);
-	}	
-
-	// prints targets in a different color
-	public void showTargets(Graphics g) {
-		for (BoardCell b : targets) {
-			b.draw(g, true);
-		}
-	}
-	
-	// Does human move once a boardCell is selected
-	public void doMoveHuman(BoardCell b) {
-		BoardCell oldLocation = humanPlayer.location;
-		humanPlayer.movePlayer(b);
-		oldLocation.setPlayer(false);
-		b.setPlayer(true);
-		humanPlayer.setHasMoved(false);
-		repaint();
-	}
-
-	// does computer move and updates board's view of player's location
-	public void doMoveComputer() {
-		BoardCell oldLocation = allPlayers.get(currentPlayerIndex).location;
-		BoardCell newLocation = ((ComputerPlayer) allPlayers.get(currentPlayerIndex)).pickLocation(targets);
-		newLocation.setPlayer(true);
-		newLocation.setPlayerColor(allPlayers.get(currentPlayerIndex).getColor());
-		oldLocation.setPlayer(false);
-		repaint();
-	}
 
 }
