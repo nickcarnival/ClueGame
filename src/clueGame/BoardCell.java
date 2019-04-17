@@ -58,7 +58,6 @@ public class BoardCell extends JPanel{
 			super.paintComponent(g);
 			g.setColor(Color.cyan);
 			g.fillRect(x, y, width, height);
-			System.out.println("special");
 		}
 
 		//if is not doorway

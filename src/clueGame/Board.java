@@ -37,7 +37,7 @@ public class Board extends JPanel {
 	
 	private Map<BoardCell, Set<BoardCell>> adjacencyMatrix;
 	private Set<BoardCell> visited;
-	private Set<BoardCell> targets;
+	private Set<BoardCell> targets = new HashSet<BoardCell>();
 
 	private HashMap<Character, String> legendMap = new HashMap<Character, String>();
 	
@@ -144,7 +144,7 @@ public class Board extends JPanel {
         	if(count == randomint) {
         		humanPlayer = new HumanPlayer(playerColor, playerName);
         		allPlayers.add(humanPlayer);
-        	}else {
+        	} else {
 				//sets the computer players
 				Player player = new ComputerPlayer(playerColor, playerName); 
 				allPlayers.add(player);
@@ -797,7 +797,8 @@ public class Board extends JPanel {
 	public BoardCell[][] getBoardCellArray() {
 		return boardCellArray;
 	}
-	//getter for targets list. MUST BE CALLED AFTER calcTargets, otherwise will be a null pointer
+	// getter for targets list.
+	// MUST BE CALLED AFTER calcTargets, otherwise will be a null pointer
 	public Set<BoardCell> getTargets() {
 		return targets;
 	}
@@ -847,7 +848,6 @@ public class Board extends JPanel {
 	}	
 
 	public void showTargets(Graphics g) {
-		System.out.println("yo");
 		for (BoardCell b : targets) {
 			b.draw(g, true);
 		}

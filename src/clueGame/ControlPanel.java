@@ -279,6 +279,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 				dn.setVisible(true);
 				break;
 			case "Next Player" :
+        		//FIXME
 //				if(humanPlayer.canChangeTurn()) {
 				if(true) {
 					advanceTurn();
@@ -340,8 +341,9 @@ public class ControlPanel extends JFrame implements ActionListener {
 		whoseTurnString = board.getHumanPlayer().getName();
 
 		ControlPanel cp = new ControlPanel();
-		cp.setVisible(true);
+		board.setCurrentPlayerIndex(board.getCurrentPlayerIndex() - 1);
 		cp.advanceTurn();
+		cp.setVisible(true);
 	}
 
 }
