@@ -53,6 +53,14 @@ public class BoardCell extends JPanel{
 		x = (width * column);
 		y = (height * row);
 
+		if(specialColor) {
+			super.repaint();
+			super.paintComponent(g);
+			g.setColor(Color.cyan);
+			g.fillRect(x, y, width, height);
+			System.out.println("special");
+		}
+
 		//if is not doorway
 		if(this.isWalkway) {
 			super.repaint();

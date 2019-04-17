@@ -144,7 +144,6 @@ public class Board extends JPanel {
         	if(count == randomint) {
         		humanPlayer = new HumanPlayer(playerColor, playerName);
         		allPlayers.add(humanPlayer);
-        		setCurrentPlayerIndex(count);
         	}else {
 				//sets the computer players
 				Player player = new ComputerPlayer(playerColor, playerName); 
@@ -829,33 +828,4 @@ public class Board extends JPanel {
 		boardCellArray[0][0].draw(g, false);
 	}
 
-	public int getCurrentPlayerIndex() {
-		return currentPlayerIndex;
-	}
-
-	public void setCurrentPlayerIndex(int currentPlayerIndex) {
-		this.currentPlayerIndex = currentPlayerIndex;
-	}
-	
-	// calculate the targets for the current player, then draw them in a special color
-	public void showTargets(Graphics g, Set<BoardCell> targets) {
-		for (BoardCell b: targets) {
-			b.draw(g, true);
-		}
-	}
-	
-	// rolls a die, sets targets, and if the player is human then draws them
-	public void setUpMove(Graphics g) {
-		Player currentPlayer = allPlayers.get(currentPlayerIndex);
-		int dieRoll = currentPlayer.rollDie();
-		calcTargets(allPlayers.get(currentPlayerIndex).location, dieRoll);
-		targets = getTargets();
-		// if the player is human do human player things
-		if (currentPlayer == humanPlayer) {
-			showTargets(g, targets);
-		} 
-	}
-	
-	public void doAMove(Graphics g) {
-	}
 }

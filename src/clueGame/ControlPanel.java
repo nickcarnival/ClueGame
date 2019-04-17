@@ -34,6 +34,7 @@ import javax.swing.border.TitledBorder;
 public class ControlPanel extends JFrame implements ActionListener {
 
 	private static Board board;
+	private ArrayList<BoardCell> targets;
 	//these are all set to temporary values, but will later be updated by the board
 	private static String whoseTurnString = "Miss Scarlet";
 	private String pastGuess = "Miss Scarlet Lounge Candlestick";
@@ -69,6 +70,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 		}
 		
 	}
+
 	public void createLayout() {
 
         /*
@@ -277,7 +279,6 @@ public class ControlPanel extends JFrame implements ActionListener {
 				dn.setVisible(true);
 				break;
 			case "Next Player" :
-				// TODO: we never actually change this state
 				if(humanPlayer.canChangeTurn()) {
 					advanceTurn();
 				} else {
@@ -290,11 +291,6 @@ public class ControlPanel extends JFrame implements ActionListener {
 				break;
 		}
 	} 	
-	
-	public void advanceTurn() {
-		board.setCurrentPlayerIndex((board.getCurrentPlayerIndex() + 1) % board.getPlayers().size());
-		board.setUpMove(g);
-	}
 	
 	//whose turn getters and setters
 	public void setWhoseTurn(String whose) {
@@ -322,6 +318,13 @@ public class ControlPanel extends JFrame implements ActionListener {
 		return pastGuess;
 	}
 	
+	//advances to the next players turn
+	private void advanceTurn() {
+		//if the current player is a human, allow them to take their turn
+		
+		//else have the computer take its turn
+	}
+	
 	public static void main(String args[]) {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
@@ -333,7 +336,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 		humanPlayer = board.getHumanPlayer();
 		humanCards = humanPlayer.getMyCards();
 		
-		whoseTurnString = board.getPlayers().get(board.getCurrentPlayerIndex()).getName();
+		whoseTurnString = board.getHumanPlayer().getName();
 
 		ControlPanel cp = new ControlPanel();
 		cp.setVisible(true);

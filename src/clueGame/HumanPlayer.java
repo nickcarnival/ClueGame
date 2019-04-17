@@ -11,6 +11,7 @@ import java.util.Random;
 public class HumanPlayer extends Player {
 	
 	private boolean hasMoved;
+	private boolean canChangeTurn;
 
 	public Solution createSuggestion() {
 		Solution suggestion = new Solution();
@@ -75,6 +76,10 @@ public class HumanPlayer extends Player {
 
 	public void setHasMoved(boolean hasMoved) {
 		this.hasMoved = hasMoved;
+	}
+
+	public void setCanChangeTurn(Boolean bool) {
+		this.canChangeTurn = bool;
 	}
 	
 }
