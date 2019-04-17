@@ -824,8 +824,32 @@ public class Board extends JPanel {
 		for(BoardCell b : nameDrawers) {
 			b.draw(g, false);
 		}
+		
+		if (allPlayers.get(currentPlayerIndex) == humanPlayer) {
+			showTargets(g);
+		}
 
 		boardCellArray[0][0].draw(g, false);
+	}
+
+	public int getCurrentPlayerIndex() {
+		return currentPlayerIndex;
+	}
+
+	public void setCurrentPlayerIndex(int currentPlayerIndex) {
+		this.currentPlayerIndex = currentPlayerIndex;
+	}
+
+	// sets up targets by rolling a die
+	public void setUpMove() {
+		int ri = allPlayers.get(currentPlayerIndex).rollDie();
+		calcTargets(allPlayers.get(currentPlayerIndex).location, ri);
+	}	
+
+	public void showTargets(Graphics g) {
+		for (BoardCell b : targets) {
+			b.draw(g, true);
+		}
 	}
 
 }

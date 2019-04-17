@@ -101,5 +101,9 @@ public abstract class Player {
 		dieRoll = random.nextInt(6) + 1;
 		return dieRoll;
 	}
+	
+	public int getDieRoll() {
+		return dieRoll;
+	}
 
 }

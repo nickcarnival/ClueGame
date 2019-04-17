@@ -279,8 +279,9 @@ public class ControlPanel extends JFrame implements ActionListener {
 				dn.setVisible(true);
 				break;
 			case "Next Player" :
-				if(humanPlayer.canChangeTurn()) {
-					advanceTurn(g);
+//				if(humanPlayer.canChangeTurn()) {
+				if(true) {
+					advanceTurn();
 				} else {
 					JOptionPane.showMessageDialog(mainPanel,
 							"You cannot change your turn yet. You must move first.");
@@ -292,9 +293,10 @@ public class ControlPanel extends JFrame implements ActionListener {
 		}
 	} 	
 	
-	public void advanceTurn(Graphics g) {
+	public void advanceTurn() {
 		board.setCurrentPlayerIndex((board.getCurrentPlayerIndex() + 1) % board.getPlayers().size());
-		board.setUpMove(g);
+		board.setUpMove();
+		diceValue = Integer.toString(board.getPlayers().get(board.getCurrentPlayerIndex()).getDieRoll());
 	}
 	
 	//whose turn getters and setters
@@ -323,13 +325,6 @@ public class ControlPanel extends JFrame implements ActionListener {
 		return pastGuess;
 	}
 	
-	//advances to the next players turn
-	private void advanceTurn() {
-		//if the current player is a human, allow them to take their turn
-		
-		//else have the computer take its turn
-	}
-	
 	public static void main(String args[]) {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
@@ -345,6 +340,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 
 		ControlPanel cp = new ControlPanel();
 		cp.setVisible(true);
+		cp.advanceTurn();
 	}
 
 }
