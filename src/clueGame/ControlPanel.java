@@ -49,6 +49,9 @@ public class ControlPanel extends JFrame implements ActionListener {
 	private ArrayList<Point> points; 
 
 	private static DetectiveNotesState dns;
+	
+	private JPanel diePanel;
+	private JTextField diceRoll;
 
 	public ControlPanel() {
 		points = new ArrayList<Point>();
@@ -133,9 +136,9 @@ public class ControlPanel extends JFrame implements ActionListener {
         JPanel lowerBottomPanel = new JPanel(new GridLayout(1, 3));
 
         //dice
-        JPanel diePanel = new JPanel(new GridLayout(1,2));
+        diePanel = new JPanel(new GridLayout(1,2));
         JLabel diceLabel = new JLabel("Dice");
-        JTextField diceRoll = new JTextField();
+        diceRoll = new JTextField();
         diceRoll.setEditable(false);
         diceRoll.setText(diceValue);
         
@@ -299,6 +302,8 @@ public class ControlPanel extends JFrame implements ActionListener {
 		board.setUpMove();
 		board.repaint();
 		diceValue = Integer.toString(board.getPlayers().get(board.getCurrentPlayerIndex()).getDieRoll());
+		diceRoll.setText(diceValue);
+		diePanel.repaint();
 	}
 	
 	//whose turn getters and setters
