@@ -278,9 +278,12 @@ public class ControlPanel extends JFrame implements ActionListener {
 				}
 				break;
 			case "Make Accusation" :
-				MakeAGuess mag = new MakeAGuess();
-				mag.setResizable(false);
-				mag.setVisible(true);
+				if(humanPlayer.isTurn()) {
+					System.out.println("Make accusatio button causes errors");
+					MakeAGuess mag = new MakeAGuess(board);
+					mag.setResizable(false);
+					mag.setVisible(true);
+				}
 				break;
 		}
 	} 	
