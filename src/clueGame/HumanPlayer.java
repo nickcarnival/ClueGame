@@ -51,6 +51,10 @@ public class HumanPlayer extends Player {
 		return suggestion;
 	}
 	
+	public void setLocation(BoardCell cell) {
+		this.location = cell;
+	}
+	
 	public Boolean canChangeTurn() {
 		return hasMoved;
 	}

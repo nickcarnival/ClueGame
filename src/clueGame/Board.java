@@ -20,6 +20,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 // TODO: we use the same scanner method for every file--
@@ -885,33 +886,39 @@ public class Board extends JPanel implements MouseListener{
 		//make sure that the points have been added to 
 		if(points.size() > 0 ) {
 			Point p = points.get(points.size() - 1);	
-			int row, column;
+			int row = 0, column = 0;
 
-			row = p.x/WIDTH;
-			column = p.y/HEIGHT;
-
-			row = p.x%WIDTH;
-			column = p.y%HEIGHT;
-
-			boardCellArray[row][column].draw(g, true);
-			g.fillRect(row,  column, WIDTH, HEIGHT);
+			row = (p.y/25) - 1;
+			column = (p.x/25) - 1;
+			
+			System.out.println(humanPlayer.getLocation());
+			BoardCell clickedCell = boardCellArray[row][column];
+			if(targets.contains(clickedCell)) {
+				boardCellArray[row][column].setPlayer(true);
+				boardCellArray[row][column].setPlayerColor(humanPlayer.getColor());
+				humanPlayer.setLocation(clickedCell);
+				boardCellArray[0][0].draw(g, false);
+			} else {
+				System.out.println("can't move there");
+			}
 		}
 	}
 
-	public BoardCell findClickedCell(int mouseX, int mouseY) {
-		if (targets != null) {
-			int col = mouseX / BoardCell.WIDTH;
-			int row = mouseY / BoardCell.HEIGHT;
-			BoardCell clicked = boardCellArray[row][col];
-			if (targets.contains(clicked))
-				return clicked;
-		}
-		return null;
-	}
 	@Override
 	public void mouseClicked(MouseEvent event) {
+		points = new ArrayList<Point>();
 		Point p = event.getPoint();
 		System.out.println("Current Point: " + p);
+		int row = 0, column = 0;
+
+		row = (p.y/25) - 2;
+		column = (p.x/25);
+		
+		BoardCell clickedCell = boardCellArray[row][column];
+		System.out.println("Current Cell: " + clickedCell);
+		for(BoardCell b : targets) {
+			System.out.println("Target Cell, row:" + b.getRow() + ", column: " + b.getColumn());
+		}
 		points.add(p);
 	}
 
