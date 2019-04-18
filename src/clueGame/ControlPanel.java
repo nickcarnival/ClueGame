@@ -321,7 +321,10 @@ public class ControlPanel extends JFrame implements ActionListener {
 			Solution suggestion = currentPlayer.createSuggestion();
 			// have board handle suggestion
 			Player disprovingPlayer = board.handleSuggestion(suggestion);
-			guess = new JTextField(suggestion.toString());
+			guess.setText(suggestion.toString());
+		} else {
+			// if not in a room, reset guess to default value
+			guess.setText("No suggestion right now");
 		}
 	}
 	
