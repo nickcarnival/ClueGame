@@ -902,7 +902,7 @@ public class Board extends JPanel implements MouseListener{
 		if (targets != null) {
 			int col = mouseX / BoardCell.WIDTH;
 			int row = mouseY / BoardCell.HEIGHT;
-			BoardCell clicked = board[row][col];
+			BoardCell clicked = boardCellArray[row][col];
 			if (targets.contains(clicked))
 				return clicked;
 		}
