@@ -7,12 +7,20 @@ package clueGame;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
 
 public class ComputerPlayer extends Player {
+	
+	Queue<Character> previousFourTurnsRooms;
+	char previousRoom;
+	
 	public ComputerPlayer(String color, String name) {
 		super(color, name);
+		previousFourTurnsRooms = new LinkedList<Character>();
+		previousRoom = 0;
 	}
 	// picks a location, prioritizing rooms
 	// also moves the player
@@ -20,6 +28,11 @@ public class ComputerPlayer extends Player {
 		BoardCell currentCell = null;
 		//check if any of the cells are doors
 		for(BoardCell b : targets) {
+			// don't go to a room we've been to recently
+			if (previousFourTurnsRooms.contains(b.getInitial()) && b.isDoorway() ||
+					previousRoom == b.getInitial()) {
+				continue;
+			}
 			if(b.isDoorway()) {
 				if(b != lastVisited) {
 					currentCell = b;
@@ -33,6 +46,14 @@ public class ComputerPlayer extends Player {
 			currentCell = getRandomCell(targets);
 		}
 		this.location = currentCell;
+		// make sure we keep track of which rooms we've been to recently
+		if (previousFourTurnsRooms.size() == 4) {
+			previousFourTurnsRooms.poll();
+		}
+		previousFourTurnsRooms.add(currentCell.getInitial());
+		if (currentCell.isDoorway()) {
+			previousRoom = currentCell.getInitial();
+		}
 		return currentCell;
 	}
 	//randomly selects a board cell from a set

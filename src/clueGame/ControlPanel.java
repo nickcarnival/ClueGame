@@ -261,7 +261,8 @@ public class ControlPanel extends JFrame implements ActionListener {
 				dn.setVisible(true);
 				break;
 			case "Next Player" :
-				if(true) {
+//				if(true) {
+				if(humanPlayer.canChangeTurn()) {
 					advanceTurn();
 				} else {
 					JOptionPane.showMessageDialog(mainPanel,
@@ -325,14 +326,14 @@ public class ControlPanel extends JFrame implements ActionListener {
 		board.setConfigFiles("data/testsMap.csv", "data/rooms.txt");		
 		board.initialize();
 
-		board.setCurrentPlayerIndex(board.getCurrentPlayerIndex());
 		//set the human player
 		humanPlayer = board.getHumanPlayer();
 		humanCards = humanPlayer.getMyCards();
-		humanPlayer.setHasMoved(false);
+		humanPlayer.setHasMoved(true);
 		
 		whoseTurnString = board.getHumanPlayer().getName();
 
+		board.setCurrentPlayerIndex(board.getCurrentPlayerIndex()-1);
 		ControlPanel cp = new ControlPanel();
 		cp.setVisible(true);
 	}
