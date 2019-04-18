@@ -887,15 +887,19 @@ public class Board extends JPanel implements MouseListener{
 		
 	}
 
+	//this happens everytime the mouse is clicked
 	@Override
 	public void mouseClicked(MouseEvent event) {
 		BoardCell clickedCell = null;
+		//clear the clickedCells array
 		clickedCells = new ArrayList<BoardCell>();
 		Point p = event.getPoint();
 		int row = 0, column = 0;
 
 		row = (p.y/25) - 2;
 		column = (p.x/25);
+
+		//check if the cell is in bounds
 		if(row <= numRows && column <= numColumns) {
 			clickedCell = boardCellArray[row][column];
 		}
@@ -903,25 +907,30 @@ public class Board extends JPanel implements MouseListener{
 			clickedCells.add(clickedCell);
 			drawPlayerPosition(clickedCell);
 		} else {
+			//display a pop up window if the wrong cell was clicked
 			JOptionPane.showMessageDialog(this,"You cannot move there");
 		}
 	}
 
+	//this method moves the player to his new position and clears the old cell
 	private void drawPlayerPosition(BoardCell clickedCell) {
-		//make sure that the points have been added to 
+		//if the clickedCells array has cells, and the player has not moved
 		if(clickedCells.size() > 0 &&  !humanPlayer.hasMoved()) {
+			//if the current cell is in targets
 			if(clickedCells.contains(clickedCell)) {
+				//removes the player icon from his original cell
 				BoardCell originalCell = humanPlayer.getLocation();
 				boardCellArray[originalCell.getRow()][originalCell.getColumn()].setPlayer(false);
+				//moves the player icon to the new cell
 				boardCellArray[clickedCell.getRow()][clickedCell.getColumn()].setPlayer(true);
 				boardCellArray[clickedCell.getRow()][clickedCell.getColumn()].setPlayerColor(humanPlayer.getColor());
 				humanPlayer.setLocation(clickedCell);
 				humanPlayer.setHasMoved(true);
+				//empty the targets array
 				targets = new HashSet<BoardCell>();
+				//repaint the board with the new location and without the targets displayed
 				repaint();
-			} else {
-				System.out.println("can't move there");
-			}
+			} 
 		}
 		
 	}
