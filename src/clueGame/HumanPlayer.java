@@ -11,6 +11,7 @@ import java.util.Random;
 public class HumanPlayer extends Player {
 	
 	private boolean hasMoved;
+	private boolean isTurn;
 
 	public HumanPlayer(String color, String name) {
 		super(color, name);
@@ -59,6 +60,7 @@ public class HumanPlayer extends Player {
 		return hasMoved;
 	}
 
+	//disproves the suggested card
 	public Card disproveSuggestion(Solution suggestion) {
 		Random random = new Random();
 		ArrayList<Card> matches = new ArrayList<Card>();
@@ -76,6 +78,14 @@ public class HumanPlayer extends Player {
 		} else {
 			return null;
 		}
+	}
+
+	public Boolean isTurn() {
+		return isTurn;
+	}
+
+	public void setIsTurn(Boolean b) {
+		this.isTurn = b;
 	}
 
 	public Boolean hasMoved() {

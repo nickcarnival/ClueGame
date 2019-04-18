@@ -890,25 +890,27 @@ public class Board extends JPanel implements MouseListener{
 	//this happens everytime the mouse is clicked
 	@Override
 	public void mouseClicked(MouseEvent event) {
-		BoardCell clickedCell = null;
-		//clear the clickedCells array
-		clickedCells = new ArrayList<BoardCell>();
-		Point p = event.getPoint();
-		int row = 0, column = 0;
+		if(humanPlayer.isTurn()) {
+			BoardCell clickedCell = null;
+			//clear the clickedCells array
+			clickedCells = new ArrayList<BoardCell>();
+			Point p = event.getPoint();
+			int row = 0, column = 0;
 
-		row = (p.y/25) - 2;
-		column = (p.x/25);
+			row = (p.y/25) - 2;
+			column = (p.x/25);
 
-		//check if the cell is in bounds
-		if(row <= numRows && column <= numColumns) {
-			clickedCell = boardCellArray[row][column];
-		}
-		if(targets.contains(clickedCell)) {
-			clickedCells.add(clickedCell);
-			drawPlayerPosition(clickedCell);
-		} else {
-			//display a pop up window if the wrong cell was clicked
-			JOptionPane.showMessageDialog(this,"You cannot move there");
+			//check if the cell is in bounds
+			if(row <= numRows && column <= numColumns) {
+				clickedCell = boardCellArray[row][column];
+			}
+			if(targets.contains(clickedCell)) {
+				clickedCells.add(clickedCell);
+				drawPlayerPosition(clickedCell);
+			} else {
+				//display a pop up window if the wrong cell was clicked
+				JOptionPane.showMessageDialog(this,"You cannot move there");
+			}
 		}
 	}
 
@@ -925,7 +927,9 @@ public class Board extends JPanel implements MouseListener{
 				boardCellArray[clickedCell.getRow()][clickedCell.getColumn()].setPlayer(true);
 				boardCellArray[clickedCell.getRow()][clickedCell.getColumn()].setPlayerColor(humanPlayer.getColor());
 				humanPlayer.setLocation(clickedCell);
+				//make sure that it is not the human players turn
 				humanPlayer.setHasMoved(true);
+				humanPlayer.setIsTurn(false);
 				//empty the targets array
 				targets = new HashSet<BoardCell>();
 				//repaint the board with the new location and without the targets displayed

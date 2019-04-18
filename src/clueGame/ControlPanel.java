@@ -264,13 +264,16 @@ public class ControlPanel extends JFrame implements ActionListener {
 //				if(true) {
 				if(humanPlayer.canChangeTurn()) {
 					advanceTurn();
+					if(!humanPlayer.canChangeTurn()) {
+						humanPlayer.setIsTurn(true);
+					}
 				} else {
 					JOptionPane.showMessageDialog(mainPanel,
 							"You cannot change your turn yet. You must move first.");
 				}
 				break;
 			case "Make Accusation" :
-				System.out.println("Make Accusation is not yet implemented");
+				JOptionPane.showMessageDialog(mainPanel, "Make Accusation is not yet implemented");
 				break;
 		}
 	} 	
@@ -287,6 +290,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 			// TODO: suggestion
 		} else {
 			// if human, flag that we haven't moved yet
+			humanPlayer.setIsTurn(true);
 			humanPlayer.setHasMoved(false);
 		}
 		// repaint board--showing targets if player is human, showing computer move if computer
