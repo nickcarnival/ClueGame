@@ -3,7 +3,9 @@
  * Nicholas Carnival
  */
 package clueGame;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -54,6 +56,7 @@ public class Board extends JPanel implements MouseListener{
 
 	//array of all the players
 	private ArrayList<Player> allPlayers ;
+	private ArrayList<Point> points;
 	private int currentPlayerIndex;
 
 	private HumanPlayer humanPlayer;
@@ -878,25 +881,31 @@ public class Board extends JPanel implements MouseListener{
 		}
 
 		boardCellArray[0][0].draw(g, false);
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		System.out.println("the mouse is doing something");
 		
+		if(points != null) {
+			for(Point p : points) {
+				g.setColor(Color.PINK);
+				g.fillOval(p.x, p.y, 30, 30);
+			}
+		}
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {}
+	public void mouseClicked(MouseEvent event) {
+		points = new ArrayList<Point>();
+		Point p = event.getPoint();
+		System.out.println("Current Point: " + p);
+		points.add(p);
+	}
 
 	@Override
-	public void mouseExited(MouseEvent arg0) {}
-
+	public void mouseEntered(MouseEvent event) {}
 	@Override
-	public void mousePressed(MouseEvent arg0) {}
-
+	public void mouseExited(MouseEvent event) {}
 	@Override
-	public void mouseReleased(MouseEvent arg0) {}
+	public void mousePressed(MouseEvent event) {}
+	@Override
+	public void mouseReleased(MouseEvent event) {}
 
 
 }
