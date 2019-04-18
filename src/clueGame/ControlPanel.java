@@ -276,7 +276,9 @@ public class ControlPanel extends JFrame implements ActionListener {
 				}
 				break;
 			case "Make Accusation" :
-				JOptionPane.showMessageDialog(mainPanel, "Make Accusation is not yet implemented");
+				MakeAGuess mag = new MakeAGuess();
+				mag.setResizable(false);
+				mag.setVisible(true);
 				break;
 		}
 	} 	
