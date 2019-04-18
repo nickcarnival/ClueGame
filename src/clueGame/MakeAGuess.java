@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dialog;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -49,13 +50,27 @@ public class MakeAGuess extends JFrame{
 		
 		//right side of the main panel
 		rightPanel.add(cancelButton);
+		mainPanel.add(rightPanel, BorderLayout.EAST);
 
 		//left side of the main panel
 		leftPanel.add(submitButton);
-
 		mainPanel.add(leftPanel, BorderLayout.WEST);
-		mainPanel.add(rightPanel, BorderLayout.EAST);
+
 		add(mainPanel);
+	}
+	
+	//handles the buttons
+	private void actionPerformed(ActionEvent ae) {
+		String action = ae.getActionCommand();
+		switch (action) {
+			case "Submit" :
+				break;
+			case "Cancel" :
+				break;
+			default:
+				break;
+		}
+		
 	}
 	
 	public static void main(String args[]) {
