@@ -36,7 +36,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 	private static Board board;
 	//these are all set to temporary values, but will later be updated by the board
 	private static String whoseTurnString = "No player yet";
-	private String pastGuess = "Miss Scarlet Lounge Candlestick"; //TODO
+	private String pastGuess = "No suggestions yet"; //TODO
 	private String diceValue = "No dice roll yet";
 
 	private JPanel mainPanel;
@@ -55,6 +55,8 @@ public class ControlPanel extends JFrame implements ActionListener {
 	private JTextField whoseTurnField;
 	private JPanel upperBottomPanel;
 
+	private JTextField guess;
+	private JPanel guessPanel;
 
 	public ControlPanel() {
 		points = new ArrayList<Point>();
@@ -139,8 +141,8 @@ public class ControlPanel extends JFrame implements ActionListener {
         diceRoll.setText(diceValue);
         
         //guess's
-        JPanel guessPanel = new JPanel(new GridLayout(1,2));
-        JTextField guess = new JTextField(pastGuess);
+        guessPanel = new JPanel(new GridLayout(1,2));
+        guess = new JTextField(pastGuess);
         guess.setEditable(false);
 
         JPanel guessResultPanel = new JPanel(new GridLayout(1,2));
@@ -289,13 +291,12 @@ public class ControlPanel extends JFrame implements ActionListener {
 	public void advanceTurn() {
 		// update who is playing
 		board.setCurrentPlayerIndex((board.getCurrentPlayerIndex() + 1) % board.getPlayers().size());
+		Player currentPlayer = board.getPlayers().get(board.getCurrentPlayerIndex());
 		// update targets
 		board.setUpMove();
 		// if computer, move
-		if (board.getPlayers().get(board.getCurrentPlayerIndex()) != humanPlayer) {
-			// TODO: accusation
-			board.doMoveComputer();
-			// TODO: suggestion
+		if (currentPlayer != humanPlayer) {
+			doComputerTurn((ComputerPlayer) currentPlayer);
 		} else {
 			// if human, flag that we haven't moved yet
 			humanPlayer.setIsTurn(true);
@@ -312,6 +313,19 @@ public class ControlPanel extends JFrame implements ActionListener {
 		whoseTurnString = board.getPlayers().get(board.getCurrentPlayerIndex()).getName();
 		whoseTurnField.setText(whoseTurnString);
 		upperBottomPanel.repaint();
+	}
+	
+	public void doComputerTurn(ComputerPlayer currentPlayer) {
+		// TODO: accusation
+		board.doMoveComputer();
+		// if in a room, make a suggestion
+		if (currentPlayer.location.isDoorway()) {
+			// create suggestion
+			Solution suggestion = currentPlayer.createSuggestion();
+			// have board handle suggestion
+			Player disprovingPlayer = board.handleSuggestion(suggestion);
+			guess = new JTextField(suggestion.toString());
+		}
 	}
 	
 	//dice getters and setters

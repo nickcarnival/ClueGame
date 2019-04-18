@@ -20,6 +20,8 @@ public abstract class Player {
 
 	protected Board board;
 	protected int dieRoll;
+	
+	protected Card disprovingCard;
 
 	public Player(String color, String name) {
 		this.colorString = color;
@@ -28,6 +30,7 @@ public abstract class Player {
 		myCards = new ArrayList<Card>();
 		seenCards = new ArrayList<Card>();
 		dieRoll = 0;
+		disprovingCard = null;
 	}
 
 	// Be sure to trim the color, we don't want spaces around the name 
