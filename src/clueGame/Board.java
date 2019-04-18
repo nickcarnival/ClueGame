@@ -875,9 +875,11 @@ public class Board extends JPanel implements MouseListener{
 			b.draw(g, false);
 		}
 		
-		if (allPlayers.get(currentPlayerIndex) == humanPlayer) {
-			setUpMove();
-			showTargets(g);
+		if (currentPlayerIndex != -1) {
+			if (allPlayers.get(currentPlayerIndex) == humanPlayer) {
+				setUpMove();
+				showTargets(g);
+			}
 		}
 
 		boardCellArray[0][0].draw(g, false);
