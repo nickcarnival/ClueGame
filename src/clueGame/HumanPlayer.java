@@ -78,6 +78,10 @@ public class HumanPlayer extends Player {
 		}
 	}
 
+	public Boolean hasMoved() {
+		return this.hasMoved;
+	}
+
 	public void setHasMoved(boolean hasMoved) {
 		this.hasMoved = hasMoved;
 	}

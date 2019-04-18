@@ -57,7 +57,7 @@ public class Board extends JPanel implements MouseListener{
 
 	//array of all the players
 	private ArrayList<Player> allPlayers ;
-	private ArrayList<Point> points = new ArrayList<Point>();
+	private ArrayList<BoardCell> clickedCells = new ArrayList<BoardCell>();
 	private int currentPlayerIndex;
 
 	private HumanPlayer humanPlayer;
@@ -885,43 +885,38 @@ public class Board extends JPanel implements MouseListener{
 
 		boardCellArray[0][0].draw(g, false);
 		
-		//make sure that the points have been added to 
-		if(points.size() > 0 ) {
-			Point p = points.get(points.size() - 1);	
-			int row = 0, column = 0;
-
-			row = (p.y/25) - 1;
-			column = (p.x/25) - 1;
-			
-			System.out.println(humanPlayer.getLocation());
-			BoardCell clickedCell = boardCellArray[row][column];
-			if(targets.contains(clickedCell)) {
-				boardCellArray[row][column].setPlayer(true);
-				boardCellArray[row][column].setPlayerColor(humanPlayer.getColor());
-				humanPlayer.setLocation(clickedCell);
-				boardCellArray[0][0].draw(g, false);
-			} else {
-				System.out.println("can't move there");
-			}
-		}
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent event) {
-		points = new ArrayList<Point>();
+		clickedCells = new ArrayList<BoardCell>();
 		Point p = event.getPoint();
-		System.out.println("Current Point: " + p);
 		int row = 0, column = 0;
 
 		row = (p.y/25) - 2;
 		column = (p.x/25);
-		
 		BoardCell clickedCell = boardCellArray[row][column];
-		System.out.println("Current Cell: " + clickedCell);
-		for(BoardCell b : targets) {
-			System.out.println("Target Cell, row:" + b.getRow() + ", column: " + b.getColumn());
+		clickedCells.add(clickedCell);
+		drawPlayerPosition(clickedCell);
+	}
+
+	private void drawPlayerPosition(BoardCell clickedCell) {
+		//make sure that the points have been added to 
+		if(clickedCells.size() > 0) {
+			System.out.println(humanPlayer.getLocation());
+			if(clickedCells.contains(clickedCell)) {
+				System.out.println("clickedCell is in targets");
+				boardCellArray[clickedCell.getRow()][clickedCell.getColumn()].setPlayer(true);
+				boardCellArray[clickedCell.getRow()][clickedCell.getColumn()].setPlayerColor(humanPlayer.getColor());
+				humanPlayer.setLocation(clickedCell);
+				humanPlayer.setHasMoved(true);
+				targets = new HashSet<BoardCell>();
+				repaint();
+			} else {
+				System.out.println("can't move there");
+			}
 		}
-		points.add(p);
+		
 	}
 
 	@Override
