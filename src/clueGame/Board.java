@@ -319,10 +319,10 @@ public class Board extends JPanel implements MouseListener{
 		Player disprovenPlayer = null;
 		Boolean disproven = false;
 
-		ArrayList<Player> playerList = getPlayers();
-
 		//iterate over every player
-		for(Player p : playerList) {
+		int count = currentPlayerIndex + 1;
+		while (currentPlayerIndex != count) {
+			Player p = allPlayers.get(currentPlayerIndex);
 			//if it hasn't already been disproven
 			if(!disproven) {
 				//if the player has at least one of the cards in the accusation
@@ -331,9 +331,11 @@ public class Board extends JPanel implements MouseListener{
 						|| p.disproveSuggestion(accusation) == accusation.getWeapon()){
 					disproven = true;
 					disprovenPlayer = p;
+					p.disprovingCard = p.disproveSuggestion(accusation);
 					break;
 				}
 			}
+			count = (count + 1) % allPlayers.size();
 		}
 
 		return disprovenPlayer;
