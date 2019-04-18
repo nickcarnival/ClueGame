@@ -902,9 +902,10 @@ public class Board extends JPanel implements MouseListener{
 
 	private void drawPlayerPosition(BoardCell clickedCell) {
 		//make sure that the points have been added to 
-		if(clickedCells.size() > 0) {
-			System.out.println(humanPlayer.getLocation());
+		if(clickedCells.size() > 0 &&  !humanPlayer.hasMoved()) {
 			if(clickedCells.contains(clickedCell)) {
+				BoardCell originalCell = humanPlayer.getLocation();
+				boardCellArray[originalCell.getRow()][originalCell.getColumn()].setPlayer(false);
 				System.out.println("clickedCell is in targets");
 				boardCellArray[clickedCell.getRow()][clickedCell.getColumn()].setPlayer(true);
 				boardCellArray[clickedCell.getRow()][clickedCell.getColumn()].setPlayerColor(humanPlayer.getColor());
