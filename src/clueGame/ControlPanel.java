@@ -261,6 +261,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 				dn.setVisible(true);
 				break;
 			case "Next Player" :
+//				if(true) {
 				if(humanPlayer.canChangeTurn()) {
 					advanceTurn();
 				} else {
