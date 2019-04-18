@@ -896,8 +896,12 @@ public class Board extends JPanel implements MouseListener{
 		row = (p.y/25) - 2;
 		column = (p.x/25);
 		BoardCell clickedCell = boardCellArray[row][column];
-		clickedCells.add(clickedCell);
-		drawPlayerPosition(clickedCell);
+		if(targets.contains(clickedCell)) {
+			clickedCells.add(clickedCell);
+			drawPlayerPosition(clickedCell);
+		} else {
+			System.out.println("Cannot move there");
+		}
 	}
 
 	private void drawPlayerPosition(BoardCell clickedCell) {
