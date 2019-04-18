@@ -4,6 +4,8 @@
  */
 package clueGame;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ import javax.swing.JPanel;
 
 // TODO: we use the same scanner method for every file--
 // we should probably make a method called "loadFile()"
-public class Board extends JPanel {
+public class Board extends JPanel implements MouseListener{
 
 
 	public static final int MAX_BOARD_SIZE = 50;
@@ -127,8 +129,8 @@ public class Board extends JPanel {
 
 	// sets up targets by rolling a die and calculating targets
 	public void setUpMove() {
-		int ri = allPlayers.get(currentPlayerIndex).rollDie();
-		calcTargets(allPlayers.get(currentPlayerIndex).location, ri);
+		int roll = allPlayers.get(currentPlayerIndex).rollDie();
+		calcTargets(allPlayers.get(currentPlayerIndex).location, roll);
 	}	
 
 	// prints targets in a different color
@@ -851,6 +853,10 @@ public class Board extends JPanel {
 		return dealtCards;
 	}
 	
+	/*************************************************************
+	 * GUI Methods 
+	 *************************************************************/
+
 	@Override
 	public void paintComponent(Graphics g) {
 		ArrayList<BoardCell> nameDrawers = new ArrayList<BoardCell>();
@@ -867,11 +873,30 @@ public class Board extends JPanel {
 		}
 		
 		if (allPlayers.get(currentPlayerIndex) == humanPlayer) {
+			setUpMove();
 			showTargets(g);
 		}
 
 		boardCellArray[0][0].draw(g, false);
 	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		System.out.println("the mouse is doing something");
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {}
 
 
 }

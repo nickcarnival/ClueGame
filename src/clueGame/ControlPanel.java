@@ -55,26 +55,20 @@ public class ControlPanel extends JFrame implements ActionListener {
 	private JTextField whoseTurnField;
 	private JPanel upperBottomPanel;
 
+
 	public ControlPanel() {
 		points = new ArrayList<Point>();
 		dns = new DetectiveNotesState(board);
 		setTitle("Clue Game");
 		//seems like a good size
 		setSize(750, 750);
+		setBackground(Color.GRAY);
 		//exit on close so that the program ends when the window closes
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        addMouseListener(new dotsListener());
+		addMouseListener(board);
 		createLayout();
 	}
 	
-	public void paintComponent(Graphics g) {
-		super.paintComponents(g);
-		g.setColor(Color.PINK);
-		for(Point p : points) {
-			g.fillOval(p.x, p.y, 100, 100);
-		}
-		
-	}
 
 	public void createLayout() {
 
@@ -156,10 +150,10 @@ public class ControlPanel extends JFrame implements ActionListener {
         
         
         //set panel sizes
-        boardPanel.setMaximumSize(new Dimension(600,600));
-        boardPanel.setMinimumSize(new Dimension(600,600));
+        boardPanel.setMaximumSize(new Dimension(525,520));
+        boardPanel.setMinimumSize(new Dimension(525,520));
         boardPanel.setPreferredSize(new Dimension(600, 600));
-        cardPanel.setPreferredSize(new Dimension(150, 680));
+        cardPanel.setPreferredSize(new Dimension(150, 580));
 
         //set borders for each panel
         cardPanel.setBorder(new TitledBorder("Card Panel"));
@@ -253,19 +247,6 @@ public class ControlPanel extends JFrame implements ActionListener {
         
 	}
 	
-	private class dotsListener implements MouseListener {
-		//when the mouse is clicked, 
-		public void mouseClicked(MouseEvent event) {
-			points.add(event.getPoint());
-			repaint();
-		}
-
-		//these must all be implemented
-		public void mouseEntered(MouseEvent event) {}
-		public void mouseExited(MouseEvent event) {}
-		public void mousePressed(MouseEvent event) {}
-		public void mouseReleased(MouseEvent event) {}
-	}
 	
 	//this handles what all of the buttons do
 	public void actionPerformed(ActionEvent ae) { 
@@ -336,6 +317,17 @@ public class ControlPanel extends JFrame implements ActionListener {
 	public String getPastGuess() {
 		return pastGuess;
 	}
+
+	public void paintComponent(Graphics g) {
+		System.out.println("trying to paint a circle");
+		super.paintComponents(g);
+		g.setColor(Color.PINK);
+		for(Point p : points) {
+			super.paintComponents(g);
+			g.fillOval(p.x, p.y, 100, 100);
+			repaint();
+		}
+	}
 	
 	public static void main(String args[]) {
 		// Board is singleton, get the only instance
@@ -344,6 +336,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 		board.setConfigFiles("data/testsMap.csv", "data/rooms.txt");		
 		board.initialize();
 
+		board.setCurrentPlayerIndex(board.getCurrentPlayerIndex() - 1);
 		//set the human player
 		humanPlayer = board.getHumanPlayer();
 		humanCards = humanPlayer.getMyCards();
@@ -352,7 +345,6 @@ public class ControlPanel extends JFrame implements ActionListener {
 		whoseTurnString = board.getHumanPlayer().getName();
 
 		ControlPanel cp = new ControlPanel();
-		board.setCurrentPlayerIndex(board.getCurrentPlayerIndex() - 1);
 		cp.setVisible(true);
 	}
 

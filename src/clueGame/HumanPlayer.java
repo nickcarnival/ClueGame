@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class HumanPlayer extends Player {
 	
-	private boolean hasMoved;
+	private boolean hasMoved = true;
 
 	public HumanPlayer(String color, String name) {
 		super(color, name);
