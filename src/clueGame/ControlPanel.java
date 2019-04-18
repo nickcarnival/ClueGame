@@ -36,7 +36,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 	private static Board board;
 	//these are all set to temporary values, but will later be updated by the board
 	private static String whoseTurnString = "No player yet";
-	private String pastGuess = "No suggestions yet"; //TODO
+	private String pastGuess = "No suggestions yet";
 	private String diceValue = "No dice roll yet";
 
 	private JPanel mainPanel;
@@ -279,7 +279,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 				break;
 			case "Make Accusation" :
 				if(humanPlayer.isTurn()) {
-					System.out.println("Make accusatio button causes errors");
+					System.out.println("Make accusation button causes errors");
 					MakeAGuess mag = new MakeAGuess(board);
 					mag.setResizable(false);
 					mag.setVisible(true);

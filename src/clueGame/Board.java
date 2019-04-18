@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.print.Paper;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -145,12 +146,14 @@ public class Board extends JPanel implements MouseListener{
 	}
 	
 	// Does human move once a boardCell is selected
-	public void doMoveHuman(BoardCell b) {
-		BoardCell oldLocation = humanPlayer.location;
-		humanPlayer.movePlayer(b);
+	public void doMove(BoardCell b, Player p) {
+		BoardCell oldLocation = p.location;
+		p.movePlayer(b);
 		oldLocation.setPlayer(false);
 		b.setPlayer(true);
-		humanPlayer.setHasMoved(false);
+		if (p instanceof HumanPlayer) {
+			humanPlayer.setHasMoved(false);
+		}
 		repaint();
 	}
 
@@ -336,6 +339,13 @@ public class Board extends JPanel implements MouseListener{
 				}
 			}
 			count = (count + 1) % allPlayers.size();
+		}
+		// figure out which player was suggested and move that player to the room
+		for (Player p : allPlayers) {
+			if (p.getName().equals(accusation.getPerson().getName())) {
+				doMove(allPlayers.get(currentPlayerIndex).location, p);
+				break;
+			}
 		}
 
 		return disprovenPlayer;
