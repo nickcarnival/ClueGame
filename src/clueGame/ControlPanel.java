@@ -317,17 +317,6 @@ public class ControlPanel extends JFrame implements ActionListener {
 	public String getPastGuess() {
 		return pastGuess;
 	}
-
-	public void paintComponent(Graphics g) {
-		System.out.println("trying to paint a circle");
-		super.paintComponents(g);
-		g.setColor(Color.PINK);
-		for(Point p : points) {
-			super.paintComponents(g);
-			g.fillOval(p.x, p.y, 100, 100);
-			repaint();
-		}
-	}
 	
 	public static void main(String args[]) {
 		// Board is singleton, get the only instance

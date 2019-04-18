@@ -56,15 +56,15 @@ public class Board extends JPanel implements MouseListener{
 
 	//array of all the players
 	private ArrayList<Player> allPlayers ;
-	private ArrayList<Point> points;
+	private ArrayList<Point> points = new ArrayList<Point>();
 	private int currentPlayerIndex;
 
 	private HumanPlayer humanPlayer;
 
 	private Solution solution;
 
-	public static final int  WIDTH  = 10;
-	public static final int  HEIGHT = 10;
+	public static final int  WIDTH  = 25;
+	public static final int  HEIGHT = 25;
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -310,7 +310,7 @@ public class Board extends JPanel implements MouseListener{
 	}
 
 	/*************************************************************
-	 * Handle Suggestion
+	 * Handle Suggestion Methods
 	 *************************************************************/
 	
 	//this method returns the player that disproves the suggestion,
@@ -882,17 +882,34 @@ public class Board extends JPanel implements MouseListener{
 
 		boardCellArray[0][0].draw(g, false);
 		
-		if(points != null) {
-			for(Point p : points) {
-				g.setColor(Color.PINK);
-				g.fillOval(p.x, p.y, 30, 30);
-			}
+		//make sure that the points have been added to 
+		if(points.size() > 0 ) {
+			Point p = points.get(points.size() - 1);	
+			int row, column;
+
+			row = p.x/WIDTH;
+			column = p.y/HEIGHT;
+
+			row = p.x%WIDTH;
+			column = p.y%HEIGHT;
+
+			boardCellArray[row][column].draw(g, true);
+			g.fillRect(row,  column, WIDTH, HEIGHT);
 		}
 	}
 
+	public BoardCell findClickedCell(int mouseX, int mouseY) {
+		if (targets != null) {
+			int col = mouseX / BoardCell.WIDTH;
+			int row = mouseY / BoardCell.HEIGHT;
+			BoardCell clicked = board[row][col];
+			if (targets.contains(clicked))
+				return clicked;
+		}
+		return null;
+	}
 	@Override
 	public void mouseClicked(MouseEvent event) {
-		points = new ArrayList<Point>();
 		Point p = event.getPoint();
 		System.out.println("Current Point: " + p);
 		points.add(p);
