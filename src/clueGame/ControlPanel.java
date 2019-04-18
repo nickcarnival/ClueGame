@@ -117,7 +117,9 @@ public class ControlPanel extends JFrame implements ActionListener {
         whoseTurnField = new JTextField();
         whoseTurnField.setEditable(false);
         whoseTurnField.setText(whoseTurnString);
+        //dimensions have to be set or it will cut off the names
         whoseTurnField.setPreferredSize(new Dimension(200, 50));
+
 
         //buttons
         JButton nextPlayerButton = new JButton("Next Player");
