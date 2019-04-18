@@ -889,18 +889,21 @@ public class Board extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent event) {
+		BoardCell clickedCell = null;
 		clickedCells = new ArrayList<BoardCell>();
 		Point p = event.getPoint();
 		int row = 0, column = 0;
 
 		row = (p.y/25) - 2;
 		column = (p.x/25);
-		BoardCell clickedCell = boardCellArray[row][column];
+		if(row <= numRows && column <= numColumns) {
+			clickedCell = boardCellArray[row][column];
+		}
 		if(targets.contains(clickedCell)) {
 			clickedCells.add(clickedCell);
 			drawPlayerPosition(clickedCell);
 		} else {
-			System.out.println("Cannot move there");
+			JOptionPane.showMessageDialog(this,"You cannot move there");
 		}
 	}
 
@@ -910,7 +913,6 @@ public class Board extends JPanel implements MouseListener{
 			if(clickedCells.contains(clickedCell)) {
 				BoardCell originalCell = humanPlayer.getLocation();
 				boardCellArray[originalCell.getRow()][originalCell.getColumn()].setPlayer(false);
-				System.out.println("clickedCell is in targets");
 				boardCellArray[clickedCell.getRow()][clickedCell.getColumn()].setPlayer(true);
 				boardCellArray[clickedCell.getRow()][clickedCell.getColumn()].setPlayerColor(humanPlayer.getColor());
 				humanPlayer.setLocation(clickedCell);
