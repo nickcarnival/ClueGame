@@ -29,9 +29,13 @@ public class MakeAGuess extends JFrame{
 
 	private static Board board;
 	private static HumanPlayer humanPlayer;
+	
+	private static String currentRoomString;
 
-	public MakeAGuess() {
+	public MakeAGuess(Board b) {
+		MakeAGuess.board = b;
 		humanPlayer = board.getHumanPlayer();
+		System.out.println("mag has been made: " + board.getHumanPlayer());
 		setTitle("Make A Guess");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		createLayout();
@@ -63,6 +67,7 @@ public class MakeAGuess extends JFrame{
 	private void actionPerformed(ActionEvent ae) {
 		String action = ae.getActionCommand();
 		switch (action) {
+			//the submit button
 			case "Submit" :
 				break;
 			case "Cancel" :
@@ -85,8 +90,11 @@ public class MakeAGuess extends JFrame{
 		ArrayList<Card> humanCards = humanPlayer.getMyCards();
 
 		board.setCurrentPlayerIndex(board.getCurrentPlayerIndex()-1);
+		
+		currentRoomString = humanPlayer.getLocation().getName(); 
+		System.out.println("Current room: " + currentRoomString);
 
-		MakeAGuess mag = new MakeAGuess();
+		MakeAGuess mag = new MakeAGuess(board);
 		mag.setVisible(true);
 	}
 }
