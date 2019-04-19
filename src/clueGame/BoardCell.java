@@ -25,6 +25,7 @@ public class BoardCell extends JPanel{
 
 	private DoorDirection doorDirection;
 	private boolean isPlayer;
+	private int playerCount = 0;
 	private Color playerColor;
 	private boolean isRoom;
 	private boolean isDoorway;
@@ -154,6 +155,15 @@ public class BoardCell extends JPanel{
 
 	public int getHeight() {
 		return height;
+	}
+	
+	//deals with having two players on the same square
+	public int getPlayerCount() {
+		return playerCount;
+	}
+	
+	public void setPlayerCount(int i) {
+		this.playerCount = i;
 	}
 
 	@Override

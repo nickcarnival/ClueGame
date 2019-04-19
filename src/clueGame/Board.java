@@ -150,8 +150,13 @@ public class Board extends JPanel implements MouseListener{
 	public void doMove(BoardCell b, Player p) {
 		BoardCell oldLocation = p.location;
 		p.movePlayer(b);
-		oldLocation.setPlayer(false);
+		if(oldLocation.getPlayerCount() == 1) {
+			oldLocation.setPlayer(false);
+			oldLocation.setPlayerCount(0);
+			System.out.println("removing player because count is only one");
+		} 
 		b.setPlayer(true);
+		b.setPlayerCount(1);
 		if (p instanceof HumanPlayer) {
 			humanPlayer.setHasMoved(false);
 		}
@@ -163,8 +168,11 @@ public class Board extends JPanel implements MouseListener{
 		BoardCell oldLocation = allPlayers.get(currentPlayerIndex).location;
 		BoardCell newLocation = ((ComputerPlayer) allPlayers.get(currentPlayerIndex)).pickLocation(targets);
 		newLocation.setPlayer(true);
+		newLocation.setPlayerCount(1);
 		newLocation.setPlayerColor(allPlayers.get(currentPlayerIndex).getColor());
-		oldLocation.setPlayer(false);
+		if(oldLocation.getPlayerCount() == 1) {
+			oldLocation.setPlayer(false);
+		}
 		repaint();
 	}
 	public HumanPlayer getHumanPlayer() {
@@ -230,6 +238,7 @@ public class Board extends JPanel implements MouseListener{
 					if(!boardCellArray[20][4].isPlayer()) {
 						allPlayers.get(i).setLocation(cell1);
 						boardCellArray[20][4].setPlayer(true);
+						boardCellArray[20][4].setPlayerCount(1);
 						boardCellArray[20][4].setPlayerColor(allPlayers.get(i).getColor());
 					}
 					else {
@@ -240,6 +249,7 @@ public class Board extends JPanel implements MouseListener{
 					if(!boardCellArray[14][10].isPlayer()) {
 						allPlayers.get(i).setLocation(cell2);
 						boardCellArray[14][10].setPlayer(true);
+						boardCellArray[20][4].setPlayerCount(1);
 						boardCellArray[14][10].setPlayerColor(allPlayers.get(i).getColor());
 					}
 					else {
@@ -250,6 +260,7 @@ public class Board extends JPanel implements MouseListener{
 					if(!boardCellArray[7][14].isPlayer()) {
 						allPlayers.get(i).setLocation(cell3);
 						boardCellArray[7][14].setPlayer(true);
+						boardCellArray[20][4].setPlayerCount(1);
 						boardCellArray[7][14].setPlayerColor(allPlayers.get(i).getColor());
 					}
 					else {
@@ -260,6 +271,7 @@ public class Board extends JPanel implements MouseListener{
 					if(!boardCellArray[5][4].isPlayer()) {
 						allPlayers.get(i).setLocation(cell4);
 						boardCellArray[5][4].setPlayer(true);
+						boardCellArray[20][4].setPlayerCount(1);
 						boardCellArray[5][4].setPlayerColor(allPlayers.get(i).getColor());
 					}
 					else {
@@ -270,6 +282,7 @@ public class Board extends JPanel implements MouseListener{
 					if(!boardCellArray[5][19].isPlayer()) {
 						allPlayers.get(i).setLocation(cell5);
 						boardCellArray[5][19].setPlayer(true);
+						boardCellArray[20][4].setPlayerCount(1);
 						boardCellArray[5][19].setPlayerColor(allPlayers.get(i).getColor());
 					}
 					else {
@@ -280,6 +293,7 @@ public class Board extends JPanel implements MouseListener{
 					if(!boardCellArray[12][17].isPlayer()) {
 						allPlayers.get(i).setLocation(cell6);
 						boardCellArray[12][17].setPlayer(true);
+						boardCellArray[20][4].setPlayerCount(1);
 						boardCellArray[12][17].setPlayerColor(allPlayers.get(i).getColor());
 					}
 					else {
@@ -290,6 +304,7 @@ public class Board extends JPanel implements MouseListener{
 					if(!boardCellArray[0][8].isPlayer()) {
 						allPlayers.get(i).setLocation(cell7);
 						boardCellArray[0][8].setPlayer(true);
+						boardCellArray[20][4].setPlayerCount(1);
 						boardCellArray[0][8].setPlayerColor(allPlayers.get(i).getColor());
 					}
 					else {
@@ -937,9 +952,13 @@ public class Board extends JPanel implements MouseListener{
 			if(clickedCells.contains(clickedCell)) {
 				//removes the player icon from his original cell
 				BoardCell originalCell = humanPlayer.getLocation();
-				boardCellArray[originalCell.getRow()][originalCell.getColumn()].setPlayer(false);
+				if(originalCell.getPlayerCount() == 1) {
+					boardCellArray[originalCell.getRow()][originalCell.getColumn()].setPlayer(false);
+					boardCellArray[originalCell.getRow()][originalCell.getColumn()].setPlayerCount(0);
+				}
 				//moves the player icon to the new cell
 				boardCellArray[clickedCell.getRow()][clickedCell.getColumn()].setPlayer(true);
+				boardCellArray[originalCell.getRow()][originalCell.getColumn()].setPlayerCount(1);
 				boardCellArray[clickedCell.getRow()][clickedCell.getColumn()].setPlayerColor(humanPlayer.getColor());
 				humanPlayer.setLocation(clickedCell);
 				//make sure that it is not the human players turn
