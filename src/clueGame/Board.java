@@ -421,7 +421,6 @@ public class Board extends JPanel implements MouseListener{
 		return peopleCardArray;
 	}
 
-
 	public ArrayList<Card> getRoomCards() {
 		return roomCardArray;
 	}

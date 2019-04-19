@@ -125,5 +125,30 @@ public class ComputerPlayer extends Player {
 			return null;
 		}
 	}
+	
+	public boolean shouldMakeAccusation() {
+		ArrayList<Card> seenPeopleCards = new ArrayList<Card>();
+		ArrayList<Card> seenRoomCards = new ArrayList<Card>();
+		ArrayList<Card> seenWeaponCards = new ArrayList<Card>();
+		for (Card c : seenCards) {
+			switch (c.getType()) {
+				case PERSON:
+					seenPeopleCards.add(c);
+					break;
+				case ROOM:
+					seenRoomCards.add(c);
+					break;
+				case WEAPON:
+					seenWeaponCards.add(c);
+					break;
+				default:
+					System.out.println("houston we have a problem");
+					break;
+			}
+		}
+		return (board.getPeopleCards().size() - seenPeopleCards.size() == 1 &&
+				board.getRoomCards().size() - seenRoomCards.size() == 1 &&
+				board.getWeaponCards().size() - seenWeaponCards.size() == 1);
+	}
 
 }

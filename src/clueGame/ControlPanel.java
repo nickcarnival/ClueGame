@@ -319,7 +319,18 @@ public class ControlPanel extends JFrame implements ActionListener {
 	}
 	
 	public void doComputerTurn(ComputerPlayer currentPlayer) {
-		// TODO: accusation
+		/* useful snippet to trigger accusation, for testing
+		for (Card c : board.getDealtCards()) {
+			if (board.getSolution().getPerson() != c &&
+					board.getSolution().getRoom() != c &&
+					board.getSolution().getWeapon() != c) {
+				currentPlayer.seeCard(c);
+			}
+		}
+		*/
+		if (currentPlayer.shouldMakeAccusation()) {
+			System.out.println("I should make an accusation");
+		}
 		board.doMoveComputer();
 		// if in a room, make a suggestion
 		if (currentPlayer.location.isDoorway()) {
