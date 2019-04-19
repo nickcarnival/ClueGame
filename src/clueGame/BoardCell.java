@@ -162,8 +162,12 @@ public class BoardCell extends JPanel{
 		return playerCount;
 	}
 	
-	public void setPlayerCount(int i) {
-		this.playerCount = i;
+	public void addPlayerCount() {
+		this.playerCount ++;
+	}
+
+	public void subPlayerCount() {
+		this.playerCount --;
 	}
 
 	@Override

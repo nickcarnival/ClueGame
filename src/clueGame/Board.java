@@ -151,12 +151,13 @@ public class Board extends JPanel implements MouseListener{
 		BoardCell oldLocation = p.getLocation();
 		p.movePlayer(b);
 		if(oldLocation.getPlayerCount() == 1) {
-			System.out.println("cell should be getting deleted");
+			System.out.println("cell deletion");
 			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].setPlayer(false);
-			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].setPlayerCount(0);
+			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].subPlayerCount();
 		} 
 		b.setPlayer(true);
-		b.setPlayerCount(0);
+		boardCellArray[b.getRow()][b.getColumn()].addPlayerCount();
+		boardCellArray[b.getRow()][b.getColumn()].setPlayer(true);
 		if (p instanceof HumanPlayer) {
 			humanPlayer.setHasMoved(false);
 		}
@@ -166,15 +167,14 @@ public class Board extends JPanel implements MouseListener{
 	// does computer move and updates board's view of player's location
 	public void doMoveComputer() {
 		BoardCell oldLocation = allPlayers.get(currentPlayerIndex).location;
-		oldLocation.setPlayerCount(1);
+		oldLocation.addPlayerCount();
 		BoardCell newLocation = ((ComputerPlayer) allPlayers.get(currentPlayerIndex)).pickLocation(targets);
 		newLocation.setPlayer(true);
-		newLocation.setPlayerCount(1);
+		newLocation.addPlayerCount();
 		newLocation.setPlayerColor(allPlayers.get(currentPlayerIndex).getColor());
-		System.out.println("Old Location: " + oldLocation.getPlayerCount());
 		if(oldLocation.getPlayerCount() == 1) {
 			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].setPlayer(false);
-			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].setPlayerCount(0);
+			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].subPlayerCount();
 		}
 		repaint();
 	}
@@ -241,7 +241,7 @@ public class Board extends JPanel implements MouseListener{
 					if(!boardCellArray[20][4].isPlayer()) {
 						allPlayers.get(i).setLocation(cell1);
 						boardCellArray[20][4].setPlayer(true);
-						boardCellArray[20][4].setPlayerCount(1);
+						boardCellArray[20][4].addPlayerCount();
 						boardCellArray[20][4].setPlayerColor(allPlayers.get(i).getColor());
 					}
 					else {
@@ -252,7 +252,7 @@ public class Board extends JPanel implements MouseListener{
 					if(!boardCellArray[14][10].isPlayer()) {
 						allPlayers.get(i).setLocation(cell2);
 						boardCellArray[14][10].setPlayer(true);
-						boardCellArray[20][4].setPlayerCount(1);
+						boardCellArray[20][4].addPlayerCount();
 						boardCellArray[14][10].setPlayerColor(allPlayers.get(i).getColor());
 					}
 					else {
@@ -263,7 +263,7 @@ public class Board extends JPanel implements MouseListener{
 					if(!boardCellArray[7][14].isPlayer()) {
 						allPlayers.get(i).setLocation(cell3);
 						boardCellArray[7][14].setPlayer(true);
-						boardCellArray[20][4].setPlayerCount(1);
+						boardCellArray[20][4].addPlayerCount();
 						boardCellArray[7][14].setPlayerColor(allPlayers.get(i).getColor());
 					}
 					else {
@@ -274,7 +274,7 @@ public class Board extends JPanel implements MouseListener{
 					if(!boardCellArray[5][4].isPlayer()) {
 						allPlayers.get(i).setLocation(cell4);
 						boardCellArray[5][4].setPlayer(true);
-						boardCellArray[20][4].setPlayerCount(1);
+						boardCellArray[20][4].addPlayerCount();
 						boardCellArray[5][4].setPlayerColor(allPlayers.get(i).getColor());
 					}
 					else {
@@ -285,7 +285,7 @@ public class Board extends JPanel implements MouseListener{
 					if(!boardCellArray[5][19].isPlayer()) {
 						allPlayers.get(i).setLocation(cell5);
 						boardCellArray[5][19].setPlayer(true);
-						boardCellArray[20][4].setPlayerCount(1);
+						boardCellArray[20][4].addPlayerCount();
 						boardCellArray[5][19].setPlayerColor(allPlayers.get(i).getColor());
 					}
 					else {
@@ -296,7 +296,7 @@ public class Board extends JPanel implements MouseListener{
 					if(!boardCellArray[12][17].isPlayer()) {
 						allPlayers.get(i).setLocation(cell6);
 						boardCellArray[12][17].setPlayer(true);
-						boardCellArray[20][4].setPlayerCount(1);
+						boardCellArray[20][4].addPlayerCount();
 						boardCellArray[12][17].setPlayerColor(allPlayers.get(i).getColor());
 					}
 					else {
@@ -307,7 +307,7 @@ public class Board extends JPanel implements MouseListener{
 					if(!boardCellArray[0][8].isPlayer()) {
 						allPlayers.get(i).setLocation(cell7);
 						boardCellArray[0][8].setPlayer(true);
-						boardCellArray[20][4].setPlayerCount(1);
+						boardCellArray[20][4].addPlayerCount();
 						boardCellArray[0][8].setPlayerColor(allPlayers.get(i).getColor());
 					}
 					else {
@@ -957,14 +957,14 @@ public class Board extends JPanel implements MouseListener{
 				BoardCell originalCell = humanPlayer.getLocation();
 				if(originalCell.getPlayerCount() == 1) {
 					boardCellArray[originalCell.getRow()][originalCell.getColumn()].setPlayer(false);
-					boardCellArray[originalCell.getRow()][originalCell.getColumn()].setPlayerCount(0);
+					boardCellArray[originalCell.getRow()][originalCell.getColumn()].addPlayerCount();
 				}
 				if(originalCell.getPlayerCount() > 2){
 					
 				}
 				//moves the player icon to the new cell
 				boardCellArray[clickedCell.getRow()][clickedCell.getColumn()].setPlayer(true);
-				boardCellArray[originalCell.getRow()][originalCell.getColumn()].setPlayerCount(1);
+				boardCellArray[originalCell.getRow()][originalCell.getColumn()].addPlayerCount();
 				boardCellArray[clickedCell.getRow()][clickedCell.getColumn()].setPlayerColor(humanPlayer.getColor());
 				humanPlayer.setLocation(clickedCell);
 				//make sure that it is not the human players turn
