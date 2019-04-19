@@ -7,8 +7,10 @@ package clueGame;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dialog;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -19,10 +21,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class MakeAGuess extends JFrame{
-	private JPanel mainPanel = new JPanel();
-	private JPanel leftPanel = new JPanel(new GridLayout(2, 0));
-	private JPanel rightPanel = new JPanel(new GridLayout(2, 0));
+public class MakeAGuess extends JFrame implements ActionListener{
+	private JPanel mainPanel = new JPanel(new GridLayout(0, 2));
+	private JPanel leftPanel = new JPanel();
+	private JPanel rightPanel = new JPanel();
 	
 	private JDialog personDialog;
 	private JDialog weaponDialog;
@@ -37,6 +39,7 @@ public class MakeAGuess extends JFrame{
 		humanPlayer = board.getHumanPlayer();
 		System.out.println("mag has been made: " + board.getHumanPlayer());
 		setTitle("Make A Guess");
+		setSize(300, 300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		createLayout();
 	}
@@ -45,6 +48,8 @@ public class MakeAGuess extends JFrame{
 		JButton submitButton = new JButton("Submit");
 		JButton cancelButton = new JButton("Cancel");
 
+		submitButton.addActionListener(this);
+		cancelButton.addActionListener(this);
 		//modal dialog crap
 //		JDialog jd = new JDialog(d2, "", Dialog.ModalityType.DOCUMENT_MODAL);
 
@@ -52,25 +57,30 @@ public class MakeAGuess extends JFrame{
 		JTextField personLabel = new JTextField();
 		JTextField weaponLabel = new JTextField();
 		
-		//right side of the main panel
-		rightPanel.add(cancelButton);
-		mainPanel.add(rightPanel, BorderLayout.EAST);
-
 		//left side of the main panel
 		leftPanel.add(submitButton);
-		mainPanel.add(leftPanel, BorderLayout.WEST);
+		mainPanel.add(leftPanel);
 
+		//right side of the main panel
+		rightPanel.add(cancelButton);
+		mainPanel.add(rightPanel);
+
+
+		mainPanel.setPreferredSize(new Dimension(3000, 3000));
+		setResizable(false);
 		add(mainPanel);
 	}
 	
 	//handles the buttons
-	private void actionPerformed(ActionEvent ae) {
+	public void actionPerformed(ActionEvent ae) {
 		String action = ae.getActionCommand();
 		switch (action) {
 			//the submit button
 			case "Submit" :
 				break;
 			case "Cancel" :
+				setVisible(false);
+				dispose();
 				break;
 			default:
 				break;
