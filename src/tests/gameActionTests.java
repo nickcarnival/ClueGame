@@ -621,9 +621,10 @@ public class gameActionTests {
 		//we need to create a list of players and determine which order they disprove
 		ComputerPlayer disprovingPlayer = null;
 
+		board.setCurrentPlayerIndex(0);
 		disprovingPlayer = (ComputerPlayer) board.handleSuggestion(accusation);
 
-		assertEquals(disprovingPlayer, npc1);
+		assertEquals(npc2, disprovingPlayer);
 	}
 	
 	@Test
@@ -671,14 +672,10 @@ public class gameActionTests {
 		board.handleSuggestion(accusation);
 		board.setPlayersList(playerList);
 		
+		board.setCurrentPlayerIndex(0);
 		Player disprovenPlayer = board.handleSuggestion(accusation);
 		
-		assertEquals(player, disprovenPlayer);
+		assertEquals(npc1, disprovenPlayer);
 	}
 
 }
-
-
-
-
-

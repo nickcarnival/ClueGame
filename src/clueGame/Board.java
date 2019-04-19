@@ -323,7 +323,7 @@ public class Board extends JPanel implements MouseListener{
 		Boolean disproven = false;
 
 		//iterate over every player
-		int count = (currentPlayerIndex + 1) % 6;
+		int count = (currentPlayerIndex + 1) % allPlayers.size();
 		while (currentPlayerIndex != count) {
 			Player p = allPlayers.get(count);
 			//if it hasn't already been disproven
