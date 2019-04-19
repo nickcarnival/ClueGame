@@ -73,7 +73,7 @@ public class gameSetupTests {
 		}
 		assertEquals(color, players.get(0).getColor());
 
-		assertEquals("Jack Sparrow", players.get(2).getName());
+		assertEquals("Jack Black", players.get(2).getName());
 		try {
 			Field field = Class.forName("java.awt.Color").getField("black".trim());
 			color = (Color)field.get(null);
@@ -123,7 +123,7 @@ public class gameSetupTests {
 		
 		//tests that the last person in cards has the proper name
 		ArrayList<Card> peopleList = board.getPeopleCards();
-		assertEquals("Harry Potter", peopleList.get(5).getName());
+		assertEquals("Harry Blue", peopleList.get(5).getName());
 
 		//tests that the first room in the list of rooms is the correct room
 		ArrayList<Card> roomList = board.getRoomCards();

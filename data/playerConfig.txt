@@ -2,5 +2,5 @@ Kernel Mustard, orange
 Sandy Green, green
 Jack Black, black
 Gordon White, white
-Tewordos Red, red
+Jed Red, red
 Harry Blue, blue
