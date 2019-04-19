@@ -133,9 +133,10 @@ public class Board extends JPanel implements MouseListener{
 	}
 
 	// sets up targets by rolling a die and calculating targets
-	public void setUpMove() {
+	public int setUpMove() {
 		int roll = allPlayers.get(currentPlayerIndex).rollDie();
 		calcTargets(allPlayers.get(currentPlayerIndex).location, roll);
+		return roll;
 	}	
 
 	// prints targets in a different color

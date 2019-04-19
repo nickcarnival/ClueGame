@@ -291,6 +291,9 @@ public class ControlPanel extends JFrame implements ActionListener {
 		}
 	} 	
 	
+	// FIXME: 2 problems with humans
+	// when they get suggested and moved the targets are not shown 
+	// the displayed die roll and the targets' die roll do not match
 	public void advanceTurn() {
 		// update who is playing
 		board.setCurrentPlayerIndex((board.getCurrentPlayerIndex() + 1) % board.getPlayers().size());
@@ -307,7 +310,6 @@ public class ControlPanel extends JFrame implements ActionListener {
 		}
 		// repaint board--showing targets if player is human, showing computer move if computer
 		board.repaint();
-		// if human, wait for move here
 		// update display of dice roll
 		diceValue = Integer.toString(board.getPlayers().get(board.getCurrentPlayerIndex()).getDieRoll());
 		diceRoll.setText(diceValue);
