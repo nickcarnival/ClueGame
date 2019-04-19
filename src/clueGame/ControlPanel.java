@@ -291,9 +291,16 @@ public class ControlPanel extends JFrame implements ActionListener {
 		}
 	} 	
 	
-	// FIXME: 2 problems with humans
-	// when they get suggested and moved the targets are not shown 
-	// the displayed die roll and the targets' die roll do not match
+	/* FIXME: 2 problems with humans
+	when they get suggested and moved the targets are not shown
+	I'm pretty sure this is because when human gets guessed HasMoved gets marked false
+	the displayed die roll and the targets' die roll do not match
+	/*
+	
+	/* FIXME:
+	 * when one player leaves a location where there are 2 players,
+	 * then the other one also stops being drawn
+	 */
 	public void advanceTurn() {
 		// update who is playing
 		board.setCurrentPlayerIndex((board.getCurrentPlayerIndex() + 1) % board.getPlayers().size());
@@ -301,7 +308,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 		// update targets
 		board.setUpMove();
 		// if computer, move
-		if (currentPlayer != humanPlayer) {
+		if (currentPlayer instanceof ComputerPlayer) {
 			doComputerTurn((ComputerPlayer) currentPlayer);
 		} else {
 			// if human, flag that we haven't moved yet
