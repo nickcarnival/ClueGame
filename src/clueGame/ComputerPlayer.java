@@ -142,7 +142,6 @@ public class ComputerPlayer extends Player {
 					seenWeaponCards.add(c);
 					break;
 				default:
-					System.out.println("houston we have a problem");
 					break;
 			}
 		}

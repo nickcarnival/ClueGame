@@ -609,6 +609,8 @@ public class Board extends JPanel implements MouseListener{
 						if(cleanedGridLine[column].equals("X") ) {
 							boardCellArray[row][column].setIsCloset(true);
 						}
+						
+						
 					//this runs if the initial string is a door
 					} else {
 						//load in initial character for board cell
@@ -617,6 +619,7 @@ public class Board extends JPanel implements MouseListener{
 						//set up which direction the door is facing
 						char doorDirectionLetter = cleanedGridLine[column].charAt(1);
 						boardCellArray[row][column].setDoorway(true);
+						boardCellArray[row][column].setRoom(true);
 
 						switch(doorDirectionLetter) {
 						case 'L':

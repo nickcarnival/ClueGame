@@ -85,6 +85,7 @@ public abstract class Player {
 		return seenCards;
 	}
 	
+	//checks if the player is on top of another player before doing so
 	public void movePlayer(BoardCell target) {
 		this.location = target;
 	}

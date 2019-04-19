@@ -72,7 +72,7 @@ public class BoardCell extends JPanel{
 		}
 		
 		//if is doorway
-		else if (isDoorway){
+		else if (this.isDoorway && this.isRoom){
 			//display doorway direction
 			switch (this.doorDirection) {
 			//display each cell's direction image
