@@ -96,4 +96,8 @@ public class HumanPlayer extends Player {
 		this.hasMoved = hasMoved;
 	}
 	
+	public Solution makeAccusation() {
+		return new Solution();
+	}
+	
 }

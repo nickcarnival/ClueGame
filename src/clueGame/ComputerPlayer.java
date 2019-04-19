@@ -150,5 +150,28 @@ public class ComputerPlayer extends Player {
 				board.getRoomCards().size() - seenRoomCards.size() == 1 &&
 				board.getWeaponCards().size() - seenWeaponCards.size() == 1);
 	}
+	
+	public Solution makeAccusation() {
+		Solution accusation = new Solution();
+		for (Card c : board.getPeopleCards()) {
+			if (!seenCards.contains(c)) {
+				accusation.setPerson(c);
+				break;
+			}
+		}
+		for (Card c : board.getRoomCards()) {
+			if (!seenCards.contains(c)) {
+				accusation.setRoom(c);
+				break;
+			}
+		}
+		for (Card c : board.getWeaponCards()) {
+			if (!seenCards.contains(c)) {
+				accusation.setWeapon(c);
+				break;
+			}
+		}
+		return accusation;
+	}
 
 }

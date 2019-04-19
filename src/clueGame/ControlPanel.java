@@ -319,7 +319,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 	}
 	
 	public void doComputerTurn(ComputerPlayer currentPlayer) {
-		/* useful snippet to trigger accusation, for testing
+		// useful snippet to trigger accusation, for testing
 		for (Card c : board.getDealtCards()) {
 			if (board.getSolution().getPerson() != c &&
 					board.getSolution().getRoom() != c &&
@@ -327,9 +327,14 @@ public class ControlPanel extends JFrame implements ActionListener {
 				currentPlayer.seeCard(c);
 			}
 		}
-		*/
+		// check if the player knows enough to make an accusation and if so do so
 		if (currentPlayer.shouldMakeAccusation()) {
-			System.out.println("I should make an accusation");
+			Solution accusation = currentPlayer.makeAccusation();
+			// if the accusation is correct, then they won and the game is over and the app is closed
+			// if not, then we should handle that
+			if (!validateAccusation(accusation)) {
+				System.out.println("That was a wrong accusation");
+			}
 		}
 		board.doMoveComputer();
 		// if in a room, make a suggestion
@@ -347,6 +352,23 @@ public class ControlPanel extends JFrame implements ActionListener {
 		} else {
 			// if not in a room, reset guess to default value
 			guess.setText("No suggestion right now");
+		}
+	}
+	
+	// handle an accusation
+	public boolean validateAccusation(Solution accusation) {
+		// have board check whether accusation is correct
+		// if so, say so and the game is over
+		if (board.validateAccusation(accusation)) {
+			JOptionPane.showMessageDialog(mainPanel,
+					board.getPlayers().get(board.getCurrentPlayerIndex()).getName() + 
+					"'s accusation of " + accusation.toString() + 
+					" was correct. They have won and the game is over.");
+			dispose();
+			return true;
+		} else {
+			// else return false and have the caller handle it
+			return false;
 		}
 	}
 	

@@ -114,5 +114,7 @@ public abstract class Player {
 	public String getColorString() {
 		return colorString;
 	}
+	
+	public abstract Solution makeAccusation();
 
 }
