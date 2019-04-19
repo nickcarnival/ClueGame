@@ -148,15 +148,15 @@ public class Board extends JPanel implements MouseListener{
 	
 	// Does human move once a boardCell is selected
 	public void doMove(BoardCell b, Player p) {
-		BoardCell oldLocation = p.location;
+		BoardCell oldLocation = p.getLocation();
 		p.movePlayer(b);
 		if(oldLocation.getPlayerCount() == 1) {
-			oldLocation.setPlayer(false);
-			oldLocation.setPlayerCount(0);
-			System.out.println("removing player because count is only one");
+			System.out.println("cell should be getting deleted");
+			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].setPlayer(false);
+			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].setPlayerCount(0);
 		} 
 		b.setPlayer(true);
-		b.setPlayerCount(1);
+		b.setPlayerCount(0);
 		if (p instanceof HumanPlayer) {
 			humanPlayer.setHasMoved(false);
 		}
@@ -166,12 +166,15 @@ public class Board extends JPanel implements MouseListener{
 	// does computer move and updates board's view of player's location
 	public void doMoveComputer() {
 		BoardCell oldLocation = allPlayers.get(currentPlayerIndex).location;
+		oldLocation.setPlayerCount(1);
 		BoardCell newLocation = ((ComputerPlayer) allPlayers.get(currentPlayerIndex)).pickLocation(targets);
 		newLocation.setPlayer(true);
 		newLocation.setPlayerCount(1);
 		newLocation.setPlayerColor(allPlayers.get(currentPlayerIndex).getColor());
+		System.out.println("Old Location: " + oldLocation.getPlayerCount());
 		if(oldLocation.getPlayerCount() == 1) {
-			oldLocation.setPlayer(false);
+			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].setPlayer(false);
+			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].setPlayerCount(0);
 		}
 		repaint();
 	}
@@ -955,6 +958,9 @@ public class Board extends JPanel implements MouseListener{
 				if(originalCell.getPlayerCount() == 1) {
 					boardCellArray[originalCell.getRow()][originalCell.getColumn()].setPlayer(false);
 					boardCellArray[originalCell.getRow()][originalCell.getColumn()].setPlayerCount(0);
+				}
+				if(originalCell.getPlayerCount() > 2){
+					
 				}
 				//moves the player icon to the new cell
 				boardCellArray[clickedCell.getRow()][clickedCell.getColumn()].setPlayer(true);
