@@ -300,7 +300,9 @@ public class ControlPanel extends JFrame implements ActionListener {
 	/* FIXME:
 	 * when one player leaves a location where there are 2 players,
 	 * then the other one also stops being drawn
-	 * this happens because we set that board cell .hasplayer to false
+	 * this happens because we set that board cell .isPlayer to false
+	 * 		added two new methods for adding and subtracting players to a cell
+	 * 		needs to be implemented properly
 	 */
 	public void advanceTurn() {
 		// update who is playing
