@@ -22,9 +22,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class MakeAGuess extends JFrame implements ActionListener{
+	private String roomText;
+	private String personText;
+	private String weaponText;
+	
 	private JPanel mainPanel = new JPanel(new GridLayout(0, 2));
-	private JPanel leftPanel = new JPanel();
-	private JPanel rightPanel = new JPanel();
+	private JPanel leftPanel = new JPanel(new GridLayout(4,0));
+	private JPanel rightPanel = new JPanel(new GridLayout(4, 0));
 	
 	private JDialog personDialog;
 	private JDialog weaponDialog;
@@ -37,7 +41,6 @@ public class MakeAGuess extends JFrame implements ActionListener{
 	public MakeAGuess(Board b) {
 		MakeAGuess.board = b;
 		humanPlayer = board.getHumanPlayer();
-		System.out.println("mag has been made: " + board.getHumanPlayer());
 		setTitle("Make A Guess");
 		setSize(300, 300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,12 +59,32 @@ public class MakeAGuess extends JFrame implements ActionListener{
 		JTextField roomLabel = new JTextField();
 		JTextField personLabel = new JTextField();
 		JTextField weaponLabel = new JTextField();
-		
+
+		JTextField yourRoomLabel = new JTextField();
+
+		roomText = "temp room";
+		yourRoomLabel.setText(roomText);
+		yourRoomLabel.setEditable(false);
+
+		roomLabel.setText("Your room:");
+		roomLabel.setEditable(false);
+
+		personLabel.setText("Person:");
+		personLabel.setEditable(false);
+
+		weaponLabel.setText("Weapon:");
+		weaponLabel.setEditable(false);
+
 		//left side of the main panel
+		leftPanel.add(roomLabel);
+		leftPanel.add(personLabel);
+		leftPanel.add(weaponLabel);
+
 		leftPanel.add(submitButton);
 		mainPanel.add(leftPanel);
 
 		//right side of the main panel
+		rightPanel.add(yourRoomLabel);
 		rightPanel.add(cancelButton);
 		mainPanel.add(rightPanel);
 
