@@ -151,28 +151,27 @@ public class Board extends JPanel implements MouseListener{
 	// Does human move once a boardCell is selected
 	public void doMove(BoardCell cell, Player player) {
 		BoardCell oldLocation = player.getLocation();
-		System.out.println(player.getLocation() == cell);
+		System.out.println("old cell player count: " + boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].getPlayerCount());
+		System.out.println("cell player count: " + boardCellArray[cell.getRow()][cell.getColumn()].getPlayerCount());
 		if(oldLocation.getPlayerCount() == 1) {
-			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].setPlayer(false);
-			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].subPlayerCount();
+			//if this player was the only player at oldLocation 
+			if(boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].getPlayerCount() == 1) {
+				//remove one of those players from the count
+				boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].subPlayerCount();
+				boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].setPlayer(false);
+			} 
+			//if there were more than one player at old location
+			else if(boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].getPlayerCount() > 1) {
+				boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].subPlayerCount();
+			}
+			//no matter what, we add a player to the new location
 			boardCellArray[cell.getRow()][cell.getColumn()].addPlayerCount();
 			boardCellArray[cell.getRow()][cell.getColumn()].setPlayer(true);
-			System.out.println("count: " + boardCellArray[cell.getRow()][cell.getColumn()].getPlayerCount());
 		} 
-		if(oldLocation.getPlayerCount() == 0) {
-			System.out.println("equal to zero");
-			player.movePlayer(cell);
-			//cell.setPlayer(true);
-			boardCellArray[cell.getRow()][cell.getColumn()].addPlayerCount();
-			boardCellArray[cell.getRow()][cell.getColumn()].setPlayer(true);
-		}else {
-			System.out.println("greater than 1");
-			boardCellArray[cell.getRow()][cell.getColumn()].addPlayerCount();
-			boardCellArray[cell.getRow()][cell.getColumn()].setPlayer(true);
-		}
 		if (player instanceof HumanPlayer) {
-			humanPlayer.setHasMoved(false);
+			humanPlayer.setHasMoved(true);
 		}
+		player.setLocation(boardCellArray[cell.getRow()][cell.getColumn()]);
 		repaint();
 	}
 
