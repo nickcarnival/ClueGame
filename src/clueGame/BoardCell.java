@@ -163,17 +163,18 @@ public class BoardCell extends JPanel{
 	}
 	
 	public void addPlayerCount() {
-		this.playerCount ++;
+		this.playerCount += 1;
 	}
 
 	public void subPlayerCount() {
-		this.playerCount --;
+		this.playerCount -= 1;
 	}
 
 	@Override
 	public String toString() {
 		return "BoardCell [row=" + row + ", column=" + column + ", doorDirection=" + doorDirection + ", isRoom="
-				+ isRoom + ", isDoorway=" + isDoorway + ", initial=" + initial + ", isNameDrawer=" + isNameDrawer + "]";
+				+ isRoom + ", isDoorway=" + isDoorway + ", initial=" + initial + ", isNameDrawer=" + isNameDrawer + " playerCount=" 
+				+ playerCount + "]";
 	}
 
 	@Override

@@ -146,19 +146,31 @@ public class Board extends JPanel implements MouseListener{
 		}
 	}
 	
+	///////////////////////////////////////////THIS IS WHAT CAUSES THE ERRORS//////////////////////////////////////////
+
 	// Does human move once a boardCell is selected
-	public void doMove(BoardCell b, Player p) {
-		BoardCell oldLocation = p.getLocation();
-		p.movePlayer(b);
+	public void doMove(BoardCell cell, Player player) {
+		BoardCell oldLocation = player.getLocation();
+		System.out.println(player.getLocation() == cell);
 		if(oldLocation.getPlayerCount() == 1) {
-			System.out.println("cell deletion");
 			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].setPlayer(false);
 			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].subPlayerCount();
+			boardCellArray[cell.getRow()][cell.getColumn()].addPlayerCount();
+			boardCellArray[cell.getRow()][cell.getColumn()].setPlayer(true);
+			System.out.println("count: " + boardCellArray[cell.getRow()][cell.getColumn()].getPlayerCount());
 		} 
-		b.setPlayer(true);
-		boardCellArray[b.getRow()][b.getColumn()].addPlayerCount();
-		boardCellArray[b.getRow()][b.getColumn()].setPlayer(true);
-		if (p instanceof HumanPlayer) {
+		if(oldLocation.getPlayerCount() == 0) {
+			System.out.println("equal to zero");
+			player.movePlayer(cell);
+			//cell.setPlayer(true);
+			boardCellArray[cell.getRow()][cell.getColumn()].addPlayerCount();
+			boardCellArray[cell.getRow()][cell.getColumn()].setPlayer(true);
+		}else {
+			System.out.println("greater than 1");
+			boardCellArray[cell.getRow()][cell.getColumn()].addPlayerCount();
+			boardCellArray[cell.getRow()][cell.getColumn()].setPlayer(true);
+		}
+		if (player instanceof HumanPlayer) {
 			humanPlayer.setHasMoved(false);
 		}
 		repaint();
@@ -949,6 +961,9 @@ public class Board extends JPanel implements MouseListener{
 
 	//this method moves the player to his new position and clears the old cell
 	private void drawPlayerPosition(BoardCell clickedCell) {
+		if(clickedCell == humanPlayer.getLocation()) {
+			humanPlayer.setHasMoved(true);
+		}
 		//if the clickedCells array has cells, and the player has not moved
 		if(clickedCells.size() > 0 &&  !humanPlayer.hasMoved()) {
 			//if the current cell is in targets
@@ -959,12 +974,12 @@ public class Board extends JPanel implements MouseListener{
 					boardCellArray[originalCell.getRow()][originalCell.getColumn()].setPlayer(false);
 					boardCellArray[originalCell.getRow()][originalCell.getColumn()].addPlayerCount();
 				}
-				if(originalCell.getPlayerCount() > 2){
+				if(boardCellArray[originalCell.getRow()][originalCell.getColumn()].getPlayerCount() > 2){
 					
 				}
 				//moves the player icon to the new cell
 				boardCellArray[clickedCell.getRow()][clickedCell.getColumn()].setPlayer(true);
-				boardCellArray[originalCell.getRow()][originalCell.getColumn()].addPlayerCount();
+				boardCellArray[clickedCell.getRow()][clickedCell.getColumn()].addPlayerCount();
 				boardCellArray[clickedCell.getRow()][clickedCell.getColumn()].setPlayerColor(humanPlayer.getColor());
 				humanPlayer.setLocation(clickedCell);
 				//make sure that it is not the human players turn

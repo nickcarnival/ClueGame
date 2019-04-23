@@ -59,7 +59,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 	private JPanel guessPanel;
 	
 	private JPanel guessResultPanel;
-	private JTextField guessResult;
+	private JTextField guessresult;
 
 	public ControlPanel() {
 		points = new ArrayList<Point>();
@@ -145,15 +145,18 @@ public class ControlPanel extends JFrame implements ActionListener {
         
         //guess's
         guessPanel = new JPanel(new GridLayout(1,2));
+        guessPanel.setPreferredSize(new Dimension(350, 50));
         guess = new JTextField(pastGuess);
+        guess.setPreferredSize(new Dimension(300, 50));
         guess.setEditable(false);
+
 
         guessResultPanel = new JPanel(new GridLayout(1,2));
         JLabel guessResultLabel = new JLabel("Respone");
-        guessResult = new JTextField();
-        guessResult.setEditable(false);
+        guessresult = new JTextField();
+        guessresult.setEditable(false);
         guessResultPanel.add(guessResultLabel);
-        guessResultPanel.add(guessResult);
+        guessResultPanel.add(guessresult);
 
         
         
@@ -356,9 +359,9 @@ public class ControlPanel extends JFrame implements ActionListener {
 			// have board handle suggestion
 			Player disprovingPlayer = board.handleSuggestion(suggestion);
 			if (disprovingPlayer == null) {
-				guessResult.setText("no new clue");
+				guessresult.setText("no new clue");
 			} else {
-				guessResult.setText(disprovingPlayer.disprovingCard.toString());
+				guessresult.setText(disprovingPlayer.disprovingCard.toString());
 			}
 			guess.setText(suggestion.toString());
 		} else {
