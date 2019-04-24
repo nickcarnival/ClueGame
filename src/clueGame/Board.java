@@ -40,6 +40,8 @@ public class Board extends JPanel implements MouseListener{
 
 	private int numRows = 0;
 	private int numColumns = 0;
+	private int roll = 0;
+	private int count = 0;
 	
 	private Map<BoardCell, Set<BoardCell>> adjacencyMatrix;
 	private Set<BoardCell> visited;
@@ -59,7 +61,7 @@ public class Board extends JPanel implements MouseListener{
 	//array of all the players
 	private ArrayList<Player> allPlayers ;
 	private ArrayList<BoardCell> clickedCells = new ArrayList<BoardCell>();
-	private int currentPlayerIndex;
+	private int currentPlayerIndex = 0;
 
 	private HumanPlayer humanPlayer;
 
@@ -134,10 +136,17 @@ public class Board extends JPanel implements MouseListener{
 
 	// sets up targets by rolling a die and calculating targets
 	public int setUpMove() {
-		int roll = allPlayers.get(currentPlayerIndex).rollDie();
+		count++;
+		roll = allPlayers.get(currentPlayerIndex).rollDie();
+		System.out.println("roll: " + roll + " count: " + count);
 		calcTargets(allPlayers.get(currentPlayerIndex).location, roll);
+		System.out.println("calc roll: " + roll);
 		return roll;
 	}	
+	
+	public int getRoll() {
+		return roll;
+	}
 
 	// prints targets in a different color
 	public void showTargets(Graphics g) {
@@ -942,11 +951,8 @@ public class Board extends JPanel implements MouseListener{
 			b.draw(g, false);
 		}
 		
-		if (currentPlayerIndex != -1) {
-			if (allPlayers.get(currentPlayerIndex) == humanPlayer && !humanPlayer.hasMoved()) {
-				setUpMove();
-				showTargets(g);
-			}
+		if (allPlayers.get(currentPlayerIndex) == humanPlayer && !humanPlayer.hasMoved() && humanPlayer.isTurn()) {
+			showTargets(g);
 		}
 
 		boardCellArray[0][0].draw(g, false);

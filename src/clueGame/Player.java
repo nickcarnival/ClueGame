@@ -109,7 +109,7 @@ public abstract class Player {
 	}
 	
 	public int getDieRoll() {
-		return dieRoll;
+		return this.dieRoll;
 	}
 	
 	public String getColorString() {
