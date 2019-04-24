@@ -18,6 +18,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.ResourceBundle.Control;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -68,7 +69,9 @@ public class Board extends JPanel implements MouseListener{
 	private Solution guess;
 
 	private Solution solution;
-
+	
+	private ControlPanel cp;
+	
 	public static final int  WIDTH  = 25;
 	public static final int  HEIGHT = 25;
 
@@ -1009,8 +1012,10 @@ public class Board extends JPanel implements MouseListener{
 
 				//if the human is in a room, make an suggestion 
 				if(humanPlayer.getLocation().isRoom()) {
-					MakeAGuess mg = new MakeAGuess(this, false);
+					MakeAGuess mg = new MakeAGuess(this, false, cp);
 					mg.setVisible(true);
+					// guess is null
+					
 				}
 				//make sure that it is not the human players turn
 				humanPlayer.setHasMoved(true);
@@ -1049,5 +1054,8 @@ public class Board extends JPanel implements MouseListener{
 		this.guess = guess;
 	}
 
+	public void setCP(ControlPanel cp) {
+		this.cp = cp;
+	}
 
 }

@@ -284,7 +284,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 				break;
 			case "Make Accusation" :
 				if(humanPlayer.isTurn()) {
-					MakeAGuess mag = new MakeAGuess(board, true);
+					MakeAGuess mag = new MakeAGuess(board, true, this);
 					mag.setVisible(true);
 				}
 				break;
@@ -393,6 +393,14 @@ public class ControlPanel extends JFrame implements ActionListener {
 		return pastGuess;
 	}
 	
+	public JTextField getGuess() {
+		return guess;
+	}
+	
+	public JTextField getGuessResult() {
+		return guessresult;
+	}
+	
 	public static void main(String args[]) {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
@@ -409,6 +417,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 
 		board.setCurrentPlayerIndex(board.getCurrentPlayerIndex()-1);
 		ControlPanel cp = new ControlPanel();
+		board.setCP(cp);
 		cp.setVisible(true);
 	}
 

@@ -61,9 +61,12 @@ public class MakeAGuess extends JFrame implements ActionListener{
 	private static String currentRoomString;
 	
 	private Boolean isAccusation; 
+	
+	private ControlPanel cp;
 
-	public MakeAGuess(Board b, Boolean bool) {
+	public MakeAGuess(Board b, Boolean bool, ControlPanel cp) {
 		isAccusation = bool;
+		this.cp = cp;
 		MakeAGuess.board = b;
 		humanPlayer = board.getHumanPlayer();
 		setTitle("Make A Guess");
@@ -188,6 +191,10 @@ public class MakeAGuess extends JFrame implements ActionListener{
 				board.setDisprovingPlayer(disprovingPlayer);
 
 				dispose();
+				if (!isAccusation) {
+					cp.getGuess().setText(board.getGuess().toString());
+					cp.getGuessResult().setText(board.getDisprovingPlayer().disprovingCard.getName());
+				}
 				break;
 			case "Cancel" :
 				setVisible(false);
@@ -198,7 +205,7 @@ public class MakeAGuess extends JFrame implements ActionListener{
 		}
 		
 	}
-	
+/*	
 	public static void main(String args[]) {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
@@ -214,7 +221,8 @@ public class MakeAGuess extends JFrame implements ActionListener{
 		
 		currentRoomString = humanPlayer.getLocation().getName(); 
 
-		MakeAGuess mag = new MakeAGuess(board, true);
+		MakeAGuess mag = new MakeAGuess(board, true, cp);
 		mag.setVisible(true);
 	}
+	*/
 }
