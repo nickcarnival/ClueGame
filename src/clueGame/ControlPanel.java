@@ -24,6 +24,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
@@ -55,7 +56,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 	private JTextField whoseTurnField;
 	private JPanel upperBottomPanel;
 
-	private JTextField guess;
+	private JTextArea guess;
 	private JPanel guessPanel;
 	
 	private JPanel guessResultPanel;
@@ -146,7 +147,7 @@ public class ControlPanel extends JFrame implements ActionListener {
         //guess's
         guessPanel = new JPanel(new GridLayout(1,2));
         guessPanel.setPreferredSize(new Dimension(350, 50));
-        guess = new JTextField(pastGuess);
+        guess = new JTextArea(pastGuess);
         guess.setPreferredSize(new Dimension(300, 50));
         guess.setEditable(false);
 
@@ -349,6 +350,8 @@ public class ControlPanel extends JFrame implements ActionListener {
 				guessresult.setText("no new clue");
 			} else {
 				guessresult.setText(disprovingPlayer.disprovingCard.toString());
+				board.getPlayers().get(board.getCurrentPlayerIndex()).seeCard(
+						disprovingPlayer.disprovingCard);
 			}
 			guess.setText(suggestion.toString());
 		} else {
@@ -393,7 +396,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 		return pastGuess;
 	}
 	
-	public JTextField getGuess() {
+	public JTextArea getGuess() {
 		return guess;
 	}
 	

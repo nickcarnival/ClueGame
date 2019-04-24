@@ -51,7 +51,7 @@ public class Solution {
 
 	@Override 
 	public String toString() {
-		return (person + " with the " + weapon + " in the " + room); 
+		return (person + " with the\n" + weapon + " in the\n" + room); 
 		
 	}
 	

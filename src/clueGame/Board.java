@@ -1014,8 +1014,6 @@ public class Board extends JPanel implements MouseListener{
 				if(humanPlayer.getLocation().isRoom()) {
 					MakeAGuess mg = new MakeAGuess(this, false, cp);
 					mg.setVisible(true);
-					// guess is null
-					
 				}
 				//make sure that it is not the human players turn
 				humanPlayer.setHasMoved(true);
