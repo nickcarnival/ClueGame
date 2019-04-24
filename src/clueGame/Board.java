@@ -947,7 +947,7 @@ public class Board extends JPanel implements MouseListener{
 			b.draw(g, false);
 		}
 		
-		if (allPlayers.get(currentPlayerIndex) == humanPlayer && !humanPlayer.hasMoved() && humanPlayer.isTurn()) {
+		if (currentPlayerIndex > 0 && allPlayers.get(currentPlayerIndex) == humanPlayer && !humanPlayer.hasMoved() && humanPlayer.isTurn()) {
 			showTargets(g);
 		}
 
@@ -1006,9 +1006,8 @@ public class Board extends JPanel implements MouseListener{
 
 				//if the human is in a room, make an suggestion 
 				if(humanPlayer.getLocation().isRoom()) {
-					MakeAGuess mg = new MakeAGuess(this);
+					MakeAGuess mg = new MakeAGuess(this, false);
 					mg.setVisible(true);
-
 				}
 				//make sure that it is not the human players turn
 				humanPlayer.setHasMoved(true);

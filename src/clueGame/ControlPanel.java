@@ -284,8 +284,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 				break;
 			case "Make Accusation" :
 				if(humanPlayer.isTurn()) {
-					MakeAGuess mag = new MakeAGuess(board);
-					mag.setResizable(false);
+					MakeAGuess mag = new MakeAGuess(board, true);
 					mag.setVisible(true);
 				}
 				break;
@@ -306,7 +305,6 @@ public class ControlPanel extends JFrame implements ActionListener {
 			humanPlayer.setIsTurn(true);
 			humanPlayer.setHasMoved(false);
 		}
-
 		// repaint board--showing targets if player is human, showing computer move if computer
 		board.repaint();
 

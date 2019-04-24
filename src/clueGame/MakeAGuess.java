@@ -23,6 +23,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class MakeAGuess extends JFrame implements ActionListener{
+	private Solution suggestion;
+	
+	protected Card disproveCard;
+
 	private String roomText;
 	private String personText;
 	private String weaponText;
@@ -32,13 +36,24 @@ public class MakeAGuess extends JFrame implements ActionListener{
 	private JPanel rightPanel = new JPanel(new GridLayout(4, 0));
 	private JPanel personDropPanel;
 	private JPanel weaponDropPanel;
+	private JPanel roomDropPanel;
+	
+	private JTextField yourRoomLabel;
+	private JTextField roomLabel = new JTextField();
+	private JTextField personLabel = new JTextField();
+	private JTextField weaponLabel = new JTextField();
 	
 	private JComboBox<String> peopleBox;
 	private JComboBox<String> weaponBox;
+	private JComboBox<String> roomBox;
 	
 	private JDialog personDialog;
 	private JDialog weaponDialog;
 	private JDialog roomDialog;
+	
+	private String accuseRoom;
+	private Card accuseWeapon;
+	private Player accusePerson;
 
 	private static Board board;
 	private static HumanPlayer humanPlayer;
@@ -47,7 +62,8 @@ public class MakeAGuess extends JFrame implements ActionListener{
 	
 	private Boolean isAccusation; 
 
-	public MakeAGuess(Board b) {
+	public MakeAGuess(Board b, Boolean bool) {
+		isAccusation = bool;
 		MakeAGuess.board = b;
 		humanPlayer = board.getHumanPlayer();
 		setTitle("Make A Guess");
@@ -59,49 +75,78 @@ public class MakeAGuess extends JFrame implements ActionListener{
 	private void createLayout() {
 		personDropPanel = new JPanel();
 		weaponDropPanel = new JPanel();
+		roomDropPanel = new JPanel();
 		peopleBox = new JComboBox<String>();
 		weaponBox = new JComboBox<String>();
+		roomBox = new JComboBox<String>();
 		personDropPanel.add(peopleBox);
 		weaponDropPanel.add(weaponBox);
+		roomDropPanel.add(roomBox);
 		
-		for (Player p : board.getPlayers()) {
-			peopleBox.addItem(p.getName());
+
+		roomLabel = new JTextField();
+
+		if(isAccusation) {
+			//draw room cards
+			for (Card room : board.getRoomCards()) {
+				roomBox.addItem(room.getName());
+			}
+
+			//draw player cards
+			for (Player person : board.getPlayers()) {
+				peopleBox.addItem(person.getName());
+			}
+			
+			//draw weapon cards
+			for (Card weapon : board.getWeaponCards()) {
+				weaponBox.addItem(weapon.getName());
+			}
+			
+			roomLabel.setText("Room:");
+			roomLabel.setEditable(false);
+			
+			roomDropPanel.add(roomBox);
+			
+			leftPanel.add(roomLabel);
+			rightPanel.add(roomDropPanel);
+
+		} else {
+			//draw player cards
+			for (Player p : board.getPlayers()) {
+				peopleBox.addItem(p.getName());
+			}
+			
+			//draw weapon cards
+			for (Card c : board.getWeaponCards()) {
+				weaponBox.addItem(c.getName());
+			}
+			yourRoomLabel = new JTextField();
+
+			roomText = board.getHumanPlayer().getLocation().getRoomName();
+			yourRoomLabel.setText(roomText);
+			yourRoomLabel.setEditable(false);
+
+			roomLabel.setText("Your room:");
+			roomLabel.setEditable(false);
+			
+			leftPanel.add(roomLabel);
+			rightPanel.add(yourRoomLabel);
 		}
-		
-		for (Card c : board.getWeaponCards()) {
-			weaponBox.addItem(c.getName());
-		}
-		
-		JButton submitButton = new JButton("Submit");
-		JButton cancelButton = new JButton("Cancel");
-
-		submitButton.addActionListener(this);
-		cancelButton.addActionListener(this);
-		//modal dialog crap
-//		JDialog jd = new JDialog(d2, "", Dialog.ModalityType.DOCUMENT_MODAL);
-
-		JTextField roomLabel = new JTextField();
-		JTextField personLabel = new JTextField();
-		JTextField weaponLabel = new JTextField();
-
-		JTextField yourRoomLabel = new JTextField();
-
-		System.out.println("human room: " + board.getHumanPlayer().getLocation());
-		roomText = board.getHumanPlayer().getLocation().getRoomName();
-		yourRoomLabel.setText(roomText);
-		yourRoomLabel.setEditable(false);
-
-		roomLabel.setText("Your room:");
-		roomLabel.setEditable(false);
 
 		personLabel.setText("Person:");
 		personLabel.setEditable(false);
 
 		weaponLabel.setText("Weapon:");
 		weaponLabel.setEditable(false);
+		
+		JButton submitButton = new JButton("Submit");
+		JButton cancelButton = new JButton("Cancel");
+
+		submitButton.addActionListener(this);
+		cancelButton.addActionListener(this);
+
 
 		//left side of the main panel
-		leftPanel.add(roomLabel);
 		leftPanel.add(personLabel);
 		leftPanel.add(weaponLabel);
 		leftPanel.add(submitButton);
@@ -109,7 +154,6 @@ public class MakeAGuess extends JFrame implements ActionListener{
 		mainPanel.add(leftPanel);
 
 		//right side of the main panel
-		rightPanel.add(yourRoomLabel);
 		rightPanel.add(personDropPanel);
 		rightPanel.add(weaponDropPanel);
 		rightPanel.add(cancelButton);
@@ -117,7 +161,6 @@ public class MakeAGuess extends JFrame implements ActionListener{
 		mainPanel.add(rightPanel);
 
 
-		mainPanel.setPreferredSize(new Dimension(3000, 3000));
 		setResizable(false);
 		add(mainPanel);
 	}
@@ -128,6 +171,19 @@ public class MakeAGuess extends JFrame implements ActionListener{
 		switch (action) {
 			//the submit button
 			case "Submit" :
+				Card accusePlayer, accuseRoom, accuseWeapon;
+
+				accusePlayer = new Card(peopleBox.getSelectedItem().toString(), CardType.PERSON);
+				accuseRoom = new Card(roomText, CardType.ROOM);
+				accuseWeapon = new Card(weaponBox.getSelectedItem().toString(), CardType.WEAPON);
+				suggestion = new Solution(accuseWeapon, accusePlayer, accuseRoom);
+
+				Player handledPlayer = board.handleSuggestion(suggestion);
+
+				//add the disproving card to players cards
+				disproveCard = handledPlayer.disprovingCard;
+
+				dispose();
 				break;
 			case "Cancel" :
 				setVisible(false);
@@ -153,9 +209,8 @@ public class MakeAGuess extends JFrame implements ActionListener{
 		board.setCurrentPlayerIndex(board.getCurrentPlayerIndex()-1);
 		
 		currentRoomString = humanPlayer.getLocation().getName(); 
-		System.out.println("Current room: " + currentRoomString);
 
-		MakeAGuess mag = new MakeAGuess(board);
+		MakeAGuess mag = new MakeAGuess(board, true);
 		mag.setVisible(true);
 	}
 }
