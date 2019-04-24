@@ -5,6 +5,7 @@
 package clueGame;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dialog;
 import java.awt.Dimension;
@@ -29,6 +30,11 @@ public class MakeAGuess extends JFrame implements ActionListener{
 	private JPanel mainPanel = new JPanel(new GridLayout(0, 2));
 	private JPanel leftPanel = new JPanel(new GridLayout(4,0));
 	private JPanel rightPanel = new JPanel(new GridLayout(4, 0));
+	private JPanel personDropPanel;
+	private JPanel weaponDropPanel;
+	
+	private JComboBox<String> peopleBox;
+	private JComboBox<String> weaponBox;
 	
 	private JDialog personDialog;
 	private JDialog weaponDialog;
@@ -51,6 +57,21 @@ public class MakeAGuess extends JFrame implements ActionListener{
 	}
 	
 	private void createLayout() {
+		personDropPanel = new JPanel();
+		weaponDropPanel = new JPanel();
+		peopleBox = new JComboBox<String>();
+		weaponBox = new JComboBox<String>();
+		personDropPanel.add(peopleBox);
+		weaponDropPanel.add(weaponBox);
+		
+		for (Player p : board.getPlayers()) {
+			peopleBox.addItem(p.getName());
+		}
+		
+		for (Card c : board.getWeaponCards()) {
+			weaponBox.addItem(c.getName());
+		}
+		
 		JButton submitButton = new JButton("Submit");
 		JButton cancelButton = new JButton("Cancel");
 
@@ -89,8 +110,8 @@ public class MakeAGuess extends JFrame implements ActionListener{
 
 		//right side of the main panel
 		rightPanel.add(yourRoomLabel);
-		rightPanel.add(personDropLabel);
-		rightPanel.add(weaponDropLabel);
+		rightPanel.add(personDropPanel);
+		rightPanel.add(weaponDropPanel);
 		rightPanel.add(cancelButton);
 
 		mainPanel.add(rightPanel);
