@@ -178,7 +178,7 @@ public class MakeAGuess extends JFrame implements ActionListener{
 				Card accusePlayer, accuseRoom, accuseWeapon;
 
 				accusePlayer = new Card(peopleBox.getSelectedItem().toString(), CardType.PERSON);
-				accuseRoom = new Card(roomText, CardType.ROOM);
+				accuseRoom = new Card(roomBox.getSelectedItem().toString(), CardType.ROOM);
 				accuseWeapon = new Card(weaponBox.getSelectedItem().toString(), CardType.WEAPON);
 				suggestion = new Solution(accuseWeapon, accusePlayer, accuseRoom);
 
