@@ -64,6 +64,9 @@ public class Board extends JPanel implements MouseListener{
 
 	private HumanPlayer humanPlayer;
 
+	private Player disprovingPlayer;
+	private Solution guess;
+
 	private Solution solution;
 
 	public static final int  WIDTH  = 25;
@@ -1029,6 +1032,22 @@ public class Board extends JPanel implements MouseListener{
 	public void mousePressed(MouseEvent event) {}
 	@Override
 	public void mouseReleased(MouseEvent event) {}
+
+	public Player getDisprovingPlayer() {
+		return disprovingPlayer;
+	}
+
+	public void setDisprovingPlayer(Player disprovingPlayer) {
+		this.disprovingPlayer = disprovingPlayer;
+	}
+
+	public Solution getGuess() {
+		return guess;
+	}
+
+	public void setGuess(Solution guess) {
+		this.guess = guess;
+	}
 
 
 }
