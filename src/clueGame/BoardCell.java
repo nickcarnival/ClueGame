@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class BoardCell extends JPanel{
+	private String roomName;
 	private int row;
 	private int column;
 
@@ -169,12 +170,20 @@ public class BoardCell extends JPanel{
 	public void subPlayerCount() {
 		this.playerCount -= 1;
 	}
+	
+	public void setRoomName(String name) {
+		this.roomName = name;
+	}
+	
+	public String getRoomName() {
+		return this.roomName;
+	}
 
 	@Override
 	public String toString() {
-		return "BoardCell [row=" + row + ", column=" + column + ", doorDirection=" + doorDirection + ", isRoom="
-				+ isRoom + ", isDoorway=" + isDoorway + ", initial=" + initial + ", isNameDrawer=" + isNameDrawer + " playerCount=" 
-				+ playerCount + "]";
+		return "BoardCell [row=" + row + ", column=" + column + " roomName=" + roomName + ", doorDirection=" + doorDirection 
+				+ ", isRoom=" + isRoom + ", isDoorway=" + isDoorway + ", initial=" + initial + ", isNameDrawer=" + isNameDrawer 
+				+ " playerCount=" + playerCount + "]";
 	}
 
 	@Override

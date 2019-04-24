@@ -32,6 +32,7 @@ public class MakeAGuess extends JFrame implements ActionListener{
 	
 	private JDialog personDialog;
 	private JDialog weaponDialog;
+	private JDialog roomDialog;
 
 	private static Board board;
 	private static HumanPlayer humanPlayer;
@@ -62,7 +63,8 @@ public class MakeAGuess extends JFrame implements ActionListener{
 
 		JTextField yourRoomLabel = new JTextField();
 
-		roomText = "temp room";
+		System.out.println("human room: " + board.getHumanPlayer().getLocation());
+		roomText = board.getHumanPlayer().getLocation().getRoomName();
 		yourRoomLabel.setText(roomText);
 		yourRoomLabel.setEditable(false);
 

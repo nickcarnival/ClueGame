@@ -158,9 +158,6 @@ public class Board extends JPanel implements MouseListener{
 
 		boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].subPlayerCount();
 
-		System.out.println("old cell player count: " + boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].getPlayerCount());
-		System.out.println("cell player count: " + boardCellArray[cell.getRow()][cell.getColumn()].getPlayerCount());
-
 		//if this player was the only player at oldLocation 
 		if(boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].getPlayerCount() == 0) {
 			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].setPlayer(false);
@@ -640,27 +637,31 @@ public class Board extends JPanel implements MouseListener{
 							}
 						}
 						//load in initial character for board cell
+						boardCellArray[row][column].setInitial(cleanedGridLine[column].charAt(0));
+
+						//sets walkways
 						if(cleanedGridLine[column].charAt(0) == 'W') {
 							boardCellArray[row][column].setWalkway(true);
 						}
-						boardCellArray[row][column].setInitial(cleanedGridLine[column].charAt(0));
 
 						//checks that the character is actually in the map
 						if(!legendMap.containsKey(boardCellArray[row][column].getInitial())) {
 							throw new BadConfigFormatException("Error: This Character is not in the Legend: "
 									+ boardCellArray[row][column].getInitial());
 						}
-						boardCellArray[row][column].setDoorway(false);
 						//everything other than a walkway or closet is a room
 						if(!cleanedGridLine[column].equals("X") && !cleanedGridLine[column].contentEquals("W")) {
+							//tells the cell that it is a room
 							boardCellArray[row][column].setRoom(true);
-						}
+							//sets the name of the room that that cell is in
+							boardCellArray[row][column].setRoomName(legendMap.get(boardCellArray[row][column].getInitial()));
+						} 
 						if(cleanedGridLine[column].equals("X") ) {
 							boardCellArray[row][column].setIsCloset(true);
 						}
 						
 						
-					//this runs if the initial string is a door
+					//this runs if the initial string is longer than 1 char 
 					} else {
 						//load in initial character for board cell
 						boardCellArray[row][column].setInitial(cleanedGridLine[column].charAt(0));
@@ -669,6 +670,7 @@ public class Board extends JPanel implements MouseListener{
 						char doorDirectionLetter = cleanedGridLine[column].charAt(1);
 						boardCellArray[row][column].setDoorway(true);
 						boardCellArray[row][column].setRoom(true);
+						boardCellArray[row][column].setRoomName(legendMap.get(boardCellArray[row][column].getInitial()));
 
 						switch(doorDirectionLetter) {
 						case 'L':
@@ -989,9 +991,6 @@ public class Board extends JPanel implements MouseListener{
 				BoardCell originalCell = humanPlayer.getLocation();
 				boardCellArray[originalCell.getRow()][originalCell.getColumn()].subPlayerCount();
 				BoardCell temp = boardCellArray[originalCell.getRow()][originalCell.getColumn()];
-				System.out.println("old cell count: " + boardCellArray[originalCell.getRow()][originalCell.getColumn()].getPlayerCount());
-				System.out.println("old cell count different: " + temp.getPlayerCount());
-				System.out.println("current cell count: " + boardCellArray[humanPlayer.getLocation().getRow()][humanPlayer.getLocation().getColumn()].getPlayerCount());
 
 				if(boardCellArray[originalCell.getRow()][originalCell.getColumn()].getPlayerCount() == 0) {
 					boardCellArray[originalCell.getRow()][originalCell.getColumn()].setPlayer(false);
