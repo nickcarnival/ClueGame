@@ -151,20 +151,20 @@ public class Board extends JPanel implements MouseListener{
 	// Does human move once a boardCell is selected
 	public void doMove(BoardCell cell, Player player) {
 		BoardCell oldLocation = player.getLocation();
+
+		//no matter what, we add a player to the new location
+		boardCellArray[cell.getRow()][cell.getColumn()].addPlayerCount();
+		boardCellArray[cell.getRow()][cell.getColumn()].setPlayer(true);
+
+		boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].subPlayerCount();
+
 		System.out.println("old cell player count: " + boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].getPlayerCount());
 		System.out.println("cell player count: " + boardCellArray[cell.getRow()][cell.getColumn()].getPlayerCount());
 
 		//if this player was the only player at oldLocation 
-		if(boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].getPlayerCount() == 1) {
-			//remove one of those players from the count
-			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].subPlayerCount();
+		if(boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].getPlayerCount() == 0) {
 			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].setPlayer(false);
 		}
-		//if there were more than one player at old location
-		if(boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].getPlayerCount() > 1) {
-			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].subPlayerCount();
-		}
-
 		//set the player to have moved
 		if (player instanceof HumanPlayer) {
 			humanPlayer.setHasMoved(true);
@@ -173,9 +173,6 @@ public class Board extends JPanel implements MouseListener{
 		//set the players location
 		player.setLocation(boardCellArray[cell.getRow()][cell.getColumn()]);
 
-		//no matter what, we add a player to the new location
-		boardCellArray[cell.getRow()][cell.getColumn()].addPlayerCount();
-		boardCellArray[cell.getRow()][cell.getColumn()].setPlayer(true);
 
 		repaint();
 	}
@@ -183,14 +180,32 @@ public class Board extends JPanel implements MouseListener{
 	// does computer move and updates board's view of player's location
 	public void doMoveComputer() {
 		BoardCell oldLocation = allPlayers.get(currentPlayerIndex).location;
-		oldLocation.addPlayerCount();
 		BoardCell newLocation = ((ComputerPlayer) allPlayers.get(currentPlayerIndex)).pickLocation(targets);
-		newLocation.setPlayer(true);
-		newLocation.addPlayerCount();
-		newLocation.setPlayerColor(allPlayers.get(currentPlayerIndex).getColor());
-		if(oldLocation.getPlayerCount() == 1) {
-			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].setPlayer(false);
+
+		boardCellArray[newLocation.getRow()][newLocation.getColumn()].addPlayerCount();
+		boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].subPlayerCount();
+
+		//if there are no players at the new location
+		if(boardCellArray[newLocation.getRow()][newLocation.getColumn()].getPlayerCount() >= 0) {
+			//set it to display a player
+			boardCellArray[newLocation.getRow()][newLocation.getColumn()].setPlayer(true);
+			//set the color
+			boardCellArray[newLocation.getRow()][newLocation.getColumn()].setPlayerColor(allPlayers.get(currentPlayerIndex).getColor());
+		}
+
+		//if there were more than one player at the old location
+		if(boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].getPlayerCount() > 1) {
+			//keep the player color to true
+			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].setPlayer(true);
+			//remove one
 			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].subPlayerCount();
+		} 
+
+		//if there are no players at the previous location
+		if(boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].getPlayerCount() > 0){
+			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].setPlayer(true);
+		} else {
+			boardCellArray[oldLocation.getRow()][oldLocation.getColumn()].setPlayer(false);
 		}
 		repaint();
 	}
@@ -268,7 +283,7 @@ public class Board extends JPanel implements MouseListener{
 					if(!boardCellArray[14][10].isPlayer()) {
 						allPlayers.get(i).setLocation(cell2);
 						boardCellArray[14][10].setPlayer(true);
-						boardCellArray[20][4].addPlayerCount();
+						boardCellArray[14][10].addPlayerCount();
 						boardCellArray[14][10].setPlayerColor(allPlayers.get(i).getColor());
 					}
 					else {
@@ -279,7 +294,7 @@ public class Board extends JPanel implements MouseListener{
 					if(!boardCellArray[7][14].isPlayer()) {
 						allPlayers.get(i).setLocation(cell3);
 						boardCellArray[7][14].setPlayer(true);
-						boardCellArray[20][4].addPlayerCount();
+						boardCellArray[7][14].addPlayerCount();
 						boardCellArray[7][14].setPlayerColor(allPlayers.get(i).getColor());
 					}
 					else {
@@ -290,7 +305,7 @@ public class Board extends JPanel implements MouseListener{
 					if(!boardCellArray[5][4].isPlayer()) {
 						allPlayers.get(i).setLocation(cell4);
 						boardCellArray[5][4].setPlayer(true);
-						boardCellArray[20][4].addPlayerCount();
+						boardCellArray[5][4].addPlayerCount();
 						boardCellArray[5][4].setPlayerColor(allPlayers.get(i).getColor());
 					}
 					else {
@@ -301,7 +316,7 @@ public class Board extends JPanel implements MouseListener{
 					if(!boardCellArray[5][19].isPlayer()) {
 						allPlayers.get(i).setLocation(cell5);
 						boardCellArray[5][19].setPlayer(true);
-						boardCellArray[20][4].addPlayerCount();
+						boardCellArray[5][19].addPlayerCount();
 						boardCellArray[5][19].setPlayerColor(allPlayers.get(i).getColor());
 					}
 					else {
@@ -312,7 +327,7 @@ public class Board extends JPanel implements MouseListener{
 					if(!boardCellArray[12][17].isPlayer()) {
 						allPlayers.get(i).setLocation(cell6);
 						boardCellArray[12][17].setPlayer(true);
-						boardCellArray[20][4].addPlayerCount();
+						boardCellArray[12][17].addPlayerCount();
 						boardCellArray[12][17].setPlayerColor(allPlayers.get(i).getColor());
 					}
 					else {
@@ -323,7 +338,7 @@ public class Board extends JPanel implements MouseListener{
 					if(!boardCellArray[0][8].isPlayer()) {
 						allPlayers.get(i).setLocation(cell7);
 						boardCellArray[0][8].setPlayer(true);
-						boardCellArray[20][4].addPlayerCount();
+						boardCellArray[0][8].addPlayerCount();
 						boardCellArray[0][8].setPlayerColor(allPlayers.get(i).getColor());
 					}
 					else {
@@ -965,22 +980,23 @@ public class Board extends JPanel implements MouseListener{
 
 	//this method moves the player to his new position and clears the old cell
 	private void drawPlayerPosition(BoardCell clickedCell) {
-		if(clickedCell == humanPlayer.getLocation()) {
-			humanPlayer.setHasMoved(true);
-		}
+
 		//if the clickedCells array has cells, and the player has not moved
 		if(clickedCells.size() > 0 &&  !humanPlayer.hasMoved()) {
 			//if the current cell is in targets
 			if(clickedCells.contains(clickedCell)) {
 				//removes the player icon from his original cell
 				BoardCell originalCell = humanPlayer.getLocation();
-				if(originalCell.getPlayerCount() == 1) {
+				boardCellArray[originalCell.getRow()][originalCell.getColumn()].subPlayerCount();
+				BoardCell temp = boardCellArray[originalCell.getRow()][originalCell.getColumn()];
+				System.out.println("old cell count: " + boardCellArray[originalCell.getRow()][originalCell.getColumn()].getPlayerCount());
+				System.out.println("old cell count different: " + temp.getPlayerCount());
+				System.out.println("current cell count: " + boardCellArray[humanPlayer.getLocation().getRow()][humanPlayer.getLocation().getColumn()].getPlayerCount());
+
+				if(boardCellArray[originalCell.getRow()][originalCell.getColumn()].getPlayerCount() == 0) {
 					boardCellArray[originalCell.getRow()][originalCell.getColumn()].setPlayer(false);
-					boardCellArray[originalCell.getRow()][originalCell.getColumn()].addPlayerCount();
 				}
-				if(boardCellArray[originalCell.getRow()][originalCell.getColumn()].getPlayerCount() > 2){
-					
-				}
+
 				//moves the player icon to the new cell
 				boardCellArray[clickedCell.getRow()][clickedCell.getColumn()].setPlayer(true);
 				boardCellArray[clickedCell.getRow()][clickedCell.getColumn()].addPlayerCount();
