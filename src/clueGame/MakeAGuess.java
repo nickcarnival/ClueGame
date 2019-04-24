@@ -171,6 +171,7 @@ public class MakeAGuess extends JFrame implements ActionListener{
 		switch (action) {
 			//the submit button
 			case "Submit" :
+				//this is where the accusation handling happens
 				Card accusePlayer, accuseRoom, accuseWeapon;
 
 				accusePlayer = new Card(peopleBox.getSelectedItem().toString(), CardType.PERSON);
