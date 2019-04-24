@@ -82,15 +82,4 @@ public class DetectiveNotes extends JDialog {
 		setVisible(true);
 	}
 	
-	//allows us to test detective notes without having to go through control panel
-	/*
-	public static void main(String args[]) {
-		Board b = Board.getInstance();
-		b.setConfigFiles("data/testsMap.csv", "data/rooms.txt");
-		b.initialize();
-		
-		DetectiveNotes dn = new DetectiveNotes(b);
-		dn.setVisible(true);
-	}
-	*/
 }

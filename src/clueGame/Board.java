@@ -41,7 +41,6 @@ public class Board extends JPanel implements MouseListener{
 	private int numRows = 0;
 	private int numColumns = 0;
 	private int roll = 0;
-	private int count = 0;
 	
 	private Map<BoardCell, Set<BoardCell>> adjacencyMatrix;
 	private Set<BoardCell> visited;
@@ -136,11 +135,8 @@ public class Board extends JPanel implements MouseListener{
 
 	// sets up targets by rolling a die and calculating targets
 	public int setUpMove() {
-		count++;
 		roll = allPlayers.get(currentPlayerIndex).rollDie();
-		System.out.println("roll: " + roll + " count: " + count);
 		calcTargets(allPlayers.get(currentPlayerIndex).location, roll);
-		System.out.println("calc roll: " + roll);
 		return roll;
 	}	
 	
@@ -1007,6 +1003,13 @@ public class Board extends JPanel implements MouseListener{
 				boardCellArray[clickedCell.getRow()][clickedCell.getColumn()].addPlayerCount();
 				boardCellArray[clickedCell.getRow()][clickedCell.getColumn()].setPlayerColor(humanPlayer.getColor());
 				humanPlayer.setLocation(clickedCell);
+
+				//if the human is in a room, make an suggestion 
+				if(humanPlayer.getLocation().isRoom()) {
+					MakeAGuess mg = new MakeAGuess(this);
+					mg.setVisible(true);
+
+				}
 				//make sure that it is not the human players turn
 				humanPlayer.setHasMoved(true);
 				humanPlayer.setIsTurn(false);

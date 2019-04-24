@@ -272,7 +272,6 @@ public class ControlPanel extends JFrame implements ActionListener {
 				dn.setVisible(true);
 				break;
 			case "Next Player" :
-//				if(true) {
 				if(humanPlayer.canChangeTurn()) {
 					advanceTurn();
 					if(!humanPlayer.canChangeTurn()) {
@@ -285,7 +284,6 @@ public class ControlPanel extends JFrame implements ActionListener {
 				break;
 			case "Make Accusation" :
 				if(humanPlayer.isTurn()) {
-					System.out.println("Make accusation button causes errors");
 					MakeAGuess mag = new MakeAGuess(board);
 					mag.setResizable(false);
 					mag.setVisible(true);

@@ -12,6 +12,7 @@ public class HumanPlayer extends Player {
 	
 	private boolean hasMoved;
 	private boolean isTurn;
+	private boolean makingSuggestion;
 
 	public HumanPlayer(String color, String name) {
 		super(color, name);

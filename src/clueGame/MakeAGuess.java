@@ -38,6 +38,8 @@ public class MakeAGuess extends JFrame implements ActionListener{
 	private static HumanPlayer humanPlayer;
 	
 	private static String currentRoomString;
+	
+	private Boolean isAccusation; 
 
 	public MakeAGuess(Board b) {
 		MakeAGuess.board = b;
@@ -81,13 +83,16 @@ public class MakeAGuess extends JFrame implements ActionListener{
 		leftPanel.add(roomLabel);
 		leftPanel.add(personLabel);
 		leftPanel.add(weaponLabel);
-
 		leftPanel.add(submitButton);
+
 		mainPanel.add(leftPanel);
 
 		//right side of the main panel
 		rightPanel.add(yourRoomLabel);
+		rightPanel.add(personDropLabel);
+		rightPanel.add(weaponDropLabel);
 		rightPanel.add(cancelButton);
+
 		mainPanel.add(rightPanel);
 
 
