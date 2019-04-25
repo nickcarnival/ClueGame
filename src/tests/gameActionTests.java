@@ -622,7 +622,7 @@ public class gameActionTests {
 		ComputerPlayer disprovingPlayer = null;
 
 		board.setCurrentPlayerIndex(0);
-		disprovingPlayer = (ComputerPlayer) board.handleSuggestion(accusation);
+		disprovingPlayer = (ComputerPlayer) board.handleSuggestion(accusation, true);
 
 		assertEquals(npc2, disprovingPlayer);
 	}
@@ -669,11 +669,11 @@ public class gameActionTests {
 		npc3.addCard(new Card("Alabame", CardType.ROOM));
 		player.addCard(new Card("Paraguay", CardType.ROOM));
 		
-		board.handleSuggestion(accusation);
+		board.handleSuggestion(accusation, true);
 		board.setPlayersList(playerList);
 		
 		board.setCurrentPlayerIndex(0);
-		Player disprovenPlayer = board.handleSuggestion(accusation);
+		Player disprovenPlayer = board.handleSuggestion(accusation, true);
 		
 		assertEquals(npc1, disprovenPlayer);
 	}
