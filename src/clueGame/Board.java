@@ -953,7 +953,7 @@ public class Board extends JPanel implements MouseListener{
 			b.draw(g, false);
 		}
 		
-		if (currentPlayerIndex > 0 && allPlayers.get(currentPlayerIndex) == humanPlayer && !humanPlayer.hasMoved() && humanPlayer.isTurn()) {
+		if (currentPlayerIndex >= 0 && allPlayers.get(currentPlayerIndex) == humanPlayer && !humanPlayer.hasMoved() && humanPlayer.isTurn()) {
 			showTargets(g);
 		}
 
