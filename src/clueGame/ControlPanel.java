@@ -270,11 +270,13 @@ public class ControlPanel extends JFrame implements ActionListener {
 			case "Exit" :
 				System.exit(0);
 				break;
+			//displays a window for taking notes
 			case "Detective Notes" :
 				DetectiveNotes dn = new DetectiveNotes(dns);
 				dn.setResizable(false);
 				dn.setVisible(true);
 				break;
+			//advances to the next players turn
 			case "Next Player" :
 				if(humanPlayer.canChangeTurn()) {
 					advanceTurn();
@@ -282,15 +284,19 @@ public class ControlPanel extends JFrame implements ActionListener {
 						humanPlayer.setIsTurn(true);
 					}
 				} else {
+					//displays error if it isn't your turn
 					JOptionPane.showMessageDialog(mainPanel,
 							"You cannot change your turn yet. You must move first.");
 				}
 				break;
+			//makes an accusation if it is the human players turn
 			case "Make Accusation" :
 				if(humanPlayer.isTurn()) {
 					MakeAGuess mag = new MakeAGuess(board, true, this);
 					mag.setVisible(true);
-				} else
+				} 
+				//displays error when not human players turn
+				else
 					JOptionPane.showMessageDialog(mainPanel, "It is not your turn!");
 				break;
 			case "Reset" :
