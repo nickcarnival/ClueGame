@@ -290,7 +290,8 @@ public class ControlPanel extends JFrame implements ActionListener {
 				if(humanPlayer.isTurn()) {
 					MakeAGuess mag = new MakeAGuess(board, true, this);
 					mag.setVisible(true);
-				}
+				} else
+					JOptionPane.showMessageDialog(mainPanel, "It is not your turn!");
 				break;
 			case "Reset" :
 				dispose();
