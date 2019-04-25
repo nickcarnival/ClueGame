@@ -337,7 +337,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 			Solution accusation = currentPlayer.makeAccusation();
 			// if the accusation is correct, then they won and the game is over and the app is closed
 			// if not, then the game is still going
-			validateAccusation(accusation);
+			validateAccusation(accusation, false);
 		}
 		board.doMoveComputer();
 		// if in a room, make a suggestion
@@ -361,21 +361,25 @@ public class ControlPanel extends JFrame implements ActionListener {
 	}
 	
 	// handle an accusation
-	public void validateAccusation(Solution accusation) {
+	public void validateAccusation(Solution accusation, boolean isHuman) {
 		// have board check whether accusation is correct
 		// if so, say so and the game is over
+		String s;
+		if (isHuman) {
+			s = "Your ";
+		} else {
+			s = board.getPlayers().get(board.getCurrentPlayerIndex()).getName();
+		}
 		if (board.validateAccusation(accusation)) {
 			JOptionPane.showMessageDialog(mainPanel,
-					board.getPlayers().get(board.getCurrentPlayerIndex()).getName() + 
-					"'s accusation of " + accusation.toString() + 
-					" was correct. They have won and the game is over.");
+					s + "accusation of " + accusation.toString() + 
+					" was correct. The player has won and the game is over.");
 			dispose();
 		} else {
 			// else return false and show message
 			JOptionPane.showMessageDialog(mainPanel,
-					board.getPlayers().get(board.getCurrentPlayerIndex()).getName() + 
-					"'s accusation of " + accusation.toString() + 
-					" was incorrect. They have not won and the game is still on.");
+					s + "accusation of " + accusation.toString() + 
+					" was incorrect. The player has not won and the game is still on.");
 		}
 	}
 	
@@ -421,7 +425,6 @@ public class ControlPanel extends JFrame implements ActionListener {
 		board.setCurrentPlayerIndex(board.getCurrentPlayerIndex()-1);
 		ControlPanel cp = new ControlPanel();
 		board.setCP(cp);
-		System.out.println(board.getSolution());
 		cp.setVisible(true);
 	}
 

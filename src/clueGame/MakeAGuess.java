@@ -178,31 +178,35 @@ public class MakeAGuess extends JFrame implements ActionListener{
 				Card accusePlayer, accuseRoom, accuseWeapon;
 
 				accusePlayer = new Card(peopleBox.getSelectedItem().toString(), CardType.PERSON);
-				accuseRoom = new Card(roomBox.getSelectedItem().toString(), CardType.ROOM);
+				if (isAccusation) {
+					accuseRoom = new Card(roomBox.getSelectedItem().toString(), CardType.ROOM);
+				} else {
+					accuseRoom = new Card(roomText, CardType.ROOM);
+				}
 				accuseWeapon = new Card(weaponBox.getSelectedItem().toString(), CardType.WEAPON);
 				suggestion = new Solution(accuseWeapon, accusePlayer, accuseRoom);
 
 				Player disprovingPlayer = board.handleSuggestion(suggestion);
 
-				//add the disproving card to players cards
-				disproveCard = disprovingPlayer.disprovingCard;
-				// need to do handling suggestion here
-				board.setGuess(suggestion);
-				board.setDisprovingPlayer(disprovingPlayer);
-
-				dispose();
 				if (!isAccusation) {
+					//add the disproving card to players cards
+					disproveCard = disprovingPlayer.disprovingCard;
+					// need to do handling suggestion here
+					board.setGuess(suggestion);
+					board.setDisprovingPlayer(disprovingPlayer);
 					cp.getGuess().setText(board.getGuess().toString());
 					cp.getGuessResult().setText(board.getDisprovingPlayer().disprovingCard.getName());
+				} else {
+					cp.validateAccusation(suggestion, true);
 				}
 				break;
 			case "Cancel" :
 				setVisible(false);
-				dispose();
 				break;
 			default:
 				break;
 		}
+		dispose();
 		
 	}
 /*	

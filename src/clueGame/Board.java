@@ -361,9 +361,9 @@ public class Board extends JPanel implements MouseListener{
 
 	//checks if the accusation is equal to the solution
 	public boolean validateAccusation(Solution accusation) {
-		return (accusation.getWeapon() == getSolution().getWeapon()
-				&& accusation.getRoom() == getSolution().getRoom()
-				&& accusation.getPerson() == getSolution().getPerson()
+		return (accusation.getWeapon().equals(getSolution().getWeapon())
+				&& accusation.getRoom().equals(getSolution().getRoom())
+				&& accusation.getPerson().equals(getSolution().getPerson())
 				);
 	}
 	
