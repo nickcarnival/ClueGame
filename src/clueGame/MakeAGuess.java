@@ -186,7 +186,7 @@ public class MakeAGuess extends JFrame implements ActionListener{
 				accuseWeapon = new Card(weaponBox.getSelectedItem().toString(), CardType.WEAPON);
 				suggestion = new Solution(accuseWeapon, accusePlayer, accuseRoom);
 
-				Player disprovingPlayer = board.handleSuggestion(suggestion);
+				Player disprovingPlayer = board.handleSuggestion(suggestion, isAccusation);
 
 				if (!isAccusation) {
 					//add the disproving card to players cards

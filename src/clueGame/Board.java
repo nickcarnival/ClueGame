@@ -376,7 +376,7 @@ public class Board extends JPanel implements MouseListener{
 	 *************************************************************/
 	
 	//this method returns the player that disproves the suggestion,
-	public Player handleSuggestion(Solution accusation) {
+	public Player handleSuggestion(Solution accusation, Boolean isAccusation) {
 		Player disprovenPlayer = null;
 		Boolean disproven = false;
 
@@ -398,13 +398,17 @@ public class Board extends JPanel implements MouseListener{
 			}
 			count = (count + 1) % allPlayers.size();
 		}
+
 		// figure out which player was suggested and move that player to the room
-		for (Player p : allPlayers) {
-			if (p.getName().equals(accusation.getPerson().getName())) {
-				doMove(allPlayers.get(currentPlayerIndex).location, p);
-				break;
+			for (Player p : allPlayers) {
+				if (p.getName().equals(accusation.getPerson().getName())) {
+					//only teleport on accusations
+					if(!isAccusation) {
+						doMove(allPlayers.get(currentPlayerIndex).location, p);
+					} 
+					break;
+				}
 			}
-		}
 
 		return disprovenPlayer;
 	}

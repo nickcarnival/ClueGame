@@ -329,16 +329,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 	}
 	
 	public void doComputerTurn(ComputerPlayer currentPlayer) {
-		/*
-		// useful snippet to trigger accusation, for testing
-		for (Card c : board.getDealtCards()) {
-			if (board.getSolution().getPerson() != c &&
-					board.getSolution().getRoom() != c &&
-					board.getSolution().getWeapon() != c) {
-				currentPlayer.seeCard(c);
-			}
-		}
-		*/
+
 		// check if the player knows enough to make an accusation and if so do so
 		if (currentPlayer.shouldMakeAccusation()) {
 			Solution accusation = currentPlayer.makeAccusation();
@@ -351,8 +342,17 @@ public class ControlPanel extends JFrame implements ActionListener {
 		if (currentPlayer.location.isDoorway()) {
 			// create suggestion
 			Solution suggestion = currentPlayer.createSuggestion();
+			Player disprovingPlayer;
 			// have board handle suggestion
-			Player disprovingPlayer = board.handleSuggestion(suggestion);
+
+			//if the player is making an accusation
+			if(currentPlayer.shouldMakeAccusation()) {
+				disprovingPlayer = board.handleSuggestion(suggestion, false);
+			} 
+			//if they are making a suggestion
+			else {
+				disprovingPlayer = board.handleSuggestion(suggestion, true);
+			}
 			if (disprovingPlayer == null) {
 				guessresult.setText("no new clue");
 			} else {
