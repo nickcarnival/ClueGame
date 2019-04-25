@@ -1,0 +1,2 @@
+We implemented a reset button (under the File menu). Its functionality is to
+create an entirely new game when pressed, including different initial conditions.
