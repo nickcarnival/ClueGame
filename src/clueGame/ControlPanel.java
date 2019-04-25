@@ -130,9 +130,12 @@ public class ControlPanel extends JFrame implements ActionListener {
         //buttons
         JButton nextPlayerButton = new JButton("Next Player");
         JButton makeAccusationButton = new JButton("Make Accusation");
+        JMenuItem resetButton = new JMenuItem("Reset");
 
         nextPlayerButton.addActionListener(this);
         makeAccusationButton.addActionListener(this);
+        resetButton.addActionListener(this);
+        
 
         //contains dice roll and guess
         JPanel lowerBottomPanel = new JPanel(new GridLayout(1, 3));
@@ -241,6 +244,7 @@ public class ControlPanel extends JFrame implements ActionListener {
         detectiveNotes.addActionListener(this);
         fileMenu.add(detectiveNotes);
         fileMenu.add(exit);
+        fileMenu.add(resetButton);
 
         fileMenuBar.add(fileMenu);
 
@@ -249,7 +253,6 @@ public class ControlPanel extends JFrame implements ActionListener {
         mainPanel.add(boardPanel, BorderLayout.CENTER);
         mainPanel.add(cardPanel, BorderLayout.EAST);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
-
 
         add(mainPanel);
         setVisible(true);
@@ -288,6 +291,10 @@ public class ControlPanel extends JFrame implements ActionListener {
 					MakeAGuess mag = new MakeAGuess(board, true, this);
 					mag.setVisible(true);
 				}
+				break;
+			case "Reset" :
+				dispose();
+				main(new String[0]);
 				break;
 		}
 	} 	
