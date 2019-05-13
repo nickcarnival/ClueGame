@@ -1,6 +1,6 @@
 # Java Clue Game
 
-A simple clue game written in Java using Eclipse.
+A simple clue game written in Java using Eclipse. This project is for the CSCI306 ClueGame project at the Colorado School of Mines
 
 ## Authors
 
